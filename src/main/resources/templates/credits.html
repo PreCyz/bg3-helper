@@ -1,49 +1,44 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head th:replace="~{shared::head('Sources & credits')}"></head>
+<html lang="en" th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{shared::head(#{ui.sources.credits})}"></head>
   <body>
     <header th:replace="~{shared::nav}"></header>
     <main class="wrap">
-      <div class="page-top"><h1>Sources &amp; credits</h1></div>
+      <div class="page-top"><h1>[[#{ui.sources.credits}]]</h1></div>
       <section class="panel">
         <div class="panel-body">
-          <h2>Equipment &amp; rules</h2>
+          <h2>[[#{ui.equipment.rules}]]</h2>
           <p class="intro">
-            The bundled item catalog draws on BG3 Wiki. Every item includes a
-            link to its source page. Game icons belong to their respective
-            rights holders.
+            [[#{ui.the.bundled.item.catalog.draws.on.bg3.wiki.every.item.includes.a}]]
           </p>
           <p>
             <a href="/catalog-credits.txt"
-              >Offline catalog credits and licenses</a
+              >[[#{ui.offline.catalog.credits.and.licenses}]]</a
             >
           </p>
           <ul class="clean-list">
-            <li><a href="https://bg3.wiki/wiki/Races">Playable races and subraces</a></li>
+            <li><a href="https://bg3.wiki/wiki/Races">[[#{ui.playable.races.and.subraces}]]</a></li>
             <li>
               <a href="https://bg3.wiki/wiki/Classes"
-                >Classes and level progression</a
+                >[[#{ui.classes.and.level.progression}]]</a
               >
             </li>
             <li>
-              <a href="https://bg3.wiki/wiki/Armour_Class">Armour Class</a>
+              <a href="https://bg3.wiki/wiki/Armour_Class">[[#{ui.armour.class}]]</a>
             </li>
             <li>
               <a href="https://bg3.wiki/wiki/Damage_mechanics"
-                >Damage mechanics</a
+                >[[#{ui.damage.mechanics}]]</a
               >
             </li>
-            <li><a href="https://bg3.wiki/wiki/Proficiency">Proficiency</a></li>
-            <li><a href="https://bg3.wiki/wiki/Feats">Feats</a></li>
+            <li><a href="https://bg3.wiki/wiki/Proficiency">[[#{ui.proficiency}]]</a></li>
+            <li><a href="https://bg3.wiki/wiki/Feats">[[#{ui.feats}]]</a></li>
           </ul>
-          <h2 class="mt-4">Builds &amp; illustration</h2>
+          <h2 class="mt-4">[[#{ui.builds.illustration}]]</h2>
           <p class="intro">
-            Community build guides are linked on each build card. The character figures,
-            subclass scenes and build illustrations are AI-generated. Matching hireling
-            portraits and class emblems come from BG3 Wiki.
-            Faerûn Forge is an unofficial fan project.
+            [[#{ui.community.build.guides.are.linked.on.each.build.card.the.characte}]]
           </p>
-          <p><a href="/art/avatars/credits.txt">Portrait and emblem sources</a></p>
+          <p><a href="/art/avatars/credits.txt">[[#{ui.emblems.and.original.hireling.portrait.sources}]]</a></p>
         </div>
       </section>
     </main>

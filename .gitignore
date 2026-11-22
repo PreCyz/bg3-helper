@@ -3,4 +3,6 @@ data/
 !src/main/resources/data/
 .idea/
 *.iml
-deploy/
+# Local artwork seed files. Existing tracked files stay in Git until explicitly untracked.
+/src/main/resources/static/art/**/*.webp
+/src/main/resources/static/items/**/*.webp

@@ -4,6 +4,19 @@ A localhost Baldur’s Gate 3 party and equipment planner built with Java 25, Sp
 
 ## Run on Windows
 
+Install PostgreSQL and create a dedicated database. In psql, connected as a local administrator, run the following once. The password prompt keeps the password out of SQL history.
+
+```sql
+CREATE ROLE bg3_forge LOGIN;
+\password bg3_forge
+CREATE DATABASE bg3_forge OWNER bg3_forge ENCODING 'UTF8' TEMPLATE template0;
+\connect bg3_forge
+CREATE SCHEMA helper AUTHORIZATION bg3_forge;
+CREATE SCHEMA demo AUTHORIZATION bg3_forge;
+```
+
+Copy `database.properties.example` to `data/database.properties` and set the password there. Create the `data` directory first on a fresh checkout. Spring also accepts `SPRING_DATASOURCE_URL`, `SPRING_DATASOURCE_USERNAME`, and `SPRING_DATASOURCE_PASSWORD`. Run from the project directory so the application can find the config and any existing save.
+
 From this directory:
 
 ```powershell
@@ -11,11 +24,11 @@ mvn package
 java -jar target\bg3-helper-1.0.0.jar
 ```
 
-Open [the start page](http://127.0.0.1:8080). The executable JAR includes Bootstrap, the equipment catalog, the images, the build guides and the rules. Building for the first time requires Maven dependencies. Running the packaged JAR works offline. Stop the server with Ctrl+C.
+Open [the start page](http://127.0.0.1:8080). The executable JAR includes Bootstrap, the equipment catalog, the images, the build guides and the rules. Building for the first time requires Maven dependencies. The local PostgreSQL service must be running. The app works without an internet connection. Stop the server with Ctrl+C.
 
 ## Try it
 
-For NAS installation, see [Deploy on Synology](#deploy-on-synology).
+Open [the editable UI navigation diagram](docs/ui-navigation.drawio) in draw.io to see where each action leads. On the Parties screen, click a hero’s portrait or name to open their sheet, then choose **Edit hero** to develop that character.
 
 1. Choose **Create party** to start your own party, or **Try demo** to explore Aelar’s level 5 Gloom Stalker build. The demo runs in your browser session. Choose **Exit demo** to discard your demo changes and return to the start page. Opening it again restores Aelar’s original loadout. In the demo, open Aelar’s equipment sheet. Click the head of the mannequin, or a labelled slot, to see compatible items in your party inventory. Change the ranking objective and compare the resulting statistics before equipping anything.
 2. In **Inventory → Wiki catalog**, search for an item such as Titanstring Bow. Add the number you own. A copy assigned to a hero becomes unavailable to the rest of the party until you unequip it.
@@ -27,27 +40,50 @@ For NAS installation, see [Deploy on Synology](#deploy-on-synology).
 
 ## Data and calculations
 
-Open **Equipment synergies** on a slot’s item card to compare companions from the offline wiki catalog. Each pick explains its pairing or modeled benefit and shows its party availability. The two chest rows offer armour and clothing alternatives.
+Open **Synergies with your inventory** to see pairings from the current party. Available copies and gear worn by the selected hero take priority over items assigned to another hero. Open **Equipment synergies** on the same card to compare companions from the offline wiki catalog. Each pick explains its pairing or modeled benefit and shows its party availability. The two chest rows offer armour and clothing alternatives.
 
-Your saved parties, their inventories and their active heroes are saved together in `data/party.json`, relative to the directory from which the app starts. An existing single-party save is automatically imported as **My party**. To back up all parties, copy that file. An alternative save location can be supplied with `--forge.save-file=C:/Games/BG3/my-party.json`.
+PostgreSQL stores each party in `forge_party`, including its heroes, inventories, equipped slots and development choices. The app commits each change in one transaction. On first initialization it imports `data/party.json` if present, including older single-party saves. Use `--forge.save-file=C:/Games/BG3/my-party.json` to import from a different location. This file is only an import source. The demo starts from Aelar’s template in `demo.forge_party_template`. Each browser session receives a temporary copy. Personal parties are stored in `helper.forge_party`.
 
-Equipment is a bundled JSON snapshot of BG3 Wiki. Item cards link to their source. To rebuild the snapshot, use the [JShell maintenance tools](#refresh-equipment-and-artwork). See [catalog credits](src/main/resources/static/catalog-credits.txt) for attribution.
+Startup creates the [tables](src/main/resources/db/forge.sql) and inserts missing item, build, progression, synergy, demo and artwork records. The acquisition snapshot updates the “Where to find” field on inventory cards, including alternate sources and quest conditions. Other existing catalog fields retain their database values. Images are served from `forge_asset` at their original URLs. The tracked `asset-paths.txt` lists the expected seed files. A fresh database needs the artwork from a local checkout, a JAR built with those assets, or a database backup. To seed from outside the JAR set `forge.asset-directory` to a directory containing `art/` and `items/`. Additional files found there are also imported. A populated database serves artwork when the original image files are absent.
 
-The character sheet models single-class levels 1–12, ordinary melee and ranged hits, armour class, hit points, movement, initiative, saving throws, skills, and example spell or class-action damage. Base scores include character-creation bonuses and exclude feats or equipped items. Averages per hit assume a successful ordinary hit. Target AC, enemy resistances, critical hits, conditional triggers, multiclass combinations and turn-by-turn encounters can change actual combat results. Item summaries and build milestones describe effects that require situational play.
+To back up everything, use `pg_dump -Fc -h localhost -U bg3_forge -d bg3_forge -f forge.dump`. Restore into a **new, empty** database owned by the application role with `pg_restore --no-owner -h localhost -U bg3_forge -d bg3_forge_restored forge.dump`, then configure the app to use that database. You can check the first import with `SELECT count(*), sum(octet_length(content)) FROM forge_asset;`. The WebP files can then be untracked in Git while keeping the working copies.
+
+Bundled JSON snapshots from BG3 Wiki supply the initial equipment records. Item cards link to their source. To rebuild the snapshot, use the [JShell maintenance tools](#refresh-equipment-and-artwork). See [catalog credits](src/main/resources/static/catalog-credits.txt) for attribution.
+
+In the wizard’s Identity step, pick a starting class, then use **Additional class → Add class** for each new class in the order you first take it. Set the levels in each class, up to 12 combined. Choose each unlocked subclass in Development. Hit points, feats and class features follow individual class levels. Proficiency and cantrip damage follow total character level. The starting class supplies saving throw proficiencies, and the last newly added class supplies the casting ability for item spells. [BG3 Wiki multiclassing rules](https://bg3.wiki/wiki/Classes#Multiclassing)
+
+The character sheet models ordinary melee and ranged hits, armour class, hit points, movement, initiative, saving throws, skills, and example spell or class-action damage. Base scores include character-creation bonuses and exclude feats or equipped items. Averages per hit assume a successful ordinary hit. Target AC, enemy resistances, critical hits, conditional triggers and turn-by-turn encounters can change actual combat results. Item summaries and build milestones describe effects that require situational play.
 
 Each starter build links to its community guide and BG3 Wiki subclass page. The level recommendations cover a single class through level 12. Suggested equipment is a shopping list and must be added to the party inventory to equip it.
 
+## Language
+
+The selector to the left of the party menu switches between English and Polish.
+The browser remembers the choice. Both languages work offline, and equipment
+search accepts names in either language. The Polish item descriptions are fan
+translations of the wiki snapshot. Interface messages and game translations are
+stored in the [resource bundles](src/main/resources/i18n).
+
 ## Refresh equipment and artwork
 
-Run these optional JDK 25 JShell scripts from the project directory. The two wiki importers use jsoup and Jackson. Prepare their libraries once with Maven, and repeat this step after cleaning `target`. The artwork scripts also use `ffmpeg` with the `libwebp` encoder on your PATH.
+Run these optional JDK 25 JShell scripts from the project directory. The wiki importers use jsoup and Jackson. Prepare their libraries once with Maven, and repeat this step after cleaning `target`. The artwork scripts also use `ffmpeg` with the `libwebp` encoder on your PATH.
 
 ```powershell
 mvn -f tools/pom.xml dependency:copy-dependencies
 jshell --class-path "target/tools/dependency/*" tools/refresh_catalog.jsh
+jshell --class-path "target/tools/dependency/*" tools/refresh_acquisitions.jsh
 jshell --class-path "target/tools/dependency/*" tools/refresh_avatar_art.jsh
 ```
 
 The catalog script rebuilds `src/main/resources/data/items.json` and the item icons. It reuses downloads in `target/wiki-cache`. Remove that cache for a fresh wiki snapshot. The avatar script downloads class and subclass emblems and hireling portraits, then updates their credits.
+
+To replace an avatar with standalone artwork, place a transparent PNG under an input directory using its character path, for example `male/wood-elf/ranger.png` or `human/bard.png` for the unspecified appearance. Run the importer with that directory:
+
+```powershell
+jshell "-R-Davatar.input=C:/Art/Standalone" tools/import_standalone_avatars.jsh
+```
+
+It exports a 640 × 960 figure and a matching roster portrait under `figures-v2`, updates the existing image files and records the new paths in the asset manifest. The next application startup publishes the replacements to PostgreSQL at the existing image URLs.
 
 To import a local illustration sheet, pass the race and image path as JShell execution properties. Quote the whole argument when a value contains spaces.
 
@@ -57,15 +93,3 @@ jshell "-R-Drace=Wood Elf" "-R-Datlas=C:/Art/Wood Elf Pairs.png" -R-Dpaired=true
 ```
 
 Use four columns and three rows for the standard sheet, with one illustration per class in alphabetical class order, read left to right. For the paired sheet, use six columns and four rows, alternating male and female for each class. Both layouts produce framed figures and portraits. The standard layout preserves credited hireling portraits.
-
-## Deploy on Synology
-
-Use a 64-bit Intel, AMD or ARM NAS that supports Container Manager. Check the model list and install the package in DSM Package Center. The project uses the official Java 25 runtime image. The NAS downloads it on first start and can then run the app offline. [Synology supported models](https://www.synology.com/en-global/dsm/packages/ContainerManager) · [Eclipse Temurin images](https://hub.docker.com/_/eclipse-temurin)
-
-1. In File Station, create a project folder such as `docker/bg3-helper`. Upload and extract the deployment ZIP so that `app.jar`, `docker-compose.yml` and the `data` folder sit directly inside it. If preparing the files yourself, run `mvn package` on your computer, copy `target/bg3-helper-1.0.0.jar` as `app.jar`, copy [docker-compose.yml](deploy/synology/docker-compose.yml), and create an empty `data` folder.
-2. To bring your existing parties, copy your computer’s `data/party.json` into the NAS project’s `data` folder before first start. An empty folder gives you the new-party and demo start page.
-3. In **Container Manager → Project → Create**, enter `bg3-helper` and select that project folder. Use the included `docker-compose.yml` as the project configuration. If DSM asks for an upload, select the same file from the extracted ZIP on your computer. Leave Web Station disabled and start the project when the wizard finishes. [Synology project guide](https://kb.synology.com/en-global/DSM/help/ContainerManager/docker_project)
-4. Open `http://YOUR-NAS-IP:18080/` from a device on your home network. If port 18080 is occupied, change the first port in `"18080:8080"` before starting. If DSM Firewall is enabled, allow the chosen TCP port from your LAN. Keep access on your LAN or VPN because the app has no sign-in.
-
-Party saves are in `data/party.json` on the NAS. Include that folder in your backups. For an update, stop the project, replace only `app.jar`, then build and start the project again. The container is configured to restart after a NAS reboot unless you manually stop it.
-

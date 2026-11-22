@@ -1,15 +1,15 @@
 package dev.forge.bg3;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import jakarta.servlet.http.HttpSession;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.context.annotation.RequestScope;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.HandlerMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.util.*;
@@ -95,8 +95,8 @@ public class ForgeController {
     }
 
     @PostMapping("/parties/{partyId}/switch")
-    String switchParty(@PathVariable String partyId) throws IOException {
-        store.switchParty(partyId);
+    String switchParty(@PathVariable String partyId, @RequestParam(required = false) String heroId) throws IOException {
+        store.switchParty(partyId, heroId);
         return redirect("sheet");
     }
 
@@ -176,7 +176,8 @@ public class ForgeController {
     @GetMapping("/equipment/{slot}")
     String equipment(@PathVariable Slot slot, @RequestParam(required = false) String heroId,
                      @RequestParam(defaultValue = "") String priority, @RequestParam(defaultValue = "") String q,
-                     @RequestParam(defaultValue = "") String category, @RequestParam(defaultValue = "") String synergy, Model m) {
+                     @RequestParam(defaultValue = "") String category, @RequestParam(defaultValue = "") String synergy,
+                     @RequestParam(defaultValue = "catalog") String synergyPool, Model m) {
         var party = page(m, "sheet");
         Hero h = party.hero(heroId == null ? party.active : heroId);
         m.addAttribute("hero", h);
@@ -220,8 +221,10 @@ public class ForgeController {
         m.addAttribute("before", before);
         m.addAttribute("options", options);
         m.addAttribute("synergyId", synergy);
+        boolean ownedOnly = "owned".equals(synergyPool);
+        m.addAttribute("synergyPool", ownedOnly ? "owned" : "catalog");
         options.stream().map(Option::item).filter(i -> i.id.equals(synergy)).findFirst().ifPresent(anchor ->
-                m.addAttribute("synergyPicks", synergies.forItem(party, h, slot, anchor, objective)));
+                m.addAttribute("synergyPicks", synergies.forItem(party, h, slot, anchor, objective, ownedOnly)));
         m.addAttribute("category", clothingOnly ? "CLOTHING" :
                 slot == Slot.RING1 || slot == Slot.RING2 ? "RING" : slot.name());
         return "equipment";
@@ -231,7 +234,9 @@ public class ForgeController {
     String equip(@PathVariable Slot slot, @RequestParam String heroId, @RequestParam String itemId, RedirectAttributes flash) throws IOException {
         try {
             store.equip(heroId, slot, itemId);
-            flash.addFlashAttribute("notice", itemId.isBlank() ? slot.label + " cleared." : catalog.items.get(itemId).name + " equipped.");
+            flash.addFlashAttribute("notice", itemId.isBlank()
+                    ? GameText.format("{0} cleared.", GameText.text(slot.label))
+                    : GameText.format("{0} equipped.", GameText.text(catalog.items.get(itemId).name)));
             return redirect("sheet");
         } catch (IllegalArgumentException e) {
             flash.addFlashAttribute("notice", e.getMessage());
@@ -270,7 +275,8 @@ public class ForgeController {
             boolean removing = "remove".equals(change);
             if (removing) store.remove(partyId, id, quantity);
             else store.add(partyId, id, quantity);
-            flash.addFlashAttribute("notice", (removing ? "Removed " : "Added ") + quantity + " × " + catalog.items.get(id).name + ".");
+            flash.addFlashAttribute("notice", GameText.format(removing ? "Removed {0} × {1}." : "Added {0} × {1}.",
+                    quantity, GameText.text(catalog.items.get(id).name)));
         } catch (IllegalArgumentException e) {
             flash.addFlashAttribute("notice", e.getMessage());
         }
@@ -315,6 +321,7 @@ public class ForgeController {
     String develop(@RequestParam String partyId, @RequestParam String id, @RequestParam boolean creating, @RequestParam String name, @RequestParam String heroClass,
                    @RequestParam String race, @RequestParam(required = false) String subrace, @RequestParam(required = false) String subraceFor,
                    @RequestParam Map<String, String> fields,
+                   @RequestParam(name = "extraClass", required = false) List<String> extraClasses,
                    @RequestParam(required = false) String gender, @RequestParam int level, @RequestParam int[] score, @RequestParam(defaultValue = "None") String subclass,
                    @RequestParam(defaultValue = "None") String style, @RequestParam(name = "skill", required = false) List<String> skills,
                    @RequestParam(name = "feat", required = false) List<String> feats, @RequestParam(defaultValue = "") String buildId,
@@ -362,7 +369,14 @@ public class ForgeController {
         } else {
             h.race = family.ancestry(subrace);
         }
-        h.level = level;
+        if (fields.containsKey("classAllocation")) {
+            h.otherClasses = readAdditionalClasses(heroClass, extraClasses, fields, action);
+            h.level = level + h.otherClasses.stream().mapToInt(Hero.ClassLevel::level).sum();
+            if (h.level > 12) throw new IllegalArgumentException("The combined class levels must be 12 or less.");
+        } else {
+            h.level = level;
+            if (h.startingLevel() < 1) throw new IllegalArgumentException("Keep at least one level in the starting class.");
+        }
         h.abilities = score;
         h.subclass = subclass;
         h.style = style;
@@ -371,11 +385,11 @@ public class ForgeController {
         h.skills = skills == null ? new ArrayList<>() : new ArrayList<>(skills);
         h.feats = feats == null ? new ArrayList<>() : new ArrayList<>(feats);
         var preset = catalog.build(buildId);
-        h.buildId = preset != null && preset.heroClass().equals(heroClass) ? buildId : "";
+        h.buildId = preset != null && (h.levelsIn(preset.heroClass()) > 0 || buildId.equals(base.buildId)) ? buildId : "";
         Rules.normalizeChoices(h);
         if ("save".equals(action) && !h.name.isBlank()) {
             store.save(partyId, h, creating);
-            flash.addFlashAttribute("notice", h.name + (creating ? " joined your party." : " updated."));
+            flash.addFlashAttribute("notice", GameText.format(creating ? "{0} joined your party." : "{0} updated.", h.name));
             return redirect("sheet");
         }
         if ("save".equals(action)) {
@@ -384,6 +398,27 @@ public class ForgeController {
         } else if ("next".equals(action)) step++;
         else if ("back".equals(action)) step--;
         return wizard(m, h, base, creating, Math.clamp(step, 1, 3));
+    }
+
+    private static List<Hero.ClassLevel> readAdditionalClasses(String startingClass, List<String> submitted,
+                                                               Map<String, String> fields, String action) {
+        var names = new ArrayList<>(submitted == null ? List.<String>of() : submitted);
+        if (action.startsWith("remove.")) names.remove(action.substring("remove.".length()));
+        if ("addClass".equals(action)) names.add(fields.get("newClass"));
+        var used = new HashSet<>(Set.of(startingClass));
+        var result = new ArrayList<Hero.ClassLevel>();
+        for (String name : names) {
+            if (name == null || !Rules.classes().contains(name) || !used.add(name))
+                throw new IllegalArgumentException("Choose a different class for each allocation.");
+            int levels = Integer.parseInt(fields.getOrDefault("levels." + name, "1"));
+            if (levels < 1 || levels > 12) throw new IllegalArgumentException("Choose 1–12 levels for each class.");
+            var skills = new ArrayList<String>();
+            for (int i = 0; i < Rules.additionalSkillSlots(name); i++)
+                skills.add(fields.getOrDefault("skill." + name + "." + i, "None"));
+            result.add(new Hero.ClassLevel(name, levels, fields.getOrDefault("path." + name, "None"),
+                    fields.getOrDefault("style." + name, "None"), skills));
+        }
+        return result;
     }
 
     private String wizard(Model m, Hero h, Hero base, boolean creating, int step) {
@@ -395,13 +430,13 @@ public class ForgeController {
         m.addAttribute("races", Rules.PLAYABLE_RACES);
         m.addAttribute("selectedRace", Rules.raceFor(h.race));
         m.addAttribute("genders", Hero.GENDERS);
-        m.addAttribute("subclasses", Rules.subclasses(h.heroClass, h.level));
-        m.addAttribute("styles", Rules.styles(h.heroClass, h.subclass, h.level));
+        m.addAttribute("subclasses", Rules.subclasses(h.heroClass, h.startingLevel()));
+        m.addAttribute("styles", Rules.styles(h.heroClass, h.subclass, h.startingLevel()));
         m.addAttribute("skills", Rules.skills(h.heroClass));
         m.addAttribute("skillSlots", Rules.skillSlots(h.heroClass));
         m.addAttribute("classSource", Rules.classSource(h.heroClass, h.subclass));
-        m.addAttribute("featChoices", Rules.feats(h.heroClass, h.level));
-        m.addAttribute("featSlots", Rules.featSlots(h.heroClass, h.level));
+        m.addAttribute("featChoices", Rules.featChoices());
+        m.addAttribute("featSlots", Rules.featSlots(h));
         m.addAttribute("before", Rules.stats(base, catalog.items));
         m.addAttribute("stats", Rules.stats(h, catalog.items));
         return "wizard";

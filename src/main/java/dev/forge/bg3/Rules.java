@@ -1,15 +1,10 @@
 package dev.forge.bg3;
 
-import tools.jackson.core.type.TypeReference;
-import tools.jackson.databind.json.JsonMapper;
 
-import java.io.IOException;
 import java.util.*;
 import java.util.function.ToIntFunction;
 
-/**
- * Single-class, unbuffed character sheet using the BG3 Wiki class tables and item properties.
- */
+/** Unbuffed character sheet using the BG3 Wiki class tables and item properties. */
 public final class Rules {
     private Rules() {
     }
@@ -25,7 +20,7 @@ public final class Rules {
         String ancestry(String subrace) {
             if (subraces.isEmpty() && (subrace == null || subrace.isEmpty())) return name;
             if (subrace != null && subraces.contains(subrace)) return subrace;
-            throw new IllegalArgumentException("Choose a valid subrace for " + name + ".");
+            throw new IllegalArgumentException(GameText.format("Choose a valid subrace for {0}.", GameText.text(name)));
         }
     }
 
@@ -95,18 +90,13 @@ public final class Rules {
     private static final Set<String> MARTIAL_CLASSES = Set.of("Barbarian", "Fighter", "Paladin", "Ranger");
     private static final Set<String> MARTIAL_PATHS = Set.of("College of Valour", "War Domain", "Tempest Domain", "Death Domain", "The Hexblade");
 
-    private record Progression(String source, SortedMap<Integer, String> features) {
+    record Progression(String source, SortedMap<Integer, String> features) {
     }
 
-    private static final Map<String, Progression> PROGRESSION = loadProgression();
+    private static volatile Map<String, Progression> progressionData = Map.of();
 
-    private static Map<String, Progression> loadProgression() {
-        try (var resource = Rules.class.getResourceAsStream("/data/subclass-progression.json")) {
-            return JsonMapper.builder().build().readValue(Objects.requireNonNull(resource), new TypeReference<>() {
-            });
-        } catch (IOException e) {
-            throw new ExceptionInInitializerError(e);
-        }
+    static void useProgression(Map<String, Progression> data) {
+        progressionData = Map.copyOf(data);
     }
 
     private static String progressionKey(String heroClass, String path) {
@@ -114,7 +104,7 @@ public final class Rules {
     }
 
     public static String classSource(String heroClass, String path) {
-        Progression p = PROGRESSION.get(progressionKey(heroClass, path));
+        Progression p = progressionData.get(progressionKey(heroClass, path));
         return p == null ? "https://bg3.wiki/wiki/" + heroClass : p.source;
     }
 
@@ -164,10 +154,21 @@ public final class Rules {
     private static List<String> chosenSkills(Hero h) {
         List<String> input = h.skills;
         if (input == null || input.isEmpty()) input = Collections.singletonList(h.skill);
-        List<String> available = skills(h.heroClass);
-        Set<String> used = new HashSet<>();
+        return chosenSkills(input, h.heroClass, skillSlots(h.heroClass), new HashSet<>());
+    }
+
+    public static int additionalSkillSlots(String career) {
+        return switch (career) {
+            case "Bard", "Ranger", "Rogue" -> 1;
+            case "Cleric" -> 2;
+            default -> 0;
+        };
+    }
+
+    private static List<String> chosenSkills(List<String> input, String career, int slots, Set<String> used) {
+        List<String> available = skills(career);
         List<String> result = new ArrayList<>();
-        for (int i = 0; i < skillSlots(h.heroClass); i++) {
+        for (int i = 0; i < slots; i++) {
             String selected = i < input.size() ? choice(available, input.get(i)) : NONE;
             result.add(used.add(selected) ? selected : NONE);
         }
@@ -208,6 +209,16 @@ public final class Rules {
 
     public static List<String> feats(String heroClass, int level) {
         if (featSlots(heroClass, level) == 0) return List.of(NONE);
+        return featChoices();
+    }
+
+    public static int featSlots(Hero h) {
+        int slots = featSlots(h.heroClass, h.startingLevel());
+        for (var entry : h.otherClasses) slots += featSlots(entry.heroClass(), entry.level());
+        return slots;
+    }
+
+    public static List<String> featChoices() {
         var choices = new ArrayList<>(options("Actor|Alert|Dual Wielder|Great Weapon Master|Mobile|Sharpshooter|Tavern Brawler · STR|Tavern Brawler · CON|Tough"));
         choices.addAll(IMPROVEMENTS.keySet());
         return List.copyOf(choices);
@@ -218,21 +229,30 @@ public final class Rules {
     }
 
     public static void normalizeChoices(Hero hero) {
-        hero.subclass = choice(subclasses(hero.heroClass, hero.level), hero.subclass);
-        hero.style = choice(styles(hero.heroClass, hero.subclass, hero.level), hero.style);
+        hero.subclass = choice(subclasses(hero.heroClass, hero.startingLevel()), hero.subclass);
+        hero.style = choice(styles(hero.heroClass, hero.subclass, hero.startingLevel()), hero.style);
         hero.skills = chosenSkills(hero);
+        Set<String> used = new HashSet<>(hero.skills);
+        hero.otherClasses.replaceAll(c -> {
+            var path = choice(subclasses(c.heroClass(), c.level()), c.subclass());
+            var style = choice(styles(c.heroClass(), path, c.level()), c.style());
+            var skills = chosenSkills(c.skills(), c.heroClass(), additionalSkillSlots(c.heroClass()), used);
+            return new Hero.ClassLevel(c.heroClass(), c.level(), path, style, skills);
+        });
         hero.skill = hero.skills.getFirst();
         hero.feats = chosenFeats(hero);
         hero.feat = hero.feats.isEmpty() ? NONE : hero.feats.getFirst();
     }
 
     private static List<String> chosenFeats(Hero hero) {
+        int slots = featSlots(hero);
+        if (slots == 0) return List.of();
         List<String> input = hero.feats;
         if (input == null || input.isEmpty()) input = Collections.singletonList(hero.feat);
-        List<String> available = feats(hero.heroClass, hero.level);
+        List<String> available = featChoices();
         List<String> result = new ArrayList<>();
         Set<String> used = new HashSet<>();
-        for (int i = 0; i < featSlots(hero.heroClass, hero.level); i++) {
+        for (int i = 0; i < slots; i++) {
             String selected = i < input.size() ? choice(available, input.get(i)) : NONE;
             String key = selected.startsWith("Tavern Brawler") ? "Tavern Brawler" : selected;
             result.add(selected.startsWith(ASI) || used.add(key) ? selected : NONE);
@@ -313,7 +333,7 @@ public final class Rules {
                 floor = Math.max(floor, fixed);
             }
             for (var entry : capped.entrySet())
-                scores[i] += Math.min(Math.max(0, entry.getKey() - scores[i]), entry.getValue());
+                scores[i] += Math.min(entry.getValue(), Math.max(0, entry.getKey() - scores[i]));
             scores[i] = Math.max(floor, scores[i]);
         }
         return scores;
@@ -334,6 +354,17 @@ public final class Rules {
     private static boolean proficient(Hero h, String path, String weapon) {
         if (weapon == null || weapon.isBlank()) return false;
         if (MARTIAL_CLASSES.contains(h.heroClass) || MARTIAL_PATHS.contains(path)) return true;
+        for (var c : h.otherClasses) {
+            if (MARTIAL_CLASSES.contains(c.heroClass()) || MARTIAL_PATHS.contains(c.subclass())) return true;
+            if (switch (c.heroClass()) {
+                case "Cleric" -> Set.of("Flail", "Morningstar").contains(weapon);
+                case "Monk" -> SIMPLE.contains(weapon) || weapon.equals("Shortsword");
+                case "Warlock" -> SIMPLE.contains(weapon);
+                default -> false;
+            }) return true;
+            if (c.subclass().equals("College of Swords") && weapon.equals("Scimitar")
+                    || c.subclass().equals("Bladesinging") && Set.of("Longsword", "Rapier", "Scimitar", "Shortsword", "Sickle").contains(weapon)) return true;
+        }
         if (elf(h.race) && Set.of("Longbow", "Shortbow", "Longsword", "Shortsword").contains(weapon)) return true;
         if (drow(h.race) && Set.of("Rapier", "Shortsword", "Hand Crossbow").contains(weapon)) return true;
         if (dwarf(h.race) && Set.of("Battleaxe", "Handaxe", "Light Hammer", "Warhammer").contains(weapon)) return true;
@@ -357,6 +388,17 @@ public final class Rules {
 
     private static boolean armourProficient(Hero h, String path, String type) {
         if ("Clothing".equals(type) || type == null) return true;
+        for (var c : h.otherClasses) {
+            boolean medium = Set.of("Cleric", "Druid", "Fighter", "Paladin", "Ranger").contains(c.heroClass());
+            boolean extraMedium = Set.of("College of Swords", "College of Valour", "The Hexblade").contains(c.subclass());
+            if (switch (type) {
+                case "Heavy" -> Set.of("Life Domain", "Nature Domain", "Tempest Domain", "War Domain").contains(c.subclass());
+                case "Medium" -> medium || extraMedium;
+                case "Light" -> medium || extraMedium || Set.of("Bard", "Rogue", "Warlock").contains(c.heroClass()) || c.subclass().equals("Bladesinging");
+                case "Shield" -> medium || c.heroClass().equals("Barbarian") || Set.of("College of Valour", "The Hexblade").contains(c.subclass());
+                default -> false;
+            }) return true;
+        }
         boolean civil = h.race.equals("Human") || h.race.endsWith("Half-Elf");
         boolean military = h.heroClass.equals("Fighter") || h.heroClass.equals("Paladin");
         boolean medium = military || Set.of("Barbarian", "Cleric", "Druid", "Ranger").contains(h.heroClass);
@@ -392,11 +434,11 @@ public final class Rules {
             default -> mod[DEX];
         };
         if (!armored) {
-            if (path.equals("Draconic Bloodline")) base = Math.max(base, 13);
-            if (h.heroClass.equals("Barbarian")) base = Math.max(base, 10 + mod[CON]);
-            if (h.heroClass.equals("Monk") && !shield) base = Math.max(base, 10 + mod[WIS]);
+            if (hasPath(h, path, "Draconic Bloodline")) base = Math.max(base, 13);
+            if (h.levelsIn("Barbarian") > 0) base = Math.max(base, 10 + mod[CON]);
+            if (h.levelsIn("Monk") > 0 && !shield) base = Math.max(base, 10 + mod[WIS]);
         }
-        int ac = base + dex + bonus(items, i -> i.ac) + (armored && style.equals("Defence") ? 1 : 0);
+        int ac = base + dex + bonus(items, i -> i.ac) + (armored && hasStyle(h, style, "Defence") ? 1 : 0);
         if (!armored && !shield && wears(items, "bracers-of-defence")) ac += 2;
         return ac;
     }
@@ -406,24 +448,40 @@ public final class Rules {
         if (dwarf(h.race) || h.race.endsWith("Gnome") || h.race.endsWith("Halfling")) speed = 7.5;
         if (h.race.startsWith("Wood ")) speed = 10.5;
         if (feats.contains("Mobile")) speed += 3;
-        if (h.heroClass.equals("Barbarian") && h.level >= 5 && items.stream().noneMatch(i -> "Heavy".equals(i.armorType)))
+        if (h.levelsIn("Barbarian") >= 5 && items.stream().noneMatch(i -> "Heavy".equals(i.armorType)))
             speed += 3;
-        if (h.heroClass.equals("Monk") && !armored && !shield && h.level >= 2)
-            speed += h.level >= 10 ? 6 : h.level >= 6 ? 4.5 : 3;
+        if (h.levelsIn("Monk") >= 2 && !armored && !shield)
+            speed += h.levelsIn("Monk") >= 10 ? 6 : h.levelsIn("Monk") >= 6 ? 4.5 : 3;
         return speed + items.stream().mapToDouble(i -> i.movement).sum();
     }
 
-    private static int attackCount(Hero h, String path) {
-        if (h.heroClass.equals("Fighter") && h.level >= 11) return 3;
-        if (h.level >= 5 && (MARTIAL_CLASSES.contains(h.heroClass) || h.heroClass.equals("Monk"))) return 2;
-        if (h.level >= 6 && Set.of("College of Swords", "College of Valour", "Bladesinging").contains(path)) return 2;
-        return 1;
+    private static int attackCount(List<Hero.ClassLevel> classes) {
+        int attacks = 1;
+        for (var c : classes) {
+            if (c.heroClass().equals("Fighter") && c.level() >= 11) return 3;
+            if (c.level() >= 5 && (MARTIAL_CLASSES.contains(c.heroClass()) || c.heroClass().equals("Monk"))) attacks = 2;
+            if (c.level() >= 6 && Set.of("College of Swords", "College of Valour", "Bladesinging").contains(c.subclass())) attacks = 2;
+        }
+        return attacks;
+    }
+
+    private static boolean hasPath(Hero h, String primary, String wanted) {
+        if (wanted.equals(primary)) return true;
+        for (var c : h.otherClasses) if (wanted.equals(c.subclass())) return true;
+        return false;
+    }
+
+    private static boolean hasStyle(Hero h, String primary, String wanted) {
+        if (wanted.equals(primary)) return true;
+        for (var c : h.otherClasses) if (wanted.equals(c.style())) return true;
+        return false;
     }
 
     private static Map<String, Integer> skillBonuses(Hero h, String path, List<String> feats, int[] mod,
                                                      int prof, List<Item> items) {
         Map<String, Integer> result = new LinkedHashMap<>();
-        List<String> selected = chosenSkills(h);
+        Set<String> selected = new HashSet<>(chosenSkills(h));
+        for (var c : h.otherClasses) selected.addAll(c.skills());
         for (var entry : SKILL_ABILITIES.entrySet()) {
             String skill = entry.getKey();
             int ability = entry.getValue();
@@ -431,13 +489,13 @@ public final class Rules {
                     || skill.equals("Perception") && (elf(h.race) || drow(h.race))
                     || skill.equals("Stealth") && h.race.startsWith("Wood ")
                     || skill.equals("Intimidation") && h.race.equals("Half-Orc")
-                    || skill.equals("Performance") && path.equals("Bladesinging");
+                    || skill.equals("Performance") && hasPath(h, path, "Bladesinging");
             boolean expertise = feats.contains("Actor") && (skill.equals("Deception") || skill.equals("Performance"))
                     || h.race.equals("Rock Gnome") && skill.equals("History");
             int extra = trained ? prof : 0;
             if (expertise) extra = 2 * prof;
-            if (extra == 0 && h.heroClass.equals("Bard") && h.level >= 2) extra = prof / 2;
-            if (extra == 0 && path.equals("Champion") && h.level >= 7 && ability <= CON) extra = prof / 2;
+            if (extra == 0 && h.levelsIn("Bard") >= 2) extra = prof / 2;
+            if (extra == 0 && hasPath(h, path, "Champion") && h.levelsIn("Fighter") >= 7 && ability <= CON) extra = prof / 2;
             int gear = bonus(items, i -> i.skillBonuses.getOrDefault(skill, 0));
             result.put(skill, mod[ability] + extra + gear);
         }
@@ -468,17 +526,17 @@ public final class Rules {
         boolean trained = unarmed || proficient(h, path, weapon.weaponType);
         if (!trained && ranged && ("Longbow".equals(weapon.weaponType) || "Shortbow".equals(weapon.weaponType)))
             trained = items.stream().anyMatch(i -> "gloves-of-archery".equals(i.id));
-        boolean monkWeapon = h.heroClass.equals("Monk") && !ranged && (unarmed || trained && !weapon.twoHanded);
+        boolean monkWeapon = h.levelsIn("Monk") > 0 && !ranged && (unarmed || trained && !weapon.twoHanded);
         boolean bothHands = !unarmed && !ranged && (weapon.twoHanded || offhand == null && weapon.versatileDie > 0);
         int ability = ranged ? mod[DEX] : mod[STR];
         if (monkWeapon || !unarmed && weapon.finesse) ability = Math.max(ability, mod[DEX]);
         int attack = ability + (trained ? prof : 0) + bonus(items, i -> i.attack);
-        boolean offhandUsesAbility = style.equals("Two-Weapon Fighting") || wears(items, "gloves-of-the-balanced-hands");
+        boolean offhandUsesAbility = hasStyle(h, style, "Two-Weapon Fighting") || wears(items, "gloves-of-the-balanced-hands");
         int flat = hand == AttackHand.OFFHAND && !offhandUsesAbility ? 0 : ability;
         int count = unarmed ? 1 : Math.max(1, weapon.diceCount);
         int die = unarmed ? 1 : Math.max(1, weapon.die);
         if (bothHands) die = Math.max(die, weapon.versatileDie);
-        if (monkWeapon && count == 1) die = Math.max(die, h.level >= 9 ? 8 : h.level >= 3 ? 6 : 4);
+        if (monkWeapon && count == 1) die = Math.max(die, h.levelsIn("Monk") >= 9 ? 8 : h.levelsIn("Monk") >= 3 ? 6 : 4);
         if (!unarmed) {
             attack += weapon.enchant;
             flat += weapon.enchant + bonus(items, i -> "caustic-band".equals(i.id) ? 0 : i.weaponDamage);
@@ -491,19 +549,20 @@ public final class Rules {
             flat += mod[STR];
         }
         if (ranged) {
-            if (style.equals("Archery")) attack += 2;
+            if (hasStyle(h, style, "Archery")) attack += 2;
             flat += bonus(items, i -> i.rangedDamage);
-        } else if (!unarmed && !bothHands && (offhand == null || "OFFHAND".equals(offhand.slot)) && style.equals("Duelling")) {
+        } else if (!unarmed && !bothHands && (offhand == null || "OFFHAND".equals(offhand.slot)) && hasStyle(h, style, "Duelling")) {
             flat += 2;
         }
         if (trained && (ranged && feats.contains("Sharpshooter") || bothHands && feats.contains("Great Weapon Master"))) {
             attack -= 5;
             flat += 10;
-            notes.add((ranged ? "Sharpshooter" : "Great Weapon Master") + " assumes All In is enabled (−5 to hit, +10 damage).");
+            notes.add(GameText.format("{0} assumes All In is enabled (−5 to hit, +10 damage).",
+                    GameText.text(ranged ? "Sharpshooter" : "Great Weapon Master")));
         }
-        if (!trained) notes.add(weapon.name + " has no weapon proficiency bonus for this hero.");
+        if (!trained) notes.add(GameText.format("{0} has no weapon proficiency bonus for this hero.", GameText.text(weapon.name)));
 
-        boolean reroll = bothHands && style.equals("Great Weapon Fighting");
+        boolean reroll = bothHands && hasStyle(h, style, "Great Weapon Fighting");
         int min = Math.max(0, count + flat), max = Math.max(0, count * die + flat);
         double mean = meanDamage(count, die, flat, reroll);
         StringBuilder formula = new StringBuilder(die == 1 ? String.valueOf(count) : count + "d" + die).append(add(flat));
@@ -519,7 +578,7 @@ public final class Rules {
             if (!"MELEE".equals(item.slot) && !"RANGED".equals(item.slot) && !"OFFHAND".equals(item.slot)
                     && item.riders != null) riders.addAll(item.riders);
         }
-        if (!unarmed && !ranged && h.heroClass.equals("Paladin") && h.level >= 11)
+        if (!unarmed && !ranged && h.levelsIn("Paladin") >= 11)
             riders.add(new Item.Rider(1, 8, "Radiant"));
         Set<String> types = new LinkedHashSet<>();
         types.add(unarmed ? "Bludgeoning" : Objects.toString(weapon.damageType, "Weapon"));
@@ -529,10 +588,10 @@ public final class Rules {
             mean += rider.count() * meanDie(rider.die(), reroll);
             formula.append(" + ").append(rider.count());
             if (rider.die() > 1) formula.append('d').append(rider.die());
-            formula.append(' ').append(rider.type());
+            formula.append(' ').append(GameText.text(rider.type()));
             if (!"weapon damage".equalsIgnoreCase(rider.type())) types.add(rider.type());
         }
-        return new Strike(unarmed ? "Unarmed strike" : weapon.name, String.join(" + ", types),
+        return new Strike(unarmed ? "Unarmed strike" : weapon.name, String.join(" + ", types.stream().map(GameText::text).toList()),
                 formula.toString(), attack, min, max, Math.round(mean * 100) / 100.0);
     }
 
@@ -558,8 +617,11 @@ public final class Rules {
 
     public static Sheet stats(Hero h, Map<String, Item> catalog) {
         Career career = Objects.requireNonNull(CAREERS.get(h.heroClass), "Choose a class.");
-        String path = choice(subclasses(h.heroClass, h.level), h.subclass);
-        String style = choice(styles(h.heroClass, path, h.level), h.style);
+        String path = choice(subclasses(h.heroClass, h.startingLevel()), h.subclass);
+        String style = choice(styles(h.heroClass, path, h.startingLevel()), h.style);
+        var classes = new ArrayList<Hero.ClassLevel>();
+        classes.add(new Hero.ClassLevel(h.heroClass, h.startingLevel(), path, style, h.skills));
+        classes.addAll(h.otherClasses);
         List<String> feats = chosenFeats(h);
         List<Item> equipped = h.gear.values().stream().filter(Objects::nonNull)
                 .map(catalog::get).filter(Objects::nonNull).toList();
@@ -577,33 +639,42 @@ public final class Rules {
         if (wears(equipped, "elixir-of-barkskin")) ac = Math.max(ac, 16);
         int hpBonus = mods[CON] + bonus(equipped, i -> i.hpPerLevel);
         if (h.race.equals("Gold Dwarf")) hpBonus++;
-        if (path.equals("Draconic Bloodline")) hpBonus++;
         if (feats.contains("Tough")) hpBonus += 2;
-        int hp = Math.max(1, career.hitDie + hpBonus) + (h.level - 1) * Math.max(1, career.hitDie / 2 + 1 + hpBonus);
+        int hp = 0;
+        for (var c : classes) {
+            int die = CAREERS.get(c.heroClass()).hitDie;
+            int perLevel = hpBonus + ("Draconic Bloodline".equals(c.subclass()) ? 1 : 0);
+            boolean starting = c.heroClass().equals(h.heroClass);
+            if (starting) hp += Math.max(1, die + perLevel);
+            hp += (c.level() - (starting ? 1 : 0)) * Math.max(1, die / 2 + 1 + perLevel);
+        }
         int initiative = mods[DEX] + bonus(equipped, i -> i.initiative);
         if (feats.contains("Alert")) initiative += 5;
-        if (path.equals("Gloom Stalker") || h.heroClass.equals("Barbarian") && h.level >= 7) initiative += 3;
-        if (path.equals("Swashbuckler")) initiative += h.level >= 10 ? 4 : h.level >= 5 ? 3 : 2;
-        int casting = mods[career.casting] + prof;
+        if (hasPath(h, path, "Gloom Stalker")) initiative += 3;
+        if (h.levelsIn("Barbarian") >= 7) initiative += 3;
+        if (hasPath(h, path, "Swashbuckler")) initiative += h.levelsIn("Rogue") >= 10 ? 4 : h.levelsIn("Rogue") >= 5 ? 3 : 2;
+        String itemClass = h.otherClasses.isEmpty() ? h.heroClass : h.otherClasses.getLast().heroClass();
+        int casting = mods[CAREERS.get(itemClass).casting] + prof;
         int spellDc = 8 + casting + bonus(equipped, i -> i.spellDc);
         int spellAttack = casting + bonus(equipped, i -> i.spellAttack + i.attack);
         List<String> notes = new ArrayList<>();
         notes.add("Damage ranges and averages are per successful ordinary hit, before resistance, critical hits and encounter-specific effects.");
-        notes.add("Class progression assumes a single class on Balanced difficulty. Spell examples use their listed slot level and assume the spell is available.");
+        notes.add("Class progression uses Balanced difficulty. Spell examples use their listed slot level and assume the spell is available.");
         notes.add("The sheet applies modeled equipment bonuses. The equipped effects list includes conditional and special abilities for reference.");
         List<String> traits = new ArrayList<>(racialTraits(h.race));
         Item elixir = equipped(h, catalog, "ELIXIR");
-        if (elixir != null && elixir.summary != null) traits.add(elixir.name + " · " + elixir.summary);
-        addFeatures(h, path, traits);
+        if (elixir != null && elixir.summary != null) traits.add(GameText.text(elixir.name) + " · " + GameText.text(elixir.summary));
+        for (var c : classes) addFeatures(c, traits);
+        if (!h.otherClasses.isEmpty()) notes.add(GameText.format("Item spell DC and spell attack use {0}. Class spell examples use their own casting ability.", GameText.text(itemClass)));
         int saveBonus = bonus(equipped, i -> i.save);
-        if (h.heroClass.equals("Paladin") && h.level >= 6) {
+        if (h.levelsIn("Paladin") >= 6) {
             saveBonus += Math.max(0, mods[CHA]);
             traits.add("Aura of Protection is active for these saving throws.");
         }
         List<Integer> saves = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
             boolean trained = i == career.firstSave || i == career.secondSave
-                    || path.equals("Gloom Stalker") && h.level >= 7 && (i == INT || i == WIS);
+                    || hasPath(h, path, "Gloom Stalker") && h.levelsIn("Ranger") >= 7 && (i == INT || i == WIS);
             String ability = ABILITIES.get(i);
             int equipmentSave = bonus(equipped, it -> it.saveBonuses.getOrDefault(ability, 0));
             if (i == WIS) equipmentSave += bonus(equipped, it -> it.wisSave);
@@ -615,10 +686,16 @@ public final class Rules {
         List<String> untrained = equipped.stream().filter(i -> !trainedForArmour(h, path, i))
                 .map(i -> i.name).toList();
         if (!untrained.isEmpty())
-            notes.add("Missing armour proficiency for " + String.join(", ", untrained)
-                    + ". Casting is blocked and attacks, saves and ability checks have disadvantage.");
-        List<Spell> spells = untrained.isEmpty() ? examples(h, path, mods, spellDc, spellAttack, equipped) : List.of();
-        return new Sheet(ac, hp, initiative, prof, spellDc, spellAttack, attackCount(h, path), movement(h, armored, shield, feats, equipped),
+            notes.add(GameText.format("Missing armour proficiency for {0}. Casting is blocked and attacks, saves and ability checks have disadvantage.",
+                    String.join(", ", untrained.stream().map(GameText::text).toList())));
+        List<Spell> spells = new ArrayList<>();
+        if (untrained.isEmpty()) {
+            for (var c : classes) {
+                int adjustment = mods[CAREERS.get(c.heroClass()).casting] + prof - casting;
+                spells.addAll(examples(c, h.level, mods, spellDc + adjustment, spellAttack + adjustment, equipped));
+            }
+        }
+        return new Sheet(ac, hp, initiative, prof, spellDc, spellAttack, attackCount(classes), movement(h, armored, shield, feats, equipped),
                 Arrays.stream(scores).boxed().toList(), Arrays.stream(mods).boxed().toList(), List.copyOf(saves),
                 skillBonuses(h, path, feats, mods, prof, equipped), melee, ranged, off, List.copyOf(traits), List.copyOf(notes), spells);
     }
@@ -669,44 +746,45 @@ public final class Rules {
         };
     }
 
-    private static void addFeatures(Hero h, String path, List<String> traits) {
-        Progression progression = PROGRESSION.get(progressionKey(h.heroClass, path));
+    private static void addFeatures(Hero.ClassLevel c, List<String> traits) {
+        String path = c.subclass();
+        Progression progression = progressionData.get(progressionKey(c.heroClass(), path));
         if (progression != null) {
             List<String> milestones = progression.features.entrySet().stream()
-                    .filter(entry -> entry.getKey() <= h.level)
-                    .map(entry -> "L" + entry.getKey() + " " + entry.getValue()).toList();
-            if (!milestones.isEmpty()) traits.add(path + " · " + String.join(" / ", milestones));
+                    .filter(entry -> entry.getKey() <= c.level())
+                    .map(entry -> GameText.format("L{0} {1}", entry.getKey(), GameText.text(entry.getValue()))).toList();
+            if (!milestones.isEmpty()) traits.add(GameText.text(path) + " · " + String.join(" / ", milestones));
         }
-        switch (h.heroClass) {
+        switch (c.heroClass()) {
             case "Barbarian" ->
-                    traits.add("Rage adds " + (h.level >= 9 ? 3 : 2) + " melee damage while active. The sheet shows ordinary hits.");
+                    traits.add("Rage adds " + (c.level() >= 9 ? 3 : 2) + " melee damage while active. The sheet shows ordinary hits.");
             case "Bard" -> {
-                traits.add("Bardic Inspiration die · d" + (h.level >= 10 ? 10 : h.level >= 5 ? 8 : 6) + ".");
-                if (h.level >= 2) traits.add("Jack of All Trades adds half proficiency to untrained skills.");
+                traits.add("Bardic Inspiration die · d" + (c.level() >= 10 ? 10 : c.level() >= 5 ? 8 : 6) + ".");
+                if (c.level() >= 2) traits.add("Jack of All Trades adds half proficiency to untrained skills.");
             }
             case "Druid" -> {
-                if (h.level >= 2)
+                if (c.level() >= 2)
                     traits.add("Wild Shape uses the chosen form's physical statistics. This sheet shows humanoid form.");
             }
             case "Fighter" -> {
-                if (h.level >= 2) traits.add("Action Surge grants one additional action per short rest.");
+                if (c.level() >= 2) traits.add("Action Surge grants one additional action per short rest.");
             }
-            case "Monk" -> traits.add("Martial Arts die · d" + (h.level >= 9 ? 8 : h.level >= 3 ? 6 : 4) + ".");
+            case "Monk" -> traits.add("Martial Arts die · d" + (c.level() >= 9 ? 8 : c.level() >= 3 ? 6 : 4) + ".");
             case "Paladin" -> {
-                if (h.level >= 2)
+                if (c.level() >= 2)
                     traits.add("Divine Smite · a first-level slot adds 2d8 radiant damage to a melee weapon hit.");
             }
             case "Ranger" -> {
-                if (h.level >= 2)
+                if (c.level() >= 2)
                     traits.add("Hunter’s Mark can add 1d6 weapon damage against the marked target while concentrating.");
             }
             case "Rogue" ->
-                    traits.add("Sneak Attack adds " + ((h.level + 1) / 2) + "d6 once per turn with an eligible finesse or ranged attack.");
+                    traits.add("Sneak Attack adds " + ((c.level() + 1) / 2) + "d6 once per turn with an eligible finesse or ranged attack.");
             case "Sorcerer" -> {
-                if (h.level >= 2) traits.add("Sorcery Points · " + h.level + " per long rest.");
+                if (c.level() >= 2) traits.add("Sorcery Points · " + c.level() + " per long rest.");
             }
             case "Warlock" -> traits.add("Pact Magic slots recover on a short rest.");
-            case "Wizard" -> traits.add("Arcane Recovery · " + ((h.level + 1) / 2) + " charges per long rest.");
+            case "Wizard" -> traits.add("Arcane Recovery · " + ((c.level() + 1) / 2) + " charges per long rest.");
             default -> {
             }
         }
@@ -731,31 +809,39 @@ public final class Rules {
         }
     }
 
-    private static List<Spell> examples(Hero h, String path, int[] mod, int dc, int attack, List<Item> equipped) {
-        int scale = h.level >= 10 ? 3 : h.level >= 5 ? 2 : 1;
+    private static List<Spell> examples(Hero.ClassLevel c, int totalLevel, int[] mod, int dc, int attack, List<Item> equipped) {
+        String path = c.subclass();
+        int scale = totalLevel >= 10 ? 3 : totalLevel >= 5 ? 2 : 1;
         int cantrip = wears(equipped, "potent-robe") ? mod[CHA] : 0;
-        int elemental = wears(equipped, "necklace-of-elemental-augmentation") ? mod[CAREERS.get(h.heroClass).casting] : 0;
-        String hit = String.format("Attack roll %+d.", attack);
+        int elemental = wears(equipped, "necklace-of-elemental-augmentation") ? mod[CAREERS.get(c.heroClass()).casting] : 0;
+        String hit = GameText.format("Attack roll {0}.", String.format(Locale.ROOT, "%+d", attack));
         List<Spell> spells = new ArrayList<>();
-        if (h.heroClass.equals("Wizard") || h.heroClass.equals("Sorcerer") || path.equals("Eldritch Knight") || path.equals("Arcane Trickster")) {
-            int evocation = path.equals("Evocation") && h.level >= 10 ? mod[INT] : 0;
-            spells.add(new Spell("Fire Bolt", scale + "d10" + add(evocation + cantrip + elemental) + " fire", hit + " Cantrip."));
+        if (c.heroClass().equals("Wizard") || c.heroClass().equals("Sorcerer") || path.equals("Eldritch Knight") || path.equals("Arcane Trickster")) {
+            int evocation = path.equals("Evocation School") && c.level() >= 10 ? mod[INT] : 0;
+            spells.add(new Spell("Fire Bolt", scale + "d10" + add(evocation + cantrip + elemental) + " " + GameText.text("fire"),
+                    hit + " " + GameText.text("Cantrip.")));
         }
-        if (h.heroClass.equals("Bard"))
-            spells.add(new Spell("Vicious Mockery", scale + "d4" + add(cantrip) + " psychic", "WIS save DC " + dc + ". Failed save also impairs the target’s next attack."));
-        if (h.heroClass.equals("Cleric")) {
-            boolean potent = h.level >= 8 && Set.of("Knowledge Domain", "Light Domain").contains(path);
-            spells.add(new Spell("Sacred Flame", scale + "d8" + add(cantrip + (potent ? mod[WIS] : 0)) + " radiant", "DEX save DC " + dc + " negates."));
-            spells.add(new Spell("Guiding Bolt", "4d6 radiant", hit + " First-level slot."));
-            if (h.level >= 2 && path.equals("Light Domain"))
-                spells.add(new Spell("Radiance of the Dawn", "2d10 + " + h.level + " radiant", "Channel Divinity. CON save DC " + dc + " halves damage."));
-            if (h.level >= 5)
-                spells.add(new Spell("Spirit Guardians", "3d8 radiant or necrotic", "Third-level slot, per affected foe. WIS save DC " + dc + " halves damage."));
+        if (c.heroClass().equals("Bard"))
+            spells.add(new Spell("Vicious Mockery", scale + "d4" + add(cantrip) + " " + GameText.text("psychic"),
+                    GameText.format("WIS save DC {0}. Failed save also impairs the target’s next attack.", dc)));
+        if (c.heroClass().equals("Cleric")) {
+            boolean potent = c.level() >= 8 && Set.of("Knowledge Domain", "Light Domain").contains(path);
+            spells.add(new Spell("Sacred Flame", scale + "d8" + add(cantrip + (potent ? mod[WIS] : 0)) + " " + GameText.text("radiant"),
+                    GameText.format("DEX save DC {0} negates.", dc)));
+            spells.add(new Spell("Guiding Bolt", "4d6 radiant", hit + " " + GameText.text("First-level slot.")));
+            if (c.level() >= 2 && path.equals("Light Domain"))
+                spells.add(new Spell("Radiance of the Dawn", "2d10 + " + c.level() + " " + GameText.text("radiant"),
+                        GameText.format("Channel Divinity. CON save DC {0} halves damage.", dc)));
+            if (c.level() >= 5)
+                spells.add(new Spell("Spirit Guardians", "3d8 radiant or necrotic",
+                        GameText.format("Third-level slot, per affected foe. WIS save DC {0} halves damage.", dc)));
         }
-        if (h.heroClass.equals("Druid"))
-            spells.add(new Spell("Produce Flame", scale + "d8" + add(cantrip + elemental) + " fire", hit + " Hurl the conjured flame."));
-        if (h.heroClass.equals("Warlock"))
-            spells.add(new Spell("Eldritch Blast", scale + (scale == 1 ? " beam" : " beams") + " × (1d10" + add(cantrip) + " force)", hit + " Roll once per beam."));
+        if (c.heroClass().equals("Druid"))
+            spells.add(new Spell("Produce Flame", scale + "d8" + add(cantrip + elemental) + " " + GameText.text("fire"),
+                    hit + " " + GameText.text("Hurl the conjured flame.")));
+        if (c.heroClass().equals("Warlock"))
+            spells.add(new Spell("Eldritch Blast", scale + " " + GameText.text(scale == 1 ? "beam" : "beams")
+                    + " × (1d10" + add(cantrip) + " " + GameText.text("force") + ")", hit + " " + GameText.text("Roll once per beam.")));
         return List.copyOf(spells);
     }
 }

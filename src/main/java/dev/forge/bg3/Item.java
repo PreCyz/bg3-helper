@@ -2,14 +2,15 @@ package dev.forge.bg3;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import java.util.Map;
-import java.util.Locale;
+import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Item {
     public record Rider(int count, int die, String type) { }
+    public record Acquisition(String act, String details, String source) { }
 
-    public java.util.List<Rider> riders = java.util.List.of();
+    public List<Acquisition> acquisition = List.of();
+    public List<Rider> riders = List.of();
     public Map<String, Integer> saveBonuses = Map.of(), skillBonuses = Map.of();
     public int strBonus, dexBonus, conBonus, intBonus, wisBonus, chaBonus,
             strBonusCap, dexBonusCap, conBonusCap, intBonusCap, wisBonusCap, chaBonusCap,
@@ -32,6 +33,7 @@ public class Item {
     boolean matchesName(String query) {
         String term = query.strip().toLowerCase(Locale.ROOT);
         return name.toLowerCase(Locale.ROOT).contains(term)
-                || polishName != null && polishName.toLowerCase(Locale.ROOT).contains(term);
+                || polishName != null && polishName.toLowerCase(Locale.ROOT).contains(term)
+                || GameText.polish(name).toLowerCase(Locale.ROOT).contains(term);
     }
 }

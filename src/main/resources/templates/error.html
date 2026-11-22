@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en" th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{shared::head(#{ui.error.title})}"></head>
+  <body>
+    <header th:replace="~{shared::nav}"></header>
+    <main class="wrap">
+      <div class="panel empty-state">
+        <h1 th:text="${status == 404} ? #{ui.error.missing} : #{ui.error.title}"></h1>
+        <p th:text="${status == 404} ? #{ui.error.missing.detail} : #{ui.error.retry}"></p>
+        <a class="btn-gold" href="/" th:text="#{ui.home.link}"></a>
+      </div>
+    </main>
+  </body>
+</html>

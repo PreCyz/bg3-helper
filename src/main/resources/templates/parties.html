@@ -1,47 +1,51 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head th:replace="~{shared::head('Manage parties')}"></head>
+<html lang="en" th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{shared::head(#{ui.manage.parties})}"></head>
   <body>
     <header th:replace="~{shared::nav}"></header>
     <main class="wrap">
       <div th:replace="~{shared::notice}"></div>
       <div class="page-top">
-        <div><h1>Parties</h1><p>Each party keeps its own heroes and inventory.</p></div>
+        <div><h1>[[#{ui.parties}]]</h1><p>[[#{ui.each.party.keeps.its.own.heroes.and.inventory}]]</p></div>
         <form class="filters" method="post" action="parties">
-          <label for="partyName">Party name</label>
+          <label for="partyName">[[#{ui.party.name}]]</label>
           <input id="partyName" name="name" maxlength="60" required />
-          <button class="btn-gold">Create party</button>
+          <button class="btn-gold">[[#{ui.create.party}]]</button>
         </form>
       </div>
-      <p class="panel empty-state" th:if="${parties.isEmpty()}">Create a party to start adding heroes.</p>
+      <p class="panel empty-state" th:if="${parties.isEmpty()}">[[#{ui.create.a.party.to.start.adding.heroes}]]</p>
       <div class="option-grid">
         <section class="panel" th:each="p : ${parties}" th:with="current=${p.id == party.id}">
           <div class="panel-head">
             <svg th:replace="~{shared::icon('shield')}"></svg>
-            <h2 class="text-break" th:text="${p.name}"></h2>
-            <span class="count-pill" th:if="${current}">Active</span>
+            <h2 class="text-break" th:text="${@words.partyName(p,basePath)}"></h2>
+            <span class="count-pill" th:if="${current}">[[#{ui.active}]]</span>
           </div>
           <div class="panel-body">
-            <p class="help" th:if="${p.heroes.isEmpty()}">No heroes in this party yet.</p>
+            <p class="help" th:if="${p.heroes.isEmpty()}">[[#{ui.no.heroes.in.this.party.yet}]]</p>
             <ul class="clean-list">
               <li class="roster-row" th:each="h : ${p.heroes}">
-                <div class="roster-identity"><span th:replace="~{shared::portrait(${h})}"></span>
-                  <div><b th:text="${h.name}"></b><small th:text="' · Level '+${h.level}+' '+${h.heroClass}"></small></div>
-                </div>
+                <form method="post" th:action="@{parties/{id}/switch(id=${p.id})}">
+                  <button type="submit" class="roster-identity roster-open" name="heroId" th:value="${h.id}"
+                          th:aria-label="#{format.open.sheet(${h.name})}">
+                    <span th:replace="~{shared::portrait(${h})}"></span>
+                    <span><b th:text="${h.name}"></b><small th:text="#{format.identity(${h.level},${@words.classes(h)})}"></small></span>
+                  </button>
+                </form>
                 <a class="remove-link" th:href="@{parties/{p}/heroes/{h}/remove(p=${p.id},h=${h.id})}"
-                   th:aria-label="'Remove '+${h.name}">Remove hero</a>
+                   th:aria-label="#{format.remove(${h.name})}">[[#{ui.remove.hero}]]</a>
               </li>
             </ul>
           </div>
           <div class="card-actions">
             <form th:unless="${current}" method="post" th:action="@{parties/{id}/switch(id=${p.id})}">
-              <button class="btn-gold">Switch party</button>
+              <button class="btn-gold">[[#{ui.switch.party}]]</button>
             </form>
             <div class="actions" th:if="${current}">
-              <a class="btn-quiet" href="sheet" th:if="${p.active != null}">Hero sheet</a>
-              <a class="btn-gold" href="heroes/new">New hero</a>
+              <a class="btn-quiet" href="sheet" th:if="${p.active != null}">[[#{ui.hero.sheet}]]</a>
+              <a class="btn-gold" href="heroes/new">[[#{ui.new.hero}]]</a>
             </div>
-            <a class="remove-link" th:href="@{parties/{id}/remove(id=${p.id})}">Remove party</a>
+            <a class="remove-link" th:href="@{parties/{id}/remove(id=${p.id})}">[[#{ui.remove.party}]]</a>
           </div>
         </section>
       </div>

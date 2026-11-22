@@ -1,13 +1,13 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head th:replace="~{shared::head('Check your selection')}"></head>
+<html lang="en" th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{shared::head(#{ui.check.your.selection})}"></head>
   <body>
     <header th:replace="~{shared::nav}"></header>
     <main class="wrap">
       <div class="panel empty-state">
-        <h1>Check your selection</h1>
-        <p th:text="${problem}"></p>
-        <a class="btn-gold" href="sheet">Return to hero sheet</a>
+        <h1>[[#{ui.check.your.selection}]]</h1>
+        <p th:text="${@words.text(problem)}"></p>
+        <a class="btn-gold" href="sheet">[[#{ui.return.to.hero.sheet}]]</a>
       </div>
     </main>
   </body>

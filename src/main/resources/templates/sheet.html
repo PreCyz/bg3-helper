@@ -1,36 +1,40 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head th:replace="~{shared::head('Hero sheet')}"></head>
+<html lang="en" th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{shared::head(#{ui.hero.sheet})}"></head>
   <body>
     <header th:replace="~{shared::nav}"></header>
     <main class="wrap">
       <div th:replace="~{shared::notice}"></div>
-      <div class="crumb"><a href="parties" th:text="${party.name}"></a><i>›</i>Hero sheet</div>
+      <div class="crumb"><a href="parties" th:text="${@words.partyName(party,basePath)}"></a><i>›</i>[[#{ui.hero.sheet}]]</div>
       <section class="hero-bar">
         <div class="identity">
           <span th:replace="~{shared::portrait(${hero})}"></span>
           <div>
             <div class="name-row">
               <h1 th:text="${hero.name}"></h1>
-              <span class="level" th:text="'Level '+${hero.level}"></span>
+              <span class="level" th:text="#{format.level(${hero.level})}"></span>
             </div>
             <div class="identity-meta">
-              <span th:text="${heroGender ?: 'Gender unspecified'}"></span><i>·</i>
-              <span th:text="${hero.race}"></span><i>·</i
-              ><span th:text="${hero.heroClass}"></span
-              ><th:block th:if="${hero.subclass != 'None'}"
-                ><i>·</i><span th:text="${hero.subclass}"></span
+              <span th:text="${@words.text(heroGender ?: 'Gender unspecified')}"></span><i>·</i>
+              <span th:text="${@words.text(hero.race)}"></span><i>·</i
+              ><span th:text="${@words.classes(hero)}"></span
+              ><th:block th:if="${hero.otherClasses.isEmpty() and hero.subclass != 'None'}"
+                ><i>·</i><span th:text="${@words.text(hero.subclass)}"></span
               ></th:block>
+            </div>
+            <div class="identity-meta" th:unless="${hero.otherClasses.isEmpty()}">
+              <span th:each="c : ${hero.classLevels()}" th:if="${c.subclass != 'None'}"
+                    th:text="|${@words.text(c.heroClass)} · ${@words.text(c.subclass)}|"></span>
             </div>
           </div>
         </div>
         <div class="actions">
           <a class="btn-quiet" th:href="@{sheet(mode=${mode},track=${build?.id})}+'#development-tracks'"
-            ><svg th:replace="~{shared::icon('book')}"></svg>Development tracks</a>
+            ><svg th:replace="~{shared::icon('book')}"></svg>[[#{ui.development.tracks}]]</a>
           <a class="btn-quiet" th:href="@{heroes/{id}/edit(id=${hero.id})}"
-            ><svg th:replace="~{shared::icon('edit')}"></svg>Edit hero</a
+            ><svg th:replace="~{shared::icon('edit')}"></svg>[[#{ui.edit.hero}]]</a
           ><a class="btn-gold" href="heroes/new"
-            ><svg th:replace="~{shared::icon('plus')}"></svg>New hero</a
+            ><svg th:replace="~{shared::icon('plus')}"></svg>[[#{ui.new.hero}]]</a
           >
         </div>
       </section>
@@ -39,7 +43,7 @@
           <section class="panel">
             <div class="panel-head">
               <svg th:replace="~{shared::icon('die')}"></svg>
-              <h2>Ability scores</h2>
+              <h2>[[#{ui.ability.scores}]]</h2>
             </div>
             <div class="ability-list">
               <div class="ability-row" th:each="a,i : ${abilities}">
@@ -49,8 +53,8 @@
                   ></svg
                 ></span>
                 <div>
-                  <b th:text="${a}"></b
-                  ><small th:text="${shortNames[i.index]}"></small>
+                  <b th:text="${@words.text(a)}"></b
+                  ><small th:text="${@words.text(shortNames[i.index])}"></small>
                 </div>
                 <strong th:text="${stats.scores[i.index]}"></strong
                 ><span
@@ -63,11 +67,11 @@
           <section class="panel saves">
             <div class="panel-head">
               <svg th:replace="~{shared::icon('shield')}"></svg>
-              <h2>Saving throws</h2>
+              <h2>[[#{ui.saving.throws}]]</h2>
             </div>
             <div class="save-grid">
               <div th:each="a,i : ${shortNames}">
-                <small th:text="${a}"></small
+                <small th:text="${@words.text(a)}"></small
                 ><b th:text="${@fmt.sign(stats.saves[i.index])}"></b>
               </div>
             </div>
@@ -76,42 +80,41 @@
         <section class="panel gear-panel">
           <div class="panel-head">
             <svg th:replace="~{shared::icon('armour')}"></svg>
-            <h2>Equipment</h2>
+            <h2>[[#{ui.equipment}]]</h2>
             <span
               class="count-pill"
               th:text="${hero.gear.size()} + ' / ' + ${slotCount}"
             ></span>
           </div>
-          <div class="equipment-stage" th:with="art=${@avatarArt.forHero(hero)}">
+          <div class="equipment-stage" th:with="art=${@avatarArt.forHero(hero)},description=${@words.appearance(art)},specialization=${@words.text(art.specialization)}">
             <div class="figure-glow"></div>
-            <img th:if="${art.backdrop != null}" class="stage-scene" th:src="${art.backdrop}" alt="" />
             <div class="figure">
-              <img class="hero-figure" th:src="${art.figure}" th:alt="${art.description}" />
-              <span class="figure-insignia" th:title="${art.specialization}">
-                <img th:src="${art.emblem}" th:alt="${art.specialization}+' emblem'" />
+              <img class="hero-figure" th:src="${art.figure}" th:alt="${description}" />
+              <span class="figure-insignia" th:title="${specialization}">
+                <img th:src="${art.emblem}" th:alt="#{format.emblem(${specialization})}" />
               </span><a
                 class="hotspot headspot"
                 th:href="@{equipment/HEAD(heroId=${hero.id})}"
-                aria-label="Choose head equipment"
-                title="Choose head equipment"
+                th:aria-label="#{ui.choose.head.equipment}"
+                th:title="#{ui.choose.head.equipment}"
               ></a
               ><a
                 class="hotspot chestspot"
                 th:href="@{equipment/CHEST(heroId=${hero.id})}"
-                aria-label="Choose armour"
-                title="Choose armour"
+                th:aria-label="#{ui.choose.armour}"
+                th:title="#{ui.choose.armour}"
               ></a
               ><a
                 class="hotspot handspot"
                 th:href="@{equipment/HANDS(heroId=${hero.id})}"
-                aria-label="Choose gloves"
-                title="Choose gloves"
+                th:aria-label="#{ui.choose.gloves}"
+                th:title="#{ui.choose.gloves}"
               ></a
               ><a
                 class="hotspot footspot"
                 th:href="@{equipment/FEET(heroId=${hero.id})}"
-                aria-label="Choose boots"
-                title="Choose boots"
+                th:aria-label="#{ui.choose.boots}"
+                th:title="#{ui.choose.boots}"
               ></a>
             </div>
             <div class="rail left">
@@ -126,82 +129,81 @@
             </div>
           </div>
           <div class="gear-caption">
-            <svg th:replace="~{shared::icon('info')}"></svg>Select a slot to
-            compare and equip items.
+            <svg th:replace="~{shared::icon('info')}"></svg>[[#{ui.select.a.slot.to.compare.and.equip.items}]]
           </div>
         </section>
         <aside class="stack">
           <section class="panel">
             <div class="panel-head">
               <svg th:replace="~{shared::icon('swords')}"></svg>
-              <h2>Combat stats</h2>
+              <h2>[[#{ui.combat.stats}]]</h2>
             </div>
             <div class="combat-tiles">
               <div>
                 <span class="tile-icon amber"
                   ><svg th:replace="~{shared::icon('shield')}"></svg></span
                 ><strong th:text="${stats.ac}"></strong
-                ><small>Armour class</small>
+                ><small>[[#{ui.armour.class.alt}]]</small>
               </div>
               <div>
                 <span class="tile-icon red"
                   ><svg th:replace="~{shared::icon('heart')}"></svg></span
                 ><strong th:text="${stats.hp}"></strong
-                ><small>Hit points</small>
+                ><small>[[#{ui.hit.points}]]</small>
               </div>
               <div>
                 <span class="tile-icon violet"
                   ><svg th:replace="~{shared::icon('bolt')}"></svg></span
                 ><strong th:text="${@fmt.sign(stats.initiative)}"></strong
-                ><small>Initiative</small>
+                ><small>[[#{ui.initiative}]]</small>
               </div>
               <div>
                 <span class="tile-icon green"
                   ><svg th:replace="~{shared::icon('boot')}"></svg></span
                 ><strong th:text="${@fmt.number(stats.movement)}+' m'"></strong
-                ><small>Movement</small>
+                ><small>[[#{ui.movement}]]</small>
               </div>
             </div>
           </section>
           <section class="panel">
             <div class="panel-head">
               <svg th:replace="~{shared::icon('target')}"></svg>
-              <h2>Attack profile</h2>
+              <h2>[[#{ui.attack.profile}]]</h2>
             </div>
             <div class="panel-body">
               <div class="seg">
                 <a href="sheet?mode=ranged" th:classappend="${ranged}?'selected'"
-                  >Ranged</a
+                  >[[#{ui.ranged}]]</a
                 ><a
                   href="sheet?mode=melee"
                   th:classappend="${!ranged and !offhand}?'selected'"
-                  >Melee</a
+                  >[[#{ui.melee}]]</a
                 ><a
                   th:if="${stats.offhand!=null}"
                   href="sheet?mode=offhand"
                   th:classappend="${offhand}?'selected'"
-                  >Off hand</a
+                  >[[#{ui.off.hand}]]</a
                 >
               </div>
-              <h3 class="weapon-name" th:text="${strike.name}"></h3>
+              <h3 class="weapon-name" th:text="${@words.text(strike.name)}"></h3>
               <div
                 class="damage-number"
                 th:text="${strike.min}+'–'+${strike.max}"
               ></div>
               <div
                 class="damage-label"
-                th:text="${strike.damageType}+' damage per hit'"
+                th:text="#{format.damage.type(${@words.text(strike.damageType)})}"
               ></div>
-              <div class="formula" th:text="${strike.formula}"></div>
+              <div class="formula" th:text="${@words.text(strike.formula)}"></div>
               <dl class="pairs">
-                <dt>Attack roll bonus</dt>
+                <dt>[[#{ui.attack.roll.bonus}]]</dt>
                 <dd th:text="${@fmt.sign(strike.attack)}"></dd>
-                <dt>Average per hit</dt>
+                <dt>[[#{ui.average.per.hit}]]</dt>
                 <dd th:text="${@fmt.number(strike.average)}"></dd>
                 <dt
-                  th:text="${offhand?'Attack cost':'Attacks per action'}"
+                  th:text="${@words.text(offhand?'Attack cost':'Attacks per action')}"
                 ></dt>
-                <dd th:text="${offhand?'Bonus action':stats.attacks}"></dd>
+                <dd th:text="${@words.text(offhand?'Bonus action':stats.attacks)}"></dd>
               </dl>
             </div>
           </section>
@@ -211,21 +213,21 @@
         <section class="panel">
           <div class="panel-head">
             <svg th:replace="~{shared::icon('spark')}"></svg>
-            <h2>Traits &amp; effects</h2>
+            <h2>[[#{ui.traits.effects}]]</h2>
           </div>
           <div class="panel-body">
             <ul class="clean-list">
-              <li th:each="t : ${stats.traits}" th:text="${t}"></li>
+              <li th:each="t : ${stats.traits}" th:text="${@words.text(t)}"></li>
             </ul>
             <details class="fold">
-              <summary>Equipped effects</summary>
+              <summary>[[#{ui.equipped.effects}]]</summary>
               <ul class="clean-list">
                 <li
                   th:each="entry : ${hero.gear}"
                   th:with="it=${catalog[entry.value]}"
                 >
-                  <a th:href="${it.source}" th:text="${it.name}"></a
-                  ><span th:text="' · '+${it.summary}"></span>
+                  <a th:href="${it.source}" th:text="${@words.text(it.name)}"></a
+                  ><span th:text="' · '+${@words.text(it.summary)}"></span>
                 </li>
               </ul>
             </details>
@@ -234,38 +236,38 @@
         <section class="panel">
           <div class="panel-head">
             <svg th:replace="~{shared::icon('book')}"></svg>
-            <h2>Character details</h2>
+            <h2>[[#{ui.character.details}]]</h2>
           </div>
           <div class="panel-body">
             <dl class="pairs first">
-              <dt>Proficiency bonus</dt>
+              <dt>[[#{ui.proficiency.bonus}]]</dt>
               <dd th:text="${@fmt.sign(stats.proficiency)}"></dd>
-              <dt>Spell save DC</dt>
+              <dt>[[#{ui.spell.save.dc}]]</dt>
               <dd th:text="${stats.spellDc}"></dd>
-              <dt>Spell attack bonus</dt>
+              <dt>[[#{ui.spell.attack.bonus}]]</dt>
               <dd th:text="${@fmt.sign(stats.spellAttack)}"></dd>
             </dl>
             <details class="fold">
-              <summary>Skill modifiers</summary>
+              <summary>[[#{ui.skill.modifiers}]]</summary>
               <dl class="pairs">
                 <th:block th:each="entry : ${stats.skills}"
-                  ><dt th:text="${entry.key}"></dt>
+                  ><dt th:text="${@words.text(entry.key)}"></dt>
                   <dd th:text="${@fmt.sign(entry.value)}"></dd
                 ></th:block>
               </dl>
             </details>
             <details class="fold" th:if="${!stats.spells.isEmpty()}">
-              <summary>Spell &amp; action examples</summary>
+              <summary>[[#{ui.spell.action.examples}]]</summary>
               <p th:each="s : ${stats.spells}">
-                <b th:text="${s.name}+' · '+${s.formula}"></b><br /><span
-                  th:text="${s.detail}"
+                <b th:text="${@words.text(s.name)}+' · '+${@words.text(s.formula)}"></b><br /><span
+                  th:text="${@words.text(s.detail)}"
                 ></span>
               </p>
             </details>
             <details class="fold">
-              <summary>Calculation notes</summary>
+              <summary>[[#{ui.calculation.notes}]]</summary>
               <ul class="clean-list">
-                <li th:each="n : ${stats.notes}" th:text="${n}"></li>
+                <li th:each="n : ${stats.notes}" th:text="${@words.text(n)}"></li>
               </ul>
             </details>
           </div>
@@ -274,49 +276,49 @@
       <section id="development-tracks" class="panel mt-3">
         <div class="panel-head">
           <svg th:replace="~{shared::icon('book')}"></svg>
-          <h2>Development tracks</h2>
-          <span class="metadata" th:text="|${classTrackCount} for ${hero.heroClass} · ${builds.size()} total|"></span>
+          <h2>[[#{ui.development.tracks}]]</h2>
+          <span class="metadata" th:text="#{format.track.count(${classTrackCount},${@words.text(hero.heroClass)},${builds.size()})}"></span>
         </div>
         <div class="panel-body">
-          <nav class="actions" aria-label="Predefined development tracks">
-            <a th:each="b : ${builds}" th:text="${b.name}"
+          <nav class="actions" th:aria-label="#{ui.predefined.development.tracks}">
+            <a th:each="b : ${builds}" th:text="${@words.text(b.name)}"
                th:class="${b == build ? 'btn-gold' : 'btn-quiet'}"
                th:attr="aria-current=${b == build ? 'true' : null}"
                th:href="@{sheet(track=${b.id},mode=${mode})}+'#development-tracks'"></a>
           </nav>
-          <p th:if="${build == null}" class="mt-3">Choose a track to see its level-by-level recommendations.</p>
-          <th:block th:if="${build != null}">
-          <h3 class="mt-3" th:text="${build.name}"></h3>
-          <p th:text="${build.summary}"></p>
-          <p><strong th:text="${build.heroClass}+' · '+${build.subclass}"></strong>
-            <span th:if="${hero.heroClass != build.heroClass}" th:text="' · '+${hero.name}+' is currently a '+${hero.heroClass}+'.'"></span>
+          <p th:if="${build == null}" class="mt-3">[[#{ui.choose.a.track.to.see.its.level.by.level.recommendations}]]</p>
+          <th:block th:if="${build != null}" th:with="trackLevel=${hero.levelsIn(build.heroClass)}">
+          <h3 class="mt-3" th:text="${@words.text(build.name)}"></h3>
+          <p th:text="${@words.text(build.summary)}"></p>
+          <p><strong th:text="${@words.text(build.heroClass)}+' · '+${@words.text(build.subclass)}"></strong>
+            <span th:if="${trackLevel == 0}" th:text="#{format.no.levels(${hero.name})}"></span>
           </p>
-          <p><strong>Starting scores</strong>
-            <span th:each="score,i : ${build.abilities}" th:text="${shortNames[i.index]}+' '+${score}+${i.last ? '' : ' · '}" ></span>
+          <p><strong>[[#{ui.starting.scores}]]</strong>
+            <span th:each="score,i : ${build.abilities}" th:text="${@words.text(shortNames[i.index])}+' '+${score}+${i.last ? '' : ' · '}" ></span>
           </p>
-          <p th:if="${build.id == hero.buildId}" th:text="${hero.name}+' is following this track.'"></p>
+          <p th:if="${build.id == hero.buildId}" th:text="#{format.following(${hero.name})}"></p>
           <form th:unless="${build.id == hero.buildId}" method="post" th:action="@{heroes/{id}/track(id=${hero.id})}">
             <input type="hidden" name="partyId" th:value="${party.id}" />
             <input type="hidden" name="buildId" th:value="${build.id}" />
             <input type="hidden" name="mode" th:value="${mode}" />
-            <button class="btn-soft" th:text="'Follow this track with '+${hero.name}"></button>
+            <button class="btn-soft" th:text="#{format.follow(${hero.name})}"></button>
           </form>
-          <h3 class="mt-3">Level-by-level plan</h3>
-          <p th:if="${hero.heroClass == build.heroClass and hero.level < build.milestones.size()}">
-            <strong th:text="'Next at level '+${hero.level + 1}"></strong>
-            <span th:text="${build.milestones[hero.level]}"></span>
+          <h3 class="mt-3">[[#{ui.level.by.level.plan}]]</h3>
+          <p th:if="${trackLevel > 0 and trackLevel < build.milestones.size()}">
+            <strong th:text="#{format.next.level(${trackLevel+1})}"></strong>
+            <span th:text="${@words.text(build.milestones[trackLevel])}"></span>
           </p>
           <ol class="track-levels">
             <li th:each="line,i : ${build.milestones}">
-              <strong th:text="'Level '+${i.count}"></strong>
-              <small th:if="${hero.heroClass == build.heroClass and hero.level == i.count}"> · Current level</small>
-              <span th:text="${line}"></span>
+              <strong th:text="#{format.level(${i.count})}"></strong>
+              <small th:if="${trackLevel == i.count}"> [[#{ui.current.level}]]</small>
+              <span th:text="${@words.text(line)}"></span>
             </li>
           </ol>
-          <p th:text="${build.note}"></p>
-          <p><a th:href="'https://bg3.wiki/wiki/'+${build.wiki}" target="_blank" rel="noreferrer">Subclass on BG3 Wiki ↗</a>
-            · <a th:href="${build.guide}" target="_blank" rel="noreferrer" th:text="${build.guideName}"></a></p>
-          <h3>Equipment goals</h3>
+          <p th:text="${@words.text(build.note)}"></p>
+          <p><a th:href="'https://bg3.wiki/wiki/'+${build.wiki}" target="_blank" rel="noreferrer">[[#{ui.subclass.on.bg3.wiki}]]</a>
+            · <a th:href="${build.guide}" target="_blank" rel="noreferrer" th:text="${@words.text(build.guideName)}"></a></p>
+          <h3>[[#{ui.equipment.goals}]]</h3>
           <div class="catalog-grid mt-3">
             <div
               class="item-heading"
@@ -325,18 +327,18 @@
             >
               <div th:replace="~{shared::itemIcon(${it},${icon})}"></div>
               <div>
-                <b th:text="${it.name}"></b>
-                <div class="metadata" th:if="${equipped}">Equipped</div>
+                <b th:text="${@words.text(it.name)}"></b>
+                <div class="metadata" th:if="${equipped}">[[#{ui.equipped}]]</div>
                 <div th:unless="${equipped}">
                   <a
                     th:if="${party.available(id)>0}"
                     th:href="@{equipment/{s}(s=${@fmt.equipSlot(it.slot)},heroId=${hero.id})}"
-                    >Compare in slot</a
+                    >[[#{ui.compare.in.slot}]]</a
                   >
                   <a
                     th:if="${party.available(id)<=0}"
                     th:href="@{inventory(tab='catalog',q=${it.name})}"
-                    >View in catalog</a
+                    >[[#{ui.view.in.catalog}]]</a
                   >
                 </div>
               </div>
@@ -346,8 +348,7 @@
         </div>
       </section>
       <p class="sample-note" th:if="${hero.id=='aelar'}">
-        Aelar and the starting inventory are a playable example. Choose New hero
-        to plan your character.
+        [[#{ui.aelar.and.the.starting.inventory.are.a.playable.example.choose.ne}]]
       </p>
     </main>
     <footer th:replace="~{shared::footer}"></footer>

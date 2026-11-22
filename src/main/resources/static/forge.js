@@ -4,17 +4,17 @@ document.querySelectorAll("[data-synergies]").forEach((details) => {
     const link = details.querySelector("[data-load-synergies]");
     if (!details.open || !link || details.getAttribute("aria-busy") === "true") return;
     details.setAttribute("aria-busy", "true");
-    link.textContent = "Loading matching equipment…";
+    link.textContent = link.dataset.loading;
     try {
       const response = await fetch(link.href);
       if (!response.ok) throw new Error("Recommendations unavailable");
       const page = new DOMParser().parseFromString(await response.text(), "text/html");
       const card = page.getElementById(details.closest("article").id);
-      const result = card?.querySelector("[data-synergies][open] [data-synergy-content]");
+      const result = card?.querySelector(`[data-synergies="${details.dataset.synergies}"][open] [data-synergy-content]`);
       if (!result) throw new Error("Missing recommendations");
       details.querySelector("[data-synergy-content]").replaceWith(result);
     } catch {
-      link.textContent = "Open matching equipment";
+      link.textContent = link.dataset.retry;
     } finally {
       details.removeAttribute("aria-busy");
     }
@@ -27,6 +27,23 @@ document
   );
 const form = document.getElementById("wizardForm");
 if (form) {
+  function updateClassBudget() {
+    const levels = [...form.querySelectorAll("[data-class-level]")];
+    const total = levels.reduce((sum, input) => sum + (input.valueAsNumber || 0), 0);
+    document.getElementById("total-level").value = total;
+    for (const input of levels)
+      input.setCustomValidity(total > 12 ? form.dataset.levelLimit : "");
+    const picker = form.elements.newClass;
+    if (picker) {
+      const taken = new Set([form.elements.heroClass.value,
+        ...[...form.querySelectorAll('[name="extraClass"]')].map(input => input.value)]);
+      for (const option of picker.options) option.disabled = taken.has(option.value);
+      if (taken.has(picker.value)) picker.value = "";
+      form.querySelector('[value="addClass"]').disabled = !picker.value || total >= 12;
+    }
+  }
+  updateClassBudget();
+  form.addEventListener("input", updateClassBudget);
   let timer;
   let sequence = 0;
   let pending;
@@ -37,7 +54,7 @@ if (form) {
     pending?.abort();
   });
   function schedule(event) {
-    if (event.target.name === "name") return;
+    if (event.target.name === "name" || event.target.name === "newClass") return;
     clearTimeout(timer);
     pending?.abort();
     const revision = ++sequence;
@@ -76,11 +93,11 @@ if (form) {
           after
             .querySelectorAll("select")
             [focusIndex]?.focus({ preventScroll: true });
-        status.textContent = "Stat preview updated.";
+        status.textContent = form.dataset.updated;
       } catch (error) {
         if (error.name !== "AbortError") {
           status.classList.remove("visually-hidden");
-          status.textContent = "Use Update preview to refresh the statistics.";
+          status.textContent = form.dataset.retry;
         }
       }
     }, 220);

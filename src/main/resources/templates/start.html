@@ -1,38 +1,38 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head th:replace="~{shared::head('Choose a party')}"></head>
+<html lang="en" th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{shared::head(#{ui.choose.a.party})}"></head>
   <body>
     <header th:replace="~{shared::nav}"></header>
     <main class="wrap">
-      <div class="page-top"><h1>Choose your party</h1></div>
+      <div class="page-top"><h1>[[#{ui.choose.your.party}]]</h1></div>
       <div class="start-options">
         <section class="panel">
-          <div class="panel-head"><svg th:replace="~{shared::icon('shield')}"></svg><h2>Create a party</h2></div>
+          <div class="panel-head"><svg th:replace="~{shared::icon('shield')}"></svg><h2>[[#{ui.create.a.party}]]</h2></div>
           <form class="panel-body start-action" method="post" action="/parties">
-            <p>Start with an empty inventory and add your own heroes.</p>
-            <label for="partyName">Party name</label>
+            <p>[[#{ui.start.with.an.empty.inventory.and.add.your.own.heroes}]]</p>
+            <label for="partyName">[[#{ui.party.name}]]</label>
             <input id="partyName" name="name" maxlength="60" required />
-            <button class="btn-gold">Create party</button>
+            <button class="btn-gold">[[#{ui.create.party}]]</button>
           </form>
         </section>
         <section class="panel">
-          <div class="panel-head"><svg th:replace="~{shared::icon('bow')}"></svg><h2>Try the demo</h2></div>
+          <div class="panel-head"><svg th:replace="~{shared::icon('bow')}"></svg><h2>[[#{ui.try.the.demo}]]</h2></div>
           <div class="panel-body start-action">
             <div class="roster-identity" th:with="art=${@avatarArt.forHero(demoHero)}">
               <img th:src="${art.face}" width="64" height="64" alt="" />
               <div><strong th:text="${demoHero.name}"></strong><br />
-                <span th:text="|Level ${demoHero.level} ${demoHero.race} · ${demoHero.subclass}|"></span>
+                <span th:text="#{format.demo.level(${demoHero.level},${@words.text(demoHero.race)},${@words.text(demoHero.subclass)})}"></span>
               </div>
             </div>
-            <p>Try equipment and compare damage. Each demo starts fresh.</p>
-            <form method="post" action="/demo/start"><button class="btn-quiet">Try demo</button></form>
+            <p>[[#{ui.try.equipment.and.compare.damage.each.demo.starts.fresh}]]</p>
+            <form method="post" action="/demo/start"><button class="btn-quiet">[[#{ui.try.demo}]]</button></form>
           </div>
         </section>
       </div>
       <p class="actions mt-4" th:if="${savedParty != null}">
         <a class="btn-gold" th:href="${savedParty.active == null ? '/parties' : '/sheet'}"
-           th:text="'Continue ' + ${savedParty.name}"></a>
-        <a class="btn-quiet" href="/parties">Manage saved parties</a>
+           th:text="#{format.continue(${savedParty.name})}"></a>
+        <a class="btn-quiet" href="/parties">[[#{ui.manage.saved.parties}]]</a>
       </p>
     </main>
     <footer th:replace="~{shared::footer}"></footer>

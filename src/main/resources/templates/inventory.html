@@ -1,27 +1,27 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head th:replace="~{shared::head('Inventory')}"></head>
+<html lang="en" th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{shared::head(#{ui.inventory})}"></head>
   <body>
     <header th:replace="~{shared::nav}"></header>
     <main class="wrap">
       <div th:replace="~{shared::notice}"></div>
-      <div class="crumb"><a href="parties" th:text="${party.name}"></a><i>›</i>Inventory</div>
+      <div class="crumb"><a href="parties" th:text="${@words.partyName(party,basePath)}"></a><i>›</i>[[#{ui.inventory}]]</div>
       <div class="page-top">
         <div>
-          <h1>Party inventory</h1>
+          <h1>[[#{ui.party.inventory}]]</h1>
           <p
-            th:text="${totalOwned}+' owned copies across '+${party.heroes.size()}+' party '+${party.heroes.size()==1?'member':'members'}"
+            th:text="#{format.inventory.total(${totalOwned},${party.heroes.size()})}"
           ></p>
         </div>
       </div>
       <div class="inventory-tools">
         <div class="tabs">
           <a th:href="@{inventory(tab='owned',q=${q},category=${category})}" th:classappend="${tab=='owned'}?'active'"
-            >My inventory</a
+            >[[#{ui.my.inventory}]]</a
           ><a
             th:href="@{inventory(tab='catalog',q=${q},category=${category})}"
             th:classappend="${tab=='catalog'}?'active'"
-            >Wiki catalog</a
+            >[[#{ui.wiki.catalog}]]</a
           >
         </div>
         <form class="filters" action="inventory">
@@ -32,52 +32,66 @@
               name="q"
               th:value="${q}"
               type="search"
-              aria-label="Item name"
-              placeholder="Search items…"
+              th:aria-label="#{ui.item.name}"
+              th:placeholder="#{ui.search.items}"
           /></label>
-          <select name="category" aria-label="Equipment type">
-            <option value="">All equipment</option>
-            <option value="CLOTHING" th:selected="${category=='CLOTHING'}">Robes &amp; clothing</option>
+          <select name="category" th:aria-label="#{ui.equipment.type}">
+            <option value="">[[#{ui.all.equipment}]]</option>
+            <option value="CLOTHING" th:selected="${category=='CLOTHING'}">[[#{ui.robes.clothing}]]</option>
             <option
               th:each="s : ${categories}"
               th:with="key=${s.name()=='RING1'?'RING':s.name()}"
               th:value="${key}"
-              th:text="${@fmt.slot(key)}"
+              th:text="${@words.text(@fmt.slot(key))}"
               th:selected="${category==key}"
             ></option></select
-          ><button class="btn-quiet">Search</button>
+          ><button class="btn-quiet">[[#{ui.search}]]</button>
         </form>
       </div>
-      <p class="help" th:text="${count}+' matching items'"></p>
+      <p class="help" th:text="#{format.matches(${count})}"></p>
       <div class="catalog-grid">
         <article class="panel inventory-card" th:each="it : ${items}">
           <div class="panel-body">
             <div class="item-heading" th:with="slotIcon=${@fmt.icon(it.slot)}">
               <div th:replace="~{shared::itemIcon(${it},${slotIcon})}"></div>
               <div>
-                <h2 th:text="${it.name}"></h2>
-                <span class="metadata" lang="pl" th:if="${it.polishName}" th:text="${it.polishName}"></span>
+                <h2 th:text="${@words.text(it.name)}"></h2>
+                <span class="metadata" lang="pl" th:if="${it.polishName != null and #locale.language != 'pl'}" th:text="${it.polishName}"></span>
                 <div
                   class="metadata"
-                  th:text="${it.rarity}+' · '+${@fmt.slot(it.slot)}"
+                  th:text="${@words.text(it.rarity)}+' · '+${@words.text(@fmt.slot(it.slot))}"
                 ></div>
               </div>
             </div>
-            <p th:text="${it.summary}"></p>
+            <p th:text="${@words.text(it.summary)}"></p>
+            <section class="mb-3">
+              <h3 class="small-label">[[#{ui.where.to.find}]]</h3>
+              <p class="help mb-1" th:if="${it.acquisition.isEmpty()}">[[#{ui.no.verified.acquisition.details.in.the.offline.catalog}]]</p>
+              <th:block th:unless="${it.acquisition.isEmpty()}" th:with="first=${it.acquisition[0]}">
+                <p class="mb-1"><strong th:if="${first.act}" th:text="|${@words.text(first.act)} · |"></strong><span th:text="${@words.text(first.details)}"></span>
+                  <a th:if="${first.source}" th:href="${first.source}" target="_blank" rel="noreferrer">[[#{ui.source}]]</a></p>
+                <details class="fold" th:if="${it.acquisition.size() > 1}">
+                  <summary th:text="#{format.other.routes(${it.acquisition.size() - 1})}"></summary>
+                  <ul><li th:each="route : ${it.acquisition.subList(1, it.acquisition.size())}">
+                    <strong th:if="${route.act}" th:text="|${@words.text(route.act)} · |"></strong><span th:text="${@words.text(route.details)}"></span>
+                  </li></ul>
+                </details>
+              </th:block>
+            </section>
             <div
               class="metadata"
-              th:text="${party.stock.getOrDefault(it.id,0)}+' owned · '+${party.available(it.id)}+' available'"
+              th:text="#{format.stock(${party.stock.getOrDefault(it.id,0)},${party.available(it.id)})}"
             ></div>
             <th:block th:each="p : ${party.heroes}"
               ><small
                 th:if="${p.gear.containsValue(it.id)}"
-                th:text="'Equipped by '+${p.name}+' '"
+                th:text="#{format.equipped.by(${p.name})}"
               ></small
             ></th:block>
           </div>
           <div class="card-actions">
             <a th:href="${it.source}" target="_blank" rel="noreferrer"
-              >Wiki entry ↗</a
+              >[[#{ui.wiki.entry}]]</a
             >
             <form action="inventory/add" method="post">
               <input type="hidden" name="partyId" th:value="${party.id}" />
@@ -94,43 +108,43 @@
                 type="number"
                 class="quantity"
                 name="quantity"
-                aria-label="Number of copies"
+                th:aria-label="#{ui.number.of.copies}"
                 min="1"
                 max="99"
                 value="1"
                 required
-              /><button class="btn-soft" name="change" value="add">Add</button
+              /><button class="btn-soft" name="change" value="add">[[#{ui.add}]]</button
               ><button
                 class="btn-quiet"
                 th:if="${tab=='owned' and party.available(it.id)>0}"
                 name="change"
                 value="remove"
               >
-                Remove
+                [[#{ui.remove}]]
               </button>
             </form>
           </div>
         </article>
       </div>
       <div class="panel empty-state" th:if="${items.isEmpty()}">
-        <h2>No matching items</h2>
-        <p>Try a different search or browse the full catalog.</p>
+        <h2>[[#{ui.no.matching.items}]]</h2>
+        <p>[[#{ui.try.a.different.search.or.browse.the.full.catalog}]]</p>
         <a th:if="${tab=='owned'}" th:href="@{inventory(tab='catalog',q=${q},category=${category})}"
-           class="btn-quiet">Search wiki catalog</a>
-        <a th:unless="${tab=='owned'}" href="inventory?tab=catalog" class="btn-quiet">Clear filters</a>
+           class="btn-quiet">[[#{ui.search.wiki.catalog}]]</a>
+        <a th:unless="${tab=='owned'}" href="inventory?tab=catalog" class="btn-quiet">[[#{ui.clear.filters}]]</a>
       </div>
-      <nav class="pager" th:if="${pages>1}" aria-label="Catalog pages">
+      <nav class="pager" th:if="${pages>1}" th:aria-label="#{ui.catalog.pages}">
         <a
           class="btn-quiet"
           th:if="${current>1}"
           th:href="@{inventory(tab=${tab},q=${q},category=${category},page=${current-1})}"
-          >Previous</a
+          >[[#{ui.previous}]]</a
         ><span th:text="${current}+' / '+${pages}"></span
         ><a
           class="btn-quiet"
           th:if="${current<pages}"
           th:href="@{inventory(tab=${tab},q=${q},category=${category},page=${current+1})}"
-          >Next</a
+          >[[#{ui.next}]]</a
         >
       </nav>
     </main>

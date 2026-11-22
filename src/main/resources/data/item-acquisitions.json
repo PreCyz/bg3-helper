@@ -1,0 +1,4269 @@
+{
+  "plus-1-breastplate" : [ {
+    "details" : "Circus of the Last Days X: -68 Y: -73: Given as a consolation prize by Akabi after failing to win the jackpot at the Wheel of Fortune",
+    "act" : "Act 3"
+  } ],
+  "adamantine-scale-mail" : [ {
+    "details" : "Adamantine Forge X: -558 Y: 230: Forged from a Scale Mail Mould and Mithral Ore"
+  } ],
+  "adamantine-splint-armour" : [ {
+    "details" : "Adamantine Forge X: -558 Y: 230: Forged from a Splint Mould and Mithral Ore"
+  } ],
+  "armour-of-agility" : [ {
+    "details" : "Stormshore Armoury X: -41 Y: -71: Sold by Gloomy Fentonson, near the Lower City Central Wall waypoint",
+    "act" : "Act 3"
+  } ],
+  "armour-of-devotion" : [ {
+    "details" : "Moonrise Towers X: -174 Y: -179: Sold by Roah Moonglow on the main floor",
+    "act" : "Act 2"
+  } ],
+  "armour-of-landfall" : [ {
+    "details" : "Sorcerous Sundries X: -14 Y: -72: Sold by Lorroakan's Projection or Rolan on the ground floor",
+    "act" : "Act 3"
+  } ],
+  "armour-of-moonbasking" : [ {
+    "details" : "Lower City Sewers X: -157 Y: 939: Sold by Voiceless Penitent Bareki",
+    "act" : "Act 3"
+  } ],
+  "armour-of-persistence" : [ {
+    "details" : "Forge of the Nine X: 5 Y: -7: Sold by Dammon in Act Three",
+    "act" : "Act 3"
+  } ],
+  "armour-of-the-sporekeeper" : [ {
+    "details" : "Philgrave's Mansion X: 14 Y: -160: Sold by Mystic Carrion",
+    "act" : "Act 3"
+  } ],
+  "armour-of-uninhibited-kushigo" : [ {
+    "details" : "Grymforge X: -628 Y: 320: Rewarded by Sergeant Thrinn after returning her boots in the quest Find the Missing Boots",
+    "act" : "Act 1"
+  } ],
+  "bandits-armour" : [ {
+    "details" : "Worn by Shadowheart in the Emerald Grove",
+    "act" : "Act 1"
+  } ],
+  "barbarian-clothes" : [ {
+    "details" : "Nautiloid: Starting clothing for a Barbarians"
+  } ],
+  "barkskin-armour" : [ {
+    "details" : "Last Light Inn X: -31 Y: 130: Sold by Quartermaster Talli near the Last Light Inn waypoint",
+    "act" : "Act 2"
+  } ],
+  "bhaalist-armour" : [ {
+    "details" : "Murder Tribunal X: -1263 Y: 511: Sold by Echo of Abazigal",
+    "act" : "Act 3"
+  } ],
+  "bided-time" : [ {
+    "details" : "House of Healing Morgue X: 46 Y: -1005: In a locked heavy chest in the storage room south of the zombie crypt"
+  } ],
+  "blackguards-plate" : [ {
+    "details" : "Murder Tribunal X: -1293 Y: 503: Worn by the death knight That Which Guards",
+    "act" : "Act 3"
+  } ],
+  "blazer-of-benevolence" : [ {
+    "details" : "Campsite (Act One): Reward for rescuing Volo from the Goblin Camp during the quest Rescue Volo",
+    "act" : "Act 1"
+  } ],
+  "bloodguzzler-garb" : [ {
+    "details" : "Underdark: in the Bulette",
+    "act" : "Act 1"
+  } ],
+  "bonespike-garb" : [ {
+    "details" : "Rivington General X: 7 Y: -35: Sold by Exxvikyap in Rivington during Act Three",
+    "act" : "Act 3"
+  } ],
+  "breastplate" : [ {
+    "details" : "Creche Y'llek X: 1380 Y: -798: Sold by A'jak'nir Jeera"
+  } ],
+  "breastplate-plus-1" : [ {
+    "details" : "Emerald Grove X: 177 Y: 560: On crate near Dammon in the The Hollow",
+    "act" : "Act 1"
+  }, {
+    "details" : "Sold by traders using the levelled magic armour table if the player is between levels 6 and 8"
+  } ],
+  "breastplate-plus-2" : [ {
+    "details" : "Sold by traders using the levelled magic armour table if the player is level 9 or above"
+  } ],
+  "broken-padded-armour" : [ {
+    "details" : "Risen Road Toll House: On a shelf in the basement"
+  } ],
+  "cerebral-citadel-armour" : [ {
+    "details" : "Knights of the Shield Hideout X: -727 Y: 589: in a wardrobe during the quest Visit the Emperor's Old Hideout",
+    "act" : "Act 3"
+  } ],
+  "chain-mail" : [ {
+    "details" : "Shattered Sanctum X: 272 Y: -31: Sold by Roah Moonglow in Act One",
+    "act" : "Act 1"
+  } ],
+  "chain-mail-plus-1" : [ {
+    "details" : "Sold by traders using the levelled magic armour table if the player is between levels 4 and 6"
+  } ],
+  "chain-mail-plus-2" : [ {
+    "details" : "Sold by traders using the levelled magic armour table if the player is level 7 or above"
+  } ],
+  "chain-shirt" : [ {
+    "details" : "Nautiloid: Starting armour for Clerics"
+  }, {
+    "details" : "Emerald Grove X: 177 Y: 562: Sold by Dammon",
+    "act" : "Act 1"
+  }, {
+    "details" : "Worn by several characters throughout the game"
+  } ],
+  "chain-shirt-plus-1" : [ {
+    "details" : "Sold by traders using the levelled magic armour table if the player character is between levels 2 and 4"
+  } ],
+  "chain-shirt-plus-2" : [ {
+    "details" : "Sold by traders using the levelled magic armour table if the player is between levels 5 and 8"
+  } ],
+  "cloth-armour" : [ {
+    "details" : "Heapside Prison X: -1266 Y: 744: On a table in the south-eastern room"
+  } ],
+  "cloth-of-authority" : [ {
+    "details" : "Wyrm's Rock Fortress X: -26 Y: 211: worn by Enver Gortash",
+    "act" : "Act 3"
+  } ],
+  "clothes" : [ {
+    "details" : "Lower City X: -213 Y: -20: Near to a picnic basket on the small ruined dock behind Elerrathin's Home",
+    "act" : "Act 3"
+  } ],
+  "damaged-dark-justiciar-armour" : [ {
+    "details" : "Grymforge X: -657 Y: 425: On a pair of skeletons past the Elder Rothé",
+    "act" : "Act 1"
+  } ],
+  "dark-justiciar-half-plate-rare" : [ {
+    "details" : "Gauntlet of Shar X: -818 Y: -755: Lying on the ground next to the altar where the Spear of Night rests, beyond the riddle door in the Silent Library",
+    "act" : "Act 2"
+  } ],
+  "dark-justiciar-half-plate-very-rare" : [ {
+    "details" : "Shadowfell X: -604 Y: -1431: Awarded to Shadowheart for killing the Nightsong",
+    "act" : "Act 2"
+  } ],
+  "dark-justiciar-mail" : [ {
+    "details" : "Grymforge X: -655 Y: 424: On a skeleton north of the Underdark - Grymforge Ancient Rune Circle",
+    "act" : "Act 1"
+  }, {
+    "details" : "Grymforge X: -609 Y: -246: On a skeleton south of the Ancient Forge Ancient Rune Circle",
+    "act" : "Act 1"
+  } ],
+  "dreamwalker-plate" : [ {
+    "details" : "Worn by the Dream Guardians in the final fight scenario"
+  } ],
+  "drow-studded-leather-armour" : [ {
+    "details" : "Underdark X: 71 Y: -220: in a heavy chest at a Lolth's Cultist's cache near the entrance of the Festering Cove",
+    "act" : "Act 1"
+  } ],
+  "druid-leather-armour" : [ {
+    "details" : "Nautiloid: Starting armour for Druids"
+  } ],
+  "drunken-cloth" : [ {
+    "details" : "Guildhall X: -19 Y: 765: Sold by Severn",
+    "act" : "Act 3"
+  } ],
+  "dwarven-splintmail" : [ {
+    "details" : "Moonrise Towers X: -164 Y: -167: Sold by Lann Tarv on the main floor",
+    "act" : "Act 2"
+  } ],
+  "elegant-studded-leather" : [ {
+    "details" : "The Counting House X: -686 Y: 874: in the High Security Vault nº9",
+    "act" : "Act 3"
+  } ],
+  "elven-chain" : [ {
+    "details" : "Rivington General X: 7 Y: -35: Sold by Exxvikyap in Rivington during Act Three",
+    "act" : "Act 3"
+  } ],
+  "emblazoned-plate-of-the-marshal" : [ {
+    "details" : "Wyrm's Rock Fortress: Can be looted from the body of Duke Ulder Ravengard if killed in the audience hall",
+    "act" : "Act 3"
+  }, {
+    "details" : "Campsite (Act Three): Can also be looted from the body of Ravengard if he comes to the Campsite"
+  } ],
+  "enraging-heart-garb" : [ {
+    "details" : "Moonrise Towers X: -164 Y: -167: Sold by Lann Tarv on the main floor",
+    "act" : "Act 2"
+  } ],
+  "faded-drow-leather-armour" : [ {
+    "details" : "Waukeen's Rest X: -71 Y: 592: On the Dead Drow Raider in the courtyard",
+    "act" : "Act 1"
+  } ],
+  "flame-enamelled-armour" : [ {
+    "details" : "Wyrm's Rock Fortress X: -28 Y: 184: in a heavy chest in the corner of the armoury, south-west of the Wyrm's Rock waypoint, behind the iron gate",
+    "act" : "Act 3"
+  } ],
+  "flawed-helldusk-armour" : [ {
+    "details" : "Last Light Inn X: -33 Y: 164: Crafted by Dammon",
+    "act" : "Act 2"
+  } ],
+  "garb-of-the-land-and-sky" : [ {
+    "details" : "Danthelon's Dancing Axe X: -10 Y: 143: Sold by Entharl Danthelon in Wyrm's Crossing",
+    "act" : "Act 3"
+  } ],
+  "githyanki-half-plate" : [ {
+    "details" : "Nautiloid: Worn by Lae'zel"
+  }, {
+    "details" : "The Risen Road: Worn by members of the githyanki patrol",
+    "act" : "Act 1"
+  }, {
+    "details" : "Last Light Inn: Worn by Shadow-Cursed Githyanki Warriors",
+    "act" : "Act 2"
+  } ],
+  "half-plate-armour" : [ {
+    "details" : "Creche Y'llek X: 1380 Y: -798: Sold by A'jak'nir Jeera"
+  } ],
+  "half-plate-armour-plus-1" : [ {
+    "details" : "Sold by traders using the levelled magic armour table if the player is between levels 6 and 8"
+  } ],
+  "half-plate-armour-plus-2" : [ {
+    "details" : "Sold by traders using the levelled magic armour table if the player is level 9 or above"
+  } ],
+  "hedge-wanderer-armour" : [ {
+    "details" : "The Hollow X: 205 Y: 516: Sold by Arron next to the Silvanus statue",
+    "act" : "Act 1"
+  } ],
+  "helldusk-armour" : [ {
+    "details" : "House of Hope X: -6477 Y: 2884: Carried by Raphael",
+    "act" : "Act 3"
+  } ],
+  "hide-armour" : [ {
+    "details" : "Traders using the Armour Trader Table stock this armour up to level 4.",
+    "source" : "https://bg3.wiki/wiki/Armour_Trader_Table"
+  } ],
+  "hide-armour-plus-1" : [ {
+    "details" : "Sold by traders using the levelled magic armour table if the player character is between levels 2 and 4"
+  } ],
+  "hide-armour-plus-2" : [ {
+    "details" : "Sold by traders using the levelled magic armour table if the player character is level 5 or above"
+  }, {
+    "details" : "Sold by Grat in the Goblin Camp regardless of level",
+    "act" : "Act 1"
+  } ],
+  "icebite-robe" : [ {
+    "details" : "Reithwin Graveyard X: -158 Y: 73: Inside a sarcophagus north of the iron gate"
+  } ],
+  "infernal-robe" : [ {
+    "details" : "Campsite (Act One): Rewarded by Mizora"
+  } ],
+  "leather-armour" : [ {
+    "details" : "Nautiloid: Starting armour for Rangers"
+  }, {
+    "details" : "Emerald Grove X: 205 Y: 516: Sold by Arron",
+    "act" : "Act 1"
+  }, {
+    "details" : "Ebonlake Grotto: Sold by Derryth Bonecloak"
+  }, {
+    "details" : "Worn by several enemies throughout the game"
+  } ],
+  "leather-armour-plus-1" : [ {
+    "details" : "Sold by traders using the levelled magic armour table if the player is between levels 4 and 6"
+  } ],
+  "leather-armour-plus-2" : [ {
+    "details" : "Sold by traders using the levelled magic armour table if the player is level 7 or above"
+  } ],
+  "luminous-armour" : [ {
+    "details" : "Selûnite Outpost X: 176 Y: -247: in a locked and trapped opulent chest",
+    "act" : "Act 1"
+  } ],
+  "monastic-robes" : [ {
+    "details" : "Nautiloid: Starting clothing for Monks"
+  } ],
+  "moon-devotion-robe" : [ {
+    "details" : "Last Light Inn X: -60 Y: 158: Worn by Isobel after dealing with the Nightsong but before completing the assault on Moonrise Towers",
+    "act" : "Act 2"
+  }, {
+    "details" : "Mind Flayer Colony X: 861 Y: -23: Worn by Isobel after being kidnapped by Marcus",
+    "act" : "Act 2"
+  }, {
+    "details" : "Ramazith's Tower: Worn by Isobel if the Nightsong is killed or imprisoned by Lorroakan",
+    "act" : "Act 3"
+  }, {
+    "details" : "Campsite (Act Two): Worn by Isobel as Camp Follower"
+  } ],
+  "mutilated-carapace" : [ {
+    "details" : "Bhaal Temple X: 61 Y: 1004: Carried by Orin during the quest Get Orin's Netherstone",
+    "act" : "Act 3"
+  } ],
+  "obsidian-laced-robe" : [ {
+    "details" : "Last Light Inn X: -31 Y: 130: Sold by Quartermaster Talli near the Last Light Inn waypoint",
+    "act" : "Act 2"
+  } ],
+  "padded-armour" : [ {
+    "details" : "Nautiloid: Starting armour for Warlocks"
+  } ],
+  "padded-armour-plus-1" : [ {
+    "details" : "Sold by traders using the levelled magic armour table if the player is between levels 2 and 4"
+  } ],
+  "padded-armour-plus-2" : [ {
+    "details" : "Sold by traders using the levelled magic armour table if the player is between levels 5 and 8"
+  } ],
+  "penumbral-armour" : [ {
+    "details" : "Ruined Battlefield X: 33 Y: 145: In a locked opulent chest in the abandoned house by the river east of the Last Light Inn",
+    "act" : "Act 2"
+  } ],
+  "plate-armour" : [ {
+    "details" : "Creche Y'llek X: 1380 Y: -798: Sold by A'jak'nir Jeera"
+  } ],
+  "plate-armour-plus-1" : [ {
+    "details" : "Sold by traders using the levelled magic armour table if the player character is between levels 8 and 10"
+  }, {
+    "details" : "The Counting House X: -95 Y: -177: Worn by Cashguard Captain Faril",
+    "act" : "Act 3"
+  } ],
+  "plate-armour-plus-2" : [ {
+    "details" : "Sold by traders using the levelled magic armour table if the player character is level 11 or above"
+  } ],
+  "poisoners-robe" : [ {
+    "details" : "Whispering Depths X: -569 Y: -359: Carried by the Phase Spider Matriarch in her lair",
+    "act" : "Act 1"
+  } ],
+  "potent-robe" : [ {
+    "details" : "Last Light Inn X: -56 Y: 141: Rewarded by Alfira for successfully completing Rescue the Tieflings",
+    "act" : "Act 2"
+  } ],
+  "protective-plate" : [ {
+    "details" : "House of Healing Morgue X: 44 Y: -942: Worn by the Hollow Armour at the bottom of the pit"
+  } ],
+  "psionic-ward-armour" : [ {
+    "details" : "Reithwin Town X: -249 Y: -33: Worn by Ch'r'ai Tska'an near the bridge leading to the To Baldur's Gate waypoint",
+    "act" : "Act 2"
+  } ],
+  "reapers-embrace" : [ {
+    "details" : "Mind Flayer Colony X: 861 Y: -23: Worn by Ketheric Thorm",
+    "act" : "Act 2"
+  } ],
+  "ring-mail-armour" : [ {
+    "details" : "Emerald Grove X: 177 Y: 562: Sold by Dammon in The Hollow",
+    "act" : "Act 1"
+  } ],
+  "ring-mail-armour-plus-1" : [ {
+    "details" : "Sold by traders using the levelled magic armour table if the player is between levels 2 and 4"
+  } ],
+  "ring-mail-armour-plus-2" : [ {
+    "details" : "Sold by traders using the levelled magic armour table if the player is between levels 5 and 8"
+  } ],
+  "rippling-force-mail" : [ {
+    "details" : "Last Light Inn X: -22 Y: 175: in a locked Rustic Chest on the second floor of Dammon's blacksmith",
+    "act" : "Act 2"
+  } ],
+  "robe" : [ {
+    "details" : "Facemaker's Boutique X: -164 Y: -26: On a shelf",
+    "act" : "Act 3"
+  } ],
+  "robe-of-exquisite-focus" : [ {
+    "details" : "Moonrise Towers X: -128 Y: -193: Sold by Araj Oblodra on the main floor",
+    "act" : "Act 2"
+  }, {
+    "details" : "Lower City X: -92 Y: -78: Sold by Araj Oblodra in Crimson Draughts if not acquired from her in Act Two",
+    "act" : "Act 3"
+  } ],
+  "robe-of-summer" : [ {
+    "details" : "Hidden Vault X: 183 Y: -82: inside a crate in the Hidden Vault within the Druid Grove"
+  } ],
+  "robe-of-supreme-defences" : [ {
+    "details" : "Rivington X: 43 Y: -101: Sold by Ferg Drogher near the Requisitioned Barn",
+    "act" : "Act 3"
+  } ],
+  "robe-of-the-weave" : [ {
+    "details" : "Ramazith's Tower X: 4970 Y: 705: in a Globe of Invulnerability",
+    "act" : "Act 3"
+  } ],
+  "scale-mail" : [ {
+    "details" : "Nautiloid: Starting armour for a Fighter"
+  }, {
+    "details" : "Emerald Grove: Sold by from Dammon",
+    "act" : "Act 1"
+  }, {
+    "details" : "Nautiloid X: -53 Y: -391: Worn by Commander Zhalk and Cambions"
+  }, {
+    "details" : "Shadow-Cursed Lands X: 57 Y: 134: Worn by Harper Lassandra",
+    "act" : "Act 2"
+  }, {
+    "details" : "Worn by several enemies through out the game"
+  } ],
+  "scale-mail-plus-1" : [ {
+    "details" : "Sold by traders using the levelled magic armour table if the player is between levels 4 and 6"
+  } ],
+  "scale-mail-plus-2" : [ {
+    "details" : "Sold by traders using the levelled magic armour table if the player character is level 7 or above"
+  } ],
+  "scale-mail-of-devotion" : [ {
+    "details" : "Nautiloid: Starting armour for Oath of Devotion Paladins"
+  } ],
+  "scale-mail-of-the-ancients" : [ {
+    "details" : "Nautiloid: Starting armour for Oath of the Ancients Paladins"
+  } ],
+  "scale-mail-of-the-crown" : [ {
+    "details" : "Nautiloid: Starting armour for Oath of the Crown Paladins"
+  } ],
+  "scale-mail-of-vengeance" : [ {
+    "details" : "Nautiloid: Starting armour for Oath of Vengeance Paladins"
+  } ],
+  "scarlet-leather-armour" : [ {
+    "details" : "Highberry's Home X: 20 Y: -34: Worn by Dolor the assassin",
+    "act" : "Act 3"
+  }, {
+    "details" : "Fraygo's Flophouse X: -14 Y: 75: In the Shabby Wardobe in the secret room of the attic",
+    "act" : "Act 3"
+  } ],
+  "selunite-robe" : [ {
+    "details" : "Last Light Inn X: -57 Y: 164: In the shabby wardrobe in Isobel's room",
+    "act" : "Act 2"
+  }, {
+    "details" : "Moonrise Towers X: -169 Y: -200: In a bedside cabinet in Isobel's room",
+    "act" : "Act 2"
+  }, {
+    "details" : "Reithwin Town X: -172 Y: 102: Buried at the gravesite outside of the Sharran Temple",
+    "act" : "Act 2"
+  } ],
+  "shadeclinger-armour" : [ {
+    "details" : "Last Light Inn X: -31 Y: 130: Sold by Quartermaster Talli near the Last Light Inn waypoint",
+    "act" : "Act 2"
+  } ],
+  "sharpened-snare-cuirass" : [ {
+    "details" : "Moonrise Towers X: -174 Y: -179: Sold by Roah Moonglow on the main floor",
+    "act" : "Act 2"
+  } ],
+  "shelter-of-athkatla" : [ {
+    "details" : "Ramazith's Tower X: 4960 Y: 705: Worn by Lorroakan",
+    "act" : "Act 3"
+  } ],
+  "simple-jerkin" : [ {
+    "details" : "Nautiloid: Starting clothing for Bards"
+  } ],
+  "simple-robe" : [ {
+    "details" : "Nautiloid: Starting armour for Wizards"
+  }, {
+    "details" : "Worn by many characters throughout the game"
+  } ],
+  "slippery-chain-shirt" : [ {
+    "details" : "The Festering Cove X: -400 Y: 329: in a chest hidden on a cliff above and behind the altar",
+    "act" : "Act 1"
+  } ],
+  "sorcerer-robe" : [ {
+    "details" : "Nautiloid: Starting clothing for Wild Magic sorcerers"
+  }, {
+    "details" : "Sorcerous Sundries X: -14 Y: -72: Sold by Lorroakan's Projection",
+    "act" : "Act 3"
+  } ],
+  "spidersilk-armour" : [ {
+    "details" : "Shattered Sanctum: Worn by Minthara",
+    "act" : "Act 1"
+  } ],
+  "splint-armour" : [ {
+    "details" : "Creche Y'llek X: 1380 Y: -798: Sold by A'jak'nir Jeera"
+  } ],
+  "splint-armour-plus-1" : [ {
+    "details" : "Sold by traders using the levelled magic armour table if the player is between levels 6 and 8"
+  } ],
+  "splint-armour-plus-2" : [ {
+    "details" : "Sold by traders using the levelled magic armour table if the player is level 9 or above"
+  } ],
+  "studded-leather-armour" : [ {
+    "details" : "Shattered Sanctum: Sold by Roah Moonglow",
+    "act" : "Act 1"
+  }, {
+    "details" : "Worn by several enemies throughout the game"
+  } ],
+  "studded-leather-armour-plus-1" : [ {
+    "details" : "Sold by traders using the levelled magic armour table if the player is between levels 6 and 8"
+  } ],
+  "studded-leather-armour-plus-2" : [ {
+    "details" : "Sold by traders using the levelled magic armour table"
+  }, {
+    "details" : "Worn by Orin during the quest Get Orin's Netherstone"
+  } ],
+  "the-graceful-cloth" : [ {
+    "details" : "Rosymorn Monastery Trail X: -43 Y: -129: Sold by Lady Esther, north-east of the Trielta Crags waypoint",
+    "act" : "Act 1"
+  } ],
+  "the-jolty-vest" : [ {
+    "details" : "Zhentarim Basement X: 295 Y: -250: Sold by Brem after completing the quest Find the Missing Shipment",
+    "act" : "Act 1"
+  } ],
+  "the-mighty-cloth" : [ {
+    "details" : "Last Light Inn X: -31 Y: 130: Sold by Quartermaster Talli near the Last Light Inn waypoint",
+    "act" : "Act 2"
+  } ],
+  "the-oak-fathers-embrace" : [ {
+    "details" : "Owlbear Nest X: -354 Y: -111: On a headless skeleton near the owlbear nest and egg",
+    "act" : "Act 1"
+  } ],
+  "the-protecty-sparkswall" : [ {
+    "details" : "Grymforge X: -645 Y: 360: in a gilded chest at the end of the trapped bridge",
+    "act" : "Act 1"
+  } ],
+  "unwanted-masterwork-scalemail" : [ {
+    "details" : "Forge of the Nine X: 5 Y: -7: Sold by Dammon",
+    "act" : "Act 3"
+  } ],
+  "veil-of-the-morning" : [ {
+    "details" : "Philgrave's Mansion X: 14 Y: -160: Sold by Mystic Carrion",
+    "act" : "Act 3"
+  } ],
+  "vest-of-soul-rejuvenation" : [ {
+    "details" : "Sold by Lorroakan's Projection in Sorcerous Sundries if Rolan is dead",
+    "act" : "Act 3"
+  }, {
+    "details" : "Sold by Rolan in Sorcerous Sundries if Rolan and Lorroakan are both alive",
+    "act" : "Act 3"
+  }, {
+    "details" : "Sold by Rolan via trade option on the bottom left during the dialogue in Ramazith's Tower if Rolan is alive but Lorroakan is dead",
+    "act" : "Act 3"
+  } ],
+  "viconias-priestess-robe" : [ {
+    "details" : "Cloister of Sombre Embrace X: -400 Y: -1651: Worn by Viconia DeVir during the quest Daughter of Darkness",
+    "act" : "Act 3"
+  } ],
+  "wavemothers-robe" : [ {
+    "details" : "Flymm Cargo X: -1048 Y: 312: Rewarded by Allandra Grey in the basement for completing the quest Avenge the Drowned",
+    "act" : "Act 3"
+  } ],
+  "yuan-ti-scale-mail" : [ {
+    "details" : "Last Light Inn X: -31 Y: 130: Sold by Quartermaster Talli near the Last Light Inn waypoint",
+    "act" : "Act 2"
+  } ],
+  "cape-of-the-red-prince" : [ {
+    "details" : "In the Peculiar Clothing Chest in the Traveller's Chest at the Campsite"
+  } ],
+  "cindermoth-cloak" : [ {
+    "details" : "Lower City Sewers X: -123 Y: 834: Worn by Aelis Siryasius in the area filled with greasy surfaces",
+    "act" : "Act 3"
+  } ],
+  "cloak" : [ {
+    "details" : "Shadow-Cursed Lands X: 57 Y: 134: Worn by Harper Lassandra",
+    "act" : "Act 2"
+  } ],
+  "cloak-of-cunning-brume" : [ {
+    "details" : "Last Light Inn X: -56 Y: 141: Sold by Mattis",
+    "act" : "Act 2"
+  } ],
+  "cloak-of-displacement" : [ {
+    "details" : "Danthelon's Dancing Axe X: -10 Y: 143: Sold by Entharl Danthelon in Wyrm's Crossing",
+    "act" : "Act 3"
+  } ],
+  "cloak-of-elemental-absorption" : [ {
+    "details" : "Moonrise Towers X: -170 Y: -171: In an opulent chest in Ketheric Thorm's chambers on the second floor",
+    "act" : "Act 2"
+  } ],
+  "cloak-of-protection" : [ {
+    "details" : "Last Light Inn X: -31 Y: 130: Sold by Quartermaster Talli near the Last Light Inn waypoint",
+    "act" : "Act 2"
+  } ],
+  "cloak-of-the-weave" : [ {
+    "details" : "Devil's Fee X: -38 Y: 17: Sold by Helsik once her special stock is unlocked",
+    "act" : "Act 3"
+  } ],
+  "derivation-cloak" : [ {
+    "details" : "Moonrise Towers X: -132 Y: -175: In a heavy chest in Balthazar's chambers on the First Floor",
+    "act" : "Act 2"
+  } ],
+  "fleshmelter-cloak" : [ {
+    "details" : "House of Healing Morgue X: 29 Y: -930: In a gilded chest above the pit"
+  } ],
+  "mantle-of-the-holy-warrior" : [ {
+    "details" : "Stormshore Tabernacle X: 107 Y: -22: Sold by Vicar Humbletoes",
+    "act" : "Act 3"
+  } ],
+  "nymph-cloak" : [ {
+    "details" : "The Counting House X: -711 Y: 864: In the High Security Vault nº1",
+    "act" : "Act 3"
+  }, {
+    "details" : "Rivington X: 44 Y: -97: Sold by Ferg Drogher near the Requisitioned Barn",
+    "act" : "Act 3"
+  } ],
+  "reverse-rain-cloak" : [ {
+    "details" : "Circus of the Last Days X: -68 Y: -73: Given as a consolation prize by Akabi after failing to win the jackpot at the Wheel of Fortune",
+    "act" : "Act 3"
+  } ],
+  "shade-slayer-cloak" : [ {
+    "details" : "Guildhall X: -17 Y: 755: Sold by Sticky Dondo",
+    "act" : "Act 3"
+  } ],
+  "the-deathstalker-mantle" : [ {
+    "details" : "Campsite (Act One): given to The Dark Urge Origin by Sceleritas Fel"
+  } ],
+  "thunderskin-cloak" : [ {
+    "details" : "Moonrise Towers X: -128 Y: -193: Sold by Araj Oblodra on the main floor",
+    "act" : "Act 2"
+  }, {
+    "details" : "Lower City X: -92 Y: -78: Sold by Araj Oblodra in Crimson Draughts if not acquired from her in Act Two"
+  } ],
+  "vivacious-cloak" : [ {
+    "details" : "Grand Mausoleum X: -257 Y: -886: In a locked traveller's chest in the south-east corner",
+    "act" : "Act 2"
+  } ],
+  "wavemothers-cloak" : [ {
+    "details" : "Water Queen's House X: -248 Y: -249: in an opulent chest behind Allandra Grey's desk on the upper floor",
+    "act" : "Act 3"
+  } ],
+  "elixir-of-acid-resistance" : [ {
+    "details" : "Carried by Vu'un and Zar'an in the Crèche Y'llek Hatchery.",
+    "act" : "Act 1"
+  } ],
+  "elixir-of-arcane-cultivation" : [ {
+    "details" : "Can be crafted via Alchemy by combining Vitriol of Weavemoss (procured from Weavemoss) and any Sublimate."
+  } ],
+  "elixir-of-barkskin" : [ {
+    "details" : "Sold by Derryth Bonecloak at the Myconid Colony (Underdark)",
+    "act" : "Act 1"
+  }, {
+    "details" : "Crafted via Alchemy by combining Salts of Tree Bark (procured from Wood Bark) and any Suspension"
+  } ],
+  "elixir-of-battlemages-power" : [ {
+    "details" : "Can be crafted via Alchemy by combining Suspension of Gauth Eye (procured from Gauth Eyestalk) and any Sublimate."
+  }, {
+    "details" : "Can be sold by any merchant that has the Elixir Table or Potion Table starting at level 6. As stock is semi-random, merchants may have anywhere from 0 to 2. Popper in Rivington."
+  } ],
+  "elixir-of-bloodlust" : [ {
+    "details" : "Crafted via Alchemy by combining Ashes of Worg Fang (procured from Worg Fang) and any Salt"
+  }, {
+    "details" : "Sold by various merchants throughout the game, including (but not limited to): Act 1 Cyrel at the Risen Road Toll House"
+  }, {
+    "details" : "Sold by various merchants throughout the game, including (but not limited to): Act 1 Derryth Bonecloak in the Myconid Colony"
+  }, {
+    "details" : "Sold by various merchants throughout the game, including (but not limited to): Act 1 Stonemason Kith at Grymforge",
+    "act" : "Act 1"
+  }, {
+    "details" : "Sold by various merchants throughout the game, including (but not limited to): Act 2 Araj Oblodra on the main floor of Moonrise Towers",
+    "act" : "Act 2"
+  }, {
+    "details" : "Sold by various merchants throughout the game, including (but not limited to): Act 2 Roah Moonglow on the main floor of Moonrise Towers",
+    "act" : "Act 2"
+  }, {
+    "details" : "Sold by various merchants throughout the game, including (but not limited to): Act 2 Quatermaster Talli at Last Light Inn and on the main floor of Moonrise Towers",
+    "act" : "Act 2"
+  }, {
+    "details" : "Sold by various merchants throughout the game, including (but not limited to): Act 3 Popper at the Circus of the Last Days",
+    "act" : "Act 3"
+  }, {
+    "details" : "Sold by various merchants throughout the game, including (but not limited to): Act 3 Entharl Danthelon in Danthelon's Dancing Axe",
+    "act" : "Act 3"
+  }, {
+    "details" : "Sold by various merchants throughout the game, including (but not limited to): Act 3 Derryth Bonecloak (or Baelen Bonecloak depending on player character choices) in Bonecloak's Apothecary",
+    "act" : "Act 3"
+  } ],
+  "elixir-of-cloud-giant-strength" : [ {
+    "details" : "Crafted via Alchemy by combining Salts of Cloud Giant Fingernails (procured from Cloud Giant Finger) and any Suspension"
+  }, {
+    "details" : "Sold by any merchant who has the Elixir Table or Potion Table starting at level 9; as stock is generated semi-random, merchants may have anywhere from 0 to 2: Araj Oblodra on the main floor of Moonrise Towers and in a house north to Beehive General Goods in Lower City"
+  }, {
+    "details" : "Sold by any merchant who has the Elixir Table or Potion Table starting at level 9; as stock is generated semi-random, merchants may have anywhere from 0 to 2: Baelen Bonecloak at Bonecloak's Apothecary in Lower City (if healed with the Noblestalk during Find the Mushroom Picker)",
+    "act" : "Act 3"
+  }, {
+    "details" : "Sold by any merchant who has the Elixir Table or Potion Table starting at level 9; as stock is generated semi-random, merchants may have anywhere from 0 to 2: Derryth Bonecloak at Bonecloak's Apothecary in Lower City (if given the Noblestalk during Find the Mushroom Picker)",
+    "act" : "Act 3"
+  }, {
+    "details" : "Sold by any merchant who has the Elixir Table or Potion Table starting at level 9; as stock is generated semi-random, merchants may have anywhere from 0 to 2: Entharl Danthelon at Danthelon's Dancing Axe in Wyrm's Crossing",
+    "act" : "Act 3"
+  }, {
+    "details" : "Sold by any merchant who has the Elixir Table or Potion Table starting at level 9; as stock is generated semi-random, merchants may have anywhere from 0 to 2: Helsik at Devil's Fee in Lower City",
+    "act" : "Act 3"
+  }, {
+    "details" : "Sold by any merchant who has the Elixir Table or Potion Table starting at level 9; as stock is generated semi-random, merchants may have anywhere from 0 to 2: Hoarding Merregon, the Merregon vendor who is part of Yurgir's retinue in the Gauntlet of Shar",
+    "act" : "Act 2"
+  }, {
+    "details" : "Sold by any merchant who has the Elixir Table or Potion Table starting at level 9; as stock is generated semi-random, merchants may have anywhere from 0 to 2: Mattis at the Last Light Inn and outside of Requisitioned Barn in Rivington at X: 59 Y: -127"
+  }, {
+    "details" : "Sold by any merchant who has the Elixir Table or Potion Table starting at level 9; as stock is generated semi-random, merchants may have anywhere from 0 to 2: Oliver Tefoco at Beehive General Goods in Lower City",
+    "act" : "Act 3"
+  }, {
+    "details" : "Sold by any merchant who has the Elixir Table or Potion Table starting at level 9; as stock is generated semi-random, merchants may have anywhere from 0 to 2: Popper the kobold at the Circus of the Last Days in Rivington",
+    "act" : "Act 3"
+  }, {
+    "details" : "Sold by any merchant who has the Elixir Table or Potion Table starting at level 9; as stock is generated semi-random, merchants may have anywhere from 0 to 2: Quartermaster Talli at Last Light Inn and on the main floor of Moonrise Towers",
+    "act" : "Act 2"
+  }, {
+    "details" : "Sold by any merchant who has the Elixir Table or Potion Table starting at level 9; as stock is generated semi-random, merchants may have anywhere from 0 to 2: Roah Moonglow at Moonrise Towers",
+    "act" : "Act 2"
+  }, {
+    "details" : "Sold by any merchant who has the Elixir Table or Potion Table starting at level 9; as stock is generated semi-random, merchants may have anywhere from 0 to 2: Stylin' Horst at The Velveteen Elixir, the floor above Danthelon's Dancing Axe in Wyrm's Crossing",
+    "act" : "Act 3"
+  }, {
+    "details" : "Sold by any merchant who has the Elixir Table or Potion Table starting at level 9; as stock is generated semi-random, merchants may have anywhere from 0 to 2: Traveller Griska on the ground floor of Fraygo's Flophouse in Wyrm's Crossing",
+    "act" : "Act 3"
+  }, {
+    "details" : "Found in the following locations: Inside the sarcophagus belonging to Zina at X: 1225 Y: 790 in the Durinbold Mausoleum",
+    "act" : "Act 3"
+  }, {
+    "details" : "Found in the following locations: Next to Koll at X: 235 Y: 45 in High Hall",
+    "act" : "Act 3"
+  }, {
+    "details" : "Found in the following locations: Inside the display case in the Open Hand Temple Cellar at X: 8 Y: -1024 (has a 1 in 3 chance to contain one; the other options being a Supreme Elixir of Arcane Cultivation or an Elixir of Psychic Resistance)"
+  } ],
+  "elixir-of-cold-resistance" : [ {
+    "details" : "On a table in Sorcerous Sundries",
+    "act" : "Act 3"
+  } ],
+  "elixir-of-darkvision" : [ {
+    "details" : "Crafted via Alchemy by combining Essence of Crystalline Lens (procured from Crystalline Lens) and any Salt"
+  } ],
+  "elixir-of-fire-resistance" : [ {
+    "details" : "Sold by Arron and Auntie Ethel in the Emerald Grove",
+    "act" : "Act 1"
+  }, {
+    "details" : "Crafted via Alchemy by combining Ashes of Dragon Egg Mushroom (procured from Dragon Egg Mushroom) and any Salt"
+  } ],
+  "elixir-of-guileful-movement" : [ {
+    "details" : "Can be crafted via Alchemy by combining Suspension of Ochre Jelly (procured from Ochre Jelly Slime) and any Sublimate."
+  }, {
+    "details" : "Can be sold by any merchant that has the Elixir Table or Potion Table starting at level 6. As stock is semi-random, merchants may have anywhere from 0 to 2."
+  } ],
+  "elixir-of-heroism" : [ {
+    "details" : "Sold by various merchants throughout the game"
+  }, {
+    "details" : "Some examples of merchants selling this item include: Mol in the Tiefling Hideout",
+    "act" : "Act 1"
+  }, {
+    "details" : "Some examples of merchants selling this item include: Quartermaster Talli in the Last Light Inn courtyard",
+    "act" : "Act 2"
+  }, {
+    "details" : "Crafted via Alchemy by combining Sublimate of Pegasus Feathers (procured from Pegasus Feather) and any Ashes"
+  } ],
+  "elixir-of-hill-giant-strength" : [ {
+    "details" : "Sold by various merchants throughout the game, including: Araj Oblodra at Moonrise Towers",
+    "act" : "Act 2"
+  }, {
+    "details" : "Sold by various merchants throughout the game, including: Auntie Ethel in the Druid Grove or the Riverside Teahouse is unique in that she always sells a stack of 3 per Long Rest or level-up"
+  }, {
+    "details" : "Sold by various merchants throughout the game, including: Derryth Bonecloak in the Myconid Colony (uncommonly, she may sell up to 2 per Long Rest or level-up)"
+  }, {
+    "details" : "Sold by various merchants throughout the game, including: Entharl Danthelon at Danthelon's Dancing Axe",
+    "act" : "Act 3"
+  }, {
+    "details" : "Sold by various merchants throughout the game, including: Esther at Rosymorn Monastery Trail",
+    "act" : "Act 1"
+  }, {
+    "details" : "Sold by various merchants throughout the game, including: Mattis at the Last Light Inn",
+    "act" : "Act 2"
+  }, {
+    "details" : "Sold by various merchants throughout the game, including: Oliver Tefoco at Beehive General Goods",
+    "act" : "Act 3"
+  }, {
+    "details" : "Sold by various merchants throughout the game, including: Quartermaster Talli at the Last Light Inn",
+    "act" : "Act 2"
+  }, {
+    "details" : "Crafted via Alchemy by combining Salts of Hill Giant Fingernails (procured from Hill Giant Finger) and any Suspension"
+  }, {
+    "details" : "Found in several locations throughout the game, including: On display at Auntie Ethel's shop in the Druid Grove"
+  }, {
+    "details" : "Found in several locations throughout the game, including: On the second floor of the South Span Checkpoint at Wyrm's Crossing at X: -13 Y: 55",
+    "act" : "Act 3"
+  } ],
+  "elixir-of-lightning-resistance" : [ {
+    "details" : "Sold by Arron in the Druid Grove"
+  }, {
+    "details" : "Crafted via Alchemy by combining Salts of Copper Shavings (procured from Broken Machinery) and any Suspension"
+  } ],
+  "elixir-of-necrotic-resistance" : [ {
+    "details" : "Crafted via Alchemy by combining Vitriol of Oleander (procured from Black Oleander) and any Sublimate"
+  }, {
+    "details" : "Sold by any merchant who has the Elixir Table or Potion Table starting at level 6"
+  } ],
+  "elixir-of-peerless-focus" : [ {
+    "details" : "Can be crafted via Alchemy by combining Sublimate of Belladonna (procured from Belladonna) and any Ashes."
+  } ],
+  "elixir-of-poison-resistance" : [ {
+    "details" : "Sold by Arron in the Emerald Grove",
+    "act" : "Act 1"
+  }, {
+    "details" : "Crafted via Alchemy by combining Suspension of Muddy Goo (procured from Mud Mephit Wing) and any Sublimate"
+  } ],
+  "elixir-of-psychic-resistance" : [ {
+    "details" : "Sold by any merchant that has the Elixir Table or Potion Table starting at level 9"
+  }, {
+    "details" : "Sold by: Omeluum in the Ebonlake Grotto."
+  }, {
+    "details" : "Sold by: Vicar Humbletoes at Stormshore Tabernacle.",
+    "act" : "Act 3"
+  }, {
+    "details" : "Crafted via Alchemy by combining Suspension of Cerebrospinal Fluid (procured from Intellect Devourer Cerebellum) and any Sublimate"
+  } ],
+  "elixir-of-radiant-resistance" : [ {
+    "details" : "Sold by any merchant that has the Elixir Table or Potion Table starting at level 9"
+  }, {
+    "details" : "Sold by: Derryth Bonecloak"
+  }, {
+    "details" : "Sold by: Griska"
+  } ],
+  "elixir-of-see-invisibility" : [ {
+    "details" : "Can be crafted via Alchemy by combining Suspension of Nothic Eye (procured from Nothic Eye) and any Vitriol"
+  }, {
+    "details" : "Can be sold by any merchant that has the Elixir Table or Potion Table starting at level 6. As stock is semi-random, merchants may have anywhere from 0 to 2."
+  } ],
+  "elixir-of-the-colossus" : [ {
+    "details" : "Can be crafted via Alchemy by combining Salts of Chasm Creeper (procured from Chasm Creeper) and any Suspension."
+  } ],
+  "elixir-of-universal-resistance" : [ {
+    "details" : "Sold by the following merchants: Skittle in Heapside Prison"
+  }, {
+    "details" : "Sold by the following merchants: Vicar Humbletoes at Stormshore Tabernacle",
+    "act" : "Act 3"
+  }, {
+    "details" : "Crafted via Alchemy by combining Vitriol of Divine Miasma (procured from Divine Bone Shard) and any Sublimate"
+  } ],
+  "elixir-of-viciousness" : [ {
+    "details" : "Can be crafted via Alchemy by combining Vitriol of Shadowroot Sac (procured from Shadowroot Sac) and any Ashes"
+  }, {
+    "details" : "Can be sold by any merchant that has the Elixir Table or Potion Table starting at level 6; as stock is semi-random, merchants may have anywhere from 0 to 2"
+  } ],
+  "elixir-of-vigilance" : [ {
+    "details" : "Sold by a variety of merchants, including (but not limited to) the following: Entharl Danthelon in Danthelon's Dancing Axe",
+    "act" : "Act 3"
+  }, {
+    "details" : "Sold by a variety of merchants, including (but not limited to) the following: Kith in Grymforge",
+    "act" : "Act 1"
+  }, {
+    "details" : "Sold by a variety of merchants, including (but not limited to) the following: Popper at the Circus of the Last Days",
+    "act" : "Act 3"
+  }, {
+    "details" : "Crafted via Alchemy by combining Sublimate of Bloodstained Hook (procured from Hook) and any Ashes"
+  } ],
+  "greater-elixir-of-arcane-cultivation" : [ {
+    "details" : "Can be crafted via Alchemy by combining Suspension of Laculite (procured from Laculite) and any Vitriol."
+  } ],
+  "superior-elixir-of-arcane-cultivation" : [ {
+    "details" : "Can be crafted via Alchemy by combining Solution of Night Orchid (procured from Night Orchid) and any Vitriol"
+  }, {
+    "details" : "Can be sold by any merchant that has the Elixir Table or Potion Table starting at level 6. As stock is semi-random, merchants may have anywhere from 0 to 2."
+  } ],
+  "supreme-elixir-of-arcane-cultivation" : [ {
+    "details" : "Crafted via alchemy by combining Essence of Beholder Eye (procured from Beholder Iris) and any suspension."
+  }, {
+    "details" : "Sold by any merchant that has the Elixir Table or Potion Table starting at level 9; as stock is semi-random, merchants may have anywhere from 0 to 2."
+  }, {
+    "details" : "Possibly obtained by using Divine Intervention when choosing \"Golden Generosity\"."
+  } ],
+  "tadpole-elixir" : [ {
+    "details" : "Can be crafted via Alchemy by combining Sublimate of Tongue of Madness (procured from Tongue of Madness) and any Essence"
+  } ],
+  "acrobat-shoes" : [ {
+    "details" : "Last Light Inn X: -56 Y: 133: Sold by Barcus Wroot at his workshop",
+    "act" : "Act 2"
+  } ],
+  "appreciably-cared-for-boots" : [ {
+    "details" : "Oubliette X: 678 Y: -68: On a table / shelf in the Morgue",
+    "act" : "Act 2"
+  } ],
+  "blackguards-greaves" : [ {
+    "details" : "Murder Tribunal X: -1292 Y: 505: Worn by the death knight That Which Lurks",
+    "act" : "Act 3"
+  } ],
+  "bonespike-boots" : [ {
+    "details" : "Western Beach X: -233 Y: 84: In wooden chest, in a secluded passageway, at the far end of the western trail leading away from the South Span Checkpoint in Rivington, at X: -1340 Y: -857",
+    "act" : "Act 3"
+  } ],
+  "boots-of-aid-and-comfort" : [ {
+    "details" : "Goblin Camp X: -99 Y: 424: Sold by Grat the Trader",
+    "act" : "Act 1"
+  } ],
+  "boots-of-apparent-death" : [ {
+    "details" : "Reithwin Graveyard X: -165 Y: 45: In a sarcophagus behind the locked grated iron doors"
+  } ],
+  "boots-of-arcane-bolstering" : [ {
+    "details" : "Moonrise Towers X: -128 Y: -193: Sold by Araj Oblodra on the main floor",
+    "act" : "Act 2"
+  }, {
+    "details" : "Lower City X: -92 Y: -78: Sold by Araj Oblodra in Crimson Draughts if not acquired from her in Act Two",
+    "act" : "Act 3"
+  } ],
+  "boots-of-brilliance" : [ {
+    "details" : "Gauntlet of Shar X: -632 Y: -723: In a heavy chest in the room just north of Yurgir",
+    "act" : "Act 2"
+  } ],
+  "boots-of-elemental-momentum" : [ {
+    "details" : "Rosymorn Monastery Trail X: -43 Y: -129: Sold by Lady Esther, north-east of the Trielta Crags waypoint",
+    "act" : "Act 1"
+  } ],
+  "boots-of-genial-striding" : [ {
+    "details" : "Ebonlake Grotto X: 111 Y: -89: Sold by Blurg"
+  } ],
+  "boots-of-persistence" : [ {
+    "details" : "Forge of the Nine X: 5 Y: -7: Sold by Dammon in the Lower City",
+    "act" : "Act 3"
+  } ],
+  "boots-of-psionic-movement" : [ {
+    "details" : "Knights of the Shield Hideout X: -731 Y: 553: Worn by Ch'r'ai Har'rak",
+    "act" : "Act 3"
+  } ],
+  "boots-of-speed" : [ {
+    "details" : "Ebonlake Grotto X: 82 Y: -97: Worn by Thulla"
+  } ],
+  "boots-of-stormy-clamour" : [ {
+    "details" : "Ebonlake Grotto X: 144 Y: 29: Sold by Omeluum after completing the quest Help Omeluum Investigate the Parasite"
+  } ],
+  "boots-of-striding" : [ {
+    "details" : "Shattered Sanctum X: 335 Y: 43: Worn by Minthara",
+    "act" : "Act 1"
+  } ],
+  "boots-of-uninhibited-kushigo" : [ {
+    "details" : "Astral Plane X: -163 Y: -1158: Carried by Prelate Lir'i'c, as entering Act Three"
+  } ],
+  "boots-of-very-fast-blinking" : [ {
+    "details" : "Circus of the Last Days X: -68 Y: -73: Given as a consolation prize by Akabi after failing to win the jackpot at the Wheel of Fortune",
+    "act" : "Act 3"
+  } ],
+  "cinder-shoes" : [ {
+    "details" : "Ebonlake Grotto X: 111 Y: -89: Sold by Blurg"
+  } ],
+  "cleverly-cobbled-boots" : [ {
+    "details" : "Possible random loot from the Shoes Variation Table.",
+    "source" : "https://bg3.wiki/wiki/Shoes_Variation_Table"
+  } ],
+  "curled-toe-boots" : [ {
+    "details" : "Flymm's Cobblers X: -22 Y: -110: On a shelf in Flymm's Cobblers",
+    "act" : "Act 3"
+  } ],
+  "dark-justiciar-boots" : [ {
+    "details" : "Shadowfell X: -604 Y: -1431: Rewarded to Shadowheart for killing the Nightsong",
+    "act" : "Act 2"
+  } ],
+  "disintegrating-night-walkers" : [ {
+    "details" : "Grymforge X: -854 Y: 780: Worn by Nere",
+    "act" : "Act 1"
+  } ],
+  "dreamsome-boots" : [ {
+    "details" : "Worn by Dream Guardians in the final fight scenario"
+  } ],
+  "drow-leather-boots" : [ ],
+  "evasive-shoes" : [ {
+    "details" : "Last Light Inn X: -56 Y: 141: Sold by Mattis",
+    "act" : "Act 2"
+  } ],
+  "firm-soled-boots" : [ {
+    "details" : "Possible random loot from the Boots Variation Table.",
+    "source" : "https://bg3.wiki/wiki/Boots_Variation_Table"
+  } ],
+  "githyanki-boots" : [ {
+    "details" : "Worn by Lae'zel"
+  } ],
+  "grovetender-boots" : [ {
+    "details" : "Nautiloid: Starting boots for Druids"
+  } ],
+  "hardily-constructed-boots" : [ ],
+  "heavy-boots" : [ {
+    "details" : "Possible random loot from the Boots Variation Table.",
+    "source" : "https://bg3.wiki/wiki/Boots_Variation_Table"
+  } ],
+  "helldusk-boots" : [ {
+    "details" : "Wyrm's Rock Fortress X: -32 Y: 219: in a locked Gilded Chest on the top floor",
+    "act" : "Act 3"
+  } ],
+  "hoarfrost-boots" : [ {
+    "details" : "Crèche Y'llek X: 1335 Y: -660: Inside a display case in the Inquisitor's Chamber",
+    "act" : "Act 1"
+  } ],
+  "humbly-cobbled-shoes" : [ {
+    "details" : "Possible random loot from the Shoes Variation Table.",
+    "source" : "https://bg3.wiki/wiki/Shoes_Variation_Table"
+  } ],
+  "jaheiras-boots" : [ {
+    "details" : "Worn by Jaheira"
+  } ],
+  "karlachs-boots" : [ {
+    "details" : "Worn by Karlach"
+  } ],
+  "leather-boots" : [ {
+    "details" : "Nautiloid: Starting boots for Bards, Clerics, Fighters, Paladins, Rangers and Rogues"
+  } ],
+  "linebreaker-boots" : [ {
+    "details" : "Worg Pens X: 379 Y: -39: Worn by Beastmaster Zurk",
+    "act" : "Act 1"
+  } ],
+  "lonely-left-boot-of-elvenkind" : [ {
+    "details" : "Circus of the Last Days X: -68 Y: -73: Given as a consolation prize by Akabi after failing to win the jackpot at the Wheel of Fortune",
+    "act" : "Act 3"
+  } ],
+  "metallic-boots" : [ {
+    "details" : "Sold by the following traders: Dammon in the Druid Grove"
+  }, {
+    "details" : "Sold by the following traders: Roah Moonglow in the Shattered Sanctum",
+    "act" : "Act 1"
+  }, {
+    "details" : "Worn by several characters throughout the game"
+  } ],
+  "monastic-boots" : [ {
+    "details" : "Nautiloid: Starting boots for Monks"
+  } ],
+  "mystras-grace" : [ {
+    "details" : "Arcane Tower X: -36 Y: -265: In the Chest of the Mundane on the northern balcony of the tower's third floor, the same level as the arcane turrets",
+    "act" : "Act 1"
+  } ],
+  "plain-boots" : [ {
+    "details" : "Possible random loot from the Boots Variation Table.",
+    "source" : "https://bg3.wiki/wiki/Boots_Variation_Table"
+  } ],
+  "quite-fashionable-boots" : [ {
+    "details" : "Heapside Prison X: -1266 Y: 744: On a table in the south-eastern room"
+  } ],
+  "simple-boots" : [ {
+    "details" : "Nautiloid: Starting boots for Sorcerers, Warlocks and Wizards"
+  }, {
+    "details" : "Worn by many characters throughout the game"
+  } ],
+  "slinging-shoes" : [ {
+    "details" : "Highberry's Home X: -1 Y: -39: Sold by Tara on the roof",
+    "act" : "Act 3"
+  } ],
+  "smarmy-swaggerer-boots" : [ {
+    "details" : "Lower City X: -213 Y: -17: Near a picnic basket on the small ruined dock behind Elerrathin's Home",
+    "act" : "Act 3"
+  } ],
+  "soft-and-comfortable-shoes" : [ {
+    "details" : "Possible random loot from the Shoes Variation Table.",
+    "source" : "https://bg3.wiki/wiki/Shoes_Variation_Table"
+  } ],
+  "spaceshunt-boots" : [ {
+    "details" : "Highberry's Home X: 20 Y: -34: Worn by Dolor the assassin",
+    "act" : "Act 3"
+  } ],
+  "spiderstep-boots" : [ {
+    "details" : "Whispering Depths X: -514 Y: -411: In a heavy chest in the Arachnomancer's lab",
+    "act" : "Act 1"
+  } ],
+  "springstep-boots" : [ {
+    "details" : "Shattered Sanctum X: 296 Y: 71: in the treasure room behind Dror Ragzlin's throne",
+    "act" : "Act 1"
+  } ],
+  "stiffly-shod-boots" : [ ],
+  "swiresy-shoes" : [ {
+    "details" : "Goblin Camp X: -99 Y: 424: Sold by Grat the Trader",
+    "act" : "Act 1"
+  } ],
+  "the-speedy-lightfeet" : [ {
+    "details" : "Blighted Village X: -711 Y: -412: In a heavy chest in the cellar behind the windmill"
+  } ],
+  "the-watersparkers" : [ {
+    "details" : "Shattered Sanctum: In a gilded chest in Minthara's area of the Shattered Sanctum X: 339 Y: 41",
+    "act" : "Act 1"
+  } ],
+  "thin-soled-shoes" : [ {
+    "details" : "Possible random loot from the Shoes Variation Table.",
+    "source" : "https://bg3.wiki/wiki/Shoes_Variation_Table"
+  } ],
+  "tidy-slender-boots" : [ {
+    "details" : "Guildhall X: -40 Y: 773: In a cupboard in Nine-Fingers Keene's Office",
+    "act" : "Act 3"
+  }, {
+    "details" : "Circus of the Last Days X: -32 Y: -51: In a backpack",
+    "act" : "Act 3"
+  } ],
+  "tough-shoes" : [ {
+    "details" : "Possible random loot from the Shoes Variation Table.",
+    "source" : "https://bg3.wiki/wiki/Shoes_Variation_Table"
+  } ],
+  "tough-soled-shoes" : [ {
+    "details" : "Possible random loot from the Shoes Variation Table.",
+    "source" : "https://bg3.wiki/wiki/Shoes_Variation_Table"
+  } ],
+  "tyrannical-jackboots" : [ {
+    "details" : "Wyrm's Rock Fortress X: -26 Y: 211: Worn by Enver Gortash",
+    "act" : "Act 3"
+  } ],
+  "unwanted-masterwork-greaves" : [ {
+    "details" : "Forge of the Nine X: 393 Y: 763: In a gilded chest in the basement",
+    "act" : "Act 3"
+  } ],
+  "varsh-kokuus-boots" : [ {
+    "details" : "Crèche Y'llek X: 1288 Y: -759: Acquired from Varsh Ko'kuu in the Hatchery",
+    "act" : "Act 1"
+  } ],
+  "vital-conduit-boots" : [ {
+    "details" : "Crèche Y'llek X: 1380 Y: -798: Sold by A'jak'nir Jeera",
+    "act" : "Act 1"
+  } ],
+  "abyss-beckoners" : [ {
+    "details" : "Zhentarim Basement X: 306 Y: -170: inside a locked chest in a cell",
+    "act" : "Act 1"
+  } ],
+  "bhaalist-gloves" : [ {
+    "details" : "Murder Tribunal X: -1263 Y: 511: Sold by Echo of Abazigal",
+    "act" : "Act 3"
+  } ],
+  "blackguards-gauntlets" : [ {
+    "details" : "Murder Tribunal X: -1292 Y: 501: Carried by the death knight That Which Watches",
+    "act" : "Act 3"
+  } ],
+  "bonespike-gloves" : [ {
+    "details" : "Lower City Sewers X: -136 Y: 980: Worn by Strangler Luke during the quest Get Orin's Netherstone",
+    "act" : "Act 3"
+  } ],
+  "bracers-of-defence" : [ {
+    "details" : "Apothecary's Cellar X: -656 Y: -370: In a gilded chest in the secret cellar area of the Apothecary, beneath the Blighted Village",
+    "act" : "Act 1"
+  } ],
+  "braindrain-gloves" : [ {
+    "details" : "Mind Flayer Colony X: 748 Y: -141: On a skeleton in the Necrotic Laboratory, next to the Blade of Oppressed Souls",
+    "act" : "Act 2"
+  } ],
+  "cerebral-citadel-gloves" : [ {
+    "details" : "Knights of the Shield Hideout X: -727 Y: 589: In a wardrobe during the quest Visit the Emperor's Old Hideout",
+    "act" : "Act 3"
+  } ],
+  "cindersnap-gloves" : [ {
+    "details" : "Last Light Inn X: -31 Y: 130: Sold by Quartermaster Talli near the Last Light Inn waypoint",
+    "act" : "Act 2"
+  } ],
+  "craterflesh-gloves" : [ {
+    "details" : "Murder Tribunal X: -1263 Y: 511: Sold by Echo of Abazigal",
+    "act" : "Act 3"
+  } ],
+  "daredevil-gloves" : [ {
+    "details" : "Crèche Y'llek X: 1380 Y: -798: Sold by A'jak'nir Jeera",
+    "act" : "Act 1"
+  } ],
+  "dark-displacement-gloves" : [ {
+    "details" : "Circus of the Last Days X: -90 Y: -56: Sold by Popper",
+    "act" : "Act 3"
+  } ],
+  "dark-justiciar-gauntlets-rare" : [ {
+    "details" : "Shadowfell X: -604 Y: -1431: Rewarded to Shadowheart for killing the Nightsong",
+    "act" : "Act 2"
+  } ],
+  "dark-justiciar-gauntlets-uncommon" : [ {
+    "details" : "Gauntlet of Shar X: -660 Y: -760: on a pile of boxes, near Yurgir",
+    "act" : "Act 2"
+  } ],
+  "drow-leather-gloves" : [ {
+    "details" : "Shattered Sanctum X: 335 Y: 43: Worn by Minthara",
+    "act" : "Act 1"
+  } ],
+  "druidic-bracers" : [ {
+    "details" : "Worn by Halsin"
+  } ],
+  "flawed-helldusk-gloves" : [ {
+    "details" : "Last Light Inn X: -33 Y: 164: Crafted by Dammon after giving him a third piece of Infernal Iron",
+    "act" : "Act 2"
+  } ],
+  "fleetfingers" : [ {
+    "details" : "Forest X: 80 Y: 347: In a buried chest after succeeding a DC 20 Perception Check",
+    "act" : "Act 1"
+  } ],
+  "gauntlet-of-the-tyrant" : [ {
+    "details" : "Wyrm's Rock Fortress X: -26 Y: 211: Worn by Enver Gortash",
+    "act" : "Act 3"
+  } ],
+  "gauntlets-of-hill-giant-strength" : [ {
+    "details" : "House of Hope X: -6549 Y: 2940: on a pedestal in the Archive",
+    "act" : "Act 3"
+  } ],
+  "gauntlets-of-surging-accuracy" : [ {
+    "details" : "Moonrise Towers X: -164 Y: -167: Sold by Lann Tarv on the main floor",
+    "act" : "Act 2"
+  } ],
+  "gauntlets-of-the-warmaster" : [ {
+    "details" : "Danthelon's Dancing Axe X: -10 Y: 143: Sold by Entharl Danthelon in Wyrm's Crossing",
+    "act" : "Act 3"
+  } ],
+  "gemini-gloves" : [ {
+    "details" : "Devil's Fee X: -38 Y: 17: Sold by Helsik once her special stock is unlocked",
+    "act" : "Act 3"
+  } ],
+  "gloves-equipment" : [ {
+    "details" : "In the Morgue area of the Mind Flayer Colony in a pile of discarded armour and clothing",
+    "act" : "Act 2"
+  } ],
+  "gloves-of-archery" : [ {
+    "details" : "Goblin Camp X: -99 Y: 424: Sold by Grat the Trader",
+    "act" : "Act 1"
+  } ],
+  "gloves-of-baneful-striking" : [ {
+    "details" : "Rosymorn Monastery Trail X: -43 Y: -129: Sold by Lady Esther, north-east of the Trielta Crags waypoint",
+    "act" : "Act 1"
+  } ],
+  "gloves-of-battlemages-power" : [ {
+    "details" : "Reithwin Tollhouse X: -84 Y: -88: in a locked opulent chest on the second floor in the room with two locked doors",
+    "act" : "Act 2"
+  } ],
+  "gloves-of-belligerent-skies" : [ {
+    "details" : "Crèche Y'llek X: 1348 Y: -677: In an elegant chest in the Inquisitor's Chamber, along the southern wall of the room, on the western side",
+    "act" : "Act 1"
+  } ],
+  "gloves-of-cinder-and-sizzle" : [ {
+    "details" : "Rosymorn Monastery Trail X: -43 Y: -129: Sold by Lady Esther, north-east of the Trielta Crags waypoint",
+    "act" : "Act 1"
+  } ],
+  "gloves-of-crushing" : [ {
+    "details" : "Moonrise Towers X: -174 Y: -179: Sold by Roah Moonglow on the main floor",
+    "act" : "Act 2"
+  } ],
+  "gloves-of-dexterity" : [ {
+    "details" : "Crèche Y'llek X: 1380 Y: -798: Sold by A'jak'nir Jeera",
+    "act" : "Act 1"
+  } ],
+  "gloves-of-hail-of-thorns" : [ {
+    "details" : "Zhentarim Basement X: 295 Y: -250: Sold by Brem after completing the quest Find the Missing Shipment",
+    "act" : "Act 1"
+  }, {
+    "details" : "Ebonlake Grotto X: 55 Y: -93: Sold by Derryth Bonecloak"
+  } ],
+  "gloves-of-heroism" : [ {
+    "details" : "The Risen Road X: -674 Y: -401: In a wooden chest at the back of the hidden room in the cellar of the Toll House",
+    "act" : "Act 1"
+  } ],
+  "gloves-of-missile-snaring" : [ {
+    "details" : "The Hollow X: 205 Y: 516: Sold by Arron next to the Silvanus statue",
+    "act" : "Act 1"
+  } ],
+  "gloves-of-power" : [ {
+    "details" : "Emerald Grove X: 208 Y: 427: Carried by Za'krug in front of the Druid Grove",
+    "act" : "Act 1"
+  } ],
+  "gloves-of-soul-catching" : [ {
+    "details" : "House of Hope X: -6477 Y: 2884: Given by Hope for completing her quest Save Hope",
+    "act" : "Act 3"
+  } ],
+  "gloves-of-the-automaton" : [ {
+    "details" : "Last Light Inn X: -56 Y: 133: Sold by Barcus Wroot at his workshop",
+    "act" : "Act 2"
+  } ],
+  "gloves-of-the-balanced-hands" : [ {
+    "details" : "Last Light Inn X: -31 Y: 130: Sold by Quartermaster Talli near the Last Light Inn waypoint",
+    "act" : "Act 2"
+  } ],
+  "gloves-of-the-duellist" : [ {
+    "details" : "Moonrise Towers X: -164 Y: -167: Sold by Lann Tarv on the main floor",
+    "act" : "Act 2"
+  } ],
+  "gloves-of-the-growling-underdog" : [ {
+    "details" : "Shattered Sanctum X: 298 Y: 66: In Dror Ragzlin's treasure crates behind the locked iron gate",
+    "act" : "Act 1"
+  } ],
+  "gloves-of-thievery" : [ {
+    "details" : "Zhentarim Basement X: 295 Y: -250: Sold by Brem after completing the quest Find the Missing Shipment",
+    "act" : "Act 1"
+  } ],
+  "gloves-of-uninhibited-kushigo" : [ {
+    "details" : "Ebonlake Grotto X: -55 Y: -93: Reward by Derryth Bonecloak for saving Baelen Bonecloak during Find the Mushroom Picker"
+  } ],
+  "helldusk-gloves" : [ {
+    "details" : "House of Hope X: -6478 Y: 2993: Worn by Haarlep in the Boudoir",
+    "act" : "Act 3"
+  } ],
+  "hellriders-pride" : [ {
+    "details" : "Secluded Chamber X: -53 Y: 67: Carried by Zevlor and can be looted from him, stolen, or earned as a reward for Kill Kagha or Investigate Kagha"
+  } ],
+  "herbalists-gloves" : [ {
+    "details" : "Ebonlake Grotto X: -55 Y: -93: Sold by Derryth Bonecloak in the Underdark",
+    "act" : "Act 1"
+  } ],
+  "hracknir-bracers" : [ {
+    "details" : "Reithwin Town X: -249 Y: -33: Worn by Ch'r'ai Tska'an near the bridge leading to the To Baldur's Gate waypoint",
+    "act" : "Act 2"
+  } ],
+  "ichorous-gloves" : [ {
+    "details" : "The Waning Moon X: -253 Y: -71: In a metal chest in the storeroom behind the bar",
+    "act" : "Act 2"
+  } ],
+  "jhannyls-gloves" : [ {
+    "details" : "Last Light Inn X: -60 Y: 158: Worn by Isobel if she is killed after dealing with the Nightsong but before completing the assault on Moonrise",
+    "act" : "Act 2"
+  }, {
+    "details" : "Mind Flayer Colony X: 861 Y: -23: Worn by Isobel if she is kidnapped by Marcus or killed at Last Light Inn before dealing with the Nightsong",
+    "act" : "Act 2"
+  }, {
+    "details" : "Ramazith's Tower: Worn by Isobel if the Nightsong is killed or imprisoned by Lorroakan",
+    "act" : "Act 3"
+  }, {
+    "details" : "Campsite (Act Two): Worn by Isobel if she joins the camp"
+  } ],
+  "knock-knuckle-gloves" : [ {
+    "details" : "The Counting House X: -719 Y: 871: In the High Security Vault nº7",
+    "act" : "Act 3"
+  } ],
+  "leather-bracers" : [ {
+    "details" : "Emerald Grove X: 201 Y: 539: On a bench next to the training children at The Hollow",
+    "act" : "Act 1"
+  } ],
+  "leather-gloves" : [ {
+    "details" : "Worn by many characters throughout the game"
+  } ],
+  "legacy-of-the-masters" : [ {
+    "details" : "Forge of the Nine X: 5 Y: -7: Sold by Dammon in Act Three",
+    "act" : "Act 3"
+  } ],
+  "luminous-gloves" : [ {
+    "details" : "Ruined Battlefield X: -52 Y: 11: in the potter's chest",
+    "act" : "Act 2"
+  } ],
+  "martial-exertion-gloves" : [ {
+    "details" : "Angleiron's Cellar X: -241 Y: -1065: Sold by Bumpnagel"
+  } ],
+  "metallic-gloves" : [ {
+    "details" : "Sold by the following traders: Dammon in the Druid Grove"
+  }, {
+    "details" : "Sold by the following traders: Roah Moonglow in the Shattered Sanctum",
+    "act" : "Act 1"
+  }, {
+    "details" : "Worn by several characters throughout the game"
+  } ],
+  "metallic-gloves-dream-guardian" : [ {
+    "details" : "Worn by Dream Guardians in the final fight scenario"
+  } ],
+  "netties-gloves" : [ {
+    "details" : "In the Druids' Chambers at X: -433 Y: 5"
+  } ],
+  "nimblefinger-gloves" : [ {
+    "details" : "Angleiron's Cellar X: -241 Y: -1065: Sold by Bumpnagel"
+  } ],
+  "poisoners-gloves" : [ {
+    "details" : "House of Healing X: -199 Y: 78: in a chest at the back of the building",
+    "act" : "Act 2"
+  } ],
+  "quickspell-gloves" : [ {
+    "details" : "Sorcerous Sundries X: -14 Y: -72: Sold by Lorroakan's Projection or Rolan on the ground floor",
+    "act" : "Act 3"
+  } ],
+  "raven-gloves" : [ {
+    "details" : "Ruined Battlefield X: 126 Y: 106: Given by He Who Was as a reward for completing the quest Punish the Wicked",
+    "act" : "Act 2"
+  } ],
+  "reasons-grasp" : [ {
+    "details" : "The Risen Road X: 37 Y: 644: In a locked chest in the cave where survivors of the attacked caravan are fending off a pack of gnolls, behind the survivors, against the cave wall",
+    "act" : "Act 1"
+  } ],
+  "seraphic-pugilist-gloves" : [ {
+    "details" : "Open Hand Temple X: -90 Y: -7: In a locked chest at the foot of the beds at the west end of the Open Hand Temple",
+    "act" : "Act 3"
+  } ],
+  "servitor-of-the-black-hand-gloves" : [ {
+    "details" : "Wyrm's Rock Fortress X: -32 Y: 198: in an opulent chest on the top floor",
+    "act" : "Act 3"
+  } ],
+  "snow-dusted-monastery-gloves" : [ {
+    "details" : "Danthelon's Dancing Axe X: -10 Y: 143: Sold by Entharl Danthelon in Wyrm's Crossing",
+    "act" : "Act 3"
+  } ],
+  "spellmight-gloves" : [ {
+    "details" : "Circus of the Last Days X: -82 Y: -33: Rewarded by Lucretious at the end of the Find Dribbles the Clown quest",
+    "act" : "Act 3"
+  } ],
+  "spellseeking-gloves" : [ {
+    "details" : "Devil's Fee X: -38 Y: 17: Sold by Helsik once her special stock is unlocked",
+    "act" : "Act 3"
+  } ],
+  "stalker-gloves" : [ {
+    "details" : "Rivington General X: 7 Y: -35: Sold by Exxvikyap in Rivington during Act Three",
+    "act" : "Act 3"
+  } ],
+  "swordmaster-gloves" : [ {
+    "details" : "Last Light Inn X: -33 Y: 164: Sold by Dammon in Act Two",
+    "act" : "Act 2"
+  } ],
+  "the-reviving-hands" : [ {
+    "details" : "Stormshore Tabernacle X: 107 Y: -22: Sold by Vicar Humbletoes",
+    "act" : "Act 3"
+  } ],
+  "the-sparkle-hands" : [ {
+    "details" : "Decrepit Sanctuary X: 95 Y: 210: in a wooden chest at the base of the giant tree stump in the Sunlit Wetlands",
+    "act" : "Act 1"
+  } ],
+  "thermoarcanic-gloves" : [ {
+    "details" : "Ruined Battlefield X: 100 Y: -54: Worn by Kansif, either at the cultist camp or after the Harper ambush",
+    "act" : "Act 2"
+  } ],
+  "thunderpalm-strikers" : [ {
+    "details" : "Angleiron's Cellar X: -241 Y: -1065: Sold by Bumpnagel"
+  } ],
+  "unlucky-thiefs-gloves" : [ {
+    "details" : "Circus of the Last Days X: -68 Y: -73: Given as a consolation prize by Akabi after failing to win the jackpot at the Wheel of Fortune",
+    "act" : "Act 3"
+  } ],
+  "unwanted-masterwork-gauntlets" : [ {
+    "details" : "Forge of the Nine X: 393 Y: 763: in a gilded chest in the basement",
+    "act" : "Act 3"
+  } ],
+  "winkling-gloves" : [ {
+    "details" : "Steel Watch Foundry X: -331 Y: -147: Carried by Zanner Toobin in the western-most room on the ground floor or later accompanying the party in the basement during the quest Save the Gondians",
+    "act" : "Act 3"
+  } ],
+  "winters-clutches" : [ {
+    "details" : "Underdark: Given by Glut for completing Avenge Glut's Circle",
+    "act" : "Act 1"
+  }, {
+    "details" : "Rosymorn Monastery Trail X: -43 Y: -129: Sold by Lady Esther, north-east of the Trielta Crags waypoint",
+    "act" : "Act 1"
+  }, {
+    "details" : "Sorcerous Sundries X: -2 Y: -66: On a counter behind a Lava Elemental (creature) and Water Elemental near the entrance",
+    "act" : "Act 3"
+  } ],
+  "wondrous-gloves" : [ {
+    "details" : "Grymforge X: -691 Y: 374: Carried by a Mimic near the harper cache",
+    "act" : "Act 1"
+  } ],
+  "adjustable-steel-helm" : [ {
+    "details" : "Oubliette X: 678 Y: -68: On a table/shelf in the Morgue",
+    "act" : "Act 2"
+  }, {
+    "details" : "Cloister of Sombre Embrace X: -332 Y: -1606: On a shelf in the Infiltration Training room",
+    "act" : "Act 3"
+  } ],
+  "angelic-plume-helmet" : [ {
+    "details" : "Cloister of Sombre Embrace X: -332 Y: -1606: On a shelf in the Infiltration Training room",
+    "act" : "Act 3"
+  } ],
+  "assassin-of-bhaal-cowl" : [ {
+    "details" : "Murder Tribunal X: -1263 Y: 511: Sold by Echo of Abazigal",
+    "act" : "Act 3"
+  } ],
+  "bicorne-of-the-sea-beast" : [ {
+    "details" : "In the Peculiar Clothing Chest in the Traveller's Chest at the Campsite"
+  } ],
+  "birthright" : [ {
+    "details" : "Sorcerous Sundries X: -14 Y: -72: Sold by Lorroakan's Projection or Rolan on the ground floor",
+    "act" : "Act 3"
+  } ],
+  "blackplume-helm" : [ {
+    "details" : "In the armoury below Oskar's painting studio in Lady Jannath's Estate",
+    "act" : "Act 3"
+  } ],
+  "blaze-portyrs-ceremonial-flaming-fist-helm" : [ {
+    "details" : "In a wooden chest behind Uktar in the Guildhall in the Lower City Sewers. X: -31 Y: 756",
+    "act" : "Act 3"
+  } ],
+  "bonespike-helmet" : [ {
+    "details" : "Lower City Sewers X: -157 Y: 939: Sold by Voiceless Penitent Bareki",
+    "act" : "Act 3"
+  } ],
+  "brimmed-hat" : [ {
+    "details" : "Found as random loot throughout the game."
+  }, {
+    "details" : "This item can be found in a Backpack on the Ravaged Beach.",
+    "act" : "Act 1"
+  } ],
+  "browbeaten-circlet" : [ {
+    "details" : "Moonrise Towers Prison X: 569 Y: -652: in the evidence chest on the top floor of the Warden's tower",
+    "act" : "Act 2"
+  } ],
+  "bycocket" : [ {
+    "details" : "Can be found on a table behind Gloomy Fentonson in Baldur's Gate."
+  }, {
+    "details" : "Cloister of Sombre Embrace X: -332 Y: -1606: On a shelf in the Infiltration Training room.",
+    "act" : "Act 3"
+  } ],
+  "cap-and-bells" : [ {
+    "details" : "Circus of the Last Days X: -40 Y: -53: In a chest inside a blue tent opposite of the clown stage.",
+    "act" : "Act 3"
+  } ],
+  "cap-of-curing" : [ {
+    "details" : "Sacred Pool X: 289 Y: 488: In a locked gilded chest behind a pillar near to where Alfira is composing her song in the Emerald Grove",
+    "act" : "Act 1"
+  } ],
+  "cap-of-wrath" : [ {
+    "details" : "Grymforge X: -617 Y: 320: Carried by Thudd",
+    "act" : "Act 1"
+  } ],
+  "circle-of-bones" : [ {
+    "details" : "Gauntlet of Shar X: -845 Y: -793: Carried by Balthazar, at his altar",
+    "act" : "Act 2"
+  }, {
+    "details" : "Shadowfell X: -604 Y: -1431: Carried by Balthazar, if he is later confronted near the Nightsong",
+    "act" : "Act 2"
+  }, {
+    "details" : "Mind Flayer Colony X: 715 Y: -49: Carried by Balthazar, if he is allowed to abduct the Nightsong",
+    "act" : "Act 2"
+  } ],
+  "circlet" : [ {
+    "details" : "Starting headwear for Shadowheart"
+  } ],
+  "circlet-of-blasting" : [ {
+    "details" : "Ebonlake Grotto X: 111 Y: -89: Sold by Blurg"
+  } ],
+  "circlet-of-hunting" : [ {
+    "details" : "Moonrise Towers X: -128 Y: -193: Sold by Araj Oblodra on the main floor",
+    "act" : "Act 2"
+  }, {
+    "details" : "Lower City X: -92 Y: -78: Sold by Araj Oblodra in Crimson Draughts if not acquired from her in Act Two"
+  } ],
+  "circlet-of-mental-anguish" : [ {
+    "details" : "Mind Flayer Colony X: 748 Y: -141: On a skeleton in the Necrotic Laboratory",
+    "act" : "Act 2"
+  } ],
+  "circlet-of-psionic-revenge" : [ {
+    "details" : "Crèche Y'llek X: 1392 Y: -752: Carried by Githyanki Inquisitor Ch'r'ai W'wargaz in the Inquisitor's Chamber",
+    "act" : "Act 1"
+  } ],
+  "coldbrim-hat" : [ {
+    "details" : "Moonrise Towers X: -155 Y: -173: In a locked chest in a hidden room behind a bookcase in Balthazar's Chambers",
+    "act" : "Act 2"
+  }, {
+    "details" : "Sorcerous Sundries: On a table by the Lava Elemental (creature)",
+    "act" : "Act 3"
+  } ],
+  "covert-cowl" : [ {
+    "details" : "Last Light Inn - Cellar X: 33 Y: -697: Carried by a Meenlock (creature) in the cellar of Last Light Inn",
+    "act" : "Act 2"
+  } ],
+  "cracked-helm-of-shar" : [ {
+    "details" : "Near a ritual circle in the Gauntlet of Shar X: -707 Y: -724",
+    "act" : "Act 2"
+  } ],
+  "dark-justiciar-helm" : [ {
+    "details" : "Abandoned Refuge X: -595 Y: 310: On the skeletal remains of Dark Justiciars, north east of the Underdark - Ancient Forge waypoint and south of the heavy splint mold",
+    "act" : "Act 1"
+  }, {
+    "details" : "Shadowfell X: -544 Y: -1447: On the ground next to a skeleton in the Nightsong's Prison",
+    "act" : "Act 2"
+  }, {
+    "details" : "Shadowfell X: -516 Y: -1397: On the ground next to another skeleton in the Nightsong's Prison",
+    "act" : "Act 2"
+  } ],
+  "dark-justiciar-helmet" : [ {
+    "details" : "Gauntlet of Shar X: -822 Y: -753: inside a Gilded Chest behind the altar and beyond the riddle door in the Silent Library",
+    "act" : "Act 2"
+  } ],
+  "dark-justiciar-mask" : [ {
+    "details" : "Abandoned Refuge X: -606 Y: 282: on a skeleton near the Ancient Forge Waypoint",
+    "act" : "Act 1"
+  }, {
+    "details" : "Ruined Battlefield X: -35 Y: -88: next to a skeleton, presumably of Inquisitor Verzen Wranlock",
+    "act" : "Act 2"
+  } ],
+  "devilfoil-mask" : [ {
+    "details" : "Grymforge X: -620 Y: 325: On a table near Sergeant Thrinn, at the Dig Site",
+    "act" : "Act 1"
+  }, {
+    "details" : "Grymforge X: -666 Y: 464: On the ground at the foot of a staircase by Skarjall, behind a wall of rubble",
+    "act" : "Act 1"
+  }, {
+    "details" : "Grymforge X: -574 Y: 380: On an altar guarded by a Merregon Legionnaire and Hellsboars",
+    "act" : "Act 1"
+  }, {
+    "details" : "Grymforge X: -574 Y: 380: Carried by the Merregon Legionnaire",
+    "act" : "Act 1"
+  } ],
+  "diadem-of-arcane-synergy" : [ {
+    "details" : "Crèche Y'llek X: 1365 Y: -663: Carried by Ardent Jhe'rezath in the Inquisitor's Chamber",
+    "act" : "Act 1"
+  } ],
+  "embroidered-bycocket" : [ {
+    "act" : "Act 3",
+    "details" : "Sold by Figaro Pennygood at Facemaker’s Boutique in the Lower City.",
+    "source" : "https://bg3.wiki/wiki/Figaro_Pennygood#Hats"
+  } ],
+  "embroidered-hat" : [ {
+    "details" : "Cloister of Sombre Embrace X: -332 Y: -1606: On a shelf in the Infiltration Training room.",
+    "act" : "Act 3"
+  } ],
+  "fierce-golden-helm" : [ {
+    "details" : "Oubliette X: 678 Y: -68: On a table/shelf in the Morgue",
+    "act" : "Act 2"
+  }, {
+    "details" : "Cloister of Sombre Embrace X: -370 Y: -1674: On top of a rack inside the Armoury",
+    "act" : "Act 3"
+  } ],
+  "fistbreaker-helm" : [ {
+    "details" : "Moonrise Towers X: -164 Y: -167: Sold by Lann Tarv on the main floor",
+    "act" : "Act 2"
+  } ],
+  "flaming-fist-helmet" : [ {
+    "details" : "Carried by members of the Flaming Fist"
+  }, {
+    "details" : "Cloister of Sombre Embrace X: -332 Y: -1606: On a shelf in the Infiltration Training room",
+    "act" : "Act 3"
+  } ],
+  "flawed-helldusk-helmet" : [ {
+    "details" : "Last Light Inn X: -33 Y: 164: Crafted by Dammon",
+    "act" : "Act 2"
+  } ],
+  "formidable-helmet" : [ {
+    "details" : "Cloister of Sombre Embrace X: -372 Y: -1671: on top of a rack inside the Armoury",
+    "act" : "Act 3"
+  }, {
+    "details" : "Central Watch Tower X: -68 Y: -33: on the second floor, sitting on a shelf",
+    "act" : "Act 3"
+  } ],
+  "frayed-drow-hood" : [ {
+    "details" : "In a backpack amongst the petrified drow, to the west of the Selûnite Outpost in the Underdark, at X: 125 Y: -253",
+    "act" : "Act 1"
+  } ],
+  "frumpy-hat" : [ {
+    "details" : "Possible random loot from the Medium Hat Table.",
+    "source" : "https://bg3.wiki/wiki/Medium_Hat_Table"
+  } ],
+  "gibus-of-the-worshipful-servant" : [ {
+    "details" : "Bhaal Temple X: 56 Y: 1006: On Sceleritas Fel if the Dark Urge refuses Bhaal's gift after defeating Orin",
+    "act" : "Act 3"
+  }, {
+    "details" : "Devil's Fee X: -38 Y: 17: Given by Helsik to The Dark Urge upon first speaking with her (while not disguised)",
+    "act" : "Act 3"
+  }, {
+    "details" : "Devil's Fee X: -38 Y: 17: Sold by Helsik if The Dark Urge is played as Origin, but has not yet spoken with her (while undisguised)",
+    "act" : "Act 3"
+  }, {
+    "details" : "Devil's Fee X: -38 Y: 17: Lying on Helsik's desk on the ground floor (if The Dark Urge is not played as Origin) [verify]",
+    "act" : "Act 3"
+  } ],
+  "goldgloss-heraldic-helm" : [ {
+    "details" : "Oubliette X: 678 Y: -68: On a table/shelf in the Morgue",
+    "act" : "Act 2"
+  }, {
+    "details" : "Stormshore Armoury: On a stand behind Gloomy Fentonson",
+    "act" : "Act 3"
+  } ],
+  "grymskull-helm" : [ {
+    "details" : "Adamantine Forge X: -558 Y: 230: Carried by Grym"
+  } ],
+  "haste-helm" : [ {
+    "details" : "Blighted Village X: 29 Y: 405: Inside the Moss-Covered Chest"
+  } ],
+  "hat-of-eminent-giggles" : [ {
+    "details" : "Cloister of Sombre Embrace X: -332 Y: -1606: On a shelf in the Infiltration Training room",
+    "act" : "Act 3"
+  }, {
+    "details" : "Circus of the Last Days X: -32 Y: -51: Looted from a traveller's chest",
+    "act" : "Act 3"
+  }, {
+    "details" : "Facemaker's Boutique X: -162 Y: -26: On a shelf",
+    "act" : "Act 3"
+  } ],
+  "hat-of-fire-acuity" : [ {
+    "details" : "Last Light Inn X: -28 Y: 170: Carried by the Strange Ox in Dammon's blacksmith in Act Two",
+    "act" : "Act 2"
+  }, {
+    "details" : "Rivington X: 38 Y: -149: Carried by the Strange Ox on a hill west of the requisitioned barn at the beginning of Act Three",
+    "act" : "Act 3"
+  } ],
+  "hat-of-storm-scions-power" : [ {
+    "details" : "Moonrise Towers X: -128 Y: -193: Sold by Araj Oblodra on the main floor",
+    "act" : "Act 2"
+  }, {
+    "details" : "Lower City X: -92 Y: -78: Sold by Araj Oblodra in Crimson Draughts if not acquired from her in Act Two",
+    "act" : "Act 3"
+  } ],
+  "hat-of-the-sharp-caster" : [ {
+    "details" : "Devil's Fee X: -29 Y: 6: Sold by Tara on the roof of the Devil's Fee",
+    "act" : "Act 3"
+  } ],
+  "hat-of-uninhibited-kushigo" : [ {
+    "details" : "Last Light Inn X: -31 Y: 130: Sold by Quartermaster Talli near the Last Light Inn waypoint",
+    "act" : "Act 2"
+  } ],
+  "helldusk-helmet" : [ {
+    "details" : "House of Hope X: -6482 Y: 2939: In Raphael's Vault across from the entrance to the Boudoir",
+    "act" : "Act 3"
+  } ],
+  "helm-of-balduran" : [ {
+    "details" : "The Dragon's Sanctum X: 636 Y: -964: On a stone altar next to Ansur",
+    "act" : "Act 3"
+  } ],
+  "helmet" : [ {
+    "details" : "Sold by numerous traders around the game"
+  }, {
+    "details" : "Worn by several characters throughout the game"
+  } ],
+  "helmet-of-arcane-acuity" : [ {
+    "details" : "Mason's Guild X: 107 Y: -758: in a locked and trapped Gilded Chest in a secret basement area",
+    "act" : "Act 2"
+  } ],
+  "helmet-of-autonomy" : [ {
+    "details" : "Underdark X: 82 Y: -241: On a skeleton at the entrance to The Festering Cove",
+    "act" : "Act 1"
+  } ],
+  "helmet-of-grit" : [ {
+    "details" : "Szarr Palace X: -1298 Y: 965: in a locked opulent chest, in the room with the cursed corpse of Victoria",
+    "act" : "Act 3"
+  } ],
+  "helmet-of-smiting" : [ {
+    "details" : "Selûnite Outpost X: 163 Y: -248: Inside a locked gilded chest south-west of the waypoint",
+    "act" : "Act 1"
+  } ],
+  "holy-lance-helm" : [ {
+    "details" : "Rosymorn Monastery X: 120 Y: 35: In a painted chest, accessible from the top level",
+    "act" : "Act 1"
+  } ],
+  "hood-of-the-weave" : [ {
+    "details" : "Philgrave's Mansion X: 14 Y: -160: Sold by Mystic Carrion",
+    "act" : "Act 3"
+  } ],
+  "horns-of-the-berserker" : [ {
+    "details" : "Danthelon's Dancing Axe X: -10 Y: 143: Sold by Entharl Danthelon in Wyrm's Crossing",
+    "act" : "Act 3"
+  } ],
+  "ignoble-hat" : [ {
+    "details" : "Found as random loot throughout the game"
+  } ],
+  "infernal-mask" : [ {
+    "details" : "Carried by Orpheus if he is freed and joins the party during the assault on the Upper City.",
+    "act" : "Act 3"
+  } ],
+  "jannaths-hat" : [ {
+    "details" : "The Counting House X: -714 Y: 863: In the High Security Vault nº2",
+    "act" : "Act 3"
+  } ],
+  "justiciar-helmet" : [ {
+    "details" : "Gauntlet of Shar X: -840 Y: -813: Beside a skeleton in the room opposite to the Altar to Shar",
+    "act" : "Act 2"
+  } ],
+  "key-of-the-ancients" : [ {
+    "details" : "Underground Passage X: -438 Y: -180: Carried by Findal in the Underground Passage that connects to the Druid Grove",
+    "act" : "Act 1"
+  } ],
+  "leather-helmet" : [ {
+    "details" : "Ravaged Beach X: 195 Y: 252: In a locked wooden trunk",
+    "act" : "Act 1"
+  }, {
+    "details" : "Emerald Grove X: 177 Y: 562: Sold by Dammon",
+    "act" : "Act 1"
+  }, {
+    "details" : "Shattered Sanctum X: 272 Y: -31: Sold by Roah Moonglow",
+    "act" : "Act 1"
+  }, {
+    "details" : "Ebonlake Grotto X: 55 Y: -93: Sold by Derryth Bonecloak"
+  }, {
+    "details" : "Worn by several characters throughout the game"
+  } ],
+  "leatherstring-helmet" : [ {
+    "details" : "Cloister of Sombre Embrace X: -332 Y: -1606: On a shelf in the Infiltration Training room",
+    "act" : "Act 3"
+  } ],
+  "marksmanship-hat" : [ {
+    "details" : "Moonrise Towers X: -174 Y: -179: Sold by Roah Moonglow on the main floor",
+    "act" : "Act 2"
+  } ],
+  "mask-of-soul-perception" : [ {
+    "details" : "Devil's Fee X: -33 Y: 20: in a locked Gilded Chest ( DC 20 Sleight of Hand Check) in Helsik's room upstairs",
+    "act" : "Act 3"
+  } ],
+  "mask-of-the-shapeshifter" : [ {
+    "details" : "In the Traveller's Chest at the Campsite"
+  } ],
+  "old-floppy-hat" : [ {
+    "details" : "Throughout the game as set-dressing and random loot"
+  } ],
+  "opulent-helmet" : [ {
+    "details" : "On a shelf in Facemaker's Boutique[verify]",
+    "act" : "Act 3"
+  } ],
+  "pyroquickness-hat" : [ {
+    "details" : "Sorcerous Vault X: 411 Y: 997: In an invisible chest in the vault of Elminster",
+    "act" : "Act 3"
+  } ],
+  "red-carmine-mask" : [ {
+    "details" : "Philgrave's Mansion X: 19 Y: -155: on the top floor, sitting on a table",
+    "act" : "Act 3"
+  }, {
+    "details" : "Central Watch Tower X: -66 Y: -34: on the second floor, sitting on a shelf",
+    "act" : "Act 3"
+  } ],
+  "regal-helm" : [ {
+    "details" : "Mind Flayer Colony X: 678 Y: -68: On a table/shelf in the Morgue",
+    "act" : "Act 2"
+  } ],
+  "reinforced-helmet" : [ {
+    "details" : "In the swamp north of Riverside Teahouse, Sunlit Wetlands at X: -4 Y: 277",
+    "act" : "Act 1"
+  } ],
+  "rich-arcanist-helmet" : [ {
+    "details" : "Cloister of Sombre Embrace X: -332 Y: -1606: On a shelf in the Infiltration Training room",
+    "act" : "Act 3"
+  } ],
+  "rufflesome-blaggart-hat" : [ {
+    "details" : "Found throughout the game as set-dressing and random loot"
+  } ],
+  "sarevoks-horned-helmet" : [ {
+    "details" : "Murder Tribunal X: -1248 Y: 503: Carried by Sarevok Anchev",
+    "act" : "Act 3"
+  } ],
+  "scabby-pugilist-circlet" : [ {
+    "details" : "Rivington X: 56 Y: -120: Sold by Mattis near the Requisitioned Barn if he survives to Act Three",
+    "act" : "Act 3"
+  } ],
+  "scalpspike-helm" : [ {
+    "details" : "Cloister of Sombre Embrace X: -332 Y: -1606: On a shelf in the Infiltration Training room",
+    "act" : "Act 3"
+  } ],
+  "scorpion-helmet" : [ {
+    "details" : "In a crate on the ground next to Dammon in The Hollow",
+    "act" : "Act 1"
+  } ],
+  "shadow-of-menzoberranzan" : [ {
+    "details" : "Ebonlake Grotto X: 52 Y: -70: On the ground next to Xargrim the Pale Corpse, in the secret area unlocked by completing the quest Defeat the Duergar Intruders"
+  } ],
+  "shapeshifter-hat" : [ {
+    "details" : "Devil's Fee X: -38 Y: 17: Sold by Helsik once her special stock is unlocked",
+    "act" : "Act 3"
+  } ],
+  "shar-headwear" : [ {
+    "details" : "Cloister of Sombre Embrace X: -376 Y: -1677: In the armoury on top of torso mannequin",
+    "act" : "Act 3"
+  }, {
+    "details" : "Cloister of Sombre Embrace X: -399 Y: -1590: On the alter inside the dormitory",
+    "act" : "Act 3"
+  } ],
+  "snakeskin-hat" : [ {
+    "details" : "In the disguise room of the Sharran Enclave in Baldur's Gate",
+    "act" : "Act 3"
+  }, {
+    "details" : "On the outer walkway of Ramazith's Tower",
+    "act" : "Act 3"
+  } ],
+  "steelwatcher-helmet" : [ {
+    "details" : "Steel Watch Foundry X: -275 Y: -134: On a table on the ground floor near the east entrance",
+    "act" : "Act 3"
+  } ],
+  "the-lifebringer" : [ {
+    "details" : "Ebonlake Grotto X: 111 Y: -89: Sold by Blurg"
+  } ],
+  "the-pointy-hat" : [ {
+    "details" : "Circus of the Last Days X: -85 Y: -24: in a chest behind Lucretious",
+    "act" : "Act 3"
+  } ],
+  "the-shadespell-circlet" : [ {
+    "details" : "Ebonlake Grotto X: 144 Y: 29: Sold by Omeluum after completing the quest Help Omeluum Investigate the Parasite"
+  } ],
+  "triumphal-helm" : [ {
+    "details" : "Oubliette X: 678 Y: -68: On a table/shelf in the Morgue",
+    "act" : "Act 2"
+  } ],
+  "wapiras-crown" : [ {
+    "details" : "Secluded Chamber X: -53 Y: 67: Rewarded by Zevlor for helping the tiefling refugees during Save the Refugees, provided the monetary reward is accepted"
+  } ],
+  "warped-headband-of-intellect" : [ {
+    "details" : "Blighted Village X: 13 Y: 366: Carried by Lump the Enlightened"
+  } ],
+  "watchs-helmet" : [ {
+    "details" : "Cloister of Sombre Embrace X: -332 Y: -1606: on a shelf in the Infiltration Training room",
+    "act" : "Act 3"
+  } ],
+  "well-crated-helm" : [ {
+    "details" : "Central Watch Tower X: -68 Y: -33: On the second floor, sitting on a shelf",
+    "act" : "Act 3"
+  } ],
+  "whispering-mask" : [ {
+    "details" : "Riverside Teahouse: 4x – on a table in the Overgrown Tunnel Entrance Gallery, just before the Gnarled Door",
+    "act" : "Act 1"
+  }, {
+    "details" : "Riverside Teahouse: Worn by Mask of Vengeance, Mask of Servitude, Mask of Regret, and Mask of Terror, the thralls located in the Overgrown Tunnel",
+    "act" : "Act 1"
+  }, {
+    "details" : "Lower City: Worn by Mask of Vengeance, Mask of Servitude, Mask of Terror, and Captain Grisly, the thralls located in the Blushing Mermaid",
+    "act" : "Act 3"
+  } ],
+  "wide-brimmed-hat" : [ {
+    "details" : "Facemaker's Boutique X: -163 Y: -38: Sold by Figaro Pennygood",
+    "act" : "Act 3"
+  }, {
+    "details" : "Carm's Garms X: 18 Y: 135: Sold by Carmen Pennygood",
+    "act" : "Act 3"
+  }, {
+    "details" : "Sorcerous Sundries X: -14 Y: -72: Sold by from Lorroakan's Projection or Rolan's Projection",
+    "act" : "Act 3"
+  } ],
+  "wizard-hat" : [ {
+    "details" : "Can be found by the fountain in Bloomridge Park in Baldur's Gate"
+  } ],
+  "adamantine-longsword" : [ {
+    "details" : "Adamantine Forge X: -558 Y: 230: Forged with a Longsword Mould and Mithral Ore"
+  } ],
+  "adamantine-mace" : [ {
+    "details" : "Adamantine Forge X: -558 Y: 230: Forged with a Mace Mould and Mithral Ore"
+  } ],
+  "adamantine-scimitar" : [ {
+    "details" : "Adamantine Forge X: -558 Y: 230: Forged with a Scimitar Mould and Mithral Ore"
+  } ],
+  "ambusher" : [ {
+    "details" : "Rivington General X: 7 Y: -35: Sold by Exxvikyap in Rivington during Act Three",
+    "act" : "Act 3"
+  } ],
+  "argument-solver" : [ {
+    "details" : "Moonrise Towers X: -196 Y: -195: Carried by Mig on the main floor",
+    "act" : "Act 2"
+  } ],
+  "artificial-leech" : [ {
+    "details" : "In the House of Healing in Act Two",
+    "act" : "Act 2"
+  }, {
+    "details" : "In Araj Oblodra's basement at Crimson Draughts in Act Three",
+    "act" : "Act 3"
+  } ],
+  "artificial-leech-plus-1" : [ {
+    "details" : "House of Healing X: -201 Y: 50: Carried by Sister Geanne",
+    "act" : "Act 2"
+  } ],
+  "assassins-shortsword" : [ {
+    "details" : "Reithwin Town X: -252 Y: 36: on one of a pair of skeletons along the cliffs west of the House of Healing",
+    "act" : "Act 2"
+  } ],
+  "assassins-touch" : [ {
+    "details" : "Shattered Sanctum X: 333 Y: 41: Reward for completing the quest Save the Goblin Sazza by escorting Sazza to the Goblin Camp",
+    "act" : "Act 1"
+  } ],
+  "baldurans-giantslayer" : [ {
+    "details" : "The Dragon's Sanctum X: 633 Y: -989: On the corpse of Ansur",
+    "act" : "Act 3"
+  } ],
+  "battle-worn-blade" : [ {
+    "details" : "Secluded Chamber X: -55 Y: 65: In Zevlor's Wooden Chest, which can be opened with Zevlor's Key or Sleight of Hand Check"
+  } ],
+  "battleaxe" : [ {
+    "details" : "May appear in Dammon’s rotating stock in the Emerald Grove (Act 1) or at Last Light Inn (Act 2).",
+    "source" : "https://bg3.wiki/wiki/Melee_Weapon_Trader_Table"
+  } ],
+  "battleaxe-plus-1" : [ {
+    "details" : "Sold by any trader using the magic melee table"
+  } ],
+  "belm" : [ {
+    "details" : "Elerrathin's Home X: -210 Y: -50: in an opulent chest in the basement",
+    "act" : "Act 3"
+  } ],
+  "bigboys-chew-toy" : [ {
+    "details" : "Moonrise Towers X: -164 Y: -167: Sold by Lann Tarv on the main floor of Moonrise Towers",
+    "act" : "Act 2"
+  } ],
+  "blackguards-sword" : [ {
+    "details" : "Murder Tribunal X: -1293 Y: 503: Carried by the death knight That Which Guards",
+    "act" : "Act 3"
+  } ],
+  "blade-of-oppressed-souls" : [ {
+    "details" : "Mind Flayer Colony X: 747 Y: -138: In an area unlocked by the Necrotic Laboratory puzzle",
+    "act" : "Act 2"
+  }, {
+    "details" : "High Hall X: 235 Y: 44: On a table of goods, owned by Koll",
+    "act" : "Act 3"
+  } ],
+  "blooded-greataxe" : [ {
+    "details" : "Shattered Sanctum X: 272 Y: -31: Sold by Roah Moonglow, to the left beyond the sanctum entrance",
+    "act" : "Act 1"
+  } ],
+  "bloodthirst" : [ {
+    "details" : "Bhaal Temple X: 61 Y: 1004: Carried by Orin during the quest Get Orin's Netherstone",
+    "act" : "Act 3"
+  } ],
+  "bonesaw" : [ {
+    "details" : "House of Healing: Carried by Sister Julia",
+    "act" : "Act 2"
+  }, {
+    "details" : "On the table below a performing couple tapestry near Sister Lidwin"
+  } ],
+  "bonesaw-plus-1" : [ {
+    "details" : "House of Healing X: -201 Y: 50: Carried by Sister Hunna",
+    "act" : "Act 2"
+  } ],
+  "boooals-arms" : [ {
+    "details" : "Equipped by the Kuo-toa in the Underdark within The Festering Cove",
+    "act" : "Act 1"
+  } ],
+  "breaching-pikestaff" : [ {
+    "details" : "Ancient Lair X: -1393 Y: 56: On a coffin in the center of the tomb",
+    "act" : "Act 3"
+  } ],
+  "broken-club" : [ {
+    "details" : "The Risen Road X: -657 Y: -425: In the Toll House basement",
+    "act" : "Act 1"
+  } ],
+  "broken-pike" : [ {
+    "details" : "Impaled into the ground within the Shadowfell",
+    "act" : "Act 2"
+  } ],
+  "cacophony" : [ {
+    "details" : "Rosymorn Monastery Trail X: -43 Y: -129: Sold by Lady Esther, north-east of the Trielta Crags waypoint",
+    "act" : "Act 1"
+  } ],
+  "caitiff-staff" : [ {
+    "details" : "Devil's Fee X: -38 Y: 17: Sold by Helsik once her special stock is unlocked",
+    "act" : "Act 3"
+  } ],
+  "cemetery-blue-torch" : [ {
+    "details" : "Felogyr's Fireworks X: 530 Y: 1056: in a chest in the basement",
+    "act" : "Act 3"
+  } ],
+  "ceremonial-battleaxe" : [ {
+    "details" : "Rosymorn Monastery X: 105 Y: 44: In the one of the dormitories protected by a Guardian of Faith",
+    "act" : "Act 1"
+  } ],
+  "ceremonial-longsword" : [ {
+    "details" : "Rosymorn Monastery X: 74 Y: 74: On the north-western pedestal in the Dawnmasters Memorial",
+    "act" : "Act 1"
+  } ],
+  "ceremonial-mace" : [ {
+    "details" : "Rosymorn Monastery X: 45 Y: 37: Carried by a random Kobold Looter in the Firewine storage room",
+    "act" : "Act 1"
+  } ],
+  "ceremonial-warhammer" : [ {
+    "details" : "Rosymorn Monastery X: 80 Y: 44: On the roof, in the Giant Eagle's nest",
+    "act" : "Act 1"
+  } ],
+  "charge-bound-warhammer" : [ {
+    "details" : "Last Light Inn X: -33 Y: 164: Sold by Dammon",
+    "act" : "Act 2"
+  } ],
+  "chessas-practice-sword" : [ {
+    "details" : "Gur Camp X: 106 Y: -29: In a wooden chest, alongside Kass' Practice Sword",
+    "act" : "Act 3"
+  } ],
+  "cleaver" : [ {
+    "act" : "Act 2",
+    "details" : "Loot from Lann Tarv at Moonrise Towers.",
+    "source" : "https://bg3.wiki/wiki/Lann_Tarv#Loot"
+  } ],
+  "clown-hammer" : [ {
+    "details" : "Circus of the Last Days X: -43 Y: -35: Carried by Dribbles on the stage in the north-eastern corner",
+    "act" : "Act 3"
+  } ],
+  "club" : [ {
+    "details" : "May appear in Dammon’s rotating stock in the Emerald Grove (Act 1) or at Last Light Inn (Act 2).",
+    "source" : "https://bg3.wiki/wiki/Melee_Weapon_Trader_Table"
+  } ],
+  "club-plus-1" : [ {
+    "details" : "Reithwin Tollhouse X: -95 Y: -92: On a skeleton at top of the building",
+    "act" : "Act 2"
+  } ],
+  "club-of-hill-giant-strength" : [ {
+    "details" : "Arcane Tower X: -26 Y: -272: Obtained by breaking the Stool of Hill Giant Strength",
+    "act" : "Act 1"
+  } ],
+  "cold-snap" : [ {
+    "details" : "Rivington X: 43 Y: -101: Sold by Ferg Drogher near the Requisitioned Barn",
+    "act" : "Act 3"
+  } ],
+  "comeback-handaxe" : [ {
+    "details" : "Circus of the Last Days X: -68 Y: -73: Given as a consolation prize by Akabi after failing to win the jackpot at the Wheel of Fortune",
+    "act" : "Act 3"
+  } ],
+  "corellons-grace" : [ {
+    "details" : "The Hollow X: 192 Y: 546: Sold by Auntie Ethel in the Hollow in the Emerald Grove",
+    "act" : "Act 1"
+  } ],
+  "corpsegrinder" : [ {
+    "details" : "Western Beach X: -222 Y: 93: Carried by Cairos at the beaches west of Rivington",
+    "act" : "Act 3"
+  } ],
+  "corrosive-flail" : [ {
+    "details" : "Ebonlake Grotto X: -55 Y: -93: Sold by Derryth Bonecloak in the Underdark",
+    "act" : "Act 1"
+  } ],
+  "creations-echo" : [ {
+    "details" : "Ebonlake Grotto X: 144 Y: 29: Sold by Omeluum after completing the quest Help Omeluum Investigate the Parasite"
+  } ],
+  "crimson-mischief" : [ {
+    "details" : "Bhaal Temple X: 61 Y: 1004: Carried by Orin during the quest Get Orin's Netherstone",
+    "act" : "Act 3"
+  } ],
+  "crude-mace" : [ {
+    "details" : "Goblin Camp: Sold by Grat and also found carried by goblins throughout Act One",
+    "act" : "Act 1"
+  } ],
+  "cruel-sting" : [ {
+    "details" : "Ruined Battlefield X: 0 Y: -15: Carried by Kar'niss",
+    "act" : "Act 2"
+  } ],
+  "cultist-brand" : [ ],
+  "dads-axe" : [ {
+    "details" : "House in Deep Shadows: On a corpse near Oliver"
+  } ],
+  "dagger" : [ {
+    "details" : "Nautiloid: Starting equipment for Warlocks"
+  } ],
+  "dagger-plus-1" : [ {
+    "details" : "Sold by any trader using the magic melee table"
+  }, {
+    "details" : "On a small hill overlooking the barn at the Blighted Village, stuck into a piece of meat roasting over a campfire"
+  } ],
+  "dagger-plus-2" : [ {
+    "details" : "Highberry's Home X: 20 Y: -34: Carried by Dolor at the Wine Festival",
+    "act" : "Act 3"
+  }, {
+    "details" : "Sold by various traders in Act Three",
+    "act" : "Act 3"
+  }, {
+    "details" : "Upper City: Carried by Assassin's Folly at the end of Act Three, if a Rogue is in the party",
+    "act" : "Act 3"
+  } ],
+  "deep-delver" : [ {
+    "details" : "Grymforge X: -631 Y: 326: Carried by Elder Brithvar",
+    "act" : "Act 1"
+  } ],
+  "defender-flail" : [ {
+    "details" : "Crèche Y'llek X: 1380 Y: -798: Sold by A'jak'nir Jeera",
+    "act" : "Act 1"
+  } ],
+  "defender-greataxe" : [ {
+    "details" : "Last Light Inn X: -31 Y: 130: Sold by Quartermaster Talli near the Last Light Inn waypoint",
+    "act" : "Act 2"
+  } ],
+  "despair-of-athkatla" : [ {
+    "details" : "Ramazith's Tower X: 4960 Y: 705: Carried by Lorroakan's body after fighting him",
+    "act" : "Act 3"
+  } ],
+  "devotees-mace" : [ {
+    "details" : "Obtained from casting the Arm Thy Servant variant of Divine Intervention. Once the party is level 10+, they can hire a cleric, have them cast Arm Thy Servant, then trade this weapon to another party member."
+  } ],
+  "dolor-amarus" : [ {
+    "details" : "Highberry's Home X: 20 Y: -34: Carried by Dolor",
+    "act" : "Act 3"
+  }, {
+    "details" : "Murder Tribunal X: -1263 Y: 511: Sold by Echo of Abazigal",
+    "act" : "Act 3"
+  } ],
+  "doom-hammer" : [ {
+    "details" : "Goblin Camp X: -99 Y: 424: Sold by Grat the Trader",
+    "act" : "Act 1"
+  } ],
+  "dragons-grasp" : [ {
+    "details" : "The Hollow X: 205 Y: 516: Sold by Arron next to the Silvanus statue",
+    "act" : "Act 1"
+  } ],
+  "drakethroat-glaive" : [ {
+    "details" : "Moonrise Towers X: -174 Y: -179: Sold by Roah Moonglow on the main floor",
+    "act" : "Act 2"
+  } ],
+  "dread-iron-dagger" : [ {
+    "details" : "Murder Tribunal X: -1263 Y: 511: Sold by Echo of Abazigal",
+    "act" : "Act 3"
+  } ],
+  "drunk-purple-torch" : [ {
+    "details" : "Felogyr's Fireworks X: 530 Y: 1056: in a chest in the basement",
+    "act" : "Act 3"
+  } ],
+  "duellists-prerogative" : [ {
+    "details" : "Lora's House X: -65 Y: -89: Reward from Lora Bergauz for completing the quest Save Vanra",
+    "act" : "Act 3"
+  } ],
+  "duke-ravengards-longsword" : [ {
+    "details" : "Wyrm's Rock Fortress: Carried by Duke Ulder Ravengard at the audience hall",
+    "act" : "Act 3"
+  }, {
+    "details" : "Campsite (Act Three): Carried by Duke Ulder Ravengard if he is present"
+  } ],
+  "dwarven-thrower" : [ {
+    "details" : "Rivington X: 43 Y: -101: Sold by Ferg Drogher near the Requisitioned Barn",
+    "act" : "Act 3"
+  } ],
+  "everburn-blade" : [ {
+    "details" : "Nautiloid X: -53 Y: -391: Carried by Commander Zhalk at the helm of the Nautiloid during the Prologue."
+  } ],
+  "exterminators-axe" : [ {
+    "details" : "Decrepit Village X: 14 Y: -196: Carried by Gekh Coal",
+    "act" : "Act 1"
+  } ],
+  "faithbreaker" : [ {
+    "details" : "Shattered Sanctum X: 297 Y: 40: Carried by Dror Ragzlin",
+    "act" : "Act 1"
+  } ],
+  "false-spear-of-the-night" : [ {
+    "details" : "Gauntlet of Shar X: -725 Y: -847: On weapon rack, in the room immediately preceding the Shadowfell",
+    "act" : "Act 2"
+  } ],
+  "flail" : [ {
+    "details" : "May appear in Dammon’s rotating stock in the Emerald Grove (Act 1) or at Last Light Inn (Act 2).",
+    "source" : "https://bg3.wiki/wiki/Melee_Weapon_Trader_Table"
+  } ],
+  "flail-plus-1" : [ {
+    "details" : "Sold by any trader using the magic melee table"
+  } ],
+  "flail-plus-2" : [ {
+    "details" : "Carried by the Blasphemous Acolyte in the final fight Atop the Netherbrain if a cleric is in the party"
+  } ],
+  "flail-of-ages" : [ {
+    "details" : "Stormshore Armoury X: -36 Y: -83: Sold by Fytz the Firecracker, near the Lower City Central Wall waypoint",
+    "act" : "Act 3"
+  } ],
+  "flail-of-myrkul" : [ {
+    "details" : "Carried by Ketheric Thorm, if he is disarmed during his initial encounter"
+  }, {
+    "details" : "Carried by Ironfinger, Maghtew Budj, and Hairy Henry"
+  } ],
+  "flame-blade-weapon" : [ {
+    "details" : "Conjured by the Flame Blade spell"
+  } ],
+  "fleshrender" : [ {
+    "details" : "Murder Tribunal X: -1263 Y: 511: Sold by Echo of Abazigal",
+    "act" : "Act 3"
+  } ],
+  "foebreaker" : [ {
+    "details" : "Sorcerous Vault X: 326 Y: 998: in a hidden chest in the Karsus section",
+    "act" : "Act 3"
+  } ],
+  "githyanki-greatsword" : [ {
+    "details" : "Carried by multiple githyanki in the Crèche Y'llek",
+    "act" : "Act 1"
+  }, {
+    "details" : "Carried by Shadow-Cursed Githyanki Warriors at Last Light Inn",
+    "act" : "Act 2"
+  } ],
+  "githyanki-greatsword-psionic" : [ {
+    "details" : "Mountain Pass X: -144 Y: 565: Carried by Sarth Baretha, leader of the githyanki patrol",
+    "act" : "Act 1"
+  } ],
+  "githyanki-longsword" : [ {
+    "details" : "Crèche Y'llek: On weapon racks and equipped by numerous Githyanki",
+    "act" : "Act 1"
+  } ],
+  "githyanki-longsword-plus-1" : [ {
+    "details" : "Mountain Pass: Carried by Gish For'reth, member of the githyanki patrol X: -143 Y: 562",
+    "act" : "Act 1"
+  } ],
+  "githyanki-shortsword" : [ {
+    "details" : "Crèche Y'llek: On weapon racks and equipped by numerous Githyanki",
+    "act" : "Act 1"
+  } ],
+  "githyanki-shortsword-plus-1" : [ {
+    "details" : "Crèche Y'llek: Carried by numerous Githyanki",
+    "act" : "Act 1"
+  } ],
+  "glaive" : [ {
+    "details" : "The Risen Road: In the hidden room in the cellar of the Risen Road Toll House",
+    "act" : "Act 1"
+  } ],
+  "glaive-plus-1" : [ {
+    "details" : "Sold by any trader using the magic melee table"
+  } ],
+  "glaive-plus-2" : [ {
+    "details" : "Wielded by the Champion of Mahkloompah"
+  } ],
+  "gleamdance-dagger" : [ {
+    "details" : "Western Beach X: -210 Y: 99: Carried by Farlin at the beaches west of Rivington",
+    "act" : "Act 3"
+  } ],
+  "goblin-scimitar" : [ {
+    "details" : "Carried by goblins in the Goblin Camp",
+    "act" : "Act 1"
+  } ],
+  "gold-wyrmling-staff" : [ {
+    "details" : "Shattered Sanctum X: 272 Y: -31: Sold by Roah Moonglow, to the left beyond the sanctum entrance",
+    "act" : "Act 1"
+  }, {
+    "details" : "Sorcerous Sundries X: -2 Y: -66: On a pedestal beneath the stained glass window behind the lava and water elementals on the ground floor",
+    "act" : "Act 3"
+  } ],
+  "greataxe" : [ {
+    "details" : "Nautiloid: Starting weapon for the Barbarians"
+  } ],
+  "greataxe-plus-1" : [ {
+    "details" : "Sold by any trader using the magic melee table"
+  }, {
+    "details" : "The Risen Road: On a rack in the hidden room in the cellar of the Risen Road Toll House",
+    "act" : "Act 1"
+  }, {
+    "details" : "Fraygo's Flophouse: Carried by Adventurer Rosanna X: -8 Y: 76",
+    "act" : "Act 3"
+  } ],
+  "greataxe-plus-2" : [ {
+    "details" : "In the Counting House Safe nº2 in The Counting House at X: -962 Y: 764",
+    "act" : "Act 3"
+  } ],
+  "greatclub" : [ {
+    "details" : "May appear in Dammon’s rotating stock in the Emerald Grove (Act 1) or at Last Light Inn (Act 2).",
+    "source" : "https://bg3.wiki/wiki/Melee_Weapon_Trader_Table"
+  } ],
+  "greatclub-plus-1" : [ {
+    "details" : "Sold by any trader using the magic melee table"
+  }, {
+    "details" : "Goblin Camp: Sold by Grat X: -99 Y: 424",
+    "act" : "Act 1"
+  }, {
+    "details" : "Last Light Inn: Carried by Fist Marcus",
+    "act" : "Act 2"
+  } ],
+  "greatsword" : [ {
+    "details" : "Throughout the game in smithies, armories, and on battlefields"
+  } ],
+  "greatsword-plus-1" : [ {
+    "details" : "Sold by any trader using the magic melee table"
+  }, {
+    "details" : "Goblin Camp: Always sold by Grat at X: -99 Y: 424",
+    "act" : "Act 1"
+  } ],
+  "greatsword-plus-1-common" : [ {
+    "details" : "Sorcerous Vault X: 324 Y: 1005: On a weapon rack in the Karsus Vault in Ramazith's Tower",
+    "act" : "Act 3"
+  } ],
+  "halberd" : [ {
+    "details" : "Carried by members of the Flaming Fist"
+  } ],
+  "halberd-plus-1" : [ {
+    "details" : "Sold by any trader using the magic melee table"
+  } ],
+  "halberd-of-vigilance" : [ {
+    "details" : "Moonrise Towers X: -164 Y: -167: Sold by Lann Tarv on the main floor",
+    "act" : "Act 2"
+  } ],
+  "hamarhraft" : [ {
+    "details" : "Waukeen's Rest X: -85 Y: 631: in a gilded chest in one of the burning rooms on the top floor of the inn",
+    "act" : "Act 1"
+  } ],
+  "hammer-of-the-just" : [ {
+    "details" : "Stormshore Tabernacle X: 796 Y: 1159: In the Offerings to Tyr chest in the basement",
+    "act" : "Act 3"
+  } ],
+  "handaxe" : [ {
+    "details" : "Nautiloid: Starting equipment for Barbarians (x2)"
+  } ],
+  "handaxe-plus-1" : [ {
+    "details" : "Sold by any trader using the magic melee table"
+  }, {
+    "details" : "Shadow-Cursed Lands X: 57 Y: 134: Carried by Harper Lassandra",
+    "act" : "Act 2"
+  } ],
+  "handmaidens-mace" : [ {
+    "details" : "Cloister of Sombre Embrace X: -400 Y: -1651: Carried by Viconia DeVir",
+    "act" : "Act 3"
+  } ],
+  "harmonic-dueller" : [ {
+    "details" : "Danthelon's Dancing Axe X: -10 Y: 143: Sold by Entharl Danthelon in Wyrm's Crossing",
+    "act" : "Act 3"
+  } ],
+  "harmonium-halberd" : [ {
+    "details" : "Last Light Inn X: -33 Y: 164: Sold by Dammon in Act Two",
+    "act" : "Act 2"
+  } ],
+  "harper-blade" : [ {
+    "details" : "Shadow-Cursed Lands X: 58 Y: 132: Carried by Harper Yonas",
+    "act" : "Act 2"
+  } ],
+  "harper-sacredstriker" : [ {
+    "details" : "Sorcerous Sundries X: -14 Y: -72: Sold by Lorroakan's Projection or Rolan on the ground floor",
+    "act" : "Act 3"
+  } ],
+  "hellbeard-halberd" : [ {
+    "details" : "Devil's Fee X: -38 Y: 17: Sold by Helsik once her special stock is unlocked",
+    "act" : "Act 3"
+  } ],
+  "hellfire-greataxe" : [ {
+    "details" : "Sorcerous Vault X: 366 Y: 941: In a gilded chest in the \"Illusion\" section",
+    "act" : "Act 3"
+  } ],
+  "hollows-staff" : [ {
+    "details" : "Circus of the Last Days X: -82 Y: -33: Carried by Lucretious",
+    "act" : "Act 3"
+  } ],
+  "hoppy" : [ {
+    "details" : "Rosymorn Monastery Trail X: -43 Y: -129: Sold by Lady Esther, north-east of the Trielta Crags waypoint",
+    "act" : "Act 1"
+  } ],
+  "hunters-dagger" : [ {
+    "details" : "Shattered Sanctum X: 272 Y: -31: Sold by Roah Moonglow, to the left beyond the sanctum entrance",
+    "act" : "Act 1"
+  } ],
+  "incandescent-staff" : [ {
+    "details" : "Last Light Inn X: -31 Y: 130: Sold by Quartermaster Talli near the Last Light Inn waypoint",
+    "act" : "Act 2"
+  } ],
+  "infernal-mace" : [ {
+    "details" : "Steel Watch Foundry: Carried by the Black Gauntlets of Bane Borri Paver, Hahns Rives, Ifran, Indora Ralston, and Tamia Holzt",
+    "act" : "Act 3"
+  } ],
+  "infernal-mace-uncommon" : [ {
+    "details" : "Felogyr's Fireworks: Carried by Black Gauntlets of Bane Uva as well as Fists of Bane Hyrriet, and Volgu Drak",
+    "act" : "Act 3"
+  }, {
+    "details" : "Wyrm's Rock Fortress: Carried by Black Gauntlets of Bane Aischa, Greyward, Ignur, and Mohlen",
+    "act" : "Act 3"
+  } ],
+  "infernal-rapier" : [ {
+    "details" : "Mind Flayer Colony X: 676 Y: 39: Possibly rewarded by Mizora to Wyll if freed during his companion quest, The Blade of Frontiers",
+    "act" : "Act 2"
+  } ],
+  "infernal-spear" : [ {
+    "details" : "Wyrm's Rock Fortress X: -13 Y: 202: Carried by Iron Consul Mian",
+    "act" : "Act 3"
+  }, {
+    "details" : "Wyrm's Rock Fortress X: -10 Y: 212: Carried by Iron Consul Nuff",
+    "act" : "Act 3"
+  } ],
+  "intransigent-warhammer" : [ {
+    "details" : "Grymforge X: -447 Y: -525: In a Watertight Chest on a duergar skiff during the first voyage to Grymforge from the Decrepit Village",
+    "act" : "Act 1"
+  } ],
+  "ironwood-club" : [ {
+    "details" : "Ruined Battlefield X: 40 Y: 60: Carried by by the Shadow-Cursed Shambling Mound",
+    "act" : "Act 2"
+  } ],
+  "jagged-spear" : [ {
+    "details" : "Shattered Sanctum X: 334 Y: -37: On the ground near Torturer Spike, east of the Sanctum entrance",
+    "act" : "Act 1"
+  } ],
+  "javelin" : [ {
+    "details" : "Nautiloid: Starting equipment for Paladins - 2x"
+  } ],
+  "javelin-plus-1" : [ {
+    "details" : "Sold by any trader using the magic melee table"
+  }, {
+    "details" : "Wyrm's Rock Fortress: Carried by Lord Jannath's Bodyguard - 5x",
+    "act" : "Act 3"
+  } ],
+  "jorgorals-greatsword" : [ {
+    "details" : "Carried by Corsair Greymon while the party first travel on Gekh's raft across the lake to Grymforge",
+    "act" : "Act 1"
+  }, {
+    "details" : "Sold by Corsair Greymon at Grymforge at X: -120 Y: -95 after the party sail there for the first time"
+  } ],
+  "justiciars-scimitar" : [ {
+    "details" : "Gauntlet of Shar X: -713 Y: -732: Carried by Lyrthindor",
+    "act" : "Act 2"
+  } ],
+  "kass-practice-sword" : [ {
+    "details" : "Gur Camp X: 106 Y: -29: In a wooden chest, alongside Chessa's Practice Sword",
+    "act" : "Act 3"
+  } ],
+  "katana" : [ {
+    "details" : "Golbraith's Cellar X: -2343 Y: 811: Lying on a table in the basement of Golbraith's Cellar",
+    "act" : "Act 3"
+  } ],
+  "ketherics-warhammer" : [ {
+    "details" : "Mind Flayer Colony X: 861 Y: -23: Carried by Ketheric Thorm while fighting in either conflict with him (see notes)",
+    "act" : "Act 2"
+  } ],
+  "kings-knife" : [ {
+    "details" : "Grymforge X: -643 Y: 411: Carried by Stone Guard Orgarth",
+    "act" : "Act 1"
+  } ],
+  "knife-of-the-undermountain-king" : [ {
+    "details" : "Crèche Y'llek X: 1380 Y: -798: Sold by A'jak'nir Jeera",
+    "act" : "Act 1"
+  } ],
+  "kurwins-cauteriser" : [ {
+    "details" : "Graveyard (Lower City) X: 7 Y: 24: carried by Bugthimble",
+    "act" : "Act 3"
+  } ],
+  "lantern" : [ {
+    "details" : "Carried by various Absolute Cultists throughout the Shadow-Cursed Lands",
+    "act" : "Act 2"
+  } ],
+  "larethians-wrath" : [ {
+    "details" : "Crèche Y'llek X: 1380 Y: -798: Sold by A'jak'nir Jeera",
+    "act" : "Act 1"
+  } ],
+  "light-hammer" : [ {
+    "details" : "May appear in Dammon’s rotating stock in the Emerald Grove (Act 1) or at Last Light Inn (Act 2).",
+    "source" : "https://bg3.wiki/wiki/Melee_Weapon_Trader_Table"
+  } ],
+  "light-hammer-plus-1" : [ {
+    "details" : "Sold by any trader using the magic melee table"
+  } ],
+  "light-of-creation" : [ {
+    "details" : "Arcane Tower X: -38 Y: -284: Carried by Bernard at the top floor",
+    "act" : "Act 1"
+  } ],
+  "lightning-jabber" : [ {
+    "details" : "Reithwin Town X: -148 Y: 115: Carried by the Cursed Kuo-Toa Chief in the Cursed Kuo-toa ambush North East of the Grand Mausoleum entrance",
+    "act" : "Act 2"
+  } ],
+  "longsword" : [ {
+    "details" : "Nautiloid: Starting equipment for Fighters"
+  } ],
+  "longsword-plus-1" : [ {
+    "details" : "Sold by any trader using the magic melee table"
+  } ],
+  "longsword-plus-2" : [ {
+    "details" : "In the basement of the Forge of the Nine in the Lower City, laying against a wall at X: 399 Y: 767",
+    "act" : "Act 3"
+  } ],
+  "loviatars-scourge" : [ {
+    "details" : "Shattered Sanctum X: 338 Y: -21: Carried by Abdirak",
+    "act" : "Act 1"
+  } ],
+  "mace" : [ {
+    "details" : "Nautiloid: Starting equipment for Clerics"
+  } ],
+  "mace-plus-1" : [ {
+    "details" : "Sold by any trader using the magic melee table"
+  } ],
+  "mace-plus-2" : [ {
+    "details" : "In the basement of the Forge of the Nine in the Lower City, standing inside a weapon rack X: 401 Y: 776",
+    "act" : "Act 3"
+  }, {
+    "details" : "Carried by Black Gauntlet Melia and Black Gauntlet Stijin"
+  } ],
+  "magical-pike" : [ {
+    "details" : "In a rosewood casket in the Lower City Graveyard at X: 16 Y: 25, after digging up a dirt mound",
+    "act" : "Act 3"
+  } ],
+  "makeshift-spear" : [ {
+    "details" : "Goblin Camp: Sold by Grat",
+    "act" : "Act 1"
+  } ],
+  "markoheshkir" : [ {
+    "details" : "Ramazith's Tower X: 4970 Y: 705: in a Globe of Invulnerability",
+    "act" : "Act 3"
+  } ],
+  "maul" : [ {
+    "details" : "May appear in Dammon’s rotating stock in the Emerald Grove (Act 1) or at Last Light Inn (Act 2).",
+    "source" : "https://bg3.wiki/wiki/Melee_Weapon_Trader_Table"
+  } ],
+  "maul-plus-1" : [ {
+    "details" : "Sold by any trader using the magic melee table"
+  } ],
+  "melfs-first-staff" : [ {
+    "details" : "Ebonlake Grotto X: 111 Y: -89: Sold by Blurg"
+  } ],
+  "merregon-halberd" : [ {
+    "details" : "Grymforge X: -574 Y: 377: Carried by a Merregon Legionnaire in the hallway with the Hellsboars",
+    "act" : "Act 1"
+  }, {
+    "details" : "Grymforge X: -643 Y: 215: Laying around the Crumbling Island",
+    "act" : "Act 1"
+  }, {
+    "details" : "Grymforge X: -601 Y: 199: Laying around the Crumbling Island",
+    "act" : "Act 1"
+  }, {
+    "details" : "Gauntlet of Shar X: -658 Y: 753: Carried by the Merregons accompanying Yurgir",
+    "act" : "Act 2"
+  } ],
+  "monster-slayer-glaive" : [ {
+    "details" : "Shattered Sanctum X: 272 Y: -31: Sold by Roah Moonglow, to the left beyond the sanctum entrance",
+    "act" : "Act 1"
+  } ],
+  "moonlantern" : [ {
+    "details" : "Ruined Battlefield X: 0 Y: -15: Carried by Kar'niss, either after the Harper ambush or at the top of Moonrise Towers",
+    "act" : "Act 2"
+  }, {
+    "details" : "Last Light Inn X: -63 Y: 172: Given by Isobel if letting the Harpers take the Moonlantern",
+    "act" : "Act 2"
+  }, {
+    "details" : "Moonrise Towers: In Balthazar's room in Moonrise Towers",
+    "act" : "Act 2"
+  } ],
+  "moonlight-glaive" : [ {
+    "details" : "Shadowfell X: -604 Y: -1431: Rewarded by the Nightsong for freeing her during the Find the Nightsong quest",
+    "act" : "Act 2"
+  } ],
+  "morningstar" : [ {
+    "details" : "May appear in Dammon’s rotating stock in the Emerald Grove (Act 1) or at Last Light Inn (Act 2).",
+    "source" : "https://bg3.wiki/wiki/Melee_Weapon_Trader_Table"
+  } ],
+  "morningstar-plus-1" : [ {
+    "details" : "Sold by any trader using the magic melee table"
+  } ],
+  "mourning-frost" : [ {
+    "details" : "Underdark: Created by combining the components carried by the three Drow mages competing to discover the Adamantine Forge: Icy Crystal - carried by Filro the Forgotten near the Sussur Tree",
+    "act" : "Act 1"
+  }, {
+    "details" : "Underdark: Created by combining the components carried by the three Drow mages competing to discover the Adamantine Forge: Icy Helve - carried by Dhourn, west of the Selûnite Outpost",
+    "act" : "Act 1"
+  }, {
+    "details" : "Underdark: Created by combining the components carried by the three Drow mages competing to discover the Adamantine Forge: Icy Metal - looted from Xargrim the Pale Corpse within the Myconid Colony, in the secret area unlocked by completing the quest Defeat the Duergar Intruders at X: 49 Y: -72, by casting Knock, or by using a skill like Misty Step from the right angle",
+    "act" : "Act 1"
+  } ],
+  "murderous-cut" : [ {
+    "details" : "Carried by several Bhaal cultists throughout Act Three",
+    "act" : "Act 3"
+  } ],
+  "myrkulite-scourge" : [ {
+    "details" : "Moonrise Towers X: -162 Y: -203: Carried by Radija on the first floor",
+    "act" : "Act 2"
+  }, {
+    "details" : "Moonrise Towers Rooftop X: -146 Y: -213: Carried by Susdera on the rooftop",
+    "act" : "Act 2"
+  }, {
+    "details" : "Mind Flayer Colony X: 727 Y: 41: Carried by Kressa Bonedaughter in the barracks",
+    "act" : "Act 2"
+  }, {
+    "details" : "Moonrise Towers Prison X: 597 Y: -655: Carried by Sarabayle after confronting Ketheric Thorm",
+    "act" : "Act 2"
+  }, {
+    "details" : "Moonrise Towers Prison X: 596 Y: -651: Carried by Willinx Jindlebee after confronting Ketheric Thorm",
+    "act" : "Act 2"
+  } ],
+  "natures-snare" : [ {
+    "details" : "Underground Passage X: -425 Y: -200: In a trapped Heavy Chest",
+    "act" : "Act 1"
+  } ],
+  "needle-of-the-outlaw-rogue" : [ {
+    "details" : "In the Peculiar Clothing Chest in the Traveller's Chest at the Campsite"
+  } ],
+  "nyrulna" : [ {
+    "details" : "Jungle X: -1511 Y: -1522: In a locked painted chest, near the portal to exit the area",
+    "act" : "Act 3"
+  } ],
+  "orphic-hammer" : [ {
+    "details" : "House of Hope X: -6543 Y: 2921: On the central pedestal in the Archive",
+    "act" : "Act 3"
+  } ],
+  "pactbound-battleaxe" : [ {
+    "details" : "Summoned via Warlock's Pact of the Blade: Battleaxe"
+  } ],
+  "pactbound-flail" : [ {
+    "details" : "Summoned by a Hexblade with Pact of the Blade: Flail"
+  } ],
+  "pactbound-glaive" : [ {
+    "details" : "Summoned via Warlock's Pact of the Blade: Glaive"
+  } ],
+  "pactbound-greatsword" : [ {
+    "details" : "Summoned via Warlock's Pact of the Blade: Greatsword"
+  } ],
+  "pactbound-maul" : [ {
+    "details" : "Summoned by a Hexblade with Pact of the Blade: Maul"
+  } ],
+  "pactbound-rapier" : [ {
+    "details" : "Summoned via Warlock's Pact of the Blade: Rapier"
+  } ],
+  "pactbound-sickle" : [ {
+    "details" : "Summoned by a Hexblade with Pact of the Blade: Sickle"
+  } ],
+  "pactbound-trident" : [ {
+    "details" : "Summoned via Warlock's Pact of the Blade: Trident"
+  } ],
+  "pactbound-warhammer" : [ {
+    "details" : "Summoned via Warlock's Pact of the Blade: Warhammer"
+  } ],
+  "pale-oak" : [ {
+    "details" : "Inner Sanctum X: -461 Y: -22: Obtained from Rath or Kagha",
+    "act" : "Act 1"
+  } ],
+  "pelorsun-blade" : [ {
+    "details" : "Cazador's Dungeon X: -1928 Y: 852: Under a dirt mound, inside a trapped rosewood casket (the casket is only revealed after DC 15 Perception Check)",
+    "act" : "Act 3"
+  } ],
+  "phalar-aluve" : [ {
+    "details" : "Underdark X: 116 Y: -192: Embedded inside a rock",
+    "act" : "Act 1"
+  } ],
+  "pickaxe" : [ {
+    "details" : "Throughout the game, commonly in ruins and underground areas"
+  } ],
+  "pike" : [ {
+    "details" : "May appear in Dammon’s rotating stock in the Emerald Grove (Act 1) or at Last Light Inn (Act 2).",
+    "source" : "https://bg3.wiki/wiki/Melee_Weapon_Trader_Table"
+  } ],
+  "pike-plus-1" : [ {
+    "details" : "Sold by any trader using the magic melee table"
+  } ],
+  "pitchfork" : [ {
+    "details" : "Throughout the world"
+  } ],
+  "plague-green-torch" : [ {
+    "details" : "Felogyr's Fireworks X: 530 Y: 1056: in a chest in the basement",
+    "act" : "Act 3"
+  } ],
+  "polished-dagger" : [ {
+    "details" : "Secluded Cove X: 332 Y: 526: East of the Emerald Grove",
+    "act" : "Act 1"
+  } ],
+  "poo-scraper" : [ {
+    "details" : "Apothecary's Cellar X: -666 Y: -330: In the skeleton area",
+    "act" : "Act 1"
+  } ],
+  "practice-sword" : [ {
+    "details" : "Emerald Grove: 4x - in The Hollow where Wyll is helping train the tiefling children",
+    "act" : "Act 1"
+  }, {
+    "details" : "Crèche Y'llek: 1x - in the infirmary in training area",
+    "act" : "Act 1"
+  }, {
+    "details" : "House of Healing X: -175 Y: 9: 2x - in the east wing infirmary near trader",
+    "act" : "Act 2"
+  }, {
+    "details" : "Arfur's Mansion X: 37 Y: -65: 1x on the ground floor, past the double doors and hanging on the wall",
+    "act" : "Act 3"
+  } ],
+  "punch-drunk-bastard" : [ {
+    "details" : "The Waning Moon X: -259 Y: -92: in a chest in the back area to the west, next to a trapped cage door",
+    "act" : "Act 2"
+  } ],
+  "quarterstaff" : [ {
+    "details" : "Nautiloid: Starting equipment for Monks, Sorcerers, and Wizards"
+  } ],
+  "quarterstaff-plus-1" : [ {
+    "details" : "Sold by any trader using the magic melee table"
+  } ],
+  "quarterstaff-plus-2" : [ {
+    "details" : "Carried by Aelis Siryasius"
+  }, {
+    "details" : "Carried by Helsik"
+  }, {
+    "details" : "Carried by Hope"
+  }, {
+    "details" : "Carried by the Metamage Persecutor in the final fight Atop the Netherbrain if a sorcerer is in the party"
+  } ],
+  "rain-dancer" : [ {
+    "details" : "The Hollow X: 205 Y: 516: Sold by Arron next to the Silvanus statue",
+    "act" : "Act 1"
+  } ],
+  "rapier" : [ {
+    "act" : "Act 1",
+    "details" : "Loot the Abducted Nobleman on the Ravaged Beach (X: 230, Y: 271).",
+    "source" : "https://bg3.wiki/wiki/Ravaged_Beach"
+  } ],
+  "rapier-plus-1" : [ {
+    "details" : "Sold by any trader using the magic melee table"
+  } ],
+  "rapier-plus-2" : [ {
+    "details" : "Sold by various traders depending on the party's level"
+  }, {
+    "details" : "Carried by Pactsplitter in the final fight Atop the Netherbrain, if a warlock is in the party"
+  } ],
+  "rat-bat" : [ {
+    "details" : "The Waning Moon X: -224 Y: -78: Leaning against a wall, near Thisobald Thorm",
+    "act" : "Act 2"
+  } ],
+  "ravengards-scourger" : [ {
+    "details" : "The Counting House X: -711 Y: 882: In the High Security Vault nº5",
+    "act" : "Act 3"
+  } ],
+  "reinforced-greatsword" : [ {
+    "details" : "In the swamp north of Riverside Teahouse, Sunlit Wetlands at X: -4 Y: 277",
+    "act" : "Act 1"
+  } ],
+  "render-of-mind-and-body" : [ {
+    "details" : "Moonrise Towers X: -164 Y: -167: Sold by Lann Tarv on the main floor",
+    "act" : "Act 2"
+  } ],
+  "returning-pike" : [ {
+    "details" : "Goblin Camp X: -99 Y: 424: Sold by Grat the Trader",
+    "act" : "Act 1"
+  } ],
+  "rhapsody" : [ {
+    "details" : "Cazador's Dungeon X: -1925 Y: 944: Carried by Cazador Szarr",
+    "act" : "Act 3"
+  } ],
+  "ritual-axe" : [ {
+    "details" : "Shattered Sanctum X: 338 Y: -26: on the table next to Abdirak",
+    "act" : "Act 1"
+  } ],
+  "ritual-dagger" : [ {
+    "details" : "Shattered Sanctum X: 338 Y: -26: Near Abdirak or carried by him",
+    "act" : "Act 1"
+  } ],
+  "ritual-dagger-of-shar" : [ {
+    "details" : "Sharran Sanctuary X: 249 Y: -847: on an altar in a hidden room at the bottom of the sanctuary",
+    "act" : "Act 2"
+  } ],
+  "ritual-staff" : [ {
+    "details" : "Carried by by various Goblin Booyahg throughout Act One",
+    "act" : "Act 1"
+  } ],
+  "rupturing-blade" : [ {
+    "details" : "Zhentarim Basement X: 295 Y: -250: Sold by Brem after completing the quest Find the Missing Shipment",
+    "act" : "Act 1"
+  } ],
+  "rusted-blade" : [ {
+    "details" : "Whispering Depths X: -490 Y: -364: On the ground next to a skeleton in the room with the Ettercaps",
+    "act" : "Act 1"
+  } ],
+  "rusty-dagger" : [ {
+    "details" : "Rosymorn Monastery: On the level just below the Eagle's Nest",
+    "act" : "Act 1"
+  }, {
+    "details" : "Ruined Battlefield X: 73 Y: 140: In the Shadow-Cursed Lands",
+    "act" : "Act 2"
+  } ],
+  "rusty-flail" : [ ],
+  "rusty-glaive" : [ {
+    "details" : "On a large pile of discarded weapons and armour near the Rivington gate at X: 10 Y: -131",
+    "act" : "Act 3"
+  } ],
+  "rusty-greatsword" : [ {
+    "details" : "Carried by the Hollow Armour in the noxious pit in the House of Healing Morgue at X: 41 Y: -929."
+  } ],
+  "rusty-halberd" : [ {
+    "details" : "On a large pile of discarded weapons and armour near the Rivington gate at X: 10 Y: -131",
+    "act" : "Act 3"
+  } ],
+  "rusty-handaxe" : [ ],
+  "rusty-light-hammer" : [ {
+    "details" : "Shadow-Cursed Lands X: -168 Y: 100: In one of the Selunite graves outside the Grand Mausoleum",
+    "act" : "Act 2"
+  } ],
+  "rusty-longsword" : [ {
+    "details" : "Just below the Eagle's Nest in the Rosymorn Monastery",
+    "act" : "Act 1"
+  } ],
+  "rusty-mace" : [ {
+    "details" : "In a buried casket next to a tombstone outside Rosymorn Monastery",
+    "act" : "Act 1"
+  } ],
+  "rusty-maul" : [ {
+    "details" : "On a large pile of discarded weapons and armour near the Rivington gate at X: 10 Y: -131",
+    "act" : "Act 3"
+  } ],
+  "rusty-morningstar" : [ {
+    "details" : "On a large pile of discarded weapons and armour near the Rivington gate at X: 10 Y: -131",
+    "act" : "Act 3"
+  } ],
+  "rusty-pike" : [ {
+    "details" : "On a large pile of discarded weapons and armour near the Rivington gate at X: 10 Y: -131",
+    "act" : "Act 3"
+  } ],
+  "rusty-scimitar" : [ {
+    "details" : "On a large pile of discarded weapons and armour near the Rivington gate at X: 10 Y: -131",
+    "act" : "Act 3"
+  } ],
+  "rusty-shortsword" : [ {
+    "details" : "Rosymorn Monastery: Stuck in a skeleton's head next to the enchanted door",
+    "act" : "Act 1"
+  } ],
+  "rusty-sickle" : [ {
+    "details" : "In the undercity ruins"
+  } ],
+  "rusty-spear" : [ {
+    "details" : "In the Astral Prism"
+  } ],
+  "rusty-trident" : [ {
+    "details" : "On a large pile of discarded weapons and armour near the Rivington gate at X: 10 Y: -131",
+    "act" : "Act 3"
+  } ],
+  "sahuagin-spear" : [ {
+    "act" : "Act 3",
+    "details" : "Loot from a Sahuagin, including the ones at the docks east of Philgrave’s Mansion.",
+    "source" : "https://bg3.wiki/wiki/Sahuagin#Loot"
+  } ],
+  "salami" : [ ],
+  "salty-scimitar-rrr" : [ {
+    "details" : "The Blushing Mermaid X: -2339 Y: -127: Carried by the real Captain Grisly in the basement",
+    "act" : "Act 3"
+  } ],
+  "scalpel" : [ {
+    "details" : "House of Healing X: -212 Y: 31: South-west of the surgery table on a shelf",
+    "act" : "Act 2"
+  }, {
+    "details" : "Mortuary X: 1250 Y: 861: Next to a prepared corpse in the cellar"
+  } ],
+  "scimitar" : [ {
+    "details" : "Nautiloid: Carried by Lesser Imps"
+  } ],
+  "scimitar-akabi" : [ {
+    "details" : "Circus of the Last Days X: -67 Y: -74: Carried by Akabi",
+    "act" : "Act 3"
+  } ],
+  "scimitar-sharran" : [ {
+    "details" : "Carried by several Sharrans in the House of Grief",
+    "act" : "Act 3"
+  }, {
+    "details" : "Carried by some Justiciar Avengers"
+  } ],
+  "scimitar-plus-1" : [ {
+    "details" : "Sold by any trader using the magic melee table"
+  } ],
+  "scimitar-plus-2" : [ {
+    "details" : "Sold by various traders depending on the main character's level"
+  } ],
+  "selunes-spear-of-night" : [ {
+    "details" : "Given to Shadowheart by Aylin at the campsite"
+  } ],
+  "sethan" : [ {
+    "details" : "Rivington X: 43 Y: -101: Sold by Ferg Drogher near the Requisitioned Barn",
+    "act" : "Act 3"
+  } ],
+  "shadow-blade-weapon" : [ {
+    "details" : "Created via Shadow Blade spell"
+  } ],
+  "shadow-lantern" : [ {
+    "details" : "Moonrise Towers X: -150 Y: -165: Gale can craft one from a Broken Moonlantern and Dead Pixie at the table within Balthazar's hidden room.",
+    "act" : "Act 2"
+  } ],
+  "shars-spear-of-evening" : [ {
+    "details" : "Shadowfell X: -604 Y: -1431: Rewarded to Shadowheart for killing the Nightsong",
+    "act" : "Act 2"
+  } ],
+  "shattered-flail" : [ {
+    "details" : "The Risen Road X: 33 Y: 597: Carried by Flind, who leads a group of Gnolls in attacking the remaining occupants of the Zhentarim caravan",
+    "act" : "Act 1"
+  } ],
+  "shining-staver-of-skulls" : [ {
+    "details" : "Carried by Corsair Greymon while the party first travel on Gekh's raft across the lake to Grymforge",
+    "act" : "Act 1"
+  }, {
+    "details" : "Sold by Corsair Greymon in Grymforge at X: -120 Y: -95 after the party sail there for the first time"
+  } ],
+  "shortsword" : [ {
+    "details" : "Starting equipment for Rogues"
+  } ],
+  "shortsword-plus-1" : [ {
+    "details" : "Sold by any trader using the magic melee table"
+  } ],
+  "shortsword-plus-2" : [ {
+    "details" : "Sold by various traders depending on the party's level"
+  }, {
+    "details" : "In the locked strongbox in the basement of Peartree House",
+    "act" : "Act 3"
+  }, {
+    "details" : "Carried by the Assassin's Folly in the final fight Atop the Netherbrain if a rogue is in the party"
+  } ],
+  "shortsword-of-first-blood" : [ {
+    "details" : "Underdark X: 73 Y: -187: On the corpse of an executed Deep Gnome, at the entrance of the Decrepit Village, if approaching from the Myconid Colony",
+    "act" : "Act 1"
+  } ],
+  "sickle" : [ {
+    "details" : "May appear in Dammon’s rotating stock in the Emerald Grove (Act 1) or at Last Light Inn (Act 2).",
+    "source" : "https://bg3.wiki/wiki/Melee_Weapon_Trader_Table"
+  } ],
+  "sickle-redcap" : [ {
+    "details" : "Carried by Redcaps"
+  } ],
+  "sickle-of-boooal" : [ {
+    "details" : "The Festering Cove X: -417 Y: 284: Carried by Pooldripp the Zealous or given to the player character by BOOOAL",
+    "act" : "Act 1"
+  } ],
+  "silver-sword-of-the-astral-plane" : [ {
+    "details" : "Lower City Sewers X: -70 Y: 828: Rewarded for showing the Orphic Hammer to (or killing) Kith'rak Voss after agreeing to meet him in the sewers within the Undercity in Act Three",
+    "act" : "Act 3"
+  } ],
+  "skybreaker" : [ {
+    "details" : "Arcane Tower X: 28 Y: -295: in a locked heavy chest in front of the entrance",
+    "act" : "Act 1"
+  } ],
+  "slicing-shortsword" : [ {
+    "details" : "Moonrise Towers X: -164 Y: -167: Sold by Lann Tarv on the main floor",
+    "act" : "Act 2"
+  } ],
+  "sorrow" : [ {
+    "details" : "Hidden Vault X: 183 Y: -82: On a stone slab at the Wolf altar in the Hidden Vault"
+  } ],
+  "soulbreaker-greatsword" : [ {
+    "details" : "Crèche Y'llek X: 1408 Y: -763: Carried by Kith'rak Therezzyn in the Captain's Quarters",
+    "act" : "Act 1"
+  } ],
+  "spear" : [ {
+    "details" : "May appear in Dammon’s rotating stock in the Emerald Grove (Act 1) or at Last Light Inn (Act 2).",
+    "source" : "https://bg3.wiki/wiki/Melee_Weapon_Trader_Table"
+  } ],
+  "spear-plus-1" : [ {
+    "details" : "Sold by any trader using the magic melee table"
+  } ],
+  "spear-plus-2" : [ {
+    "details" : "Carried by Dream Guardians or Breaker of War in the final fight scenario"
+  } ],
+  "spear-of-night" : [ {
+    "details" : "Gauntlet of Shar X: -820 Y: -756: On a shrine in the Silent Library, beyond the riddle door",
+    "act" : "Act 2"
+  } ],
+  "speedy-reply" : [ {
+    "details" : "The Risen Road X: 25 Y: 603: on the body of a dead caravan agent, near the cave where gnolls are attacking the caravan's survivors",
+    "act" : "Act 1"
+  } ],
+  "staff" : [ {
+    "details" : "Golbraith's Cellar: Lying on a table in the cellar.",
+    "act" : "Act 3"
+  } ],
+  "staff-of-a-mumbling-wizard" : [ {
+    "details" : "Circus of the Last Days X: -68 Y: -73: Given as a consolation prize by Akabi after failing to win the jackpot at the Wheel of Fortune",
+    "act" : "Act 3"
+  } ],
+  "staff-of-arcane-blessing" : [ {
+    "details" : "Arcane Tower X: 164 Y: 432: Leaning against a table in the basement",
+    "act" : "Act 1"
+  } ],
+  "staff-of-cherished-necromancy" : [ {
+    "details" : "Philgrave's Mansion X: 14 Y: -160: Carried by Mystic Carrion",
+    "act" : "Act 3"
+  } ],
+  "staff-of-crones" : [ {
+    "details" : "Overgrown Tunnel X: -416 Y: 599: on the ground in the treasure room of the Ancient Abode (the Hag's lair) beneath Auntie Ethel's Teahouse",
+    "act" : "Act 1"
+  } ],
+  "staff-of-interruption" : [ {
+    "details" : "Old Garlow's Place at X: -55 Y: -1470: Rewarded by Mayrina after finishing the quest Help the Hag Survivors",
+    "act" : "Act 3"
+  }, {
+    "details" : "Old Garlow's Place at X: -55 Y: -1470: Given by Adrielle, if Mayrina is a captive of the Hag after accepting the quest to kill the Hag",
+    "act" : "Act 3"
+  } ],
+  "staff-of-spellpower" : [ {
+    "details" : "House of Hope X: -6486 Y: 2939: In Raphael's Vault across from the entrance to the Boudoir",
+    "act" : "Act 3"
+  } ],
+  "staff-of-the-emperor" : [ {
+    "details" : "Astral Plane X: -160 Y: -1165: Carried by the Emperor"
+  } ],
+  "staff-of-the-moonmaiden" : [ {
+    "details" : "Underdark X: 161 Y: -200: Lying next to a skeleton just outside the Selûnite Outpost",
+    "act" : "Act 1"
+  } ],
+  "staff-of-the-ram" : [ {
+    "details" : "Elerrathin's Home X: -1572 Y: 976: in an opulent chest in the basement",
+    "act" : "Act 3"
+  } ],
+  "steelforged-sword" : [ {
+    "details" : "Blighted Village X: -435 Y: -371: In Sampson's locked chest in the Blacksmith's Forge"
+  }, {
+    "details" : "High Hall X: 235 Y: 44: On a table of goods, owned by Koll",
+    "act" : "Act 3"
+  } ],
+  "stillmaker" : [ {
+    "details" : "Open Hand Temple X: 67 Y: -1018: In a hole in the area underneath the temple",
+    "act" : "Act 3"
+  } ],
+  "sussur-dagger" : [ {
+    "details" : "Blighted Village X: -477 Y: -378: Reward for completing the quest Finish the Masterwork Weapon"
+  } ],
+  "sussur-greatsword" : [ {
+    "details" : "Blighted Village X: -477 Y: -378: Reward for completing the quest Finish the Masterwork Weapon"
+  } ],
+  "sussur-sickle" : [ {
+    "details" : "Blighted Village X: -477 Y: -378: Reward for completing the quest Finish the Masterwork Weapon"
+  } ],
+  "svartlebees-woundseeker" : [ {
+    "details" : "Waukeen's Rest X: -66 Y: 609: Carried by Gauntlet Yeva",
+    "act" : "Act 1"
+  }, {
+    "details" : "Tadpoling Centre X: 677 Y: 15: If she is still alive, carried by Gauntlet Yeva after being freed from her pod",
+    "act" : "Act 2"
+  } ],
+  "sword-of-chaos" : [ {
+    "details" : "Murder Tribunal X: -1248 Y: 503: Carried by Sarevok Anchev",
+    "act" : "Act 3"
+  } ],
+  "sword-of-clutching-umbra" : [ {
+    "details" : "Last Light Inn X: -33 Y: 164: Sold by Dammon",
+    "act" : "Act 2"
+  } ],
+  "sword-of-justice" : [ {
+    "details" : "Risen Road Toll House X: 110 Y: 560: Carried by Anders, can be looted or rewarded by him for killing Karlach in Hunt the Devil"
+  } ],
+  "sword-of-life-stealing" : [ {
+    "details" : "Last Light Inn X: -33 Y: 164: Sold by Dammon",
+    "act" : "Act 2"
+  } ],
+  "sword-of-screams" : [ {
+    "details" : "Grymforge X: -854 Y: -780: Carried by Nere near the cave-in in the main forge area",
+    "act" : "Act 1"
+  } ],
+  "sword-of-the-emperor" : [ {
+    "details" : "Knights of the Shield Hideout X: -728 Y: 588: In the hidden room during the quest Visit the Emperor's Old Hideout",
+    "act" : "Act 3"
+  } ],
+  "sylvan-scimitar" : [ {
+    "details" : "Last Light Inn X: -28 Y: 129: Carried by Jaheira",
+    "act" : "Act 2"
+  } ],
+  "syringe" : [ {
+    "details" : "House of Healing: Carried by an undead nurse",
+    "act" : "Act 2"
+  } ],
+  "syringe-plus-1" : [ {
+    "details" : "House of Healing X: -201 Y: 50: Carried by Sister Anya",
+    "act" : "Act 2"
+  } ],
+  "the-baneful" : [ {
+    "details" : "Ebonlake Grotto X: 111 Y: -89: Sold by Blurg"
+  } ],
+  "the-blood-of-lathander" : [ {
+    "details" : "Crèche Y'llek X: 1068 Y: -779: On a locked altar in the Secret Chamber",
+    "act" : "Act 1"
+  } ],
+  "the-dancing-breeze" : [ {
+    "details" : "Rivington General X: 7 Y: -35: Sold by Exxvikyap in Rivington during Act Three",
+    "act" : "Act 3"
+  } ],
+  "the-sacred-star" : [ {
+    "details" : "Stormshore Tabernacle X: 107 Y: -22: Sold by Vicar Humbletoes",
+    "act" : "Act 3"
+  } ],
+  "the-skinburster" : [ {
+    "details" : "Crèche Y'llek X: 1383 Y: -659: Leaning against a display case in the Inquisitor's Chamber",
+    "act" : "Act 1"
+  } ],
+  "the-sparky-points" : [ {
+    "details" : "Waukeen's Rest X: -63 Y: 600: Rewarded by Counsellor Florrick for rescuing her from the burning inn during the quest Rescue the Grand Duke",
+    "act" : "Act 1"
+  } ],
+  "the-spellsparkler" : [ {
+    "details" : "Waukeen's Rest X: -63 Y: 600: Rewarded by Counsellor Florrick for rescuing her from the burning inn during the quest Rescue the Grand Duke.",
+    "act" : "Act 1"
+  } ],
+  "the-undead-bane" : [ {
+    "details" : "Gur Camp X: 100 Y: -17: Carried by Ulma",
+    "act" : "Act 3"
+  }, {
+    "details" : "Cazador's Dungeon X: -1925 Y: 836: Carried by Ulma if she approaches the party after dealing with Cazador Szarr",
+    "act" : "Act 3"
+  } ],
+  "the-watchers-guide" : [ {
+    "details" : "Dank Crypt X: -293 Y: -323: In the sarcophagus surrounded by statues and traps"
+  } ],
+  "thermodynamo-axe" : [ {
+    "details" : "Last Light Inn X: -33 Y: 164: Sold by Dammon in Act Two",
+    "act" : "Act 2"
+  }, {
+    "details" : "High Hall X: 235 Y: 44: On a table of goods, owned by Koll",
+    "act" : "Act 3"
+  } ],
+  "thorn-blade" : [ {
+    "details" : "Last Light Inn X: -33 Y: 164: Sold by Dammon",
+    "act" : "Act 2"
+  } ],
+  "torch" : [ {
+    "details" : "Throughout the game"
+  } ],
+  "torch-of-revocation" : [ {
+    "details" : "Philgrave's Mansion X: 14 Y: -160: Given by Mystic Carrion as a potential reward for the quest Find Mystic Carrion's Servant, or in the locked chest behind Mystic Carrion",
+    "act" : "Act 3"
+  } ],
+  "trepan" : [ {
+    "details" : "House of Healing: Carried by Sister Clara",
+    "act" : "Act 2"
+  } ],
+  "trepan-plus-1" : [ {
+    "details" : "House of Healing X: -201 Y: 50: Carried by Sister Vanessa",
+    "act" : "Act 2"
+  } ],
+  "trident" : [ {
+    "details" : "May appear in Dammon’s rotating stock in the Emerald Grove (Act 1) or at Last Light Inn (Act 2).",
+    "source" : "https://bg3.wiki/wiki/Melee_Weapon_Trader_Table"
+  } ],
+  "trident-plus-1" : [ {
+    "details" : "Sold by any trader using the magic melee table"
+  } ],
+  "trident-plus-2" : [ {
+    "details" : "Carried by The Darkening Hunt in the final fight Atop the Netherbrain, if a ranger is in the party"
+  } ],
+  "trident-of-the-waves" : [ {
+    "details" : "The Counting House X: -711 Y: 882: In the High Security Vault nº4",
+    "act" : "Act 3"
+  } ],
+  "twist-of-fortune" : [ {
+    "details" : "Reithwin Tollhouse X: -112 Y: -92: Carried by Gerringothe Thorm",
+    "act" : "Act 2"
+  } ],
+  "twisting-branch" : [ {
+    "details" : "Decrepit Sanctuary: Carried by the Wood Woads in the Sunlit Wetlands",
+    "act" : "Act 1"
+  } ],
+  "unseen-menace" : [ {
+    "details" : "Crèche Y'llek X: 1380 Y: -798: Sold by A'jak'nir Jeera",
+    "act" : "Act 1"
+  } ],
+  "very-heavy-greataxe" : [ {
+    "details" : "Blighted Village X: 10 Y: 420: Carried by Fezzerk in front of the windmill in Act One",
+    "act" : "Act 1"
+  }, {
+    "details" : "Moonrise Towers X: -152 Y: -191: Carried by Fezzerk on the main floor",
+    "act" : "Act 2"
+  } ],
+  "vicious-battleaxe" : [ {
+    "details" : "Murder Tribunal X: -1263 Y: 511: Sold by Echo of Abazigal",
+    "act" : "Act 3"
+  } ],
+  "vision-of-the-absolute" : [ {
+    "details" : "Wilderness: Created by combining: Shaft of a Broken Spear - carried by Edowin in the Forest west of the Druid Grove at X: 136 Y: 446",
+    "act" : "Act 1"
+  }, {
+    "details" : "Wilderness: Created by combining: Head of a Broken Spear - carried by the Owlbear mother in the Owlbear Nest",
+    "act" : "Act 1"
+  } ],
+  "voss-silver-sword" : [ {
+    "details" : "Campsite (Act One): Carried by Kith'rak Voss during his visit to camp in Act One",
+    "act" : "Act 1"
+  }, {
+    "details" : "Sharess' Caress X: 25 Y: 98: Carried by Voss on the first floor in Act Three",
+    "act" : "Act 3"
+  }, {
+    "details" : "Lower City Sewers X: -70 Y: 826: Carried by Voss in Act Three",
+    "act" : "Act 3"
+  }, {
+    "details" : "Upper City: Looted from Voss, if he is killed at the end of Act Three",
+    "act" : "Act 3"
+  } ],
+  "war-pick" : [ {
+    "details" : "May appear in Dammon’s rotating stock in the Emerald Grove (Act 1) or at Last Light Inn (Act 2).",
+    "source" : "https://bg3.wiki/wiki/Melee_Weapon_Trader_Table"
+  } ],
+  "war-pick-plus-1" : [ {
+    "details" : "Sold by any trader using the magic melee table"
+  }, {
+    "details" : "Goblin Camp: Always sold by Grat the Trader X: -99 Y: 424",
+    "act" : "Act 1"
+  } ],
+  "warhammer" : [ {
+    "details" : "Nautiloid: Starting equipment for Paladins"
+  } ],
+  "warhammer-plus-1" : [ {
+    "details" : "Sold by any trader using the magic melee table"
+  } ],
+  "warhammer-plus-2" : [ {
+    "details" : "Carried by Gauntlet Edwynna at South Span Checkpoint in Rivington at X: 0 Y: 30",
+    "act" : "Act 3"
+  } ],
+  "wavemothers-sickle" : [ {
+    "details" : "Water Queen's House X: -229 Y: -261: Carried by Allandra Grey",
+    "act" : "Act 3"
+  } ],
+  "whipping-cane" : [ {
+    "details" : "Grymforge: In and around the Duergar camp",
+    "act" : "Act 1"
+  }, {
+    "details" : "Grymforge X: -668 Y: 442: Carried by Skarjall",
+    "act" : "Act 1"
+  }, {
+    "details" : "Carried by some Duergar characters"
+  } ],
+  "witchbreaker" : [ {
+    "details" : "Crèche Y'llek X: 1380 Y: -798: Sold by A'jak'nir Jeera",
+    "act" : "Act 1"
+  } ],
+  "woe" : [ {
+    "details" : "Cazador's Dungeon X: -1925 Y: 944: Reward for defeating Cazador Szarr during the quest The Pale Elf",
+    "act" : "Act 3"
+  } ],
+  "worgfang" : [ {
+    "details" : "Worg Pens X: 386 Y: -17: On a pile of bones in one of the cells",
+    "act" : "Act 1"
+  } ],
+  "wulbrens-hammer" : [ {
+    "details" : "Moonrise Towers Prison X: 575 Y: -647: On a table up the ladder in the Warden's room",
+    "act" : "Act 2"
+  } ],
+  "xyanyde" : [ {
+    "details" : "Shattered Sanctum X: 335 Y: 43: Carried by Minthara in Act One or in the Evidence Chest in the Warden's Office's in Moonrise Towers Prison during Act Two if Minthara is imprisoned in Moonrise Towers."
+  } ],
+  "aberration-hunters-amulet" : [ {
+    "details" : "Crèche Y'llek X: 1285 Y: -801: Carried by Ghustil Stornugoss in the Doctor's Office, west of the Infirmary",
+    "act" : "Act 1"
+  } ],
+  "absolute-confidence-amulet" : [ {
+    "details" : "Carm's Garms X: 23 Y: 131: Reward by Naaber",
+    "act" : "Act 3"
+  } ],
+  "absolutes-talisman" : [ {
+    "details" : "Shattered Sanctum X: 298 Y: -16: Worn by Priestess Gut",
+    "act" : "Act 1"
+  } ],
+  "amulet-of-bhaal" : [ {
+    "details" : "Murder Tribunal X: -1248 Y: 503: Worn by Sarevok Anchev or rewarded by him for completing Impress the Murder Tribunal",
+    "act" : "Act 3"
+  } ],
+  "amulet-of-branding" : [ {
+    "details" : "Crèche Y'llek X: 1380 Y: -798: Carried by A'jak'nir Jeera",
+    "act" : "Act 1"
+  } ],
+  "amulet-of-elemental-torment" : [ {
+    "details" : "House of Hope X: -6477 Y: 2884: Carried by Hope while fighting Raphael in the Foyer",
+    "act" : "Act 3"
+  } ],
+  "amulet-of-greater-health" : [ {
+    "details" : "House of Hope X: -6548 Y: 2940: on the left-most pedestal in the Archive",
+    "act" : "Act 3"
+  } ],
+  "amulet-of-misty-step" : [ {
+    "details" : "Defiled Temple X: 386 Y: 8: In a Gilded chest next to the bed behind Polma in Gut's private chambers",
+    "act" : "Act 1"
+  }, {
+    "details" : "Ebonlake Grotto X: 112 Y: -88: Sold by Omeluum after completing Help Omeluum Investigate the Parasite"
+  } ],
+  "amulet-of-restoration" : [ {
+    "details" : "Ebonlake Grotto X: -55 Y: -93: Sold by Derryth Bonecloak in the Underdark",
+    "act" : "Act 1"
+  }, {
+    "details" : "The Counting House X: -85 Y: -185: In a chest titled 'Private Stash', in the eastern room down the very first flight of stairs",
+    "act" : "Act 3"
+  } ],
+  "amulet-of-selunes-chosen" : [ {
+    "details" : "Shattered Sanctum X: 296 Y: 71: In Dror Ragzlin's treasure pile",
+    "act" : "Act 1"
+  } ],
+  "amulet-of-silvanus" : [ {
+    "details" : "Emerald Grove X: 262 Y: 481: Near Ormn the bear, hidden under a flat rock which must be moved",
+    "act" : "Act 1"
+  } ],
+  "amulet-of-the-absolute" : [ {
+    "details" : "Gauntlet of Shar X: -653 Y: -754: On the dismembered remains of a Zealot of the Absolute in a room beneath Yurgir's bedroom",
+    "act" : "Act 2"
+  }, {
+    "details" : "Mind Flayer Colony X: 874 Y: -16: On Ketheric Thorm's desk",
+    "act" : "Act 2"
+  } ],
+  "amulet-of-the-devout" : [ {
+    "details" : "Stormshore Tabernacle X: 796 Y: 1159: in the main Offering Chest in the basement",
+    "act" : "Act 3"
+  } ],
+  "amulet-of-the-drunkard" : [ {
+    "details" : "Sharess' Caress X: 21 Y: 85: Sold by Hoots Hooligan",
+    "act" : "Act 3"
+  } ],
+  "amulet-of-the-harpers" : [ {
+    "details" : "Last Light Inn X: -31 Y: 130: Sold by Quartermaster Talli near the Last Light Inn waypoint",
+    "act" : "Act 2"
+  } ],
+  "amulet-of-the-unworthy" : [ {
+    "details" : "Underdark X: 160 Y: -147: Carried by a Minotaur wandering around",
+    "act" : "Act 1"
+  } ],
+  "amulet-of-windrider" : [ {
+    "details" : "Lora's House X: -65 Y: -89: Reward by Lora Bergauz for saving her daughter during the quest Save Vanra",
+    "act" : "Act 3"
+  } ],
+  "barnabus-collar" : [ {
+    "details" : "Moonrise Towers X: -106 Y: -192: Worn by 'Barnabus'",
+    "act" : "Act 2"
+  } ],
+  "beastmasters-chain" : [ {
+    "details" : "Worg Pens X: 379 Y: -43: In a chest next to the table with meat",
+    "act" : "Act 1"
+  } ],
+  "bloody-amulet" : [ {
+    "details" : "The Bloody Amulet can be obtained from Barcus Wroot, who can be met in several different locations: Tied to the windmill in Blighted Village X: 0 Y: 425"
+  }, {
+    "details" : "The Bloody Amulet can be obtained from Barcus Wroot, who can be met in several different locations: In Grymforge, if been freed from the windmill",
+    "act" : "Act 1"
+  }, {
+    "details" : "The Bloody Amulet can be obtained from Barcus Wroot, who can be met in several different locations: In Camp, if been encountered in Grymforge and asked to join as a Camp Follower"
+  }, {
+    "details" : "The Bloody Amulet can be obtained from Barcus Wroot, who can be met in several different locations: In Last Light, if he survives into Act 2",
+    "act" : "Act 2"
+  } ],
+  "brass-locket" : [ {
+    "details" : "In a chest inside the Tiefling Hideout in the Druid Grove",
+    "act" : "Act 1"
+  } ],
+  "brass-locket-common" : [ {
+    "details" : "Lady Jannath's Estate X: -262 Y: -60: in the ashes of the fireplace on the ground floor",
+    "act" : "Act 3"
+  } ],
+  "bronze-necklace" : [ {
+    "details" : "Random loot from chests and characters"
+  } ],
+  "bronze-pendant" : [ {
+    "details" : "The Glitter Gala X: -174 Y: -62: On a display table",
+    "act" : "Act 3"
+  } ],
+  "broodmothers-revenge" : [ {
+    "details" : "Inner Sanctum X: -461 Y: -22: Carried by Kagha in the Emerald Grove",
+    "act" : "Act 1"
+  }, {
+    "details" : "High Hall X: 235 Y: 44: On a table of goods, owned by Koll",
+    "act" : "Act 3"
+  } ],
+  "burnished-necklace" : [ {
+    "details" : "Aboard the Nautiloid in the Prologue X: 5 Y: -363"
+  }, {
+    "details" : "Random loot throughout the game"
+  } ],
+  "champions-chain" : [ {
+    "details" : "Ebonlake Grotto X: 58 Y: -110: Reward for delivering Nere's Head to Glut during the quest Deliver Nere's Head"
+  } ],
+  "chancers-carcanet" : [ {
+    "details" : "Lower City Sewers X: -124 Y: 827: Given by Sarin",
+    "act" : "Act 3"
+  } ],
+  "corvid-token" : [ {
+    "details" : "Rivington X: 56 Y: -120: Sold by Mattis near the Requisitioned Barn",
+    "act" : "Act 3"
+  } ],
+  "destroyed-kill-collar" : [ {
+    "details" : "Worn by several Gondian workers inside the Steel Watch Foundry",
+    "act" : "Act 3"
+  } ],
+  "dog-collar" : [ {
+    "details" : "In the grave of Myrna on the cliff, overlooking the Arcane Tower, to the south of the Underdark - Sussur Tree Waypoint at X: -41 Y: -209",
+    "act" : "Act 1"
+  } ],
+  "envoys-amulet" : [ {
+    "details" : "Ebonlake Grotto X: 79 Y: -106: Reward for delivering Nere's Head to Spaw during the quest Deliver Nere's Head"
+  } ],
+  "fey-semblance-amulet" : [ {
+    "details" : "Old Garlow's Place X: -55 Y: -147: Reward from Mayrina for completing the quest Avenge the Hag Survivors",
+    "act" : "Act 3"
+  } ],
+  "fireheart" : [ {
+    "details" : "Reithwin Town X: -127 Y: -78: Inside a Heavy Chest",
+    "act" : "Act 2"
+  } ],
+  "frost-prince" : [ {
+    "details" : "Ruined Battlefield X: 80 Y: -96: In gilded chest in the southeast, near an ambush of Shadow-Cursed Needle Blights and Shadow-Cursed Vine Blights",
+    "act" : "Act 2"
+  } ],
+  "gold-necklace" : [ {
+    "details" : "Random loot from chests and characters"
+  } ],
+  "gold-pendant" : [ {
+    "act" : "Act 3",
+    "details" : "On the upstairs table beside the staircase in Philgrave’s Mansion.",
+    "source" : "https://bg3.wiki/wiki/Philgrave%27s_Mansion"
+  } ],
+  "gordis-dog-collar" : [ {
+    "details" : "Durinbold Mausoleum X: 1207 Y: 797: Carried by Houndmaster Pol",
+    "act" : "Act 3"
+  } ],
+  "hammergrim-mist-amulet" : [ {
+    "details" : "Ruined Battlefield X: -12 Y: -7: In a locked chest tucked away in ruined house in the Shadow-Cursed Lands, east of the tollhouse",
+    "act" : "Act 2"
+  } ],
+  "khalids-gift" : [ {
+    "details" : "Elerrathin's Home X: -1572 Y: 976: in a display case in the basement",
+    "act" : "Act 3"
+  } ],
+  "kill-collar" : [ {
+    "details" : "Carried by Zanner Toobin in the Steel Watch Foundry, Lower City",
+    "act" : "Act 3"
+  } ],
+  "komiras-locket" : [ {
+    "details" : "Sacred Pool X: 262 Y: 542: Given to the party by Arabella's parents Komira and Locke, after protecting her from Kagha in Save Arabella",
+    "act" : "Act 1"
+  } ],
+  "mayrinas-locket" : [ {
+    "details" : "Riverside Teahouse X: -68 Y: 258: Worn by Mayrina"
+  } ],
+  "moondrop-pendant" : [ {
+    "details" : "Owlbear Nest X: -321 Y: -135: In a Selûnite gilded chest",
+    "act" : "Act 1"
+  } ],
+  "necklace-of-elemental-augmentation" : [ {
+    "details" : "Crèche Y'llek X: 1379 Y: -662: inside a display case in the Inquisitor's Chamber",
+    "act" : "Act 1"
+  }, {
+    "details" : "Wyrm's Crossing X: -97 Y: 107: inside a Traveller's Chest on a shipwrecked ship Northwest of South Span Checkpoint",
+    "act" : "Act 3"
+  } ],
+  "pearl-necklace" : [ {
+    "details" : "The Counting House: In high security vault nº4",
+    "act" : "Act 3"
+  } ],
+  "pearl-of-power-amulet" : [ {
+    "details" : "Ebonlake Grotto X: 144 Y: 29: Sold by Omeluum after completing the quest Help Omeluum Investigate the Parasite"
+  } ],
+  "periapt-of-wound-closure" : [ {
+    "details" : "Rosymorn Monastery Trail X: -43 Y: -129: Sold by Lady Esther, north-east of the Trielta Crags waypoint",
+    "act" : "Act 1"
+  } ],
+  "polished-necklace" : [ {
+    "details" : "The Counting House: In Vault nº6",
+    "act" : "Act 3"
+  }, {
+    "details" : "Western Beach X: -233 Y: 84: In the passageway",
+    "act" : "Act 3"
+  }, {
+    "details" : "Elfsong Tavern X: 65 Y: 2: Sold by Doora Thumbfoot",
+    "act" : "Act 3"
+  } ],
+  "psychic-spark" : [ {
+    "details" : "Ebonlake Grotto X: 111 Y: -89: Sold by Blurg"
+  } ],
+  "rockys-dog-collar" : [ {
+    "details" : "Durinbold Mausoleum X: 1207 Y: 797: Carried by Houndmaster Pol",
+    "act" : "Act 3"
+  } ],
+  "sahuagin-singing-bundle" : [ {
+    "details" : "Inside the Iron Throne",
+    "act" : "Act 3"
+  } ],
+  "selunite-amulet" : [ {
+    "details" : "Last Light Inn: in a cupboard in Isobel's room",
+    "act" : "Act 2"
+  }, {
+    "details" : "Moonrise Towers: in a bedside cabinet in Isobel's room at X: -173 Y: -199",
+    "act" : "Act 2"
+  }, {
+    "details" : "Stormshore Tabernacle: next to Selûne's statue at X: 101 Y: -27",
+    "act" : "Act 3"
+  } ],
+  "sentient-amulet-rare" : [ {
+    "details" : "Abandoned Refuge X: -624 Y: 224: In a locked Adamantine Chest on the island with the broken structure near the Lava Elemental in Grymforge",
+    "act" : "Act 1"
+  } ],
+  "sentient-amulet-very-rare" : [ {
+    "details" : "Open Hand Temple Cellar X: -7 Y: -1004: Obtained upon completing the Help the Cursed Monk quest"
+  } ],
+  "shars-temptation" : [ {
+    "details" : "House of Healing X: -193 Y: 9: In a crate with a note on top, next to the wooden ladder on the ground floor",
+    "act" : "Act 2"
+  } ],
+  "silver-amulet" : [ {
+    "details" : "The Counting House: In High Security Vault nº3",
+    "act" : "Act 3"
+  } ],
+  "silver-locket" : [ {
+    "details" : "Carried by an Abducted Nobleman at the Nautiloid Wreck X: 230 Y: 271"
+  } ],
+  "silver-necklace" : [ {
+    "details" : "Throughout the game as set-dressing and random loot"
+  } ],
+  "silver-pendant" : [ {
+    "details" : "Ravaged Beach X: 152 Y: 366: On a skeleton on the Harper Outpost southwest of the Druid Grove",
+    "act" : "Act 1"
+  } ],
+  "spell-savant-amulet" : [ {
+    "details" : "In High Security Vault nº1 in The Counting House",
+    "act" : "Act 3"
+  } ],
+  "spellcrux-amulet" : [ {
+    "details" : "Moonrise Towers Prison X: 569 Y: -650: Worn by the Warden",
+    "act" : "Act 2"
+  } ],
+  "spineshudder-amulet" : [ {
+    "details" : "Moonrise Towers X: -171 Y: -195: in the Mimic in Isobel's bedroom on the upper floor",
+    "act" : "Act 2"
+  } ],
+  "strange-tendril-amulet" : [ {
+    "details" : "House of Healing Morgue X: 85 Y: -1007: In a wooden chest inside a hidden room near the main entrance"
+  } ],
+  "surgeons-subjugation-amulet" : [ {
+    "details" : "House of Healing X: -201 Y: 49: Worn by Malus Thorm",
+    "act" : "Act 2"
+  } ],
+  "tarnished-charm" : [ {
+    "details" : "Riverside Teahouse X: -58 Y: 263: Carried by Auntie Ethel"
+  }, {
+    "details" : "Overgrown Tunnel X: -412 Y: 577: Carried by Auntie Ethel, if it hadn't been looted already",
+    "act" : "Act 1"
+  }, {
+    "details" : "The Blushing Mermaid X: -2329 Y: -95: Carried by Auntie Ethel, if it hadn't been looted already",
+    "act" : "Act 3"
+  } ],
+  "tarnished-locket" : [ {
+    "details" : "Blighted Village X: 2 Y: 365: Worn by the Dead Tiefling, who Lump the Enlightened, Chock and Fank are feasting on in the Blighted Village"
+  } ],
+  "tarnished-pendant" : [ {
+    "details" : "Nortale's Hostel X: 96 Y: -62: On top of a rustic chest upstairs",
+    "act" : "Act 3"
+  } ],
+  "the-amulet-of-lost-voices" : [ {
+    "details" : "Dank Crypt X: -290 Y: -235: In a heavy chest in the room that Withers emerges from."
+  } ],
+  "the-blast-pendant" : [ {
+    "details" : "Underdark X: 121 Y: -245: Worn by Dhourn, a petrified drow west of the Selûnite Outpost",
+    "act" : "Act 1"
+  } ],
+  "the-ever-seeing-eye" : [ {
+    "details" : "Overgrown Tunnel X: -416 Y: 599: In the treasure room in the Hag's Lair underneath the Gnarled Teahouse",
+    "act" : "Act 1"
+  } ],
+  "the-spectator-eyes" : [ {
+    "details" : "Underdark X: 112 Y: -249: Worn by the Spectator located in the Petrified Battlefield",
+    "act" : "Act 1"
+  } ],
+  "tressym-collar" : [ {
+    "details" : "Open Hand Temple X: -87 Y: -7: Worn by Tara on the roof",
+    "act" : "Act 3"
+  }, {
+    "details" : "Devil's Fee X: -27 Y: 5: Worn by Tara on the roof",
+    "act" : "Act 3"
+  }, {
+    "details" : "Highberry's Home X: 1 Y: -36: Worn by Tara on the roof",
+    "act" : "Act 3"
+  } ],
+  "uncovered-mysteries" : [ {
+    "details" : "Arcane Tower X: -48 Y: -282: In a small gilded chest on the basement floor's mezzanine, right next to the elevator exit",
+    "act" : "Act 1"
+  } ],
+  "unflinching-protector-amulet" : [ {
+    "details" : "The Lodge - Basement Docks X: -1283 Y: 252: Worn by Ptaris"
+  } ],
+  "zinas-dog-collar" : [ {
+    "details" : "Durinbold Mausoleum X: 1207 Y: 797: Carried by Houndmaster Pol",
+    "act" : "Act 3"
+  } ],
+  "abdels-trusted-shield" : [ {
+    "details" : "Golbraith's Cellar X: -148 Y: -60: Given by Golbraith on the first floor of his home",
+    "act" : "Act 3"
+  } ],
+  "absolutes-protector" : [ {
+    "details" : "Moonrise Towers X: -150 Y: -202: Carried by Z'rell",
+    "act" : "Act 2"
+  } ],
+  "absolutes-warboard" : [ {
+    "details" : "Shattered Sanctum X: 298 Y: -16: Carried by True Soul Gut",
+    "act" : "Act 1"
+  } ],
+  "adamantine-shield" : [ {
+    "details" : "Adamantine Forge X: -558 Y: 230: Forged from a Shield Mould and Mithral Ore"
+  } ],
+  "broken-shield" : [ {
+    "details" : "In areas where old battles have occurred, such as in the Gauntlet of Shar and the Shadowfell",
+    "act" : "Act 2"
+  } ],
+  "fossilised-shell" : [ {
+    "details" : "The Festering Cove: Equipped by several Kuo-Toa, in the Underdark",
+    "act" : "Act 1"
+  }, {
+    "details" : "Western Beach X: 215 Y: 120: On the shore next to the ship near where members of the Guild led by Farlin fight the Stone Lord's gang led by Cairos",
+    "act" : "Act 3"
+  } ],
+  "gloomstrand-shield" : [ {
+    "details" : "Ruined Battlefield X: -60 Y: -114: In a locked traveller's chest on a pier across the Reithwin Tollhouse, next to the half-ruined wooden bridge. The chest can be opened with the Key (Reithwin Tollhouse).",
+    "act" : "Act 2"
+  } ],
+  "glowing-shield" : [ {
+    "details" : "Goblin Camp X: -53 Y: 461: In a locked chest on a ridge behind the camp",
+    "act" : "Act 1"
+  } ],
+  "iron-banded-shield" : [ {
+    "details" : "Carried by Sharran Sentries"
+  } ],
+  "iron-banded-shield-plus-1" : [ {
+    "details" : "Moonrise Towers X: -164 Y: -163: leaning against a rack next to the bugbear merchant Lann Tarv",
+    "act" : "Act 2"
+  }, {
+    "details" : "Wyrm's Rock Fortress X: 20 Y: 202: on a table outside the Audience Hall",
+    "act" : "Act 3"
+  } ],
+  "ironvine-shield" : [ {
+    "details" : "Reithwin Tollhouse X: -127 Y: -95: In a chest",
+    "act" : "Act 2"
+  } ],
+  "justiciars-greatshield" : [ {
+    "details" : "Gauntlet of Shar X: -713 Y: -732: Carried by Lyrthindor",
+    "act" : "Act 2"
+  } ],
+  "ketherics-shield" : [ {
+    "details" : "Mind Flayer Colony X: 861 Y: -23: Carried by Ketheric Thorm when fought atop Moonrise Towers and in the Mind Flayer Colony (see notes)",
+    "act" : "Act 2"
+  } ],
+  "metal-shield" : [ {
+    "details" : "Goblin Camp: Sold by Grat the Trader",
+    "act" : "Act 1"
+  }, {
+    "details" : "On the cliff-side North of the Githyanki patrol in the Mountain Pass",
+    "act" : "Act 1"
+  } ],
+  "organic-shield" : [ {
+    "details" : "Sunlit Wetlands X: 95 Y: 210: Carried by a Wood Woad",
+    "act" : "Act 1"
+  } ],
+  "rusty-studded-shield" : [ {
+    "details" : "Lower City X: -36 Y: -83: At Fytz the Firecracker's shop in Baldur's Gate",
+    "act" : "Act 3"
+  } ],
+  "safeguard-shield" : [ {
+    "details" : "The Hollow X: 177 Y: 562: Sold by Dammon in the Emerald Grove",
+    "act" : "Act 1"
+  } ],
+  "scrapwood-shield" : [ {
+    "details" : "Carried by several characters throughout the game"
+  } ],
+  "sentinel-shield" : [ {
+    "details" : "Moonrise Towers X: -164 Y: -167: Sold by Lann Tarv on the main floor",
+    "act" : "Act 2"
+  } ],
+  "shield-item" : [ {
+    "details" : "Cloister of Sombre Embrace: In the armoury",
+    "act" : "Act 3"
+  }, {
+    "details" : "Emerald Grove: In the tiefling children's hideout",
+    "act" : "Act 1"
+  } ],
+  "shield-plus-1" : [ {
+    "details" : "Flymm Cargo: Carried by Redhammer",
+    "act" : "Act 3"
+  }, {
+    "details" : "Hhune Mausoleum: In a Sarcophagus",
+    "act" : "Act 3"
+  }, {
+    "details" : "Moonrise Towers: Sold by Quartermaster Talli after Ketheric Thorm is defeated",
+    "act" : "Act 2"
+  }, {
+    "details" : "Rivington General: On a shelf behind Exxvikyap",
+    "act" : "Act 3"
+  }, {
+    "details" : "Rivington General: On a shelf on the second floor of Rivington General",
+    "act" : "Act 3"
+  } ],
+  "shield-of-devotion" : [ {
+    "details" : "Last Light Inn X: -31 Y: 130: Sold by Quartermaster Talli near the Last Light Inn waypoint",
+    "act" : "Act 2"
+  } ],
+  "shield-of-scorching-reprisal" : [ {
+    "details" : "Last Light Inn X: -3 Y: 215: on a buried Flaming Fist's corpse directly east of the \"Open Graves\" beyond the northern bridge",
+    "act" : "Act 2"
+  } ],
+  "shield-of-shielding" : [ {
+    "details" : "Stormshore Tabernacle X: 796 Y: 1159: Can be found inside the Offerings to Helm Chest in the basement, which can in turn be reached by entering the secret hatch in the corner of the tabernacle",
+    "act" : "Act 3"
+  } ],
+  "shield-of-the-undevout" : [ {
+    "details" : "Murder Tribunal X: -1293 Y: 503: Carried by the death knight That Which Guards",
+    "act" : "Act 3"
+  } ],
+  "spiked-shield" : [ {
+    "details" : "Emerald Grove X: -274 Y: 115: Carried by Za'krug in front of the Emerald Grove",
+    "act" : "Act 1"
+  } ],
+  "studded-shield" : [ {
+    "details" : "Starting equipment for Clerics"
+  }, {
+    "details" : "Emerald Grove X: 177 Y: 562: Sold by Dammon",
+    "act" : "Act 1"
+  }, {
+    "details" : "Shattered Sanctum X: 272 Y: -31: Sold by Roah Moonglow",
+    "act" : "Act 1"
+  }, {
+    "details" : "Carried by many characters throughout the game"
+  } ],
+  "studded-shield-plus-1" : [ {
+    "details" : "Cloister of Sombre Embrace X: -369 Y: -1672: Inside the Armoury, leaning against a rack",
+    "act" : "Act 3"
+  } ],
+  "swires-sledboard" : [ {
+    "details" : "Rivington General X: 7 Y: -35: Sold by Exxvikyap in Rivington during Act Three",
+    "act" : "Act 3"
+  } ],
+  "the-real-sparky-sparkswall" : [ {
+    "details" : "Grymforge X: -695 Y: 420: In a locked and trapped chest",
+    "act" : "Act 1"
+  } ],
+  "training-shield" : [ {
+    "details" : "Emerald Grove: In the Hollow near Wyll",
+    "act" : "Act 1"
+  }, {
+    "details" : "Crèche Y'llek: In the infirmary near the training area",
+    "act" : "Act 1"
+  }, {
+    "details" : "Arfur's Mansion X: 37 Y: -65: On the ground floor, past the double doors, hanging on the wall",
+    "act" : "Act 3"
+  } ],
+  "viconias-walking-fortress" : [ {
+    "details" : "Cloister of Sombre Embrace X: -400 Y: -1651: Carried by Viconia DeVir during the quest Daughter of Darkness",
+    "act" : "Act 3"
+  } ],
+  "watchers-shield" : [ {
+    "details" : "Reithwin Town X: -250 Y: 36: On one of a pair of skeletons along the cliffs west of the House of Healing",
+    "act" : "Act 2"
+  } ],
+  "wood-woad-shield" : [ {
+    "details" : "Decrepit Sanctuary X: 85 Y: 212: Carried by Wood Woads in the Sunlit Wetlands",
+    "act" : "Act 1"
+  } ],
+  "wooden-shield" : [ {
+    "details" : "Starting equipment for Paladins"
+  } ],
+  "blightbringer" : [ {
+    "details" : "Danthelon's Dancing Axe X: -10 Y: 143: Sold by Entharl Danthelon in Wyrm's Crossing",
+    "act" : "Act 3"
+  } ],
+  "bow-of-awareness" : [ {
+    "details" : "Shattered Sanctum X: 272 Y: -31: Sold by Roah Moonglow, to the left beyond the sanctum entrance",
+    "act" : "Act 1"
+  } ],
+  "bow-of-the-banshee" : [ {
+    "details" : "Carried by Corsair Greymon while the party first travel on Gekh's raft across the lake to Grymforge",
+    "act" : "Act 1"
+  }, {
+    "details" : "Sold by Corsair Greymon at Grymforge at X: -120 Y: -95 after the party sail there for the first time"
+  } ],
+  "crossbow-of-arcane-force" : [ {
+    "details" : "Crèche Y'llek X: 1396 Y: -839: Carried by Raider G'r'ath in the camp area south of the Crèche Y'llek waypoint",
+    "act" : "Act 1"
+  } ],
+  "darkfire-shortbow" : [ {
+    "details" : "Last Light Inn X: -33 Y: 164: Sold by Dammon in Act Two",
+    "act" : "Act 2"
+  } ],
+  "fabricated-arbalest" : [ {
+    "details" : "Wyrm's Rock Fortress X: -26 Y: 211: Carried by Enver Gortash",
+    "act" : "Act 3"
+  } ],
+  "firestoker" : [ {
+    "details" : "Grymforge X: -574 Y: 382: In an opulent chest in the Dormitory room with the Hellsboars",
+    "act" : "Act 1"
+  } ],
+  "gandrels-aspiration" : [ {
+    "details" : "Sunlit Wetlands X: -26 Y: 238: Carried by Gandrel in Act One",
+    "act" : "Act 1"
+  } ],
+  "giantbreaker" : [ {
+    "details" : "Zhentarim Basement X: 295 Y: -250: Sold by Brem after completing the quest Find the Missing Shipment",
+    "act" : "Act 1"
+  } ],
+  "githyanki-crossbow" : [ {
+    "details" : "Mountain Pass: Carried by Raider Chost, Raider Zastri and Kith'rak Voss of the githyanki patrol",
+    "act" : "Act 1"
+  } ],
+  "goblin-bow" : [ {
+    "details" : "Carried by goblins in- and outside the Goblin Camp",
+    "act" : "Act 1"
+  } ],
+  "gontr-mael" : [ {
+    "details" : "Steel Watch Foundry X: -1952 Y: 206: Carried by the Steel Watcher Titan in the Control Centre",
+    "act" : "Act 3"
+  } ],
+  "hand-crossbow" : [ {
+    "details" : "Nautiloid: Starting equipment for Bards"
+  }, {
+    "details" : "Common loot throughout the game"
+  }, {
+    "details" : "Among Act 1 merchants, for example Dammon"
+  }, {
+    "details" : "Grymforge X: -632 Y: 325: In the boxes inside of the slavers tent",
+    "act" : "Act 1"
+  }, {
+    "details" : "Zhentarim Basement X: 300 Y: -184: Carried by Jarg",
+    "act" : "Act 1"
+  } ],
+  "hand-crossbow-plus-1" : [ {
+    "details" : "Ebonlake Grotto X: -55 Y: -93: Sold by Derryth Bonecloak in the Underdark",
+    "act" : "Act 1"
+  }, {
+    "details" : "The Hollow: Sold by Dammon",
+    "act" : "Act 1"
+  }, {
+    "details" : "Shattered Sanctum X: 272 Y: -31: Sold by Roah Moonglow, to the left beyond the sanctum entrance",
+    "act" : "Act 1"
+  }, {
+    "details" : "Crèche Y'llek: Sold by Jeera",
+    "act" : "Act 1"
+  } ],
+  "hand-crossbow-plus-2" : [ {
+    "details" : "Inside a wall vault in an office on the first floor of Lady Jannath's Estate",
+    "act" : "Act 3"
+  } ],
+  "harold" : [ {
+    "details" : "Zhentarim Basement X: 277 Y: -247: Reward for bringing the chest to Zarys as part of Find the Missing Shipment",
+    "act" : "Act 1"
+  } ],
+  "heavy-crossbow" : [ {
+    "act" : "Act 1",
+    "details" : "Loot from Murmath near the entrance to Grymforge (X: -626, Y: 373).",
+    "source" : "https://bg3.wiki/wiki/Murmath#Loot"
+  } ],
+  "heavy-crossbow-plus-1" : [ {
+    "details" : "Shattered Sanctum X: 272 Y: -31: Sold by Roah Moonglow, to the left beyond the sanctum entrance",
+    "act" : "Act 1"
+  }, {
+    "details" : "Ebonlake Grotto X: -55 Y: -93: Sold by Derryth Bonecloak in the Underdark",
+    "act" : "Act 1"
+  } ],
+  "hellfire-engine-crossbow" : [ {
+    "details" : "Steel Watch Foundry: Created by combining the following components at the workbench located at X: -325 Y: -134, by the stairway on the main floor in the Security Office: Watcher Crossbow Blueprint - on a desk at X: -333 Y: -157 on the main floor of the Steel Watch Foundry",
+    "act" : "Act 3"
+  }, {
+    "details" : "Steel Watch Foundry: Created by combining the following components at the workbench located at X: -325 Y: -134, by the stairway on the main floor in the Security Office: Targeting Module - on a table at X: -307 Y: -157, next to the plaque labeled \"Watcher Targeting Module\" on the main floor of the Steel Watch Foundry",
+    "act" : "Act 3"
+  }, {
+    "details" : "Steel Watch Foundry: Created by combining the following components at the workbench located at X: -325 Y: -134, by the stairway on the main floor in the Security Office: Steel Watcher Arm - on a table at X: -280 Y: -165, next to the plaque labeled \"Steel Watcher Arm Unit\" on the main floor of the Steel Watch Foundry",
+    "act" : "Act 3"
+  } ],
+  "hellfire-hand-crossbow" : [ {
+    "details" : "Gauntlet of Shar X: -653 Y: -764: Carried by Yurgir",
+    "act" : "Act 2"
+  } ],
+  "hellrider-longbow" : [ {
+    "details" : "Rivington X: 43 Y: -101: Sold by Ferg Drogher near the Requisitioned Barn",
+    "act" : "Act 3"
+  } ],
+  "hunting-shortbow" : [ {
+    "details" : "The Hollow X: 177 Y: 562: Sold by Dammon in the Emerald Grove",
+    "act" : "Act 1"
+  } ],
+  "least-expected" : [ {
+    "details" : "Gauntlet of Shar X: -730 Y: -800: In a gilded chest beyond the locked puzzle door",
+    "act" : "Act 2"
+  } ],
+  "light-crossbow" : [ {
+    "details" : "Carried by Lesser Imps on the Nautiloid"
+  } ],
+  "light-crossbow-plus-1" : [ {
+    "details" : "The Hollow X: 177 Y: 562: Sold by Dammon",
+    "act" : "Act 1"
+  }, {
+    "details" : "Ebonlake Grotto X: 55 Y: -93: Sold by Derryth Bonecloak"
+  } ],
+  "longbow" : [ {
+    "act" : "Act 1",
+    "details" : "Loot from Zarys in the Zhentarim Basement beneath Waukeen’s Rest.",
+    "source" : "https://bg3.wiki/wiki/Zarys#Loot"
+  } ],
+  "longbow-plus-1" : [ {
+    "details" : "Goblin Camp: Sold by Grat the Trader",
+    "act" : "Act 1"
+  }, {
+    "details" : "Shattered Sanctum: Sold by Roah Moonglow",
+    "act" : "Act 1"
+  }, {
+    "details" : "Zhentarim Hideout: Sold by Brem after completing Find the Missing Shipment"
+  } ],
+  "longbow-plus-2" : [ {
+    "details" : "Carried by The Darkening Hunt in the final fight Atop the Netherbrain if a ranger is in the party"
+  } ],
+  "neer-misser" : [ {
+    "details" : "Moonrise Towers X: -174 Y: -179: Sold by Roah Moonglow on the main floor",
+    "act" : "Act 2"
+  } ],
+  "rusty-heavy-crossbow" : [ {
+    "details" : "Carried by Reconstituted Marksman"
+  } ],
+  "rusty-light-crossbow" : [ ],
+  "sahuagin-longbow" : [ {
+    "details" : "Carried by Sahuagin"
+  } ],
+  "sharran-crossbow" : [ {
+    "details" : "Grymforge X: -677 Y: 398: in a locked chest behind 2 archery targets",
+    "act" : "Act 1"
+  } ],
+  "shortbow" : [ {
+    "details" : "Nautiloid: Starting equipment for Rangers"
+  } ],
+  "shortbow-plus-1" : [ {
+    "details" : "* Sold by Dammon in the Druid Grove"
+  }, {
+    "details" : "* Sold by Derryth Bonecloak in the Myconid Colony"
+  } ],
+  "spellthief" : [ {
+    "details" : "The Hollow X: 205 Y: 516: Sold by Arron next to the Silvanus statue",
+    "act" : "Act 1"
+  } ],
+  "the-dead-shot" : [ {
+    "details" : "Stormshore Armoury X: -36 Y: -83: Sold by Fytz the Firecracker, near the Lower City Central Wall waypoint",
+    "act" : "Act 3"
+  } ],
+  "the-joltshooter" : [ {
+    "details" : "Waukeen's Rest X: -63 Y: 600: Rewarded by Counsellor Florrick for rescuing her from the burning inn during the quest Rescue the Grand Duke",
+    "act" : "Act 1"
+  } ],
+  "the-long-arm-of-the-gur" : [ {
+    "details" : "The Counting House X: -718 Y: 861: In the High Security Vault nº3",
+    "act" : "Act 3"
+  } ],
+  "titanstring-bow" : [ {
+    "details" : "Zhentarim Basement X: 295 Y: -250: Sold by Brem after completing the quest Find the Missing Shipment",
+    "act" : "Act 1"
+  }, {
+    "details" : "Moonrise Towers X: -164 Y: -167: Sold by Lann Tarv on the main floor, only if Brem's special stock was not unlocked before by completing Find the Missing Shipment",
+    "act" : "Act 2"
+  } ],
+  "vicious-shortbow" : [ {
+    "details" : "Murder Tribunal X: -1263 Y: 511: Sold by Echo of Abazigal",
+    "act" : "Act 3"
+  } ],
+  "magic-ring" : [ {
+    "details" : "Emerald Grove X: 246 Y: 553: Received from Mattis at his stall",
+    "act" : "Act 1"
+  } ],
+  "after-death-do-us-part" : [ {
+    "details" : "Lady Jannath's Estate X: -250 Y: -44: Carried by Oskar Fevras",
+    "act" : "Act 3"
+  } ],
+  "amethyst-ring" : [ {
+    "details" : "In chests and carried by characters throughout the game"
+  } ],
+  "band-of-the-mystic-scoundrel" : [ {
+    "details" : "Jungle X: -1566 Y: -1522: In a backpack",
+    "act" : "Act 3"
+  } ],
+  "bloody-signet-ring" : [ {
+    "details" : "Elfsong Tavern: On the floor in Stelmane's private room",
+    "act" : "Act 3"
+  } ],
+  "bracing-band" : [ {
+    "details" : "Grymforge X: -628 Y: 320: Rewarded by Sergeant Thrinn after returning her boots in the quest Find the Missing Boots",
+    "act" : "Act 1"
+  } ],
+  "bronze-ring" : [ {
+    "details" : "In chests and carried by characters throughout the game"
+  } ],
+  "burnished-ring" : [ {
+    "details" : "House of Hope X: -6481 Y: 2921: Carried by Spectator in Hope's prison",
+    "act" : "Act 3"
+  } ],
+  "callous-glow-ring" : [ {
+    "details" : "Gauntlet of Shar X: -821 Y: -752: in an opulent chest in the vault room near Balthazar",
+    "act" : "Act 2"
+  } ],
+  "carnelian-ring" : [ {
+    "details" : "In chests and carried by characters throughout the game"
+  } ],
+  "caustic-band" : [ {
+    "details" : "Ebonlake Grotto X: -55 Y: -93: Sold by Derryth Bonecloak in the Underdark",
+    "act" : "Act 1"
+  } ],
+  "copper-band" : [ {
+    "details" : "In chests and carried by characters throughout the game"
+  } ],
+  "copper-ring" : [ {
+    "details" : "In chests and carried by characters throughout the game"
+  } ],
+  "coruscation-ring" : [ {
+    "details" : "Last Light Inn - Cellar X: 44 Y: -734: in a trapped heavy chest in the cellar of the Last Light Inn",
+    "act" : "Act 2"
+  } ],
+  "crushers-ring" : [ {
+    "details" : "Goblin Camp X: -70 Y: 439: Worn by Crusher",
+    "act" : "Act 1"
+  } ],
+  "crypt-lord-ring" : [ {
+    "details" : "Philgrave's Mansion X: 14 Y: -160: Rewarded for completion of the quest Find Mystic Carrion's Servant, if Thrumbo survives",
+    "act" : "Act 3"
+  } ],
+  "dark-ring" : [ {
+    "details" : "In chests and carried by characters throughout the game"
+  } ],
+  "djinni-ring" : [ {
+    "details" : "Circus of the Last Days X: -67 Y: -73: Worn by Akabi, the Djinni",
+    "act" : "Act 3"
+  } ],
+  "dowry-ring" : [ {
+    "details" : "Waukeen's Rest X: -99 Y: 619: In a Gilded Chest, in a haystack, inside a barn, in the building to the west",
+    "act" : "Act 1"
+  } ],
+  "emerald-ring" : [ {
+    "details" : "In chests and carried by characters throughout the game"
+  } ],
+  "eversight-ring" : [ {
+    "details" : "House of Healing Morgue X: 9 Y: -981: In a locked opulent chest in the corner of the morgue lab west of the zombie crypt"
+  } ],
+  "explorers-ring" : [ {
+    "details" : "Dread Hollow X: -12 Y: -50: On a skeleton on a ledge above the Bibberbang in the Bibberbang Grotto section of Dread Hollow",
+    "act" : "Act 1"
+  } ],
+  "family-ring" : [ {
+    "details" : "Ruined Battlefield X: 108 Y: 128: In a burrow, down the cliff from Ellie May's grave and the camp",
+    "act" : "Act 2"
+  } ],
+  "fetish-of-callarduran-smoothhands" : [ {
+    "details" : "Grymforge X: -610 Y: 408: On one of the dead deep gnomes that a pair of duergar are throwing into the lake",
+    "act" : "Act 1"
+  } ],
+  "firzus-ring-of-trading" : [ {
+    "details" : "House of Healing Morgue X: 82 Y: -1006: On a charred corpse in the hidden room immediately south of the entrance hall"
+  } ],
+  "garnet-ring" : [ {
+    "details" : "In chests and carried by characters throughout the game"
+  } ],
+  "gold-band" : [ {
+    "details" : "In chests and carried by characters throughout the game"
+  } ],
+  "gold-ring" : [ {
+    "details" : "In chests and carried by characters throughout the game"
+  } ],
+  "guiding-light" : [ {
+    "details" : "Arcane Tower X: -26 Y: -283: Carried by Bernard at the top floor",
+    "act" : "Act 1"
+  } ],
+  "guild-ring" : [ {
+    "details" : "Carried by Tusgront in the Lower City at X: 58 Y: -102",
+    "act" : "Act 3"
+  }, {
+    "details" : "In a locked wooden chest ( DC 15 Sleight of Hand Check) in the Lower City at X: 58 Y: -102",
+    "act" : "Act 3"
+  }, {
+    "details" : "In the basement of the same house, in a trapped chest ( DC 15 Sleight of Hand Check) hidden behind a pressure-plate activated false wall at X: -2325 Y: 1056"
+  } ],
+  "keepsake-ring" : [ {
+    "details" : "Elfsong Tavern X: -859 Y: 531: In the Basement, in the middle of the room with the rats.",
+    "act" : "Act 3"
+  } ],
+  "killers-sweetheart" : [ {
+    "details" : "Gauntlet of Shar X: -833 Y: -729: On the ground where the shadow copy appearing next to the Brazier is defeated in the Self-Same Trial",
+    "act" : "Act 2"
+  } ],
+  "mages-friend" : [ {
+    "details" : "Arcane Tower X: -34 Y: -274: in a chest at the foot of the bed on the third floor",
+    "act" : "Act 1"
+  } ],
+  "onyx-ring" : [ {
+    "details" : "In chests and carried by characters throughout the game"
+  } ],
+  "orphic-ring" : [ {
+    "details" : "Astral Plane X: 53 Y: 3238: Worn by Orpheus"
+  } ],
+  "peridot-ring" : [ {
+    "details" : "In chests and carried by characters throughout the game"
+  } ],
+  "poisoners-ring" : [ {
+    "details" : "Moonrise Towers X: -174 Y: -179: Sold by Roah Moonglow on the main floor",
+    "act" : "Act 2"
+  } ],
+  "polished-ring" : [ {
+    "details" : "In chests and carried by characters throughout the game"
+  } ],
+  "ring-of-absolute-force" : [ {
+    "details" : "Grymforge X: -628 Y: 320: Carried by Sergeant Thrinn",
+    "act" : "Act 1"
+  } ],
+  "ring-of-arcane-synergy" : [ {
+    "details" : "Crèche Y'llek X: 1359 Y: -831: Worn by Gish Far'aag",
+    "act" : "Act 1"
+  } ],
+  "ring-of-being-really-invisible" : [ {
+    "details" : "Emerald Grove X: 246 Y: 553: Sold by Mattis",
+    "act" : "Act 1"
+  } ],
+  "ring-of-blink" : [ {
+    "details" : "Open Hand Temple X: -45 Y: -5: Reward from Tara, on the roof of the temple",
+    "act" : "Act 3"
+  } ],
+  "ring-of-colour-spray" : [ {
+    "details" : "Secluded Cove X: 326 Y: 495: In the Harpy Nest to the south of the harpy encounter",
+    "act" : "Act 1"
+  } ],
+  "ring-of-elemental-infusion" : [ {
+    "details" : "Crèche Y'llek X: 1303 Y: -798: Worn by Gish Umr'a'ac in the southern section of the Infirmary",
+    "act" : "Act 1"
+  } ],
+  "ring-of-evasion" : [ {
+    "details" : "Campsite (Act One): Given by Tara during the first Long Rest following the completion of the Escape the Nautiloid quest (only if Gale is chosen as Origin)"
+  } ],
+  "ring-of-exalted-marrow" : [ {
+    "details" : "Moonrise Towers Rooftop X: -153 Y: -170: In a heavy chest at the altar",
+    "act" : "Act 2"
+  } ],
+  "ring-of-feywild-sparks" : [ {
+    "details" : "The Blushing Mermaid X: -2329 Y: -95: Carried by Auntie Ethel",
+    "act" : "Act 3"
+  } ],
+  "ring-of-flinging" : [ {
+    "details" : "The Hollow X: 205 Y: 516: Sold by Arron next to the Silvanus statue",
+    "act" : "Act 1"
+  } ],
+  "ring-of-free-action" : [ {
+    "details" : "Moonrise Towers X: -128 Y: -193: Sold by Araj Oblodra on the main floor",
+    "act" : "Act 2"
+  }, {
+    "details" : "Lower City X: -92 Y: -78: Sold by Araj Oblodra in Crimson Draughts if not acquired from her in Act Two",
+    "act" : "Act 3"
+  } ],
+  "ring-of-geniality" : [ {
+    "details" : "Last Light Inn X: -56 Y: 133: Sold by Barcus Wroot at his workshop",
+    "act" : "Act 2"
+  } ],
+  "ring-of-infinite-wishes" : [ {
+    "details" : "Emerald Grove X: 246 Y: 553: Sold by Mattis",
+    "act" : "Act 1"
+  } ],
+  "ring-of-jumping" : [ {
+    "details" : "Ebonlake Grotto X: -55 Y: -93: Sold by Derryth Bonecloak in the Underdark",
+    "act" : "Act 1"
+  } ],
+  "ring-of-mental-inhibition" : [ {
+    "details" : "House in Deep Shadows X: 76 Y: 40: in a locked chest, just east of the Waypoint of the Shadowed Battlefield",
+    "act" : "Act 2"
+  } ],
+  "ring-of-mind-shielding" : [ {
+    "details" : "Ebonlake Grotto X: 144 Y: 29: Offered by Omeluum upon completion of the quest Help Omeluum Investigate the Parasite"
+  } ],
+  "ring-of-murderous-opportunity" : [ {
+    "details" : "Bhaal Temple X: 859 Y: -22: Carried by Orin",
+    "act" : "Act 3"
+  } ],
+  "ring-of-poison-resistance" : [ {
+    "details" : "Shattered Sanctum X: 338 Y: 14: On a skeleton inside an opened sarcophagus just before the Worg Pens area",
+    "act" : "Act 1"
+  } ],
+  "ring-of-protection" : [ {
+    "details" : "Tiefling Hideout X: 84 Y: 73: Rewarded by Mol for completing the quest Steal the Sacred Idol in the Emerald Grove",
+    "act" : "Act 1"
+  } ],
+  "ring-of-regeneration" : [ {
+    "details" : "Act Three: If Rolan is dead: Sold by Lorroakan's Projection in Sorcerous Sundries",
+    "act" : "Act 3"
+  }, {
+    "details" : "Act Three: If Rolan and Lorroakan are both alive: Sold by Rolan in Sorcerous Sundries",
+    "act" : "Act 3"
+  }, {
+    "details" : "Act Three: If Rolan is alive but Lorroakan is dead: Carried by Rolan in Ramazith's Tower shortly after Lorroakan is killed (may disappear from Rolan's inventory later)",
+    "act" : "Act 3"
+  }, {
+    "details" : "Act Three: If both Rolan and Lorroakan are dead or missing: Ring is unavailable",
+    "act" : "Act 3"
+  } ],
+  "ring-of-resistance-to-ants" : [ {
+    "details" : "Emerald Grove X: 246 Y: 553: Sold by Mattis",
+    "act" : "Act 1"
+  } ],
+  "ring-of-salving" : [ {
+    "details" : "Ebonlake Grotto X: 144 Y: 29: Sold by Omeluum after completing the quest Help Omeluum Investigate the Parasite"
+  } ],
+  "ring-of-self-immolation" : [ {
+    "details" : "Ruined Battlefield X: 29 Y: 63: In a locked wooden chest in the tower north of the Shadow-Cursed Shambling Mound ambush",
+    "act" : "Act 2"
+  } ],
+  "ring-of-shadows" : [ {
+    "details" : "House in Deep Shadows X: 76 Y: 37: Rewarded by Oliver, for playing both rounds of hide and seek with him (regardless of winning or losing)"
+  } ],
+  "ring-of-spiteful-thunder" : [ {
+    "details" : "Moonrise Towers X: -174 Y: -179: Sold by Roah Moonglow on the main floor",
+    "act" : "Act 2"
+  } ],
+  "ring-of-the-lekinesus" : [ {
+    "details" : "Emerald Grove X: 246 Y: 553: Sold by Mattis",
+    "act" : "Act 1"
+  } ],
+  "ring-of-truthfulness" : [ {
+    "details" : "Abandoned Windmill X: 44 Y: -38: Worn by the newborn Mind Flayer hiding in the basement",
+    "act" : "Act 3"
+  } ],
+  "ring-of-twilight" : [ {
+    "details" : "Ruined Battlefield X: -34 Y: -12: In a traveller's chest hidden behind some pots inside a ruined tower",
+    "act" : "Act 2"
+  } ],
+  "risky-ring" : [ {
+    "details" : "Moonrise Towers X: -128 Y: -193: Sold by Araj Oblodra on the main floor",
+    "act" : "Act 2"
+  }, {
+    "details" : "Lower City X: -92 Y: -78: Sold by Araj Oblodra in Crimson Draughts if not acquired from her in Act Two"
+  } ],
+  "ruby-ring" : [ {
+    "details" : "In chests and carried by characters throughout the game"
+  } ],
+  "seemingly-gleaming-ring" : [ {
+    "details" : "Carm's Garms X: 23 Y: 131: Reward by Naaber in Wyrm's Crossing, for initiating a conversation with him multiple times until all dialogue options are exhausted",
+    "act" : "Act 3"
+  } ],
+  "shadow-blade-ring" : [ {
+    "details" : "Campsite (Act Two): Rewarded by Arabella for completing the quest Find Arabella's Parents"
+  } ],
+  "shadow-cloaked-ring" : [ {
+    "details" : "Ruined Battlefield X: -49 Y: 36: Carried by Shadow Mastiff Alpha in a cursed camp north of the ruined pottery",
+    "act" : "Act 2"
+  } ],
+  "shapeshifters-boon-ring" : [ {
+    "details" : "Emerald Grove X: 217 Y: 540: Carried by the Strange Ox in the Druid Grove",
+    "act" : "Act 1"
+  }, {
+    "details" : "Last Light Inn X: -28 Y: 170: Carried by the Strange Ox at Dammon's blacksmith",
+    "act" : "Act 2"
+  }, {
+    "details" : "Rivington X: 39 Y: -149: Reward for completing Help the Devilish Ox or looted from Strange Ox",
+    "act" : "Act 3"
+  } ],
+  "shifting-corpus-ring" : [ {
+    "details" : "Last Light Inn X: -63 Y: 163: Worn by Fist Marcus",
+    "act" : "Act 2"
+  } ],
+  "silver-band" : [ {
+    "details" : "In chests and carried by characters throughout the game"
+  } ],
+  "smugglers-ring" : [ {
+    "details" : "The Risen Road X: 58 Y: 516: On a skeleton, hidden in a bush on the lower path following the river, near the broken bridge section",
+    "act" : "Act 1"
+  } ],
+  "snowburst-ring" : [ {
+    "details" : "Last Light Inn X: -80 Y: 158: Inside a loose plank in the bedroom north of the bar",
+    "act" : "Act 2"
+  } ],
+  "spurred-band" : [ {
+    "details" : "Whispering Depths X: -495 Y: -365: on a skeleton with a backpack nearby",
+    "act" : "Act 1"
+  } ],
+  "strange-conduit-ring" : [ {
+    "details" : "Crèche Y'llek X: 1360 Y: -657: Inside an elegant chest in the Inquisitor's Chamber",
+    "act" : "Act 1"
+  } ],
+  "sunwalkers-gift" : [ {
+    "details" : "Ebonlake Grotto X: 111 Y: -89: Sold by Blurg"
+  } ],
+  "szarr-family-ring" : [ {
+    "details" : "Carried by Godey on the lowest floor of the Szarr Palace in the kennels",
+    "act" : "Act 3"
+  }, {
+    "details" : "Carried by Cazador Szarr"
+  } ],
+  "tarnished-ring" : [ {
+    "details" : "Carried by Derryth Bonecloak"
+  } ],
+  "tarnished-wedding-ring" : [ {
+    "details" : "Beehive General Goods X: -1946 Y: 625: In a wall safe in the basement, unlocked using Tefoco's Basement Chest Key",
+    "act" : "Act 3"
+  } ],
+  "the-sparkswall" : [ {
+    "details" : "Arcane Tower X: 163 Y: -432: In a gilded chest on the upper level of the Arcane Tower's basement",
+    "act" : "Act 1"
+  } ],
+  "the-whispering-promise" : [ {
+    "details" : "Goblin Camp X: -99 Y: 424: Sold by Grat the Trader",
+    "act" : "Act 1"
+  }, {
+    "details" : "Sacred Pool X: 260 Y: 510: Sold by Volo",
+    "act" : "Act 1"
+  }, {
+    "details" : "Campsite (Act One): Sold by Volo"
+  }, {
+    "details" : "Campsite (Act Two): Sold by Volo"
+  }, {
+    "details" : "Campsite (Act Three): Sold by Volo"
+  } ],
+  "till-death-do-us-part" : [ {
+    "details" : "Lady Jannath's Estate X: -250 Y: -44: Given by Lady Jannath",
+    "act" : "Act 3"
+  } ],
+  "tourmaline-ring" : [ {
+    "details" : "In chests and carried by characters throughout the game"
+  } ],
+  "true-loves-caress" : [ {
+    "details" : "Reithwin Graveyard X: -147 Y: 43: On a skeleton leaning up against a tombstone, on the road between the House of Healing and Mason's Guild",
+    "act" : "Act 2"
+  } ],
+  "true-loves-embrace" : [ {
+    "details" : "House of Healing X: -212 Y: 0: On a skeleton laying on a mattress on the ground",
+    "act" : "Act 2"
+  } ],
+  "verdelite-ring" : [ {
+    "details" : "In chests and carried by characters throughout the game"
+  } ]
+}

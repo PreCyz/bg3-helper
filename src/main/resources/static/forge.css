@@ -157,10 +157,21 @@ body > footer {
   border-color: var(--gold);
 }
 .party-menu {
-  margin-left: auto;
   align-self: center;
   position: relative;
   z-index: 6;
+}
+.mast-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  align-self: center;
+}
+.mast-actions > form { display: contents; }
+.language-menu select { width: auto; font: inherit; }
+@media (max-width: 960px) {
+  .mast-inner { flex-wrap: wrap; column-gap: 16px; }
 }
 .party-menu summary,
 .btn-quiet,
@@ -1235,7 +1246,11 @@ select {
 }
 .party-name { max-width: 12ch; overflow: hidden; text-overflow: ellipsis; }
 .roster-row { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
-.roster-row > div { overflow-wrap: anywhere; }
+.roster-row > form { min-width: 0; }
+.roster-open { border: 0; background: transparent; color: inherit; padding: 3px; text-align: left; overflow-wrap: anywhere; }
+.roster-open b { text-decoration: underline; text-underline-offset: .15em; }
+.roster-open:hover b, .roster-open:focus-visible b { color: var(--gold); }
+.roster-open:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
 .remove-link { color: #e3aba4; white-space: nowrap; }
 
 .hero-portrait {
@@ -1292,7 +1307,7 @@ select {
   font-family: var(--serif);
   font-size: 1.15rem;
 }
-.preview-scene, .stage-scene {
+.preview-scene {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -1301,7 +1316,6 @@ select {
   pointer-events: none;
 }
 .preview-scene { opacity: .45; z-index: -1; }
-.stage-scene { opacity: .60; }
 .preview-figure { width: 45%; height: 164px; object-fit: contain; }
 .preview-caption { display: grid; justify-items: start; gap: 6px; text-shadow: 0 1px 4px #111; }
 .preview-caption img { height: 38px; width: 38px; object-fit: contain; }

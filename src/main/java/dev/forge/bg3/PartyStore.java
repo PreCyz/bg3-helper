@@ -1,13 +1,10 @@
 package dev.forge.bg3;
 
-import tools.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
+import tools.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
-import java.nio.file.*;
 import java.util.*;
 import java.util.function.Consumer;
 
@@ -52,60 +49,43 @@ public class PartyStore {
 
     private final ObjectMapper json;
     private final Catalog catalog;
-    private final Path file;
-    private Campaigns campaigns;
+    private final ForgeDatabase database;
+    private Campaigns demo;
 
     @Autowired
-    PartyStore(ObjectMapper json, Catalog catalog, @Value("${forge.save-file}") String file) throws IOException {
+    PartyStore(ObjectMapper json, Catalog catalog, ForgeDatabase database) {
         this.json = json;
         this.catalog = catalog;
-        this.file = Path.of(file).toAbsolutePath().normalize();
-        campaigns = new Campaigns();
-        if (!Files.exists(this.file)) {
-            return;
-        }
-        var saved = json.readTree(this.file.toFile());
-        if (saved.has("parties")) {
-            campaigns = json.treeToValue(saved, Campaigns.class);
-        } else {
-            Party legacy = json.treeToValue(saved, Party.class);
-            legacy.hero(legacy.active);
-            campaigns.add(legacy);
-            persist(campaigns);
-        }
+        this.database = database;
     }
 
-    private PartyStore(ObjectMapper json, Catalog catalog, Party example) {
-        this.json = json;
-        this.catalog = catalog;
-        this.file = null;
-        this.campaigns = new Campaigns();
-        campaigns.add(example);
+    Party readDemoParty() {
+        return database.demoParty();
     }
 
-    Party readDemoParty() throws IOException {
-        try (var input = new ClassPathResource("data/demo-party.json").getInputStream()) {
-            return json.readValue(input, Party.class);
-        }
-    }
-
-    PartyStore newDemo() throws IOException {
-        return new PartyStore(json, catalog, readDemoParty());
+    PartyStore newDemo() {
+        var session = new PartyStore(json, catalog, database);
+        session.demo = new Campaigns();
+        session.demo.add(readDemoParty());
+        return session;
     }
 
     public synchronized Campaigns campaigns() {
-        return json.convertValue(campaigns, Campaigns.class);
+        return demo == null ? database.campaigns() : json.convertValue(demo, Campaigns.class);
     }
 
     public synchronized Party snapshot() {
-        return json.convertValue(campaigns.current(), Party.class);
+        return campaigns().current();
     }
 
-    private synchronized void change(Consumer<Campaigns> action) throws IOException {
-        Campaigns next = campaigns();
+    private synchronized void change(Consumer<Campaigns> action) {
+        if (demo == null) {
+            database.change(action);
+            return;
+        }
+        var next = campaigns();
         action.accept(next);
-        if (file != null) persist(next);
-        campaigns = next;
+        demo = next;
     }
 
     private void update(Consumer<Party> action) throws IOException {
@@ -121,17 +101,6 @@ public class PartyStore {
             throw new IllegalArgumentException("The active party changed. Reopen the form in the intended party.");
     }
 
-    private void persist(Campaigns next) throws IOException {
-        Files.createDirectories(file.getParent());
-        Path temp = Files.createTempFile(file.getParent(), "party-", ".tmp");
-        try {
-            json.writerWithDefaultPrettyPrinter().writeValue(temp.toFile(), next);
-            Files.move(temp, file, StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING);
-        } finally {
-            Files.deleteIfExists(temp);
-        }
-    }
-
     public void select(String id) throws IOException {
         update(p -> p.active = p.hero(id).id);
     }
@@ -145,8 +114,12 @@ public class PartyStore {
         change(all -> all.add(party));
     }
 
-    public void switchParty(String id) throws IOException {
-        change(all -> all.activeParty = all.find(id).id);
+    public void switchParty(String partyId, String heroId) throws IOException {
+        change(all -> {
+            Party party = all.find(partyId);
+            if (heroId != null) party.active = party.hero(heroId).id;
+            all.activeParty = party.id;
+        });
     }
 
     public void removeParty(String id) throws IOException {

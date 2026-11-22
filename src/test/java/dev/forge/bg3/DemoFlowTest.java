@@ -1,9 +1,5 @@
 package dev.forge.bg3;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.List;
-import java.util.regex.Pattern;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +11,18 @@ import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
+import java.nio.file.Path;
+import java.util.List;
+import java.util.regex.Pattern;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.containsString;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -27,9 +31,157 @@ class DemoFlowTest {
     @Autowired MockMvc mvc;
     @Autowired PartyStore saved;
 
+    @Test
+    void polishAppliesToPagesFiltersAndWizardWithoutChangingSavedRuleValues() throws Exception {
+        var session = new MockHttpSession();
+        var home = mvc.perform(get("/").session(session).param("lang", "pl"))
+                .andExpect(status().isOk()).andExpect(content().string(containsString("Wybierz drużynę")))
+                .andExpect(content().string(containsString("lang=\"pl\"")))
+                .andReturn().getResponse();
+        var language = home.getCookie("forge-language");
+        assertThat(language).isNotNull();
+        mvc.perform(post("/demo/start").session(session).cookie(language));
+        var sheet = mvc.perform(get("/demo/sheet").session(session).cookie(language))
+                .andExpect(status().isOk()).andExpect(content().string(containsString("Karta postaci")))
+                .andExpect(content().string(containsString("Elf leśny"))).andReturn().getResponse().getContentAsString();
+        assertThat(sheet.indexOf("class=\"language-menu\"")).isLessThan(sheet.indexOf("class=\"party-menu\""));
+        assertThat(sheet).contains("class=\"figure-glow\"", "class=\"hero-figure\"").doesNotContain("/avatars/scenes/");
+        mvc.perform(get("/demo/inventory").session(session).cookie(language).param("tab","catalog")
+                        .param("q","Zgrabny habit").param("category","CLOTHING"))
+                .andExpect(content().string(containsString("Zgrabny habit")))
+                .andExpect(content().string(containsString("Gdzie zdobyć")));
+        mvc.perform(get("/demo/heroes/aelar/edit").session(session).cookie(language))
+                .andExpect(content().string(containsString("Tożsamość postaci")))
+                .andExpect(content().string(containsString("value=\"Ranger\"")))
+                .andExpect(content().string(containsString("Łowca")));
+        mvc.perform(get("/demo/sheet").session(session).cookie(language).param("lang","en"))
+                .andExpect(content().string(containsString("Hero sheet")))
+                .andExpect(content().string(containsString("Wood Elf")));
+    }
+
+    @Test
+    void wizardCanAddRemoveAndSaveAllTwelveClasses() throws Exception {
+        var session = new MockHttpSession();
+        mvc.perform(post("/demo/start").session(session));
+        var store = (PartyStore) session.getAttribute(StartController.DEMO);
+        String party = store.snapshot().id;
+        var add = editRace(session, party, "Human").param("classAllocation", "1")
+                .param("newClass", "Cleric").param("action", "addClass");
+        var added = mvc.perform(add).andExpect(status().isOk())
+                .andExpect(content().string(containsString("Remove Cleric")))
+                .andExpect(content().string(containsString("Light Domain"))).andReturn().getModelAndView();
+        assertThat(((Hero) added.getModel().get("draft")).level).isEqualTo(6);
+        assertThat(store.snapshot().hero("aelar").otherClasses).isEmpty();
+
+        String[] others = Rules.classes().stream().filter(c -> !c.equals("Ranger")).toArray(String[]::new);
+        var form = post("/demo/heroes/wizard").session(session).param("partyId", party).param("id", "aelar")
+                .param("creating", "false").param("name", "Aelar").param("race", "Human")
+                .param("heroClass", "Ranger").param("subclass", "Gloom Stalker").param("level", "1")
+                .param("score", "10", "16", "14", "10", "15", "10").param("classAllocation", "1")
+                .param("extraClass", others).param("path.Cleric", "Light Domain").param("action", "save");
+        mvc.perform(form).andExpect(redirectedUrl("/demo/sheet"));
+        var h = store.snapshot().hero("aelar");
+        assertThat(h.level).isEqualTo(12);
+        assertThat(h.classLevels()).hasSize(12).allMatch(c -> c.level() == 1);
+        assertThat(h.subclass).isEqualTo("None");
+        assertThat(h.feats).isEmpty();
+        assertThat(Rules.stats(h, java.util.Map.of()).attacks()).isEqualTo(1);
+        mvc.perform(get("/demo/sheet").session(session)).andExpect(content().string(containsString("Cleric · Light Domain")));
+        mvc.perform(get("/demo/heroes/aelar/edit").session(session)).andExpect(content().string(containsString("Remove Wizard")));
+        mvc.perform(form.param("levels.Cleric", "2")).andExpect(status().isBadRequest());
+        mvc.perform(editRace(session, party, "Human").param("classAllocation", "1")
+                .param("extraClass", "Ranger").param("action", "save")).andExpect(status().isBadRequest());
+        assertThat(store.snapshot().hero("aelar").level).isEqualTo(12);
+        var removed = mvc.perform(editRace(session, party, "Human").param("classAllocation", "1")
+                .param("extraClass", "Cleric", "Monk").param("action", "remove.Cleric"))
+                .andExpect(status().isOk()).andReturn().getModelAndView();
+        assertThat(((Hero) removed.getModel().get("draft")).classSummary()).isEqualTo("Ranger 5 / Monk 1");
+    }
+
     @DynamicPropertySource
     static void emptySave(DynamicPropertyRegistry registry) {
+        DatabaseFixture.configure(registry);
         registry.add("forge.save-file", () -> directory.resolve("parties.json").toString());
+    }
+
+    @Test
+    void rosterPortraitOpensTheChosenHeroAndEditsOnlyThatHero() throws Exception {
+        var session = new MockHttpSession();
+        mvc.perform(post("/demo/start").session(session));
+        var store = (PartyStore) session.getAttribute(StartController.DEMO);
+        var partyId = store.snapshot().id;
+        var second = new Hero();
+        second.name = "Nyx";
+        store.save(partyId, second, true);
+        assertThat(store.snapshot().active).isEqualTo(second.id);
+
+        store.createParty("Moonrise");
+        var otherPartyId = store.snapshot().id;
+        String roster = mvc.perform(get("/demo/parties").session(session)).andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString();
+        assertThat(roster).containsPattern("(?s)<form[^>]*action=\"parties/" + partyId
+                + "/switch\"[^>]*>\\s*<button[^>]*name=\"heroId\"[^>]*value=\"aelar\"[^>]*>\\s*<span[^>]*class=\"hero-portrait\"");
+        mvc.perform(post("/demo/parties/" + partyId + "/switch").session(session).param("heroId", "missing"))
+                .andExpect(status().isBadRequest());
+        assertThat(store.snapshot().id).isEqualTo(otherPartyId);
+
+        mvc.perform(post("/demo/parties/" + partyId + "/switch").session(session).param("heroId", "aelar"))
+                .andExpect(redirectedUrl("/demo/sheet"));
+        mvc.perform(get("/demo/sheet").session(session)).andExpect(status().isOk())
+                .andExpect(content().string(containsString("href=\"heroes/aelar/edit\"")));
+        mvc.perform(get("/demo/heroes/aelar/edit").session(session)).andExpect(status().isOk())
+                .andExpect(content().string(containsString("value=\"Aelar\"")));
+        mvc.perform(editRace(session, partyId, "Wood Elf").param("gender", "Female").param("action", "save"))
+                .andExpect(redirectedUrl("/demo/sheet"));
+        assertThat(store.snapshot().hero("aelar").gender).isEqualTo("Female");
+        assertThat(store.snapshot().hero(second.id).gender).isEqualTo(second.gender);
+        assertThat(store.snapshot().hero(second.id).name).isEqualTo("Nyx");
+
+        mvc.perform(post("/demo/parties/" + partyId + "/switch").session(session).param("heroId", second.id))
+                .andExpect(redirectedUrl("/demo/sheet"));
+        mvc.perform(get("/demo/sheet").session(session))
+                .andExpect(content().string(containsString("href=\"heroes/" + second.id + "/edit\"")));
+    }
+
+    @Test
+    void inventorySynergiesRankOwnedCopiesAndRespectAssignments() throws Exception {
+        var session = new MockHttpSession();
+        mvc.perform(post("/demo/start").session(session));
+        var store = (PartyStore) session.getAttribute(StartController.DEMO);
+        var party = store.snapshot();
+        var request = get("/demo/equipment/HEAD").session(session).param("synergy", "shadow-of-menzoberranzan")
+                .param("heroId", "aelar").param("synergyPool", "owned");
+        var view = mvc.perform(request).andExpect(status().isOk()).andReturn();
+        String html = view.getResponse().getContentAsString();
+        assertThat(html.indexOf("Synergies with your inventory")).isBetween(html.indexOf("Ability scores &amp; saves") + 1,
+                html.indexOf("Equipment synergies") - 1);
+        @SuppressWarnings("unchecked")
+        var picks = (List<EquipmentSynergies.Pick>) view.getModelAndView().getModel().get("synergyPicks");
+        assertThat(picks).filteredOn(p -> p.item() != null).isNotEmpty()
+                .allMatch(p -> party.stock.containsKey(p.item().id));
+        assertThat(html).doesNotContain("Hellfire Hand Crossbow");
+        store.add(party.id, "hellfire-hand-crossbow", 1);
+        mvc.perform(request).andExpect(content().string(containsString("Hellfire Hand Crossbow")));
+        var other = new Hero();
+        other.name = "Scout";
+        store.save(party.id, other, true);
+        store.equip(other.id, Slot.RANGED, "hellfire-hand-crossbow");
+        store.select("aelar");
+        var assigned = mvc.perform(request).andReturn().getResponse().getContentAsString();
+        assertThat(assigned).doesNotContain("Hellfire Hand Crossbow");
+        assertThat(store.snapshot().hero("aelar").gear).isEqualTo(party.hero("aelar").gear);
+    }
+
+    @Test
+    void inventoryCardsShowWikiAcquisitionRoutesInBothTabs() throws Exception {
+        var session = new MockHttpSession();
+        mvc.perform(post("/demo/start").session(session));
+        for (var tab : List.of("owned", "catalog")) {
+            var html = mvc.perform(get("/demo/inventory").session(session).param("tab", tab).param("q", "Titanstring Bow"))
+                    .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+            assertThat(html).contains("Where to find", "Act 1", "Zhentarim Basement", "Brem", "Find the Missing Shipment",
+                    "Act 2", "Moonrise Towers", "Lann Tarv");
+        }
     }
 
     @Test
@@ -255,7 +407,7 @@ class DemoFlowTest {
         mvc.perform(post("/parties").session(browser).param("name", "Moonrise")).andExpect(redirectedUrl("/parties"));
         assertThat(saved.snapshot().heroes).isEmpty();
         assertThat(saved.snapshot().stock).isEmpty();
-        byte[] personalSave = Files.readAllBytes(save);
+        var personalParty = saved.snapshot().id;
         mvc.perform(post("/demo/parties").session(browser).param("name", "Test party")).andExpect(redirectedUrl("/demo/parties"));
         mvc.perform(get("/demo/parties").session(browser)).andExpect(content().string(containsString("Test party")));
         mvc.perform(post("/demo/exit").session(browser)).andExpect(redirectedUrl("/"));
@@ -265,6 +417,8 @@ class DemoFlowTest {
         var freshDemo = (PartyStore) browser.getAttribute(StartController.DEMO);
         assertThat(freshDemo.campaigns().parties).hasSize(1);
         assertThat(freshDemo.snapshot().hero("aelar").gear.get("RANGED")).isEqualTo("titanstring-bow");
-        assertThat(Files.readAllBytes(save)).isEqualTo(personalSave);
+        assertThat(saved.snapshot().id).isEqualTo(personalParty);
+        assertThat(saved.campaigns().parties).hasSize(1);
+        assertThat(save).doesNotExist();
     }
 }

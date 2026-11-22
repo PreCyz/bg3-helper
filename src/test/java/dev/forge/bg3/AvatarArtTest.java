@@ -1,16 +1,23 @@
 package dev.forge.bg3;
 
+import org.junit.jupiter.api.Test;
+
 import java.util.HashSet;
 import java.util.List;
-import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class AvatarArtTest {
+    @org.junit.jupiter.api.BeforeAll
+    static void loadRulesFixture() throws java.io.IOException {
+        DatabaseFixture.loadProgression();
+    }
+
     private final AvatarArt avatars = new AvatarArt();
 
     @Test
-    void everySelectableAppearanceHasLocalArtwork() {
+    void everySelectableAppearanceHasLocalArtwork() throws java.io.IOException {
+        var paths = DatabaseFixture.assetPaths();
         var hero = new Hero();
         hero.level = 12;
         var figures = new HashSet<String>();
@@ -43,13 +50,14 @@ class AvatarArtTest {
         assertThat(emblems).hasSize(specializations + Rules.classes().size());
         for (var group : List.of(figures, faces, emblems, scenes)) {
             for (String path : group) {
-                assertThat(getClass().getResource("/static" + path)).as(path).isNotNull();
+                assertThat(paths.contains(path)).as(path).isTrue();
             }
         }
     }
 
     @Test
-    void genderSelectsMatchingFiguresAndFacesAcrossEveryRaceAndClass() {
+    void genderSelectsMatchingFiguresAndFacesAcrossEveryRaceAndClass() throws java.io.IOException {
+        var paths = DatabaseFixture.assetPaths();
         var hero = new Hero();
         for (String race : Rules.ANCESTRIES) {
             hero.race = race;
@@ -63,10 +71,11 @@ class AvatarArtTest {
                     hero.gender = gender;
                     var art = avatars.forHero(hero);
                     String folder = "/" + gender.toLowerCase(java.util.Locale.ROOT) + "/";
-                    assertThat(art.figure()).isEqualTo(original.figure().replace("/figures/", "/figures" + folder));
+                    String figures = gender.equals("Female") && race.equals("Seldarine Drow") ? "/figures-v2" : "/figures";
+                    assertThat(art.figure()).isEqualTo(original.figure().replace("/figures/", figures + folder));
                     assertThat(art.face()).isEqualTo(original.face().replace("/portraits/", "/portraits" + folder));
                     for (String path : List.of(art.figure(), art.face())) {
-                        assertThat(getClass().getResource("/static" + path)).as(path).isNotNull();
+                        assertThat(paths.contains(path)).as(path).isTrue();
                     }
                 }
             }

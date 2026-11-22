@@ -1,4 +1,13 @@
 spring:
+  messages:
+    basename: i18n/messages
+    encoding: UTF-8
+    fallback-to-system-locale: false
+  config:
+    import: optional:file:./data/database.properties
+  datasource:
+    url: jdbc:postgresql://127.0.0.1:5432/bg3_forge?currentSchema=helper
+    username: bg3_forge
   application:
     name: Faerun Forge
   web:

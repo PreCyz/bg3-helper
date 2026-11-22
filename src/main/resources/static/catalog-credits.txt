@@ -6,6 +6,10 @@ record links to its wiki article and contributor history. The importer combines
 category tables, normalises fields for calculation, converts HTML descriptions
 to plain text, and deduplicates thumbnails.
 
+The “Where to find” snapshot uses the acquisition section of each linked item
+article. Act labels use BG3 Wiki's act-specific location categories. For
+supplementary routes, the card links to the wiki trader, loot or location page.
+
 The adapted wiki text is provided under CC BY-NC-SA 4.0.
 https://creativecommons.org/licenses/by-nc-sa/4.0/
 https://bg3.wiki/wiki/bg3wiki:Copyrights
@@ -14,3 +18,8 @@ Item icons and in-game names and descriptions are based on Baldur's Gate 3.
 Game assets belong to their respective rights holders, including Larian Studios
 and Wizards of the Coast. Their use here is for identification in a local fan
 planner. The applicable source and fan content policies are linked above.
+
+The Polish catalog is a fan translation of this offline snapshot. Parts of the
+descriptive text were translated with assistance from the OPUS-MT English–Polish
+model by Jörg Tiedemann and Santhosh Thottingal, distributed by Argos Translate.
+https://huggingface.co/Helsinki-NLP/opus-mt-en-pl

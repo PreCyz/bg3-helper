@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
   <head th:fragment="head(title)">
     <base th:href="${basePath}" />
     <meta charset="utf-8" />
@@ -10,21 +10,21 @@
       rel="stylesheet"
       href="/webjars/bootstrap/5.3.3/css/bootstrap.min.css"
     />
-    <link rel="stylesheet" href="/forge.css?v=2" />
+    <link rel="stylesheet" href="/forge.css?v=3" />
     <style th:if="${races != null}" th:inline="css">
       #wizardForm .subrace-field { display: none; }
       /*[# th:each="r : ${races}" th:if="${!r.subraces.isEmpty()}"]*/
       #wizardForm:has(#[[${'race-' + r.name}]]:checked) #[[${'subrace-' + r.name}]] { display: grid; }
       /*[/]*/
     </style>
-    <script src="/forge.js?v=3" defer></script>
+    <script src="/forge.js?v=6" defer></script>
   </head>
   <body>
     <svg th:fragment="icon(id)" class="ico" aria-hidden="true">
       <use th:href="'/icons.svg#'+${id}"></use>
     </svg>
     <span th:fragment="portrait(character)" class="hero-portrait"
-          th:with="art=${@avatarArt.forHero(character)}" role="img" th:aria-label="${art.description}">
+          th:with="art=${@avatarArt.forHero(character)},description=${@words.appearance(art)}" role="img" th:aria-label="${description}">
       <img class="portrait-face" th:src="${art.face}" alt="" />
       <img class="portrait-emblem" th:src="${art.emblem}" alt="" />
     </span>
@@ -35,33 +35,48 @@
             ><svg th:replace="~{shared::icon('brand')}"></svg></span
           >Faerûn <b>Forge</b></a
         >
-        <nav th:if="${party != null}" aria-label="Main navigation">
+        <nav th:if="${party != null}" th:aria-label="#{ui.main.navigation}">
           <a
             href="sheet"
             th:classappend="${section == 'sheet' or section == 'wizard'} ? 'active'"
-            ><svg th:replace="~{shared::icon('sheet')}"></svg>Hero sheet</a
+            ><svg th:replace="~{shared::icon('sheet')}"></svg>[[#{ui.hero.sheet}]]</a
           >
           <a
             href="inventory"
             th:classappend="${section == 'inventory'} ? 'active'"
-            ><svg th:replace="~{shared::icon('bag')}"></svg>Inventory</a
+            ><svg th:replace="~{shared::icon('bag')}"></svg>[[#{ui.inventory}]]</a
           >
           <a href="builds" th:classappend="${section == 'builds'} ? 'active'"
-            ><svg th:replace="~{shared::icon('book')}"></svg>Build library</a
+            ><svg th:replace="~{shared::icon('book')}"></svg>[[#{ui.build.library}]]</a
           >
         </nav>
         <form th:if="${basePath == '/demo/'}" method="post" action="/demo/exit" class="demo-controls">
-          <span>Demo mode</span>
-          <button class="btn-quiet">Exit demo</button>
+          <span>[[#{ui.demo.mode}]]</span>
+          <button class="btn-quiet">[[#{ui.exit.demo}]]</button>
         </form>
+        <div class="mast-actions">
+          <form th:unless="${section == 'wizard'}" id="languageForm" method="get" th:action="${languagePage?.path ?: '/'}">
+            <th:block th:each="entry : ${languagePage?.parameters}">
+              <input th:each="parameter : ${entry.value}" type="hidden" th:name="${entry.key}" th:value="${parameter}" />
+            </th:block>
+          </form>
+          <label class="language-menu">
+            <span class="visually-hidden" th:text="#{ui.language}"></span>
+            <select name="lang" th:form="${section == 'wizard' ? 'wizardForm' : 'languageForm'}" data-submit>
+              <option value="en" lang="en" th:selected="${#locale.language != 'pl'}">English</option>
+              <option value="pl" lang="pl" th:selected="${#locale.language == 'pl'}">Polski</option>
+            </select>
+          </label>
+          <noscript><button class="btn-quiet" th:form="${section == 'wizard' ? 'wizardForm' : 'languageForm'}"
+                            th:text="#{ui.apply.language}"></button></noscript>
         <details th:if="${party != null}" class="party-menu">
           <summary>
             <svg th:replace="~{shared::icon('user')}"></svg>
-            <span class="party-name" th:text="${party == null ? 'Parties' : party.name}"></span>
+            <span class="party-name" th:text="${party == null} ? #{ui.parties} : ${@words.partyName(party,basePath)}"></span>
             <span class="chev">⌄</span>
           </summary>
           <div class="party-pop">
-            <span class="small-label" th:if="${party != null and !party.heroes.isEmpty()}">Switch hero</span>
+            <span class="small-label" th:if="${party != null and !party.heroes.isEmpty()}">[[#{ui.switch.hero}]]</span>
             <form
               th:each="p : ${party?.heroes}"
               method="post"
@@ -70,13 +85,14 @@
               <button name="id" th:value="${p.id}">
                 <span th:replace="~{shared::portrait(${p})}"></span>
                 <span th:text="${p.name}"></span
-                ><span th:text="'Lv. '+${p.level}"></span>
+                ><span th:text="#{format.level.short(${p.level})}"></span>
               </button>
             </form>
-            <a href="heroes/new" th:if="${party != null}">+ Create hero</a>
-            <a href="parties">Manage parties</a>
+            <a href="heroes/new" th:if="${party != null}">[[#{ui.create.hero}]]</a>
+            <a href="parties">[[#{ui.manage.parties}]]</a>
           </div>
         </details>
+        </div>
       </div>
     </header>
     <div
@@ -84,7 +100,7 @@
       th:if="${notice != null}"
       class="notice"
       role="status"
-      th:text="${notice}"
+      th:text="${@words.text(notice)}"
     ></div>
     <div
       th:fragment="itemIcon(item,icon)"
@@ -110,26 +126,26 @@
     <footer th:fragment="footer">
       <span>Faerûn Forge</span
       ><span
-        >Game data from
+        >[[#{ui.game.data.from}]]
         <a href="https://bg3.wiki/" target="_blank" rel="noreferrer"
           >BG3 Wiki</a
         >
-        · <a href="credits">Credits</a></span
+        · <a href="credits">[[#{ui.credits}]]</a></span
       >
     </footer>
     <a
       th:fragment="slot(s)"
-      th:with="it=${catalog.get(hero.gear.get(s.name()))}"
+      th:with="it=${catalog.get(hero.gear.get(s.name()))},slotTitle=${@words.text(s.label) + ' · ' + @words.text(it == null ? 'Empty' : it.name)}"
       class="gear-slot"
       th:classappend="${it != null}?'filled'"
       th:href="@{equipment/{slot}(slot=${s.name()},heroId=${hero.id})}"
-      th:title="${s.label + ' · ' + (it == null ? 'Empty' : it.name)}"
+      th:title="${slotTitle}"
     >
       <div th:replace="~{shared::itemIcon(${it},${s.icon})}"></div>
-      <small th:text="${s.label}"></small
+      <small th:text="${@words.text(s.label)}"></small
     ></a>
     <div th:fragment="metric(label,value,base)" class="diff">
-      <small th:text="${label}"></small><b th:text="${@fmt.number(value)}"></b
+      <small th:text="${@words.text(label)}"></small><b th:text="${@fmt.number(value)}"></b
       ><em
         th:if="${value != base}"
         th:class="${value > base ? 'up' : 'down'}"

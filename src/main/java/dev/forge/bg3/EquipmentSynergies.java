@@ -1,8 +1,6 @@
 package dev.forge.bg3;
 
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
-import tools.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -45,21 +43,23 @@ class EquipmentSynergies {
     private final Catalog catalog;
     private final Map<String,Map<String,String>> pairs = new HashMap<>();
 
-    EquipmentSynergies(Catalog catalog, ObjectMapper mapper) throws IOException {
+    EquipmentSynergies(Catalog catalog, ForgeDatabase database) throws IOException {
         this.catalog = catalog;
-        try (var in = new ClassPathResource("data/equipment-synergies.json").getInputStream()) {
-            for (var rule : mapper.readValue(in, PairRule[].class)) {
-                for (String left : rule.enablers) for (String right : rule.partners) {
-                    if (!catalog.items.containsKey(left) || !catalog.items.containsKey(right))
-                        throw new IOException("Unknown synergy item: " + left + " / " + right);
-                    pairs.computeIfAbsent(left, k -> new HashMap<>()).put(right, rule.reason);
-                    pairs.computeIfAbsent(right, k -> new HashMap<>()).put(left, rule.reason);
-                }
+        for (var rule : database.reference("synergies", PairRule.class).values()) {
+            for (String left : rule.enablers) for (String right : rule.partners) {
+                if (!catalog.items.containsKey(left) || !catalog.items.containsKey(right))
+                    throw new IOException("Unknown synergy item: " + left + " / " + right);
+                pairs.computeIfAbsent(left, k -> new HashMap<>()).put(right, rule.reason);
+                pairs.computeIfAbsent(right, k -> new HashMap<>()).put(left, rule.reason);
             }
         }
     }
 
-    List<Pick> forItem(PartyStore.Party party, Hero hero, Slot anchorSlot, Item anchor, String priority) {
+    List<Pick> forItem(PartyStore.Party party, Hero hero, Slot anchorSlot, Item anchor, String priority, boolean ownedOnly) {
+        Collection<Item> candidates = ownedOnly ? party.stock.entrySet().stream()
+                .filter(e -> e.getValue() > 0).map(e -> catalog.items.get(e.getKey())).filter(Objects::nonNull).toList()
+                : catalog.items.values();
+        Comparator<Candidate> order = ownedOnly ? Comparator.comparing(Candidate::available).thenComparing(BEST) : BEST;
         Hero preview = hero.copy();
         preview.gear.entrySet().removeIf(e -> !anchorSlot.name().equals(e.getKey()) && anchor.id.equals(e.getValue()));
         if (!PartyStore.conflict(preview, anchorSlot, anchor, catalog.items).isEmpty()) {
@@ -74,11 +74,11 @@ class EquipmentSynergies {
         for (Slot slot : Slot.values()) {
             if (slot == anchorSlot || slot == Slot.ELIXIR) continue;
             if (slot == Slot.CHEST) {
-                result.add(best(party, preview, anchorSlot, anchor, slot, "Armour", false, reserved, metric, build));
-                result.add(best(party, preview, anchorSlot, anchor, slot, "Robe / clothing", true, reserved, metric, build));
+                result.add(best(party, preview, anchorSlot, anchor, slot, "Armour", false, reserved, metric, build, candidates, order));
+                result.add(best(party, preview, anchorSlot, anchor, slot, "Robe / clothing", true, reserved, metric, build, candidates, order));
                 continue;
             }
-            var pick = best(party, preview, anchorSlot, anchor, slot, slot.label, false, reserved, metric, build);
+            var pick = best(party, preview, anchorSlot, anchor, slot, slot.label, false, reserved, metric, build, candidates, order);
             result.add(pick);
             if (pick.item != null) {
                 reserved.add(pick.item.id);
@@ -90,18 +90,19 @@ class EquipmentSynergies {
     }
 
     private Pick best(PartyStore.Party party, Hero preview, Slot anchorSlot, Item anchor, Slot slot, String label,
-                      boolean clothing, Set<String> reserved, Metric metric, Catalog.Build build) {
+                      boolean clothing, Set<String> reserved, Metric metric, Catalog.Build build,
+                      Collection<Item> candidates, Comparator<Candidate> order) {
         Hero with = preview.copy();
         with.gear.remove(slot.name());
         Item main = catalog.items.get(with.gear.get("MELEE"));
         if (slot == Slot.OFFHAND && main != null && main.twoHanded)
-            return new Pick(label, slot, null, main.name + " uses both hands.", "");
+            return new Pick(label, slot, null, GameText.format("{0} uses both hands.", GameText.text(main.name)), "");
         Hero without = with.copy();
         without.gear.remove(anchorSlot.name());
         var baseline = Rules.stats(with, catalog.items);
         var control = Rules.stats(without, catalog.items);
         Candidate best = null;
-        for (Item item : catalog.items.values()) {
+        for (Item item : candidates) {
             if (!slot.accepts(item) || reserved.contains(item.id) || !Rules.trainedForItem(with, item)) continue;
             if (slot == Slot.CHEST && clothing != "Clothing".equals(item.armorType)) continue;
             if ((slot == Slot.RING1 && item.id.equals(with.gear.get("RING2")))
@@ -115,7 +116,7 @@ class EquipmentSynergies {
             var alone = Rules.stats(without, catalog.items);
             var candidate = score(anchor, item, build, metric, baseline, control, after, alone,
                     party.available(item.id) > 0 || item.id.equals(preview.gear.get(slot.name())));
-            if (best == null || BEST.compare(candidate, best) > 0) best = candidate;
+            if (best == null || order.compare(candidate, best) > 0) best = candidate;
         }
         if (best == null) return new Pick(label, slot, null, "No compatible, proficient option for this slot.", "");
         String status = best.item.id.equals(preview.gear.get(slot.name())) ? "Equipped"
@@ -134,11 +135,11 @@ class EquipmentSynergies {
             double extra = gain - m.gain(alone, control);
             if (extra * m.weight > interaction) {
                 interaction = extra * m.weight;
-                pairedStat = "Pairing these items adds an extra " + number(extra) + " " + m.label + ".";
+                pairedStat = GameText.format("Pairing these items adds an extra {0} {1}.", number(extra), GameText.text(m.label));
             }
             if (gain * m.weight > strongest) {
                 strongest = gain * m.weight;
-                fallback = "+" + number(gain) + " " + m.label + " with " + anchor.name + " equipped.";
+                fallback = gainReason(gain, m, anchor);
             }
         }
         String pair = pairs.getOrDefault(anchor.id, Map.of()).get(item.id);
@@ -146,13 +147,17 @@ class EquipmentSynergies {
         boolean buildPair = goal && build.items().contains(anchor.id);
         double gain = priority.gain(after, baseline);
         String reason = pair != null ? pair : interaction > 0 ? pairedStat
-                : buildPair ? "Both items are equipment goals for " + build.name() + "."
-                : gain > 0 ? "+" + number(gain) + " " + priority.label + " with " + anchor.name + " equipped."
-                : goal ? "Equipment goal for " + build.name() + "." : fallback;
+                : buildPair ? GameText.format("Both items are equipment goals for {0}.", GameText.text(build.name()))
+                : gain > 0 ? gainReason(gain, priority, anchor)
+                : goal ? GameText.format("Equipment goal for {0}.", GameText.text(build.name())) : fallback;
         return new Candidate(item, pair, interaction, buildPair, gain, overall, goal, available, reason);
     }
 
     private static String number(double value) {
         return BigDecimal.valueOf(value).stripTrailingZeros().toPlainString();
+    }
+
+    private static String gainReason(double gain, Metric metric, Item anchor) {
+        return GameText.format("+{0} {1} with {2} equipped.", number(gain), GameText.text(metric.label), GameText.text(anchor.name));
     }
 }

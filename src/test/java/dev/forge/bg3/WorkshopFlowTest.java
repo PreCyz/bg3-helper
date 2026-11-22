@@ -1,33 +1,35 @@
 package dev.forge.bg3;
 
-import tools.jackson.databind.ObjectMapper;
-import tools.jackson.databind.node.ObjectNode;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.mock.web.MockHttpSession;
+import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.node.ObjectNode;
 
-import java.nio.file.Path;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.io.IOException;
 import java.net.CookieManager;
 import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
+import java.net.http.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.UUID;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
@@ -41,11 +43,13 @@ class WorkshopFlowTest {
         try (var fixture = WorkshopFlowTest.class.getResourceAsStream("/data/demo-party.json")) {
             Files.copy(fixture, file);
         }
+        DatabaseFixture.configure(registry);
         registry.add("forge.save-file", file::toString);
     }
 
     @Autowired
     MockMvc mvc;
+    @Autowired ForgeDatabase database;
     @Autowired
     Catalog catalog;
     @Autowired
@@ -72,7 +76,7 @@ class WorkshopFlowTest {
     void rendersOfflinePagesAndEverySlot() throws Exception {
         for (String path : new String[]{"/", "/sheet", "/sheet?mode=melee", "/inventory", "/inventory?tab=catalog",
                 "/heroes/new", "/heroes/aelar/edit", "/builds", "/parties", "/credits", "/webjars/bootstrap/5.3.3/css/bootstrap.min.css",
-                "/art/ranger.webp", "/forge.js", "/forge.css"}) {
+                "/art/test-image.svg", "/forge.js", "/forge.css"}) {
             mvc.perform(get(path)).andExpect(status().isOk());
         }
         for (Slot slot : Slot.values()) {
@@ -91,7 +95,7 @@ class WorkshopFlowTest {
             assertThat(draft.style).isEqualTo(build.style());
             assertThat(draft.skills).containsExactlyElementsOf(build.skills()).doesNotContain("None");
             assertThat(draft.abilities).containsExactly(build.abilities());
-            mvc.perform(get(build.art())).andExpect(status().isOk());
+            assertThat(DatabaseFixture.assetPaths()).contains(build.art());
         }
     }
 
@@ -116,10 +120,10 @@ class WorkshopFlowTest {
         var savedSheet = mvc.perform(get("/sheet")).andExpect(status().isOk()).andReturn().getResponse();
         assertThat(savedSheet.getContentAsString()).containsPattern("<span>Female</span><i>·</i>\\s*<span>Gold Dwarf</span>");
         assertThat(savedSheet.getContentAsString()).contains("/art/avatars/figures/female/gold-dwarf/cleric.webp",
-                "/art/avatars/portraits/female/gold-dwarf/cleric.webp",
-                "/art/avatars/scenes/light-domain.webp");
+                "/art/avatars/portraits/female/gold-dwarf/cleric.webp", "class=\"figure-glow\"")
+                .doesNotContain("/art/avatars/scenes/");
         mvc.perform(post("/party/switch").param("id", "aelar")).andExpect(status().is3xxRedirection());
-        var restored = new PartyStore(json, catalog, temp.resolve("party.json").toString()).snapshot();
+        var restored = new PartyStore(json, catalog, database).snapshot();
         assertThat(restored.active).isEqualTo("aelar");
         assertThat(restored.hero(id).gear.get("CHEST")).isEqualTo("luminous-armour");
         assertThat(restored.hero(id).skills).containsExactly("Insight", "Religion");
@@ -177,6 +181,16 @@ class WorkshopFlowTest {
         store.save(second, hero, true);
         store.add(second, "longbow", 1);
         store.equip(hero.id, Slot.RANGED, "longbow");
+        var lastAdded = new Hero();
+        lastAdded.name = "Kara";
+        store.save(second, lastAdded, true);
+        mvc.perform(post("/parties/" + original + "/switch")).andExpect(redirectedUrl("/sheet"));
+        mvc.perform(post("/parties/" + second + "/switch").param("heroId", hero.id))
+                .andExpect(redirectedUrl("/sheet"));
+        mvc.perform(get("/sheet"))
+                .andExpect(content().string(org.hamcrest.Matchers.containsString("href=\"heroes/" + hero.id + "/edit\"")));
+        assertThat(new PartyStore(json, catalog, database).snapshot().active).isEqualTo(hero.id);
+        store.removeHero(second, lastAdded.id);
         String removeHero = "/parties/" + second + "/heroes/" + hero.id + "/remove";
         var session = new MockHttpSession();
         mvc.perform(get(removeHero).session(session)).andExpect(status().isOk());
@@ -195,6 +209,44 @@ class WorkshopFlowTest {
     }
 
     @Test
+    void standaloneArtworkReplacesExistingFigureAndPortraitRows(
+            @Autowired org.springframework.jdbc.core.JdbcTemplate jdbc,
+            @Autowired org.springframework.transaction.support.TransactionTemplate tx) throws Exception {
+        Path root = temp.resolve("avatar-seed");
+        String avatars = "art/avatars/";
+        String key = "male/test-ancestry/ranger.webp";
+        String[] targets = {avatars + "figures/" + key, avatars + "portraits/" + key};
+        String[] sources = {avatars + "figures-v2/" + key,
+                avatars + "figures-v2/male/test-ancestry/portraits/ranger.webp"};
+        for (int i = 0; i < targets.length; i++) {
+            Path file = root.resolve(targets[i]);
+            Files.createDirectories(file.getParent());
+            Files.write(file, new byte[]{(byte) i});
+        }
+        new ForgeDatabase(jdbc, json, tx, temp.resolve("party.json").toString(), root.toString(), "test-standalone-art-paths.txt");
+        for (int i = 0; i < sources.length; i++) {
+            assertThat(jdbc.queryForObject("SELECT content FROM forge_asset WHERE path=?", byte[].class, "/" + sources[i]))
+                    .isEqualTo(Files.readAllBytes(root.resolve(targets[i])));
+        }
+        for (int i = 0; i < sources.length; i++) {
+            Files.createDirectories(root.resolve(sources[i]).getParent());
+            Files.write(root.resolve(sources[i]), new byte[]{(byte) (i + 1)});
+        }
+        for (byte revision : new byte[]{1, 2}) {
+            Files.write(root.resolve(sources[0]), new byte[]{revision, 3});
+            new ForgeDatabase(jdbc, json, tx, temp.resolve("party.json").toString(), root.toString(), "test-asset-paths.txt");
+            for (int i = 0; i < targets.length; i++) {
+                byte[] expected = Files.readAllBytes(root.resolve(sources[i]));
+                assertThat(jdbc.queryForObject("SELECT content FROM forge_asset WHERE path=?", byte[].class, "/" + targets[i]))
+                        .isEqualTo(expected);
+                String hash = java.util.HexFormat.of().formatHex(java.security.MessageDigest.getInstance("SHA-256").digest(expected));
+                assertThat(jdbc.queryForObject("SELECT digest FROM forge_asset WHERE path=?", String.class, "/" + targets[i]))
+                        .isEqualTo(hash);
+            }
+        }
+    }
+
+    @Test
     void migratesLegacySaveAndAllowsRemovingTheLastParty() throws Exception {
         Path file = temp.resolve("legacy.json");
         var oldParty = store.snapshot();
@@ -202,18 +254,46 @@ class WorkshopFlowTest {
         ((ObjectNode) legacy).remove(java.util.List.of("id", "name"));
         ((ObjectNode) legacy.get("heroes").get(0)).remove("gender");
         json.writeValue(file.toFile(), legacy);
-        var migrated = new PartyStore(json, catalog, file.toString());
-        var original = migrated.snapshot();
-        assertThat(original.heroes.getFirst().gender).isEqualTo("Gender unspecified");
-        assertThat(original.stock).isEqualTo(oldParty.stock);
-        assertThat(original.hero("aelar").gear).isEqualTo(oldParty.hero("aelar").gear);
-        migrated.createParty("Second");
-        migrated.removeParty(migrated.snapshot().id);
-        assertThat(migrated.snapshot().id).isEqualTo(original.id);
-        migrated.removeParty(original.id);
-        var reopened = new PartyStore(json, catalog, file.toString());
-        assertThat(reopened.campaigns().parties).isEmpty();
-        reopened.createParty("Fresh start");
-        assertThat(reopened.snapshot().heroes).isEmpty();
+        try (var pg = DatabaseFixture.start()) {
+            var source = pg.getPostgresDatabase();
+            var jdbc = new org.springframework.jdbc.core.JdbcTemplate(source);
+            var tx = new org.springframework.transaction.support.TransactionTemplate(
+                    new org.springframework.jdbc.datasource.DataSourceTransactionManager(source));
+            var db = new ForgeDatabase(jdbc, json, tx, file.toString(), "", "test-asset-paths.txt");
+            var migrated = new PartyStore(json, catalog, db);
+            var original = migrated.snapshot();
+            assertThat(original.heroes.getFirst().gender).isEqualTo("Gender unspecified");
+            assertThat(original.stock).isEqualTo(oldParty.stock);
+            assertThat(original.hero("aelar").gear).isEqualTo(oldParty.hero("aelar").gear);
+            migrated.createParty("Second");
+            migrated.removeParty(migrated.snapshot().id);
+            assertThat(migrated.snapshot().id).isEqualTo(original.id);
+            migrated.removeParty(original.id);
+            var assetCount = jdbc.queryForObject("SELECT count(*) FROM forge_asset", Long.class);
+            jdbc.update("UPDATE forge_asset SET content=? WHERE path=?", new byte[]{1,2,3}, "/art/test-image.svg");
+            jdbc.update("""
+                    UPDATE forge_reference SET body = (body - 'acquisition') || '{"summary":"Local item note"}'::jsonb
+                    WHERE kind='items' AND code='titanstring-bow'
+                    """);
+            // Recreate the previous release's layout, including a locally customised template.
+            jdbc.update("""
+                    WITH old AS (DELETE FROM demo.forge_party_template RETURNING code,body)
+                    INSERT INTO helper.forge_reference(kind,code,position,body)
+                    SELECT 'demo',code,0,body || '{"name":"Custom demo"}'::jsonb FROM old
+                    """);
+            var restarted = new ForgeDatabase(jdbc, json, tx, file.toString(), "", "test-asset-paths.txt");
+            var reopened = new PartyStore(json, catalog, restarted);
+            var updatedBow = restarted.reference("items", Item.class).get("titanstring-bow");
+            assertThat(updatedBow.summary).isEqualTo("Local item note");
+            assertThat(updatedBow.acquisition).extracting(Item.Acquisition::act).containsExactly("Act 1", "Act 2");
+            assertThat(reopened.newDemo().snapshot().name).isEqualTo("Custom demo");
+            assertThat(jdbc.queryForObject("SELECT count(*) FROM helper.forge_reference WHERE kind='demo'", Long.class)).isZero();
+            assertThat(jdbc.queryForObject("SELECT count(*) FROM forge_asset", Long.class)).isEqualTo(assetCount);
+            assertThat(jdbc.queryForObject("SELECT content FROM forge_asset WHERE path=?", byte[].class, "/art/test-image.svg"))
+                    .containsExactly(1,2,3);
+            assertThat(reopened.campaigns().parties).isEmpty();
+            reopened.createParty("Fresh start");
+            assertThat(reopened.snapshot().heroes).isEmpty();
+        }
     }
 }

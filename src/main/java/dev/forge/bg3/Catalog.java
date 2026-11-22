@@ -1,10 +1,7 @@
 package dev.forge.bg3;
 
-import tools.jackson.databind.ObjectMapper;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
 import java.util.*;
 
 @Component
@@ -31,17 +28,10 @@ public class Catalog {
     public final Map<String, Item> items;
     public final List<Build> builds;
 
-    public Catalog(ObjectMapper mapper) throws IOException {
-        Map<String, Item> catalog = new LinkedHashMap<>();
-        try (var stream = new ClassPathResource("data/items.json").getInputStream()) {
-            for (Item i : mapper.readValue(stream, Item[].class)) {
-                if (catalog.putIfAbsent(i.id, i) != null) throw new IOException("Duplicate catalog ID " + i.id);
-            }
-        }
-        items = Collections.unmodifiableMap(catalog);
-        try (var stream = new ClassPathResource("data/builds.json").getInputStream()) {
-            builds = List.of(mapper.readValue(stream, Build[].class));
-        }
+    Catalog(ForgeDatabase database) {
+        items = database.reference("items", Item.class);
+        builds = List.copyOf(database.reference("builds", Build.class).values());
+        Rules.useProgression(database.reference("progression", Rules.Progression.class));
     }
 
     Build build(String id) {

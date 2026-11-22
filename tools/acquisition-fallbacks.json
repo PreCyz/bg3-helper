@@ -1,0 +1,10 @@
+{
+  "cleaver": { "act": "Act 2", "details": "Loot from Lann Tarv at Moonrise Towers.", "source": "https://bg3.wiki/wiki/Lann_Tarv#Loot" },
+  "embroidered-bycocket": { "act": "Act 3", "details": "Sold by Figaro Pennygood at Facemaker’s Boutique in the Lower City.", "source": "https://bg3.wiki/wiki/Figaro_Pennygood#Hats" },
+  "gold-pendant": { "act": "Act 3", "details": "On the upstairs table beside the staircase in Philgrave’s Mansion.", "source": "https://bg3.wiki/wiki/Philgrave%27s_Mansion" },
+  "heavy-crossbow": { "act": "Act 1", "details": "Loot from Murmath near the entrance to Grymforge (X: -626, Y: 373).", "source": "https://bg3.wiki/wiki/Murmath#Loot" },
+  "hide-armour": { "details": "Traders using the Armour Trader Table stock this armour up to level 4.", "source": "https://bg3.wiki/wiki/Armour_Trader_Table" },
+  "longbow": { "act": "Act 1", "details": "Loot from Zarys in the Zhentarim Basement beneath Waukeen’s Rest.", "source": "https://bg3.wiki/wiki/Zarys#Loot" },
+  "rapier": { "act": "Act 1", "details": "Loot the Abducted Nobleman on the Ravaged Beach (X: 230, Y: 271).", "source": "https://bg3.wiki/wiki/Ravaged_Beach" },
+  "sahuagin-spear": { "act": "Act 3", "details": "Loot from a Sahuagin, including the ones at the docks east of Philgrave’s Mansion.", "source": "https://bg3.wiki/wiki/Sahuagin#Loot" }
+}

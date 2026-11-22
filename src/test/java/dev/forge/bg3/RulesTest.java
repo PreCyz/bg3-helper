@@ -7,6 +7,36 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class RulesTest {
+    @org.junit.jupiter.api.BeforeAll
+    static void loadRulesFixture() throws java.io.IOException {
+        DatabaseFixture.loadProgression();
+    }
+
+    @Test
+    void multiclassUsesClassLevelsForFeaturesAndHitDiceAndTotalLevelForCantripsAndProficiency() {
+        var h = new Hero();
+        h.heroClass = "Wizard";
+        h.level = 8;
+        h.race = "High Elf";
+        h.abilities = new int[]{10, 10, 10, 18, 14, 10};
+        h.otherClasses.add(new Hero.ClassLevel("Fighter", 5, "Champion", "Archery", List.of()));
+        h.otherClasses.add(new Hero.ClassLevel("Cleric", 1, "Light Domain", "None", List.of("Religion")));
+        Rules.normalizeChoices(h);
+        var sheet = Rules.stats(h, Map.of());
+        assertEquals(45, sheet.hp()); // Wizard 6 + 4, Fighter 5 × 6, Cleric 5.
+        assertEquals(3, sheet.proficiency());
+        assertEquals(2, sheet.attacks());
+        assertEquals(1, Rules.featSlots(h));
+        assertEquals(List.of(0, 0, 0, 7, 5, 0), sheet.saves());
+        assertEquals(13, sheet.spellDc());
+        assertTrue(sheet.spells().stream().anyMatch(s -> s.name().equals("Fire Bolt") && s.formula().contains("2d10") && s.detail().contains("+7")));
+        assertFalse(sheet.spells().stream().anyMatch(s -> s.name().equals("Spirit Guardians")));
+        Item heavy = item("plate", "CHEST");
+        heavy.armorType = "Heavy";
+        assertFalse(Rules.trainedForItem(h, heavy));
+        h.otherClasses.set(1, new Hero.ClassLevel("Cleric", 1, "War Domain", "None", List.of()));
+        assertTrue(Rules.trainedForItem(h, heavy));
+    }
     private static Item item(String id, String slot) {
         Item item = new Item();
         item.slot = slot;

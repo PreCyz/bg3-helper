@@ -1,27 +1,27 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head th:replace="~{shared::head('Hero workshop')}"></head>
+<html lang="en" th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{shared::head(#{ui.hero.workshop})}"></head>
   <body>
     <header th:replace="~{shared::nav}"></header>
     <main class="wrap">
       <div th:replace="~{shared::notice}"></div>
       <div class="crumb">
-        <a href="sheet">Hero sheet</a><i>›</i
-        ><span th:text="${creating?'New hero':'Edit hero'}"></span>
+        <a href="sheet">[[#{ui.hero.sheet}]]</a><i>›</i
+        ><span th:text="${@words.text(creating?'New hero':'Edit hero')}"></span>
       </div>
       <div class="page-top">
         <div>
           <h1
-            th:text="${creating ? 'Create a hero' : 'Develop '+draft.name}"
+            th:text="${creating} ? #{ui.create.a.hero} : #{format.develop(${draft.name})}"
           ></h1>
-          <p>Preview each change before saving it to your party.</p>
+          <p>[[#{ui.preview.each.change.before.saving.it.to.your.party}]]</p>
         </div>
-        <a class="btn-quiet" href="sheet">Cancel</a>
+        <a class="btn-quiet" href="sheet">[[#{ui.cancel}]]</a>
       </div>
       <div class="step-track">
-        <span th:classappend="${step==1}?'current'">1 · Identity</span
-        ><span th:classappend="${step==2}?'current'">2 · Abilities</span
-        ><span th:classappend="${step==3}?'current'">3 · Development</span>
+        <span th:classappend="${step==1}?'current'">[[#{ui.1.identity}]]</span
+        ><span th:classappend="${step==2}?'current'">[[#{ui.2.abilities}]]</span
+        ><span th:classappend="${step==3}?'current'">[[#{ui.3.development}]]</span>
       </div>
       <div class="wizard-grid">
         <form
@@ -29,6 +29,7 @@
           method="post"
           action="heroes/wizard"
           id="wizardForm"
+          th:attr="data-level-limit=#{ui.the.combined.class.levels.must.be.12.or.less},data-updated=#{ui.stat.preview.updated},data-retry=#{ui.use.update.preview.to.refresh.the.statistics}"
         >
           <input type="hidden" name="partyId" th:value="${party.id}" />
           <input type="hidden" name="id" th:value="${draft.id}" /><input
@@ -41,66 +42,88 @@
             th:value="${draft.buildId}"
           />
           <section class="form-area" th:hidden="${step!=1}">
-            <h2>Hero identity</h2>
+            <h2>[[#{ui.hero.identity}]]</h2>
             <div class="form-fields">
               <label class="full"
-                >Hero name<input
+                >[[#{ui.hero.name}]]<input
                   type="text"
                   name="name"
                   maxlength="60"
                   th:value="${draft.name}"
-                  placeholder="Enter a name"
+                  th:placeholder="#{ui.enter.a.name}"
                   autocomplete="off"
               /></label>
-              <label>Gender<select name="gender">
-                <option th:each="g : ${genders}" th:value="${g}" th:selected="${draft.gender == g}" th:text="${g}"></option>
+              <label>[[#{ui.gender}]]<select name="gender">
+                <option th:each="g : ${genders}" th:value="${g}" th:selected="${draft.gender == g}" th:text="${@words.text(g)}"></option>
               </select></label>
               <label
-                >Race<select name="race">
+                >[[#{ui.race}]]<select name="race">
                   <option
                     th:each="r : ${races}"
                     th:value="${r.name}"
                     th:id="|race-${r.name}|"
                     th:selected="${selectedRace.name == r.name}"
-                    th:text="${r.name}"
+                    th:text="${@words.text(r.name)}"
                   ></option></select
               ></label>
               <label th:each="r : ${races}" th:if="${!r.subraces.isEmpty()}"
-                     class="subrace-field" th:id="|subrace-${r.name}|">Subrace
+                     class="subrace-field" th:id="|subrace-${r.name}|">[[#{ui.subrace}]]
                 <select th:name="|subrace.${r.name}|">
                   <option th:each="s : ${r.subraces}" th:value="${s}"
-                          th:selected="${draft.race == s}" th:text="${s}"></option>
+                          th:selected="${draft.race == s}" th:text="${@words.text(s)}"></option>
                 </select>
               </label>
               <label
-                >Class<select name="heroClass">
+                >[[#{ui.starting.class}]]<select name="heroClass">
                   <option
                     th:each="c : ${classes}"
                     th:value="${c}"
                     th:selected="${draft.heroClass==c}"
-                    th:text="${c}"
+                    th:disabled="${draft.levelsIn(c) > 0 and draft.heroClass != c}"
+                    th:text="${@words.text(c)}"
                   ></option></select
               ></label>
               <label
-                >Character level<input
+                >[[#{ui.starting.class.level}]]<input
                   type="number"
                   name="level"
+                  data-class-level
                   min="1"
                   max="12"
                   required
-                  th:value="${draft.level}"
+                  th:value="${draft.startingLevel()}"
               /></label>
             </div>
+            <input type="hidden" name="classAllocation" value="1" />
+            <h3 class="mt-3">[[#{ui.multiclassing}]]</h3>
+            <p class="help">[[#{ui.divide.up.to.12.levels.among.your.classes.at.level.12.lower.one.c}]]</p>
+            <div th:each="c : ${draft.otherClasses}" class="form-fields mb-2">
+              <input type="hidden" name="extraClass" th:value="${c.heroClass}" />
+              <label><span th:text="#{format.class.level(${@words.text(c.heroClass)})}"></span>
+                <input type="number" min="1" max="12" required data-class-level
+                       th:name="|levels.${c.heroClass}|" th:value="${c.level}" />
+              </label>
+              <button type="submit" class="btn-quiet align-self-end" name="action" th:value="|remove.${c.heroClass}|"
+                      th:text="#{format.remove.class(${@words.text(c.heroClass)})}"></button>
+            </div>
+            <div class="form-fields" th:if="${draft.otherClasses.size() < 11}">
+              <label>[[#{ui.additional.class}]]<select name="newClass">
+                <option value="">[[#{ui.choose.a.class}]]</option>
+                <option th:each="c : ${classes}" th:value="${c}" th:text="${@words.text(c)}"
+                        th:disabled="${draft.levelsIn(c) > 0}"></option>
+              </select></label>
+              <button class="btn-quiet align-self-end" name="action" value="addClass">[[#{ui.add.class}]]</button>
+            </div>
+            <p class="mt-2">[[#{ui.character.level}]] <output id="total-level" th:text="${draft.level}"></output> / 12</p>
           </section>
           <section class="form-area" th:hidden="${step!=2}">
-            <h2>Base ability scores</h2>
+            <h2>[[#{ui.base.ability.scores}]]</h2>
             <p class="help">
-              Enter your in-game base scores, including creation bonuses. Feats,
-              equipment and elixirs are added in the preview.
+              [[#{ui.enter.your.in.game.base.scores.including.creation.bonuses.feats.e}]]
             </p>
             <div class="form-fields">
               <label th:each="a,i : ${abilities}"
-                ><span th:text="${a}"></span
+                ><span th:text="${@words.text(a)}"></span
                 ><input
                   type="number"
                   name="score"
@@ -112,47 +135,62 @@
             </div>
           </section>
           <section id="development" class="form-area" th:hidden="${step!=3}">
-            <h2>Class development</h2>
+            <h2>[[#{ui.class.development}]]</h2>
             <p
               class="help"
-              th:text="'Level '+${draft.level}+' '+${draft.heroClass}"
+              th:text="#{format.draft.level(${draft.level},${@words.classes(draft)})}"
             ></p>
             <div class="form-fields">
               <label
-                >Subclass<select name="subclass">
+                ><span th:text="#{format.class.subclass(${@words.text(draft.heroClass)})}"></span><select name="subclass">
                   <option
                     th:each="v : ${subclasses}"
-                    th:text="${v}"
+                    th:text="${@words.text(v)}"
                     th:value="${v}"
                     th:selected="${v==draft.subclass}"
                   ></option></select
               ></label>
               <label
-                >Fighting style<select name="style">
+                >[[#{ui.fighting.style}]]<select name="style">
                   <option
                     th:each="v : ${styles}"
-                    th:text="${v}"
+                    th:text="${@words.text(v)}"
                     th:value="${v}"
                     th:selected="${v==draft.style}"
                   ></option></select
               ></label>
               <label th:each="n : ${#numbers.sequence(0,skillSlots - 1)}"
-                ><span th:text="'Class skill '+${n+1}"></span
+                ><span th:text="#{format.skill(${n+1})}"></span
                 ><select name="skill">
                   <option
                     th:each="v : ${skills}"
-                    th:text="${v}"
+                    th:text="${@words.text(v)}"
                     th:value="${v}"
                     th:selected="${v==draft.skills[n]}"
                   ></option></select
               ></label>
+              <th:block th:each="c : ${draft.otherClasses}">
+                <label><span th:text="#{format.class.subclass(${@words.text(c.heroClass)})}"></span><select th:name="|path.${c.heroClass}|">
+                  <option th:each="v : ${c.availablePaths()}" th:value="${v}" th:text="${@words.text(v)}" th:selected="${v == c.subclass}"></option>
+                </select></label>
+                <label th:if="${c.availableStyles().size() > 1}"><span th:text="#{format.class.fighting.style(${@words.text(c.heroClass)})}"></span>
+                  <select th:name="|style.${c.heroClass}|">
+                    <option th:each="v : ${c.availableStyles()}" th:value="${v}" th:text="${@words.text(v)}" th:selected="${v == c.style}"></option>
+                  </select>
+                </label>
+                <label th:each="skill,i : ${c.skills}"><span th:text="#{format.class.skill(${@words.text(c.heroClass)},${i.count})}"></span>
+                  <select th:name="|skill.${c.heroClass}.${i.index}|">
+                    <option th:each="v : ${c.availableSkills()}" th:value="${v}" th:text="${@words.text(v)}" th:selected="${v == skill}"></option>
+                  </select>
+                </label>
+              </th:block>
               <th:block th:if="${featSlots>0}"
                 ><label th:each="n : ${#numbers.sequence(0,featSlots - 1)}"
-                  ><span th:text="'Feat '+${n+1}"></span
+                  ><span th:text="#{format.feat(${n+1})}"></span
                   ><select name="feat">
                     <option
                       th:each="v : ${featChoices}"
-                      th:text="${v}"
+                      th:text="${@words.text(v)}"
                       th:value="${v}"
                       th:selected="${v==draft.feats[n]}"
                     ></option></select></label
@@ -160,7 +198,7 @@
             </div>
             <div class="fold">
               <a th:href="${classSource}" target="_blank" rel="noreferrer"
-                >Class progression on BG3 Wiki ↗</a
+                >[[#{ui.class.progression.on.bg3.wiki}]]</a
               >
             </div>
           </section>
@@ -171,7 +209,7 @@
               name="action"
               value="preview"
             >
-              Update preview
+              [[#{ui.update.preview}]]
             </button>
             <div>
               <button
@@ -180,20 +218,20 @@
                 name="action"
                 value="back"
               >
-                Back</button
+                [[#{ui.back}]]</button
               ><button
                 th:if="${step<3}"
                 class="btn-gold"
                 name="action"
                 value="next"
               >
-                Continue</button
+                [[#{ui.continue}]]</button
               ><button
                 th:if="${step==3}"
                 class="btn-gold"
                 name="action"
                 value="save"
-                th:text="${creating ? 'Create hero' : 'Save changes'}"
+                th:text="${@words.text(creating ? 'Create hero' : 'Save changes')}"
               ></button>
             </div>
           </div>
@@ -206,7 +244,7 @@
           <section class="panel">
             <div class="panel-head">
               <svg th:replace="~{shared::icon('die')}"></svg>
-              <h2>Stat preview</h2>
+              <h2>[[#{ui.stat.preview}]]</h2>
             </div>
             <div class="panel-body">
               <div class="preview-identity" th:with="art=${@avatarArt.forHero(draft)}">
@@ -214,12 +252,12 @@
                 <img class="preview-figure" th:src="${art.figure}" alt="" />
                 <span class="preview-caption">
                   <img th:src="${art.emblem}" alt="" />
-                  <span th:text="${art.description}"></span>
+                  <span th:text="${@words.appearance(art)}"></span>
                 </span>
               </div>
               <p
                 class="help"
-                th:text="${creating?'Changes from the starting level 1 Wood Elf Ranger.':'Changes from your saved hero.'}"
+                th:text="${@words.text(creating?'Changes from the starting level 1 Wood Elf Ranger.':'Changes from your saved hero.')}"
               ></p>
               <div class="wiz-scores">
                 <div
@@ -227,7 +265,7 @@
                   th:each="a,i : ${shortNames}"
                   th:with="change=${stats.scores[i.index]-before.scores[i.index]}"
                 >
-                  <small th:text="${a}"></small
+                  <small th:text="${@words.text(a)}"></small
                   ><b th:text="${stats.scores[i.index]}"></b>
                   <em
                     th:if="${change!=0}"
@@ -235,7 +273,7 @@
                     th:text="${@fmt.sign(change)}"
                   ></em
                   ><small
-                    th:text="'Modifier '+${@fmt.sign(stats.modifiers[i.index])}"
+                    th:text="#{format.modifier(${@fmt.sign(stats.modifiers[i.index])})}"
                   ></small>
                 </div>
               </div>
@@ -272,24 +310,24 @@
                 ></div>
               </div>
               <details class="fold">
-                <summary>Skills &amp; saving throws</summary>
+                <summary>[[#{ui.skills.saving.throws}]]</summary>
                 <dl class="pairs">
                   <th:block th:each="v : ${stats.skills}"
-                    ><dt th:text="${v.key}"></dt>
+                    ><dt th:text="${@words.text(v.key)}"></dt>
                     <dd th:text="${@fmt.sign(v.value)}"></dd></th:block
                   ><th:block th:each="a,i : ${shortNames}"
-                    ><dt th:text="${a}+' save'"></dt>
+                    ><dt th:text="#{format.save(${@words.text(a)})}"></dt>
                     <dd th:text="${@fmt.sign(stats.saves[i.index])}"></dd
                   ></th:block>
                 </dl>
               </details>
               <details class="fold" th:open="${step==3}">
-                <summary>Features &amp; spell examples</summary>
+                <summary>[[#{ui.features.spell.examples}]]</summary>
                 <ul class="clean-list">
-                  <li th:each="t : ${stats.traits}" th:text="${t}"></li>
+                  <li th:each="t : ${stats.traits}" th:text="${@words.text(t)}"></li>
                   <li
                     th:each="s : ${stats.spells}"
-                    th:text="${s.name}+' · '+${s.formula}+' · '+${s.detail}"
+                    th:text="${@words.text(s.name)}+' · '+${@words.text(s.formula)}+' · '+${@words.text(s.detail)}"
                   ></li>
                 </ul>
               </details>

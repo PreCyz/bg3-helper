@@ -11,7 +11,8 @@ public class Display {
     }
 
     public String number(double n) {
-        return n == (long) n ? Long.toString((long) n) : String.format(Locale.ROOT, "%.1f", n);
+        return n == (long) n ? Long.toString((long) n)
+                : String.format(org.springframework.context.i18n.LocaleContextHolder.getLocale(), "%.1f", n);
     }
 
     public String delta(double n) {
