@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{shared::head('Check your selection')}"></head>
+  <body>
+    <header th:replace="~{shared::nav}"></header>
+    <main class="wrap">
+      <div class="panel empty-state">
+        <h1>Check your selection</h1>
+        <p th:text="${problem}"></p>
+        <a class="btn-gold" href="sheet">Return to hero sheet</a>
+      </div>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,59 @@
+{
+  "active": "aelar",
+  "heroes": [
+    {
+      "abilities": [
+        12,
+        17,
+        14,
+        8,
+        15,
+        8
+      ],
+      "buildId": "gloom-stalker",
+      "feat": "None",
+      "feats": [
+        "None"
+      ],
+      "gear": {
+        "HANDS": "gloves-of-archery",
+        "RANGED": "titanstring-bow",
+        "FEET": "disintegrating-night-walkers",
+        "NECK": "amulet-of-misty-step",
+        "HEAD": "shadow-of-menzoberranzan",
+        "CHEST": "leather-armour",
+        "CLOAK": "cloak-of-protection",
+        "MELEE": "shortsword",
+        "ELIXIR": "elixir-of-hill-giant-strength"
+      },
+      "heroClass": "Ranger",
+      "id": "aelar",
+      "level": 5,
+      "name": "Aelar",
+      "gender": "Male",
+      "race": "Wood Elf",
+      "skill": "Stealth",
+      "skills": [],
+      "style": "Archery",
+      "subclass": "Gloom Stalker"
+    }
+  ],
+  "name": "Aelar’s demo party",
+  "stock": {
+    "gloves-of-archery": 1,
+    "longbow": 1,
+    "disintegrating-night-walkers": 1,
+    "amulet-of-misty-step": 1,
+    "shadow-of-menzoberranzan": 1,
+    "leather-armour": 1,
+    "cloak-of-protection": 1,
+    "shortsword": 1,
+    "titanstring-bow": 1,
+    "elixir-of-hill-giant-strength": 1,
+    "caustic-band": 1,
+    "luminous-armour": 1,
+    "wooden-shield": 1,
+    "haste-helm": 1,
+    "helmet-of-arcane-acuity": 1
+  }
+}

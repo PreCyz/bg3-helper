@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:fragment="head(title)">
+    <base th:href="${basePath}" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title th:text="${title} + ' · Faerûn Forge'">Faerûn Forge</title>
+    <link rel="icon" href="/forge.svg" />
+    <link
+      rel="stylesheet"
+      href="/webjars/bootstrap/5.3.3/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="/forge.css?v=2" />
+    <style th:if="${races != null}" th:inline="css">
+      #wizardForm .subrace-field { display: none; }
+      /*[# th:each="r : ${races}" th:if="${!r.subraces.isEmpty()}"]*/
+      #wizardForm:has(#[[${'race-' + r.name}]]:checked) #[[${'subrace-' + r.name}]] { display: grid; }
+      /*[/]*/
+    </style>
+    <script src="/forge.js?v=3" defer></script>
+  </head>
+  <body>
+    <svg th:fragment="icon(id)" class="ico" aria-hidden="true">
+      <use th:href="'/icons.svg#'+${id}"></use>
+    </svg>
+    <span th:fragment="portrait(character)" class="hero-portrait"
+          th:with="art=${@avatarArt.forHero(character)}" role="img" th:aria-label="${art.description}">
+      <img class="portrait-face" th:src="${art.face}" alt="" />
+      <img class="portrait-emblem" th:src="${art.emblem}" alt="" />
+    </span>
+    <header th:fragment="nav" class="mast">
+      <div class="mast-inner">
+        <a class="brand" href="/"
+          ><span class="brand-mark"
+            ><svg th:replace="~{shared::icon('brand')}"></svg></span
+          >Faerûn <b>Forge</b></a
+        >
+        <nav th:if="${party != null}" aria-label="Main navigation">
+          <a
+            href="sheet"
+            th:classappend="${section == 'sheet' or section == 'wizard'} ? 'active'"
+            ><svg th:replace="~{shared::icon('sheet')}"></svg>Hero sheet</a
+          >
+          <a
+            href="inventory"
+            th:classappend="${section == 'inventory'} ? 'active'"
+            ><svg th:replace="~{shared::icon('bag')}"></svg>Inventory</a
+          >
+          <a href="builds" th:classappend="${section == 'builds'} ? 'active'"
+            ><svg th:replace="~{shared::icon('book')}"></svg>Build library</a
+          >
+        </nav>
+        <form th:if="${basePath == '/demo/'}" method="post" action="/demo/exit" class="demo-controls">
+          <span>Demo mode</span>
+          <button class="btn-quiet">Exit demo</button>
+        </form>
+        <details th:if="${party != null}" class="party-menu">
+          <summary>
+            <svg th:replace="~{shared::icon('user')}"></svg>
+            <span class="party-name" th:text="${party == null ? 'Parties' : party.name}"></span>
+            <span class="chev">⌄</span>
+          </summary>
+          <div class="party-pop">
+            <span class="small-label" th:if="${party != null and !party.heroes.isEmpty()}">Switch hero</span>
+            <form
+              th:each="p : ${party?.heroes}"
+              method="post"
+              action="party/switch"
+            >
+              <button name="id" th:value="${p.id}">
+                <span th:replace="~{shared::portrait(${p})}"></span>
+                <span th:text="${p.name}"></span
+                ><span th:text="'Lv. '+${p.level}"></span>
+              </button>
+            </form>
+            <a href="heroes/new" th:if="${party != null}">+ Create hero</a>
+            <a href="parties">Manage parties</a>
+          </div>
+        </details>
+      </div>
+    </header>
+    <div
+      th:fragment="notice"
+      th:if="${notice != null}"
+      class="notice"
+      role="status"
+      th:text="${notice}"
+    ></div>
+    <div
+      th:fragment="itemIcon(item,icon)"
+      class="item-art"
+      th:classappend="${item != null ? @fmt.rarity(item.rarity) : 'empty'}"
+    >
+      <img
+        th:if="${item != null and item.image != null and !item.image.isBlank()}"
+        th:src="${item.image}"
+        alt=""
+        loading="lazy"
+      />
+      <svg
+        th:unless="${item != null and item.image != null and !item.image.isBlank()}"
+        th:replace="~{shared::fallback(${item},${icon})}"
+      ></svg>
+    </div>
+    <th:block
+      th:fragment="fallback(item,icon)"
+      th:unless="${item != null and item.image != null and !item.image.isBlank()}"
+      ><svg th:replace="~{shared::icon(${icon})}"></svg
+    ></th:block>
+    <footer th:fragment="footer">
+      <span>Faerûn Forge</span
+      ><span
+        >Game data from
+        <a href="https://bg3.wiki/" target="_blank" rel="noreferrer"
+          >BG3 Wiki</a
+        >
+        · <a href="credits">Credits</a></span
+      >
+    </footer>
+    <a
+      th:fragment="slot(s)"
+      th:with="it=${catalog.get(hero.gear.get(s.name()))}"
+      class="gear-slot"
+      th:classappend="${it != null}?'filled'"
+      th:href="@{equipment/{slot}(slot=${s.name()},heroId=${hero.id})}"
+      th:title="${s.label + ' · ' + (it == null ? 'Empty' : it.name)}"
+    >
+      <div th:replace="~{shared::itemIcon(${it},${s.icon})}"></div>
+      <small th:text="${s.label}"></small
+    ></a>
+    <div th:fragment="metric(label,value,base)" class="diff">
+      <small th:text="${label}"></small><b th:text="${@fmt.number(value)}"></b
+      ><em
+        th:if="${value != base}"
+        th:class="${value > base ? 'up' : 'down'}"
+        th:text="'('+ ${@fmt.delta(value-base)} + ')'"
+      ></em>
+    </div>
+  </body>
+</html>

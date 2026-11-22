@@ -1,0 +1,368 @@
+{
+  "SLOTS": {
+    "Headwear": "HEAD",
+    "Cloaks": "CLOAK",
+    "Armour": "CHEST",
+    "Clothing": "CHEST",
+    "Handwear": "HANDS",
+    "Footwear": "FEET",
+    "Amulets": "NECK",
+    "Rings": "RING",
+    "Shields": "OFFHAND",
+    "Elixirs": "ELIXIR"
+  },
+  "WEAPONS": {
+    "Battleaxes": "Battleaxe",
+    "Clubs": "Club",
+    "Daggers": "Dagger",
+    "Flails": "Flail",
+    "Glaives": "Glaive",
+    "Greataxes": "Greataxe",
+    "Greatclubs": "Greatclub",
+    "Greatswords": "Greatsword",
+    "Halberds": "Halberd",
+    "Handaxes": "Handaxe",
+    "Javelins": "Javelin",
+    "Light_Hammers": "Light Hammer",
+    "Longswords": "Longsword",
+    "Maces": "Mace",
+    "Mauls": "Maul",
+    "Morningstars": "Morningstar",
+    "Pikes": "Pike",
+    "Quarterstaves": "Quarterstaff",
+    "Rapiers": "Rapier",
+    "Scimitars": "Scimitar",
+    "Shortswords": "Shortsword",
+    "Sickles": "Sickle",
+    "Spears": "Spear",
+    "Tridents": "Trident",
+    "War_Picks": "War Pick",
+    "Warhammers": "Warhammer",
+    "Hand_Crossbows": "Hand Crossbow",
+    "Heavy_Crossbows": "Heavy Crossbow",
+    "Light_Crossbows": "Light Crossbow",
+    "Longbows": "Longbow",
+    "Shortbows": "Shortbow"
+  },
+  "TWO_HAND": [
+    "Glaive",
+    "Greataxe",
+    "Greatclub",
+    "Greatsword",
+    "Halberd",
+    "Heavy Crossbow",
+    "Light Crossbow",
+    "Longbow",
+    "Maul",
+    "Pike",
+    "Shortbow"
+  ],
+  "VERSATILE": {
+    "Battleaxe": 10,
+    "Longsword": 10,
+    "Quarterstaff": 8,
+    "Spear": 8,
+    "Trident": 8,
+    "Warhammer": 10
+  },
+  "FINESSE": [
+    "Dagger",
+    "Rapier",
+    "Scimitar",
+    "Shortsword"
+  ],
+  "ABILITIES": {
+    "Strength": "STR",
+    "Dexterity": "DEX",
+    "Constitution": "CON",
+    "Intelligence": "INT",
+    "Wisdom": "WIS",
+    "Charisma": "CHA"
+  },
+  "SKILLS": {
+    "STR": [
+      "Athletics"
+    ],
+    "DEX": [
+      "Acrobatics",
+      "Sleight of Hand",
+      "Stealth"
+    ],
+    "CON": [],
+    "INT": [
+      "Arcana",
+      "History",
+      "Investigation",
+      "Nature",
+      "Religion"
+    ],
+    "WIS": [
+      "Animal Handling",
+      "Insight",
+      "Medicine",
+      "Perception",
+      "Survival"
+    ],
+    "CHA": [
+      "Deception",
+      "Intimidation",
+      "Performance",
+      "Persuasion"
+    ]
+  },
+  "BONUSES": {
+    "titanstring-bow": {
+      "titan": true
+    },
+    "gloves-of-dexterity": {
+      "dexFloor": 18,
+      "attack": 1
+    },
+    "club-of-hill-giant-strength": {
+      "strFloor": 19
+    },
+    "gauntlets-of-hill-giant-strength": {
+      "strFloor": 23
+    },
+    "amulet-of-greater-health": {
+      "conFloor": 23
+    },
+    "elixir-of-hill-giant-strength": {
+      "strFloor": 21
+    },
+    "elixir-of-cloud-giant-strength": {
+      "strFloor": 27
+    },
+    "elixir-of-vigilance": {
+      "initiative": 5
+    },
+    "hellrider-longbow": {
+      "initiative": 3
+    },
+    "sentinel-shield": {
+      "initiative": 3
+    },
+    "bow-of-awareness": {
+      "initiative": 1
+    },
+    "fistbreaker-helm": {
+      "initiative": 1,
+      "spellDc": 1
+    },
+    "caustic-band": {
+      "weaponDamage": 2
+    },
+    "gloves-of-archery": {
+      "rangedDamage": 2
+    },
+    "cloak-of-protection": {
+      "ac": 1,
+      "save": 1
+    },
+    "ring-of-protection": {
+      "ac": 1,
+      "save": 1
+    },
+    "crushers-ring": {
+      "movement": 3
+    },
+    "phalar-aluve": {
+      "finesse": true
+    },
+    "larethians-wrath": {
+      "finesse": true
+    },
+    "the-dancing-breeze": {
+      "finesse": true
+    },
+    "armour-of-agility": {
+      "dexCap": 99,
+      "save": 2
+    },
+    "yuan-ti-scale-mail": {
+      "dexCap": 99,
+      "initiative": 1
+    },
+    "sharpened-snare-cuirass": {
+      "dexCap": 99
+    },
+    "amulet-of-the-devout": {
+      "spellDc": 2
+    },
+    "markoheshkir": {
+      "spellAttack": 1,
+      "spellDc": 1
+    },
+    "staff-of-spellpower": {
+      "spellAttack": 1,
+      "spellDc": 1
+    },
+    "melfs-first-staff": {
+      "spellAttack": 1,
+      "spellDc": 1
+    },
+    "hood-of-the-weave": {
+      "spellAttack": 2,
+      "spellDc": 2
+    },
+    "cloak-of-the-weave": {
+      "spellAttack": 1,
+      "spellDc": 1
+    },
+    "robe-of-the-weave": {
+      "spellAttack": 1,
+      "spellDc": 1,
+      "ac": 2
+    },
+    "ketherics-shield": {
+      "spellAttack": 1,
+      "spellDc": 1
+    },
+    "helldusk-armour": {
+      "baseAc": 21
+    },
+    "warped-headband-of-intellect": {
+      "intFloor": 17
+    },
+    "handmaidens-mace": {
+      "strFloor": 18
+    },
+    "birthright": {
+      "chaBonus": 2,
+      "chaBonusCap": 22
+    },
+    "dwarven-splintmail": {
+      "conBonus": 2,
+      "conBonusCap": 20
+    },
+    "enraging-heart-garb": {
+      "conBonus": 2,
+      "conBonusCap": 20
+    },
+    "gloves-of-soul-catching": {
+      "conBonus": 2,
+      "conBonusCap": 20
+    },
+    "the-mighty-cloth": {
+      "strBonus": 2,
+      "strBonusCap": 20
+    },
+    "harmonium-halberd": {
+      "strBonus": 2,
+      "strBonusCap": 23,
+      "intBonus": -1,
+      "wisBonus": -1
+    },
+    "khalids-gift": {
+      "wisBonus": 1,
+      "wisBonusCap": 21
+    },
+    "legacy-of-the-masters": {
+      "weaponDamage": 2
+    },
+    "helldusk-gloves": {
+      "riders": [
+        {
+          "count": 1,
+          "die": 6,
+          "type": "Fire"
+        }
+      ],
+      "spellAttack": 1,
+      "spellDc": 1
+    },
+    "flawed-helldusk-gloves": {
+      "riders": [
+        {
+          "count": 1,
+          "die": 4,
+          "type": "Fire"
+        }
+      ]
+    },
+    "armour-of-the-sporekeeper": {
+      "spellDc": 1
+    },
+    "gauntlet-of-the-tyrant": {
+      "spellDc": 1
+    },
+    "ring-of-feywild-sparks": {
+      "spellDc": 1
+    },
+    "nyrulna": {
+      "movement": 3
+    },
+    "elven-chain": {
+      "initiative": 2
+    },
+    "assassin-of-bhaal-cowl": {
+      "initiative": 2
+    },
+    "unwanted-masterwork-scalemail": {
+      "dexCap": 99
+    },
+    "duke-ravengards-longsword": {
+      "chaBonus": 2
+    },
+    "mourning-frost": {
+      "riders": [
+        {
+          "count": 1,
+          "die": 4,
+          "type": "Cold"
+        },
+        {
+          "count": 1,
+          "die": 1,
+          "type": "Cold"
+        }
+      ]
+    },
+    "elixir-of-the-colossus": {
+      "riders": [
+        {
+          "count": 1,
+          "die": 4,
+          "type": "weapon damage"
+        }
+      ]
+    },
+    "elixir-of-battlemages-power": {
+      "spellAttack": 3,
+      "spellDc": 3
+    },
+    "boots-of-persistence": {
+      "movement": 3
+    },
+    "blackguards-greaves": {
+      "movement": 3
+    },
+    "smugglers-ring": {
+      "chaBonus": -1
+    },
+    "daredevil-gloves": {
+      "spellAttack": 1
+    },
+    "the-graceful-cloth": {
+      "dexBonus": 2,
+      "dexBonusCap": 20,
+      "saveBonuses": {
+        "DEX": 1
+      }
+    },
+    "mask-of-soul-perception": {
+      "initiative": 2,
+      "attack": 2,
+      "skillBonuses": {
+        "Perception": 2
+      }
+    }
+  },
+  "POLISH_NAMES": {
+    "the-graceful-cloth": "Zgrabny habit"
+  },
+  "ITEM_NOTES": {
+    "elixir-of-battlemages-power": "Three stacks of Arcane Acuity until long rest. The wiki records a timing bug that can reduce this to two at the start of a combat turn.",
+    "elixir-of-the-colossus": "Enlarges the hero. Weapon hits gain 1d4 damage, and Strength checks and saves gain Advantage."
+  }
+}

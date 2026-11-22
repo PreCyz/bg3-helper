@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{shared::head('Choose equipment')}"></head>
+  <body>
+    <header th:replace="~{shared::nav}"></header>
+    <main class="wrap">
+      <div th:replace="~{shared::notice}"></div>
+      <div class="crumb">
+        <a href="sheet">Hero sheet</a><i>›</i><span th:text="${hero.name}"></span
+        ><i>›</i><span th:text="${slot.label}"></span>
+      </div>
+      <div class="page-top">
+        <div>
+          <h1 th:text="${slot.label}+' equipment'"></h1>
+          <p
+            th:text="'Compare your inventory against '+${hero.name}+'’s current loadout.'"
+          ></p>
+        </div>
+        <a
+          class="btn-gold"
+          th:href="@{inventory(tab='catalog',category=${category},q=${q})}"
+          ><svg th:replace="~{shared::icon('plus')}"></svg>Add inventory
+          items</a
+        >
+      </div>
+      <div class="inventory-tools">
+        <div th:with="current=${catalog.get(hero.gear.get(slot.name()))}">
+          <span class="small-label">Currently equipped</span
+          ><b th:text="${current == null ? 'Empty slot' : current.name}"></b>
+        </div>
+        <form class="filters" method="get">
+          <input type="hidden" name="heroId" th:value="${hero.id}" />
+          <input type="search" name="q" th:value="${q}" aria-label="Item name" placeholder="Search items…" />
+          <select th:if="${slot.name()=='CHEST'}" name="category" aria-label="Equipment type" data-submit>
+            <option value="">All chest equipment</option>
+            <option value="CLOTHING" th:selected="${clothingOnly}">Robes &amp; clothing</option>
+          </select>
+          <label
+            for="priority"
+            >Prioritize</label
+          ><select name="priority" id="priority" data-submit>
+            <option
+              th:each="p : ${priorities}"
+              th:value="${p.key}"
+              th:text="${p.value}"
+              th:selected="${p.key==objective}"
+            ></option></select
+          ><button class="btn-quiet">Rank items</button>
+        </form>
+      </div>
+      <div class="panel empty-state" th:if="${options.isEmpty()}">
+        <h2 th:text="${clothingOnly or !q.isBlank() ? 'No matching items in your inventory' : 'No items for this slot yet'}"></h2>
+        <p>
+          Add a compatible item from the offline catalog to compare it here.
+        </p>
+        <a
+          class="btn-quiet"
+          th:href="@{inventory(tab='catalog',category=${category},q=${q})}"
+          >Browse catalog</a
+        >
+      </div>
+      <div class="option-grid">
+        <article
+          class="panel option"
+          th:each="o : ${options}"
+          th:id="|item-${o.item.id}|"
+          th:with="it=${o.item},after=${o.after}"
+        >
+          <div class="panel-body">
+            <div class="option-head">
+              <div class="item-heading">
+                <div th:replace="~{shared::itemIcon(${it},${slot.icon})}"></div>
+                <div>
+                  <h2 th:text="${it.name}"></h2>
+                  <span class="metadata" lang="pl" th:if="${it.polishName}" th:text="${it.polishName}"></span>
+                  <div
+                    class="metadata"
+                    th:text="${it.rarity}+' · '+${o.free}+' available'"
+                  ></div>
+                </div>
+              </div>
+              <span class="level" th:if="${o.equipped}">Equipped</span>
+            </div>
+            <p th:text="${it.summary}"></p>
+            <div class="diff-grid">
+              <div
+                th:replace="~{shared::metric('Armour class',${after.ac},${before.ac})}"
+              ></div>
+              <div
+                th:replace="~{shared::metric('Hit points',${after.hp},${before.hp})}"
+              ></div>
+              <div
+                th:replace="~{shared::metric('Melee avg / hit',${after.melee.average},${before.melee.average})}"
+              ></div>
+              <div
+                th:replace="~{shared::metric('Ranged avg / hit',${after.ranged.average},${before.ranged.average})}"
+              ></div>
+              <div
+                th:replace="~{shared::metric('Spell save DC',${after.spellDc},${before.spellDc})}"
+              ></div>
+              <div
+                th:replace="~{shared::metric('Initiative',${after.initiative},${before.initiative})}"
+              ></div>
+              <div
+                th:replace="~{shared::metric('Melee attack',${after.melee.attack},${before.melee.attack})}"
+              ></div>
+              <div
+                th:replace="~{shared::metric('Ranged attack',${after.ranged.attack},${before.ranged.attack})}"
+              ></div>
+              <div
+                th:replace="~{shared::metric('Movement (m)',${after.movement},${before.movement})}"
+              ></div>
+            </div>
+            <details class="fold">
+              <summary>Ability scores &amp; saves</summary>
+              <div class="diff-grid">
+                <th:block th:each="a,i : ${shortNames}"
+                  ><div
+                    th:replace="~{shared::metric(${a},${after.scores[i.index]},${before.scores[i.index]})}"
+                  ></div>
+                  <div
+                    th:replace="~{shared::metric(${a+' save'},${after.saves[i.index]},${before.saves[i.index]})}"
+                  ></div
+                ></th:block>
+              </div>
+              <p th:each="note : ${after.notes}" th:text="${note}"></p>
+            </details>
+            <details class="fold" data-synergies th:attr="open=${synergyId == it.id ? 'open' : null}">
+              <summary>Equipment synergies</summary>
+              <div data-synergy-content>
+                <a th:unless="${synergyId == it.id}" data-load-synergies
+                   th:href="@{equipment/{s}(s=${slot.name()},heroId=${hero.id},priority=${objective},q=${q},category=${clothingOnly ? 'CLOTHING' : ''},synergy=${it.id})}+'#item-'+${it.id}">
+                  Show matching equipment
+                </a>
+                <th:block th:if="${synergyId == it.id}">
+                  <p class="help">Picks from the full catalog for this hero. Known item interactions come first, followed by build fit and stat gains. Gains compare against leaving the companion slot empty.</p>
+                  <p class="help" th:if="${slot.name() != 'CHEST'}">Armour and robes are alternatives for the chest slot.</p>
+                  <ul class="synergy-picks">
+                    <li th:each="pick : ${synergyPicks}">
+                      <small class="small-label" th:text="${pick.label}"></small>
+                      <th:block th:if="${pick.item != null}">
+                        <div class="item-heading">
+                          <div th:replace="~{shared::itemIcon(${pick.item},${pick.slot.icon})}"></div>
+                          <div>
+                            <a th:href="@{inventory(tab='catalog',q=${pick.item.name})}" th:text="${pick.item.name}"></a>
+                            <div class="metadata" th:text="${pick.availability}"></div>
+                          </div>
+                        </div>
+                      </th:block>
+                      <span class="help" th:text="${pick.reason}"></span>
+                    </li>
+                  </ul>
+                </th:block>
+              </div>
+            </details>
+            <div class="card-actions">
+              <a th:href="${it.source}" target="_blank" rel="noreferrer"
+                >Wiki entry ↗</a
+              >
+              <form
+                method="post"
+                th:action="@{equipment/{s}(s=${slot.name()})}"
+              >
+                <input
+                  type="hidden"
+                  name="heroId"
+                  th:value="${hero.id}"
+                /><button
+                  th:if="${o.equipped}"
+                  class="btn-quiet"
+                  name="itemId"
+                  value=""
+                >
+                  Unequip
+                </button>
+                <button
+                  th:unless="${o.equipped}"
+                  class="btn-gold"
+                  name="itemId"
+                  th:value="${it.id}"
+                  th:disabled="${o.free < 1 or !o.conflict.isEmpty()}"
+                  th:text="${o.free < 1 ? 'Assigned elsewhere' : 'Equip item'}"
+                ></button>
+              </form>
+            </div>
+            <small
+              th:if="${!o.conflict.isEmpty()}"
+              th:text="${o.conflict}"
+            ></small>
+          </div>
+        </article>
+      </div>
+    </main>
+    <footer th:replace="~{shared::footer}"></footer>
+  </body>
+</html>

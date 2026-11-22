@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{shared::head('Hero workshop')}"></head>
+  <body>
+    <header th:replace="~{shared::nav}"></header>
+    <main class="wrap">
+      <div th:replace="~{shared::notice}"></div>
+      <div class="crumb">
+        <a href="sheet">Hero sheet</a><i>›</i
+        ><span th:text="${creating?'New hero':'Edit hero'}"></span>
+      </div>
+      <div class="page-top">
+        <div>
+          <h1
+            th:text="${creating ? 'Create a hero' : 'Develop '+draft.name}"
+          ></h1>
+          <p>Preview each change before saving it to your party.</p>
+        </div>
+        <a class="btn-quiet" href="sheet">Cancel</a>
+      </div>
+      <div class="step-track">
+        <span th:classappend="${step==1}?'current'">1 · Identity</span
+        ><span th:classappend="${step==2}?'current'">2 · Abilities</span
+        ><span th:classappend="${step==3}?'current'">3 · Development</span>
+      </div>
+      <div class="wizard-grid">
+        <form
+          class="panel"
+          method="post"
+          action="heroes/wizard"
+          id="wizardForm"
+        >
+          <input type="hidden" name="partyId" th:value="${party.id}" />
+          <input type="hidden" name="id" th:value="${draft.id}" /><input
+            type="hidden"
+            name="creating"
+            th:value="${creating}"
+          /><input type="hidden" name="step" th:value="${step}" /><input
+            type="hidden"
+            name="buildId"
+            th:value="${draft.buildId}"
+          />
+          <section class="form-area" th:hidden="${step!=1}">
+            <h2>Hero identity</h2>
+            <div class="form-fields">
+              <label class="full"
+                >Hero name<input
+                  type="text"
+                  name="name"
+                  maxlength="60"
+                  th:value="${draft.name}"
+                  placeholder="Enter a name"
+                  autocomplete="off"
+              /></label>
+              <label>Gender<select name="gender">
+                <option th:each="g : ${genders}" th:value="${g}" th:selected="${draft.gender == g}" th:text="${g}"></option>
+              </select></label>
+              <label
+                >Race<select name="race">
+                  <option
+                    th:each="r : ${races}"
+                    th:value="${r.name}"
+                    th:id="|race-${r.name}|"
+                    th:selected="${selectedRace.name == r.name}"
+                    th:text="${r.name}"
+                  ></option></select
+              ></label>
+              <label th:each="r : ${races}" th:if="${!r.subraces.isEmpty()}"
+                     class="subrace-field" th:id="|subrace-${r.name}|">Subrace
+                <select th:name="|subrace.${r.name}|">
+                  <option th:each="s : ${r.subraces}" th:value="${s}"
+                          th:selected="${draft.race == s}" th:text="${s}"></option>
+                </select>
+              </label>
+              <label
+                >Class<select name="heroClass">
+                  <option
+                    th:each="c : ${classes}"
+                    th:value="${c}"
+                    th:selected="${draft.heroClass==c}"
+                    th:text="${c}"
+                  ></option></select
+              ></label>
+              <label
+                >Character level<input
+                  type="number"
+                  name="level"
+                  min="1"
+                  max="12"
+                  required
+                  th:value="${draft.level}"
+              /></label>
+            </div>
+          </section>
+          <section class="form-area" th:hidden="${step!=2}">
+            <h2>Base ability scores</h2>
+            <p class="help">
+              Enter your in-game base scores, including creation bonuses. Feats,
+              equipment and elixirs are added in the preview.
+            </p>
+            <div class="form-fields">
+              <label th:each="a,i : ${abilities}"
+                ><span th:text="${a}"></span
+                ><input
+                  type="number"
+                  name="score"
+                  min="3"
+                  max="30"
+                  required
+                  th:value="${draft.abilities[i.index]}"
+              /></label>
+            </div>
+          </section>
+          <section id="development" class="form-area" th:hidden="${step!=3}">
+            <h2>Class development</h2>
+            <p
+              class="help"
+              th:text="'Level '+${draft.level}+' '+${draft.heroClass}"
+            ></p>
+            <div class="form-fields">
+              <label
+                >Subclass<select name="subclass">
+                  <option
+                    th:each="v : ${subclasses}"
+                    th:text="${v}"
+                    th:value="${v}"
+                    th:selected="${v==draft.subclass}"
+                  ></option></select
+              ></label>
+              <label
+                >Fighting style<select name="style">
+                  <option
+                    th:each="v : ${styles}"
+                    th:text="${v}"
+                    th:value="${v}"
+                    th:selected="${v==draft.style}"
+                  ></option></select
+              ></label>
+              <label th:each="n : ${#numbers.sequence(0,skillSlots - 1)}"
+                ><span th:text="'Class skill '+${n+1}"></span
+                ><select name="skill">
+                  <option
+                    th:each="v : ${skills}"
+                    th:text="${v}"
+                    th:value="${v}"
+                    th:selected="${v==draft.skills[n]}"
+                  ></option></select
+              ></label>
+              <th:block th:if="${featSlots>0}"
+                ><label th:each="n : ${#numbers.sequence(0,featSlots - 1)}"
+                  ><span th:text="'Feat '+${n+1}"></span
+                  ><select name="feat">
+                    <option
+                      th:each="v : ${featChoices}"
+                      th:text="${v}"
+                      th:value="${v}"
+                      th:selected="${v==draft.feats[n]}"
+                    ></option></select></label
+              ></th:block>
+            </div>
+            <div class="fold">
+              <a th:href="${classSource}" target="_blank" rel="noreferrer"
+                >Class progression on BG3 Wiki ↗</a
+              >
+            </div>
+          </section>
+          <div class="wizard-buttons">
+            <button
+              class="btn-quiet"
+              type="submit"
+              name="action"
+              value="preview"
+            >
+              Update preview
+            </button>
+            <div>
+              <button
+                th:if="${step>1}"
+                class="btn-quiet"
+                name="action"
+                value="back"
+              >
+                Back</button
+              ><button
+                th:if="${step<3}"
+                class="btn-gold"
+                name="action"
+                value="next"
+              >
+                Continue</button
+              ><button
+                th:if="${step==3}"
+                class="btn-gold"
+                name="action"
+                value="save"
+                th:text="${creating ? 'Create hero' : 'Save changes'}"
+              ></button>
+            </div>
+          </div>
+        </form>
+        <aside
+          class="stack wizard-preview"
+          id="preview"
+          th:with="after=${stats}"
+        >
+          <section class="panel">
+            <div class="panel-head">
+              <svg th:replace="~{shared::icon('die')}"></svg>
+              <h2>Stat preview</h2>
+            </div>
+            <div class="panel-body">
+              <div class="preview-identity" th:with="art=${@avatarArt.forHero(draft)}">
+                <img th:if="${art.backdrop != null}" class="preview-scene" th:src="${art.backdrop}" alt="" />
+                <img class="preview-figure" th:src="${art.figure}" alt="" />
+                <span class="preview-caption">
+                  <img th:src="${art.emblem}" alt="" />
+                  <span th:text="${art.description}"></span>
+                </span>
+              </div>
+              <p
+                class="help"
+                th:text="${creating?'Changes from the starting level 1 Wood Elf Ranger.':'Changes from your saved hero.'}"
+              ></p>
+              <div class="wiz-scores">
+                <div
+                  class="wiz-score"
+                  th:each="a,i : ${shortNames}"
+                  th:with="change=${stats.scores[i.index]-before.scores[i.index]}"
+                >
+                  <small th:text="${a}"></small
+                  ><b th:text="${stats.scores[i.index]}"></b>
+                  <em
+                    th:if="${change!=0}"
+                    th:class="${change>0 ? 'up' : 'down'}"
+                    th:text="${@fmt.sign(change)}"
+                  ></em
+                  ><small
+                    th:text="'Modifier '+${@fmt.sign(stats.modifiers[i.index])}"
+                  ></small>
+                </div>
+              </div>
+              <div class="diff-grid">
+                <div
+                  th:replace="~{shared::metric('Armour class',${after.ac},${before.ac})}"
+                ></div>
+                <div
+                  th:replace="~{shared::metric('Hit points',${after.hp},${before.hp})}"
+                ></div>
+                <div
+                  th:replace="~{shared::metric('Melee avg / hit',${after.melee.average},${before.melee.average})}"
+                ></div>
+                <div
+                  th:replace="~{shared::metric('Ranged avg / hit',${after.ranged.average},${before.ranged.average})}"
+                ></div>
+                <div
+                  th:replace="~{shared::metric('Spell save DC',${after.spellDc},${before.spellDc})}"
+                ></div>
+                <div
+                  th:replace="~{shared::metric('Initiative',${after.initiative},${before.initiative})}"
+                ></div>
+                <div
+                  th:replace="~{shared::metric('Melee attack',${stats.melee.attack},${before.melee.attack})}"
+                ></div>
+                <div
+                  th:replace="~{shared::metric('Ranged attack',${stats.ranged.attack},${before.ranged.attack})}"
+                ></div>
+                <div
+                  th:replace="~{shared::metric('Movement (m)',${stats.movement},${before.movement})}"
+                ></div>
+                <div
+                  th:replace="~{shared::metric('Attacks per action',${stats.attacks},${before.attacks})}"
+                ></div>
+              </div>
+              <details class="fold">
+                <summary>Skills &amp; saving throws</summary>
+                <dl class="pairs">
+                  <th:block th:each="v : ${stats.skills}"
+                    ><dt th:text="${v.key}"></dt>
+                    <dd th:text="${@fmt.sign(v.value)}"></dd></th:block
+                  ><th:block th:each="a,i : ${shortNames}"
+                    ><dt th:text="${a}+' save'"></dt>
+                    <dd th:text="${@fmt.sign(stats.saves[i.index])}"></dd
+                  ></th:block>
+                </dl>
+              </details>
+              <details class="fold" th:open="${step==3}">
+                <summary>Features &amp; spell examples</summary>
+                <ul class="clean-list">
+                  <li th:each="t : ${stats.traits}" th:text="${t}"></li>
+                  <li
+                    th:each="s : ${stats.spells}"
+                    th:text="${s.name}+' · '+${s.formula}+' · '+${s.detail}"
+                  ></li>
+                </ul>
+              </details>
+            </div>
+          </section>
+        </aside>
+      </div>
+      <span
+        id="preview-status"
+        aria-live="polite"
+        class="visually-hidden"
+      ></span>
+    </main>
+    <footer th:replace="~{shared::footer}"></footer>
+  </body>
+</html>

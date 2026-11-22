@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{shared::head('Build library')}"></head>
+  <body>
+    <header th:replace="~{shared::nav}"></header>
+    <main class="wrap">
+      <div class="crumb"><a href="parties" th:text="${party.name}"></a><i>›</i>Build library</div>
+      <div class="page-top">
+        <div>
+          <h1>Build library</h1>
+          <p>
+            Start with a community build, then adjust its abilities and
+            equipment for your party.
+          </p>
+        </div>
+      </div>
+      <div class="build-grid">
+        <article class="panel build-card" th:each="b : ${builds}">
+          <img th:src="${b.art}" alt="" />
+          <div class="panel-body">
+            <span class="section-label" th:text="${b.role}"></span>
+            <h2 th:text="${b.name}"></h2>
+            <small
+              th:text="${b.subclass}+' · Level '+${b.level}+' '+${b.heroClass}"
+            ></small>
+            <p th:text="${b.summary}"></p>
+            <details class="fold">
+              <summary>Starting setup</summary>
+              <p th:text="${b.race}+' · '+${b.subclass}"></p>
+              <p><span th:each="score,i : ${b.abilities}"
+                       th:text="${shortNames[i.index]}+' '+${score}+${i.last ? '' : ' · '}"></span></p>
+              <p th:text="'Skills · '+${#strings.listJoin(b.skills, ', ')}"></p>
+              <p th:if="${b.style != 'None'}" th:text="'Fighting style · '+${b.style}"></p>
+            </details>
+            <h3>Equipment goals</h3>
+            <ul class="clean-list">
+              <li th:each="id : ${b.items}" th:if="${catalog.get(id) != null}">
+                <a
+                  th:href="@{inventory(tab='catalog',q=${catalog.get(id).name})}"
+                  th:text="${catalog.get(id).name}"
+                ></a>
+              </li>
+            </ul>
+            <details class="fold">
+              <summary>Development path</summary>
+              <ol class="track-levels">
+                <li th:each="line,i : ${b.milestones}"><strong th:text="'Level '+${i.count}"></strong>
+                  <span th:text="${line}"></span></li>
+              </ol>
+              <p th:text="${b.note}"></p>
+              <a
+                th:href="${b.guide}"
+                th:text="${b.guideName}"
+                target="_blank"
+                rel="noreferrer"
+              ></a>
+            </details>
+          </div>
+          <div class="card-actions">
+            <a
+              th:href="'https://bg3.wiki/wiki/'+${b.wiki}"
+              target="_blank"
+              rel="noreferrer"
+              >Wiki subclass ↗</a
+            ><a class="btn-gold" th:href="@{heroes/new(build=${b.id})}"
+              >Use build</a
+            >
+          </div>
+        </article>
+      </div>
+    </main>
+    <footer th:replace="~{shared::footer}"></footer>
+  </body>
+</html>

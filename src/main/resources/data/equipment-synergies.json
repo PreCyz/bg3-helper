@@ -1,0 +1,62 @@
+[
+  {
+    "enablers": ["shadow-of-menzoberranzan", "the-deathstalker-mantle"],
+    "partners": ["hellfire-hand-crossbow"],
+    "reason": "Invisibility sets up Hellstalker’s chance to burn the target on a weapon hit."
+  },
+  {
+    "enablers": ["shadow-of-menzoberranzan", "the-deathstalker-mantle"],
+    "partners": ["rhapsody"],
+    "reason": "Attack from invisibility with Rhapsody for a chance to inflict Bleeding."
+  },
+  {
+    "enablers": ["helmet-of-arcane-acuity"],
+    "partners": ["band-of-the-mystic-scoundrel"],
+    "reason": "A damaging weapon hit builds Arcane Acuity and unlocks a bonus-action illusion or enchantment that turn."
+  },
+  {
+    "enablers": ["the-spellsparkler", "the-sparkle-hands", "the-speedy-lightfeet"],
+    "partners": ["the-lifebringer"],
+    "reason": "Generating Lightning Charges also grants temporary hit points through The Lifebringer."
+  },
+  {
+    "enablers": ["the-spellsparkler", "the-sparkle-hands", "the-speedy-lightfeet"],
+    "partners": ["the-jolty-vest"],
+    "reason": "Generating Lightning Charges enables the vest’s Countershock when the wearer takes damage."
+  },
+  {
+    "enablers": ["hellfire-hand-crossbow", "gloves-of-cinder-and-sizzle"],
+    "partners": ["hat-of-fire-acuity"],
+    "reason": "Use the granted Scorching Ray attack to deal fire damage and build Arcane Acuity."
+  },
+  {
+    "enablers": ["callous-glow-ring"],
+    "partners": ["luminous-armour", "luminous-gloves"],
+    "reason": "Against an illuminated target, the ring adds radiant damage that can trigger Radiating Orb."
+  },
+  {
+    "enablers": ["mourning-frost", "cold-snap"],
+    "partners": ["snowburst-ring"],
+    "reason": "Cold damage from the weapon can create ice under the target through Snowburst."
+  },
+  {
+    "enablers": ["amulet-of-restoration"],
+    "partners": ["wapiras-crown", "hellriders-pride", "the-whispering-promise", "the-reviving-hands"],
+    "reason": "The amulet grants Healing Word and Mass Healing Word. Heal an ally to trigger the paired item’s healing effect."
+  },
+  {
+    "enablers": ["titanstring-bow"],
+    "partners": ["club-of-hill-giant-strength", "gauntlets-of-hill-giant-strength", "elixir-of-hill-giant-strength", "elixir-of-cloud-giant-strength"],
+    "reason": "Titanstring adds the Strength modifier to bow damage. Raising Strength improves that bonus when it exceeds the hero’s existing score."
+  },
+  {
+    "enablers": ["amulet-of-the-drunkard"],
+    "partners": ["drunken-cloth", "punch-drunk-bastard"],
+    "reason": "Drinking activates these effects together, and the amulet extends the duration of the Drunk condition."
+  },
+  {
+    "enablers": ["covert-cowl", "shade-slayer-cloak"],
+    "partners": ["the-dead-shot", "knife-of-the-undermountain-king"],
+    "reason": "Their critical-hit threshold reductions can stack when the headwear or cloak’s positioning condition is met."
+  }
+]

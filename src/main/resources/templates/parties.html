@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{shared::head('Manage parties')}"></head>
+  <body>
+    <header th:replace="~{shared::nav}"></header>
+    <main class="wrap">
+      <div th:replace="~{shared::notice}"></div>
+      <div class="page-top">
+        <div><h1>Parties</h1><p>Each party keeps its own heroes and inventory.</p></div>
+        <form class="filters" method="post" action="parties">
+          <label for="partyName">Party name</label>
+          <input id="partyName" name="name" maxlength="60" required />
+          <button class="btn-gold">Create party</button>
+        </form>
+      </div>
+      <p class="panel empty-state" th:if="${parties.isEmpty()}">Create a party to start adding heroes.</p>
+      <div class="option-grid">
+        <section class="panel" th:each="p : ${parties}" th:with="current=${p.id == party.id}">
+          <div class="panel-head">
+            <svg th:replace="~{shared::icon('shield')}"></svg>
+            <h2 class="text-break" th:text="${p.name}"></h2>
+            <span class="count-pill" th:if="${current}">Active</span>
+          </div>
+          <div class="panel-body">
+            <p class="help" th:if="${p.heroes.isEmpty()}">No heroes in this party yet.</p>
+            <ul class="clean-list">
+              <li class="roster-row" th:each="h : ${p.heroes}">
+                <div class="roster-identity"><span th:replace="~{shared::portrait(${h})}"></span>
+                  <div><b th:text="${h.name}"></b><small th:text="' · Level '+${h.level}+' '+${h.heroClass}"></small></div>
+                </div>
+                <a class="remove-link" th:href="@{parties/{p}/heroes/{h}/remove(p=${p.id},h=${h.id})}"
+                   th:aria-label="'Remove '+${h.name}">Remove hero</a>
+              </li>
+            </ul>
+          </div>
+          <div class="card-actions">
+            <form th:unless="${current}" method="post" th:action="@{parties/{id}/switch(id=${p.id})}">
+              <button class="btn-gold">Switch party</button>
+            </form>
+            <div class="actions" th:if="${current}">
+              <a class="btn-quiet" href="sheet" th:if="${p.active != null}">Hero sheet</a>
+              <a class="btn-gold" href="heroes/new">New hero</a>
+            </div>
+            <a class="remove-link" th:href="@{parties/{id}/remove(id=${p.id})}">Remove party</a>
+          </div>
+        </section>
+      </div>
+    </main>
+    <footer th:replace="~{shared::footer}"></footer>
+  </body>
+</html>

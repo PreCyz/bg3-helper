@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+  <filter id="sharpen" x="0%" y="0%" width="100%" height="100%" color-interpolation-filters="sRGB">
+    <!-- A unit-sum kernel increases local detail while preserving flat colours and the cutout silhouette. -->
+    <feConvolveMatrix order="3" kernelMatrix="0 -1 0  -1 8 -1  0 -1 0" divisor="4" preserveAlpha="true"/>
+  </filter>
+</svg>

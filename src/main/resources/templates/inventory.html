@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{shared::head('Inventory')}"></head>
+  <body>
+    <header th:replace="~{shared::nav}"></header>
+    <main class="wrap">
+      <div th:replace="~{shared::notice}"></div>
+      <div class="crumb"><a href="parties" th:text="${party.name}"></a><i>›</i>Inventory</div>
+      <div class="page-top">
+        <div>
+          <h1>Party inventory</h1>
+          <p
+            th:text="${totalOwned}+' owned copies across '+${party.heroes.size()}+' party '+${party.heroes.size()==1?'member':'members'}"
+          ></p>
+        </div>
+      </div>
+      <div class="inventory-tools">
+        <div class="tabs">
+          <a th:href="@{inventory(tab='owned',q=${q},category=${category})}" th:classappend="${tab=='owned'}?'active'"
+            >My inventory</a
+          ><a
+            th:href="@{inventory(tab='catalog',q=${q},category=${category})}"
+            th:classappend="${tab=='catalog'}?'active'"
+            >Wiki catalog</a
+          >
+        </div>
+        <form class="filters" action="inventory">
+          <input type="hidden" name="tab" th:value="${tab}" /><label
+            class="search"
+            ><svg th:replace="~{shared::icon('search')}"></svg
+            ><input
+              name="q"
+              th:value="${q}"
+              type="search"
+              aria-label="Item name"
+              placeholder="Search items…"
+          /></label>
+          <select name="category" aria-label="Equipment type">
+            <option value="">All equipment</option>
+            <option value="CLOTHING" th:selected="${category=='CLOTHING'}">Robes &amp; clothing</option>
+            <option
+              th:each="s : ${categories}"
+              th:with="key=${s.name()=='RING1'?'RING':s.name()}"
+              th:value="${key}"
+              th:text="${@fmt.slot(key)}"
+              th:selected="${category==key}"
+            ></option></select
+          ><button class="btn-quiet">Search</button>
+        </form>
+      </div>
+      <p class="help" th:text="${count}+' matching items'"></p>
+      <div class="catalog-grid">
+        <article class="panel inventory-card" th:each="it : ${items}">
+          <div class="panel-body">
+            <div class="item-heading" th:with="slotIcon=${@fmt.icon(it.slot)}">
+              <div th:replace="~{shared::itemIcon(${it},${slotIcon})}"></div>
+              <div>
+                <h2 th:text="${it.name}"></h2>
+                <span class="metadata" lang="pl" th:if="${it.polishName}" th:text="${it.polishName}"></span>
+                <div
+                  class="metadata"
+                  th:text="${it.rarity}+' · '+${@fmt.slot(it.slot)}"
+                ></div>
+              </div>
+            </div>
+            <p th:text="${it.summary}"></p>
+            <div
+              class="metadata"
+              th:text="${party.stock.getOrDefault(it.id,0)}+' owned · '+${party.available(it.id)}+' available'"
+            ></div>
+            <th:block th:each="p : ${party.heroes}"
+              ><small
+                th:if="${p.gear.containsValue(it.id)}"
+                th:text="'Equipped by '+${p.name}+' '"
+              ></small
+            ></th:block>
+          </div>
+          <div class="card-actions">
+            <a th:href="${it.source}" target="_blank" rel="noreferrer"
+              >Wiki entry ↗</a
+            >
+            <form action="inventory/add" method="post">
+              <input type="hidden" name="partyId" th:value="${party.id}" />
+              <input type="hidden" name="id" th:value="${it.id}" /><input
+                type="hidden"
+                name="tab"
+                th:value="${tab}"
+              /><input type="hidden" name="q" th:value="${q}" /><input
+                type="hidden"
+                name="category"
+                th:value="${category}"
+              /><input type="hidden" name="page" th:value="${current}" />
+              <input
+                type="number"
+                class="quantity"
+                name="quantity"
+                aria-label="Number of copies"
+                min="1"
+                max="99"
+                value="1"
+                required
+              /><button class="btn-soft" name="change" value="add">Add</button
+              ><button
+                class="btn-quiet"
+                th:if="${tab=='owned' and party.available(it.id)>0}"
+                name="change"
+                value="remove"
+              >
+                Remove
+              </button>
+            </form>
+          </div>
+        </article>
+      </div>
+      <div class="panel empty-state" th:if="${items.isEmpty()}">
+        <h2>No matching items</h2>
+        <p>Try a different search or browse the full catalog.</p>
+        <a th:if="${tab=='owned'}" th:href="@{inventory(tab='catalog',q=${q},category=${category})}"
+           class="btn-quiet">Search wiki catalog</a>
+        <a th:unless="${tab=='owned'}" href="inventory?tab=catalog" class="btn-quiet">Clear filters</a>
+      </div>
+      <nav class="pager" th:if="${pages>1}" aria-label="Catalog pages">
+        <a
+          class="btn-quiet"
+          th:if="${current>1}"
+          th:href="@{inventory(tab=${tab},q=${q},category=${category},page=${current-1})}"
+          >Previous</a
+        ><span th:text="${current}+' / '+${pages}"></span
+        ><a
+          class="btn-quiet"
+          th:if="${current<pages}"
+          th:href="@{inventory(tab=${tab},q=${q},category=${category},page=${current+1})}"
+          >Next</a
+        >
+      </nav>
+    </main>
+    <footer th:replace="~{shared::footer}"></footer>
+  </body>
+</html>

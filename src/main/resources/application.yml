@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: Faerun Forge
+  web:
+    error:
+      include-message: never
+  thymeleaf:
+    cache: false
+server:
+  address: 127.0.0.1
+  port: 8080
+  servlet:
+    session:
+      tracking-modes: cookie
+forge:
+  save-file: data/party.json

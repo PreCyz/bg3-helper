@@ -1,0 +1,16 @@
+Equipment data and item thumbnails
+
+This offline equipment snapshot was adapted from the equipment tables maintained
+by the BG3 Wiki community at https://bg3.wiki/. The source field of each JSON
+record links to its wiki article and contributor history. The importer combines
+category tables, normalises fields for calculation, converts HTML descriptions
+to plain text, and deduplicates thumbnails.
+
+The adapted wiki text is provided under CC BY-NC-SA 4.0.
+https://creativecommons.org/licenses/by-nc-sa/4.0/
+https://bg3.wiki/wiki/bg3wiki:Copyrights
+
+Item icons and in-game names and descriptions are based on Baldur's Gate 3.
+Game assets belong to their respective rights holders, including Larian Studios
+and Wizards of the Coast. Their use here is for identification in a local fan
+planner. The applicable source and fan content policies are linked above.
