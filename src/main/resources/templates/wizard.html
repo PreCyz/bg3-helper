@@ -36,11 +36,19 @@
             type="hidden"
             name="creating"
             th:value="${creating}"
-          /><input type="hidden" name="step" th:value="${step}" /><input
-            type="hidden"
-            name="buildId"
-            th:value="${draft.buildId}"
-          />
+          /><input type="hidden" name="step" th:value="${step}" />
+          <input type="hidden" name="originalBuildId" th:value="${originalBuildId}" />
+          <div class="form-area form-fields">
+            <label class="full">[[#{advisor.follow}]]
+              <select name="buildId">
+                <option value="">[[#{advisor.automatic}]]</option>
+                <option th:each="m : ${advice.ranked}" th:value="${m.plan.id}" th:text="${m.plan.name}"
+                        th:selected="${m.plan.id == draft.buildId}"></option>
+              </select>
+            </label>
+            <button class="btn-quiet" name="action" value="preview" formaction="heroes/wizard#build-advisor"
+                    th:text="#{advisor.title}"></button>
+          </div>
           <section class="form-area" th:hidden="${step!=1}">
             <h2>[[#{ui.hero.identity}]]</h2>
             <div class="form-fields">
@@ -53,6 +61,11 @@
                   th:placeholder="#{ui.enter.a.name}"
                   autocomplete="off"
               /></label>
+              <label>[[#{advisor.background}]]<select name="background">
+                <option value="" th:text="#{advisor.unknown}"></option>
+                <option th:each="b : ${backgrounds}" th:value="${b.key}" th:selected="${b.key == draft.background}"
+                        th:text="|${@words.text(b.key)} · ${@words.list(b.value)}|"></option>
+              </select></label>
               <label>[[#{ui.gender}]]<select name="gender">
                 <option th:each="g : ${genders}" th:value="${g}" th:selected="${draft.gender == g}" th:text="${@words.text(g)}"></option>
               </select></label>
@@ -221,6 +234,14 @@
               ></th:block>
             </div>
             <div class="fold">
+              <input type="hidden" name="loadoutPresent" value="1" />
+              <fieldset th:unless="${loadoutOptions.isEmpty()}" class="loadout-options">
+                <legend th:text="#{advisor.record}"></legend>
+                <label th:each="pick : ${loadoutOptions}">
+                  <input type="checkbox" name="loadout" th:value="${pick}" th:checked="${draft.loadout.contains(pick)}" />
+                  <span th:text="${@words.text(pick)}"></span>
+                </label>
+              </fieldset>
               <a th:href="${classSource}" target="_blank" rel="noreferrer"
                 >[[#{ui.class.progression.on.bg3.wiki}]]</a
               >
@@ -265,6 +286,7 @@
           id="preview"
           th:with="after=${stats}"
         >
+          <section th:replace="~{advice::advisor(${draft},true)}"></section>
           <section class="panel">
             <div class="panel-head">
               <svg th:replace="~{shared::icon('die')}"></svg>

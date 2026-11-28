@@ -103,8 +103,7 @@ if (form) {
         );
         if (revision !== sequence) return;
         const before = document.getElementById("development");
-        const selects = [...before.querySelectorAll("select")];
-        const focusIndex = selects.indexOf(document.activeElement);
+        const focus = before.contains(document.activeElement) ? document.activeElement : null;
         const after = page.getElementById("development");
         const preview = page.getElementById("preview");
         if (!after || !preview) throw new Error("Incomplete preview");
@@ -116,10 +115,12 @@ if (form) {
           .forEach((d, i) => (d.open = expanded[i] ?? d.open));
         before.replaceWith(after);
         document.getElementById("preview").replaceWith(preview);
-        if (focusIndex >= 0)
-          after
-            .querySelectorAll("select")
-            [focusIndex]?.focus({ preventScroll: true });
+        if (focus?.name) {
+          const inputs = [...after.querySelectorAll("select, input")].filter(input => input.name === focus.name);
+          const index = [...before.querySelectorAll("select, input")].filter(input => input.name === focus.name).indexOf(focus);
+          const replacement = focus.type === "checkbox" ? inputs.find(input => input.value === focus.value) : inputs[index];
+          replacement?.focus({ preventScroll: true });
+        }
         status.textContent = form.dataset.updated;
       } catch (error) {
         if (error.name !== "AbortError") {

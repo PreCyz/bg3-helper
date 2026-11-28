@@ -174,6 +174,10 @@ public class PartyStore {
     }
 
     public void save(String partyId, Hero draft, boolean creating) throws IOException {
+        save(partyId, draft, creating, false);
+    }
+
+    void save(String partyId, Hero draft, boolean creating, boolean changeTrack) throws IOException {
         update(p -> {
             requireParty(p, partyId);
             if (creating) {
@@ -185,7 +189,7 @@ public class PartyStore {
                 }
             } else {
                 Hero current = p.hero(draft.id);
-                draft.buildId = current.buildId;
+                if (!changeTrack) draft.buildId = current.buildId;
                 draft.gear = new LinkedHashMap<>(current.gear);
                 Item off = catalog.items.get(draft.gear.get("OFFHAND"));
                 if (off != null && off.slot.equals("MELEE")

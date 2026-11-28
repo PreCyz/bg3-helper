@@ -20,6 +20,8 @@ import java.util.*;
 public class ForgeController {
     private final Catalog catalog;
     private final EquipmentSynergies synergies;
+    private final BuildAdvisor advisor;
+    private PartyStore.Campaigns campaigns;
     private final PartyStore store;
     private final String basePath;
     static final List<String> ABILITIES = List.of("Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma");
@@ -28,9 +30,10 @@ public class ForgeController {
     static final List<Slot> LEFT = List.of(Slot.HEAD, Slot.CHEST, Slot.HANDS, Slot.FEET, Slot.MELEE, Slot.RANGED);
     static final List<Slot> RIGHT = List.of(Slot.CLOAK, Slot.NECK, Slot.RING1, Slot.RING2, Slot.OFFHAND, Slot.ELIXIR);
 
-    ForgeController(Catalog catalog, EquipmentSynergies synergies, PartyStore saved, HttpServletRequest request) {
+    ForgeController(Catalog catalog, EquipmentSynergies synergies, BuildAdvisor advisor, PartyStore saved, HttpServletRequest request) {
         this.catalog = catalog;
         this.synergies = synergies;
+        this.advisor = advisor;
         String route = (String) request.getAttribute(HandlerMapping.BEST_MATCHING_PATTERN_ATTRIBUTE);
         boolean demo = route.startsWith("/demo/");
         basePath = demo ? "/demo/" : "/";
@@ -65,8 +68,13 @@ public class ForgeController {
         m.addAttribute("abilityIcons", ABILITY_ICONS);
     }
 
+    private PartyStore.Campaigns campaigns() {
+        if (campaigns == null) campaigns = store.campaigns();
+        return campaigns;
+    }
+
     private PartyStore.Party page(Model m, String section) {
-        PartyStore.Party party = store.snapshot();
+        PartyStore.Party party = campaigns().current();
         if (party == null) throw new NoActiveParty();
         layout(m, section, party);
         return party;
@@ -146,6 +154,10 @@ public class ForgeController {
         m.addAttribute("rightSlots", RIGHT);
         m.addAttribute("slotCount", Slot.values().length);
         String selectedId = track.isBlank() ? h.buildId : track;
+        var advice = advisor.recommend(h, campaigns.personalBuilds, selectedId);
+        m.addAttribute("advice", advice);
+        m.addAttribute("gearPicks", advisor.fillEmptySlots(p, h, advice.selected().plan()));
+        if (selectedId.isBlank()) selectedId = advice.selected().plan().id();
         var preview = catalog.build(selectedId);
         var personal = campaigns.personalBuild(selectedId);
         if (!track.isBlank() && preview == null && personal == null)
@@ -330,10 +342,10 @@ public class ForgeController {
     }
 
     @GetMapping("/heroes/{id}/edit")
-    String edit(@PathVariable String id, Model m) {
+    String edit(@PathVariable String id, @RequestParam(defaultValue = "1") int step, Model m) {
         var p = page(m, "wizard");
         var h = p.hero(id);
-        return wizard(m, h.copy(), h, false, 1);
+        return wizard(m, h.copy(), h, false, Math.clamp(step, 1, 3));
     }
 
     @PostMapping("/heroes/wizard")
@@ -346,6 +358,7 @@ public class ForgeController {
                    @RequestParam(required = false) Integer plusOne, @RequestParam(defaultValue = "None") String subclass,
                    @RequestParam(defaultValue = "None") String style, @RequestParam(name = "skill", required = false) List<String> skills,
                    @RequestParam(name = "feat", required = false) List<String> feats, @RequestParam(defaultValue = "") String buildId,
+                   @RequestParam(required = false) List<String> loadout,
                    @RequestParam(defaultValue = "1") int step, @RequestParam(defaultValue = "preview") String action,
                    Model m, RedirectAttributes flash) throws IOException {
         var p = page(m, "wizard");
@@ -362,6 +375,11 @@ public class ForgeController {
         Hero h = base.copy();
         h.id = id;
         h.name = name.strip();
+        if (fields.containsKey("background")) {
+            h.background = fields.get("background");
+            if (!h.background.isEmpty() && !Rules.BACKGROUNDS.containsKey(h.background))
+                throw new IllegalArgumentException("Choose a background from the list.");
+        }
         if (gender != null) {
             if (!Hero.GENDERS.contains(gender)) throw new IllegalArgumentException("Choose a gender from the list.");
             h.gender = gender;
@@ -415,9 +433,16 @@ public class ForgeController {
         h.feat = "None";
         h.skills = skills == null ? new ArrayList<>() : new ArrayList<>(skills);
         h.feats = feats == null ? new ArrayList<>() : new ArrayList<>(feats);
-        var preset = catalog.build(buildId);
-        h.buildId = preset != null && (h.levelsIn(preset.heroClass()) > 0 || buildId.equals(base.buildId)) ? buildId : "";
+        if (action.startsWith("guide.")) buildId = action.substring("guide.".length());
+        if (!buildId.isBlank() && catalog.build(buildId) == null && campaigns().personalBuild(buildId) == null)
+            throw new IllegalArgumentException("Unknown development track.");
+        h.buildId = buildId;
         Rules.normalizeChoices(h);
+        if (fields.containsKey("loadoutPresent")) {
+            var options = advisor.loadoutOptions(h);
+            h.loadout = loadout == null ? new ArrayList<>() :
+                    new ArrayList<>(loadout.stream().distinct().filter(options::contains).toList());
+        }
         if (allocation != null) {
             m.addAttribute("allocation", allocation);
             if (!allocation.complete() && ("save".equals(action) || ("next".equals(action) && step == 2))) {
@@ -429,7 +454,8 @@ public class ForgeController {
             }
         }
         if ("save".equals(action) && !h.name.isBlank()) {
-            store.save(partyId, h, creating);
+            String original = fields.get("originalBuildId");
+            store.save(partyId, h, creating, original != null && !original.equals(h.buildId));
             flash.addFlashAttribute("notice", GameText.format(creating ? "{0} joined your party." : "{0} updated.", h.name));
             return redirect("sheet");
         }
@@ -438,6 +464,7 @@ public class ForgeController {
             step = 1;
         } else if ("next".equals(action)) step++;
         else if ("back".equals(action)) step--;
+        m.addAttribute("originalBuildId", fields.getOrDefault("originalBuildId", base.buildId));
         return wizard(m, h, base, creating, Math.clamp(step, 1, 3));
     }
 
@@ -465,16 +492,22 @@ public class ForgeController {
     private String wizard(Model m, Hero h, Hero base, boolean creating, int step) {
         Rules.normalizeChoices(h);
         m.addAttribute("draft", h);
+        var advice = advisor.recommend(h, campaigns().personalBuilds, h.buildId);
+        m.addAttribute("advice", advice);
         if (creating) {
             if (!m.containsAttribute("allocation")) m.addAttribute("allocation", PointBuy.recommended(h.abilities));
             m.addAttribute("pointCosts", PointBuy.COST);
         }
+        m.addAttribute("gearPicks", advisor.fillEmptySlots(campaigns().current(), h, advice.selected().plan()));
+        if (!m.containsAttribute("originalBuildId")) m.addAttribute("originalBuildId", base.buildId);
+        m.addAttribute("loadoutOptions", advisor.loadoutOptions(h));
         m.addAttribute("creating", creating);
         m.addAttribute("step", step);
         m.addAttribute("classes", Rules.classes());
         m.addAttribute("races", Rules.PLAYABLE_RACES);
         m.addAttribute("selectedRace", Rules.raceFor(h.race));
         m.addAttribute("genders", Hero.GENDERS);
+        m.addAttribute("backgrounds", Rules.BACKGROUNDS);
         m.addAttribute("subclasses", Rules.subclasses(h.heroClass, h.startingLevel()));
         m.addAttribute("styles", Rules.styles(h.heroClass, h.subclass, h.startingLevel()));
         m.addAttribute("skills", Rules.skills(h.heroClass));

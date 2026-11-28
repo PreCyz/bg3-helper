@@ -1,0 +1,122 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<section th:fragment="advisor(character,editing)" id="build-advisor" class="panel mt-3"
+         th:with="chosen=${advice.selected},plan=${chosen.plan},target=${plan.target}">
+  <div class="panel-head">
+    <svg th:replace="~{shared::icon('book')}"></svg>
+    <h2 th:text="#{advisor.title}"></h2>
+  </div>
+  <div class="panel-body">
+    <h3 th:text="#{advisor.matches}"></h3>
+    <ol class="advice-matches">
+      <li th:each="m : ${advice.bestFits()}">
+        <button th:if="${editing}" class="btn-quiet" form="wizardForm" name="action" th:value="|guide.${m.plan.id}|"
+                formaction="heroes/wizard#build-advisor" th:text="${m.plan.name}"></button>
+        <a th:unless="${editing}" class="btn-quiet" th:href="@{sheet(track=${m.plan.id},mode=${mode})}+'#build-advisor'"
+           th:text="${m.plan.name}"></a>
+        <small th:text="#{advisor.fit(${@words.text(m.plan.target.heroClass)},${m.classLevel},${m.skills},${m.gear})}"></small>
+        <small th:unless="${m.plan.profile.abilities.isEmpty()}" th:text="#{advisor.fitScores(${m.coreScores},${m.plan.profile.abilities.size()})}"></small>
+      </li>
+    </ol>
+    <h3 th:text="${plan.name}"></h3>
+    <p><strong th:text="${@words.classes(target)}"></strong> · <span th:text="${@words.text(target.subclass)}"></span>
+      <span th:if="${chosen.classLevel == 0}" th:text="#{advisor.needsClass}"></span></p>
+    <p th:if="${chosen.classLevel > 0 and !chosen.pathMatches and target.subclass != 'None'}"
+       th:text="#{advisor.subclassGoal(${@words.text(target.subclass)})}"></p>
+    <th:block th:unless="${editing}">
+      <th:block th:replace="~{shared::followTrack(${plan.id})}"></th:block>
+    </th:block>
+    <div class="advice-steps">
+      <div th:if="${advice.current != null}">
+        <h4 th:text="#{advisor.now(${@words.text(advice.current.career)},${advice.current.level})}"></h4>
+        <p th:text="${@words.text(advice.current.description)}"></p>
+      </div>
+      <div th:if="${advice.next != null}">
+        <h4 th:text="#{advisor.next(${@words.text(advice.next.career)},${advice.next.level})}"></h4>
+        <p th:if="${plan.guide != null}" th:text="${@words.text(advice.next.description)}"></p>
+        <p th:each="g : ${advice.upcoming}">
+          <strong th:text="#{|advisor.${g.kind}|}"></strong> · <span th:text="${@words.list(g.picks)}"></span>
+        </p>
+      </div>
+    </div>
+    <div th:unless="${advice.feats.isEmpty()}">
+      <h4 th:text="#{advisor.featPlan(${@words.text(target.heroClass)},${advice.goalLevel})}"></h4>
+      <ul class="clean-list">
+        <li th:each="f : ${advice.feats}">
+          <strong th:text="#{format.level(${f.level})}"></strong> · <span th:text="${@words.text(f.feat)}"></span> ·
+          <span th:text="${f.taken} ? #{advisor.recorded} : #{advisor.unrecorded}"></span>
+        </li>
+        <li th:each="s : ${advice.increases}" th:text="#{advisor.increase(${@words.text(s.ability)},${s.actual},${s.target})}"></li>
+      </ul>
+    </div>
+    <details class="fold" th:open="${character.level == 1 or editing}">
+      <summary th:text="${plan.guide == null} ? #{advisor.snapshot} : #{advisor.creation}"></summary>
+      <p th:text="#{advisor.race(${@words.text(target.race)})}"></p>
+      <table class="advice-scores" th:with="start=${advice.startingAllocation()}">
+        <thead><tr><th th:text="#{ui.ability.scores}"></th><th th:text="#{advisor.yours}"></th>
+          <th>[[#{ui.starting.scores}]]</th>
+          <th th:if="${plan.guide == null}" th:text="#{advisor.target}"></th></tr></thead>
+        <tbody><tr th:each="s,i : ${advice.scores}" th:with="bonus=${start.bonus(i.index)}">
+          <th scope="row"><span th:text="${@words.text(s.ability)}"></span>
+            <small th:if="${s.core}" th:text="#{advisor.core}"></small></th>
+          <td th:text="${s.actual}"></td>
+          <td><span th:if="${bonus > 0}" th:text="|${start.base[i.index]} + ${bonus} = |"></span><b th:text="${start.base[i.index] + bonus}"></b></td>
+          <td th:if="${plan.guide == null}" th:text="${s.target}"></td>
+        </tr></tbody>
+      </table>
+      <p th:if="${plan.guide != null}" class="help" th:text="#{advisor.abilityHelp}"></p>
+      <ul class="clean-list">
+        <li th:each="s : ${advice.skillGoals}">
+          <strong th:text="${@words.text(s)}"></strong> ·
+          <span th:text="${plan.profile.skills.contains(s)} ? #{advisor.coreSkill} : #{advisor.suggested}"></span> ·
+          <span th:text="${advice.trained.contains(s)} ? #{advisor.trained} : #{advisor.missing}"></span>
+        </li>
+      </ul>
+      <p th:if="${plan.guide == null and !target.feats.isEmpty()}" th:text="|#{ui.feats} · ${@words.list(target.feats)}|"></p>
+    </details>
+    <details class="fold" open>
+      <summary th:text="#{advisor.loadout}"></summary>
+      <p th:if="${advice.available.isEmpty() and target.loadout.isEmpty()}" th:text="#{advisor.noPicks}"></p>
+      <ul class="clean-list">
+        <li th:each="g : ${advice.available}"><strong th:text="#{|advisor.${g.kind}|}"></strong>
+          <ul><li th:each="pick : ${g.picks}">
+            <span th:text="${@words.text(pick)}"></span>
+            <small th:if="${#locale.language == 'pl' and @words.text(pick) != pick}" lang="en" th:text="|(${pick})|"></small>
+            <small th:if="${g.selectable()}" th:text="${character.loadout.contains(pick)} ? #{advisor.recorded} : #{advisor.unrecorded}"></small>
+          </li></ul>
+        </li>
+        <li th:each="pick : ${target.loadout}"><span th:text="${@words.text(pick)}"></span>
+          <small th:text="${character.loadout.contains(pick)} ? #{advisor.recorded} : #{advisor.unrecorded}"></small></li>
+      </ul>
+      <a th:unless="${editing}" th:href="@{heroes/{id}/edit(id=${character.id},step=3)}" th:text="#{advisor.editLoadout}"></a>
+    </details>
+    <details class="fold">
+      <summary th:text="#{ui.equipment.goals}"></summary>
+      <th:block th:unless="${gearPicks.isEmpty()}">
+        <h4 th:text="#{advisor.availableGear}"></h4>
+        <ul class="clean-list">
+          <li th:each="p : ${gearPicks}">
+            <strong th:text="${@words.text(p.slot.label)}"></strong> · <span th:text="${@words.text(p.item.name)}"></span> ·
+            <span th:text="${p.goal} ? #{advisor.buildItem} : #{advisor.substitute}"></span>
+            <a th:unless="${editing}" th:href="@{equipment/{slot}(slot=${p.slot.name()},heroId=${character.id},q=${p.item.name})}"
+               th:text="#{ui.compare.in.slot}"></a>
+          </li>
+        </ul>
+        <h4 th:text="#{ui.equipment.goals}"></h4>
+      </th:block>
+      <ul class="clean-list">
+        <li th:each="id : ${plan.items}" th:with="item=${catalog[id]}" th:if="${catalog[id] != null}">
+          <strong th:text="${@words.text(item.name)}"></strong> · <span th:text="${@words.text(@fmt.slot(item.slot))}"></span> ·
+          <span th:text="${@words.text(character.gear.containsValue(id) ? 'Equipped' : party.available(id) > 0 ? 'Available in party' : party.stock.containsKey(id) ? 'Assigned in party' : 'Catalog only')}"></span>
+          <a th:if="${!editing and !character.gear.containsValue(id) and party.available(id) > 0}"
+             th:href="@{equipment/{slot}(slot=${@fmt.equipSlot(item.slot)},heroId=${character.id},q=${item.name})}"
+             th:text="#{ui.compare.in.slot}"></a>
+          <a th:unless="${editing}" th:href="@{inventory(tab='catalog',q=${item.name})}" th:text="#{ui.view.in.catalog}"></a>
+        </li>
+      </ul>
+    </details>
+  </div>
+</section>
+</body>
+</html>

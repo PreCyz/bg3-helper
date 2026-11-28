@@ -1368,8 +1368,32 @@ select {
   overflow-wrap: anywhere;
   text-align: center;
 }
+.advice-matches {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
+  gap: .75rem;
+  padding: 0;
+  list-style: none;
+}
+.advice-matches small, .advice-scores small {
+  display: block;
+  color: var(--muted);
+}
+.advice-matches .btn-quiet {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.advice-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.advice-steps h4, .loadout-options legend { font-size: 1rem; color: var(--gold); }
 .advice-scores { width: 100%; max-width: 32rem; margin-bottom: .75rem; }
 .advice-scores td, .advice-scores th { padding: .3rem .5rem; border-bottom: 1px solid var(--line); }
+.loadout-options { display: grid; gap: .3rem; margin-bottom: 1rem; }
+.loadout-options input { width: auto; margin-inline-end: .4rem; }
 .track-levels li {
   border-bottom: 1px solid var(--line);
   padding: .5rem 0;

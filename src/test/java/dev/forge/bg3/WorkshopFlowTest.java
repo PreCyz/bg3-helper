@@ -139,6 +139,42 @@ class WorkshopFlowTest extends ForgeIntegrationTest {
     }
 
     @Test
+    @Transactional
+    void followsAPolishGuideFromCreationThroughLevelUp() throws Exception {
+        String party = store.snapshot().id;
+        String id = UUID.randomUUID().toString();
+        var form = post("/heroes/wizard").param("lang", "pl").param("partyId", party).param("creating", "true")
+                .param("id", id).param("name", "Mira").param("heroClass", "Cleric").param("race", "Wood Elf")
+                .param("subclass", "Light Domain").param("level", "1").param("score", "10", "14", "16", "8", "16", "10")
+                .param("background", "Acolyte").param("loadoutPresent", "1").param("loadout", "Bless", "Spirit Guardians")
+                .param("buildId", "radiant-cleric");
+        var preview = mvc.perform(form).andExpect(status().isOk()).andReturn();
+        assertThat(preview.getResponse().getContentAsString()).contains("Doradca rozwoju postaci", "Przygotuj czary",
+                "Błogosławieństwo", "Leczące słowo", "Najlepiej dopasowane konfiguracje").doesNotContain("??advisor.");
+        assertThat(store.snapshot().heroes).noneMatch(h -> h.id.equals(id));
+        mvc.perform(form.param("action", "save")).andExpect(status().is3xxRedirection());
+        assertThat(store.snapshot().hero(id).loadout).containsExactly("Bless");
+        mvc.perform(post("/heroes/wizard").param("partyId", party).param("id", id).param("creating", "false")
+                .param("name", "Mira").param("heroClass", "Cleric").param("race", "Wood Elf").param("subclass", "Light Domain")
+                .param("level", "5").param("score", "10", "14", "16", "8", "16", "10").param("feat", "Ability Improvement · WIS +2")
+                .param("loadoutPresent", "1").param("loadout", "Spirit Guardians", "Bless")
+                .param("buildId", "radiant-cleric").param("action", "save")).andExpect(status().is3xxRedirection());
+        var saved = new PartyStore(json, catalog, database).snapshot().hero(id);
+        assertThat(saved.loadout).containsExactly("Spirit Guardians", "Bless");
+        assertThat(saved.buildId).isEqualTo("radiant-cleric");
+        assertThat(saved.background).isEqualTo("Acolyte");
+        var sheet = mvc.perform(get("/sheet").param("lang", "pl")).andExpect(status().isOk()).andReturn();
+        var advice = (BuildAdvisor.Advice) sheet.getModelAndView().getModel().get("advice");
+        assertThat(advice.bestFits()).hasSize(3);
+        assertThat(advice.current().level()).isEqualTo(5);
+        assertThat(advice.trained()).contains("Insight", "Religion");
+        assertThat(advice.next().level()).isEqualTo(6);
+        assertThat(advice.increases()).contains(new BuildAdvisor.AbilityGoal("Wisdom", 18, 18));
+        assertThat(advice.feats().getFirst().taken()).isTrue();
+        assertThat(sheet.getResponse().getContentAsString()).contains("Duchowi strażnicy", "Zaznaczono");
+    }
+
+    @Test
     void adviceUsesClassLevelsAndTheRemainingCharacterLevels(@Autowired BuildAdvisor advisor) {
         Hero h = catalog.build("shadow-monk").draft();
         h.level = 5;

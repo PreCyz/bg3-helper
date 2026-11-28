@@ -29,6 +29,8 @@
           </div>
         </div>
         <div class="actions">
+          <a class="btn-quiet" th:href="@{sheet(mode=${mode},track=${advice.selected.plan.id})}+'#build-advisor'"
+             th:text="#{advisor.title}"></a>
           <form method="post" th:action="@{heroes/{id}/personal-builds(id=${hero.id})}">
             <input type="hidden" name="partyId" th:value="${party.id}" />
             <input type="hidden" name="requestId" th:value="${buildRequestId}" />
@@ -279,6 +281,7 @@
           </div>
         </section>
       </div>
+      <section th:replace="~{advice::advisor(${hero},false)}"></section>
       <details id="personal-development-tracks" class="panel track-panel mt-3"
                th:if="${!personalBuilds.isEmpty()}" th:open="${personalSelected}">
         <summary class="panel-head">
@@ -311,6 +314,8 @@
           <p><strong>[[#{ui.feats}]]</strong>
             <span th:text="${saved.feats.isEmpty() ? @words.text(saved.feat) : @words.list(saved.feats)}"></span>
           </p>
+          <p th:unless="${saved.loadout.isEmpty()}"><strong>[[#{advisor.loadout}]]</strong>
+            <span th:text="${@words.list(saved.loadout)}"></span></p>
           <h3>[[#{ui.equipment.goals}]]</h3>
           <p th:if="${saved.gear.isEmpty()}" th:text="${@words.text('None')}"></p>
           <ul class="clean-list" th:unless="${saved.gear.isEmpty()}">
@@ -347,7 +352,7 @@
           </p>
           <th:block th:replace="~{shared::followTrack(${build.id})}"></th:block>
           <h3 class="mt-3">[[#{ui.level.by.level.plan}]]</h3>
-          <p th:if="${trackLevel > 0 and trackLevel < build.milestones.size()}">
+          <p th:if="${hero.level < 12 and trackLevel > 0 and trackLevel < build.milestones.size()}">
             <strong th:text="#{format.next.level(${trackLevel+1})}"></strong>
             <span th:text="${@words.text(build.milestones[trackLevel])}"></span>
           </p>
