@@ -28,6 +28,8 @@ Open [the start page](http://127.0.0.1:8080). The executable JAR includes Bootst
 
 Maven embeds the project version and seven-character Git commit hash in the application. The header shows them beside the language selector. When running from IntelliJ, run the Maven `process-resources` phase after changing commits to refresh the label.
 
+Logback writes console output and appends to `logs/bg3-helper.YYYY-MM-DD.log` in the working directory. It starts a new file on the first log entry of each local calendar day and appends to the same file after a restart that day. Set `LOGGING_FILE_PATH` to use a different directory.
+
 ## Try it
 
 Open [the editable UI navigation diagram](docs/ui-navigation.drawio) in draw.io to see where each action leads. On the Parties screen, click a hero’s portrait or name to open their sheet, then choose **Edit hero** to develop that character.
