@@ -44,6 +44,7 @@ class DemoFlowTest {
         var sheet = mvc.perform(get("/demo/sheet").session(session).cookie(language))
                 .andExpect(status().isOk()).andExpect(content().string(containsString("Karta postaci")))
                 .andExpect(content().string(containsString("Elf leśny"))).andReturn().getResponse().getContentAsString();
+        assertThat(sheet).containsPattern("class=\"build-version\">v[^<]+-[0-9a-f]{7}</span>\\s*<label class=\"language-menu\"");
         assertThat(sheet.indexOf("class=\"language-menu\"")).isLessThan(sheet.indexOf("class=\"party-menu\""));
         assertThat(sheet).contains("class=\"figure-glow\"", "class=\"hero-figure\"").doesNotContain("/avatars/scenes/");
         mvc.perform(get("/demo/inventory").session(session).cookie(language).param("tab","catalog")

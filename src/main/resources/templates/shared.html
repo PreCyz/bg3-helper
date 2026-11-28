@@ -10,7 +10,7 @@
       rel="stylesheet"
       href="/webjars/bootstrap/5.3.3/css/bootstrap.min.css"
     />
-    <link rel="stylesheet" href="/forge.css?v=3" />
+    <link rel="stylesheet" href="/forge.css?v=6" />
     <style th:if="${races != null}" th:inline="css">
       #wizardForm .subrace-field { display: none; }
       /*[# th:each="r : ${races}" th:if="${!r.subraces.isEmpty()}"]*/
@@ -60,6 +60,7 @@
               <input th:each="parameter : ${entry.value}" type="hidden" th:name="${entry.key}" th:value="${parameter}" />
             </th:block>
           </form>
+          <span class="build-version" th:if="${!#strings.isEmpty(buildVersion)}" th:text="${buildVersion}"></span>
           <label class="language-menu">
             <span class="visually-hidden" th:text="#{ui.language}"></span>
             <select name="lang" th:form="${section == 'wizard' ? 'wizardForm' : 'languageForm'}" data-submit>

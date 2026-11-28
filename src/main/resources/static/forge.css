@@ -169,9 +169,11 @@ body > footer {
   align-self: center;
 }
 .mast-actions > form { display: contents; }
+.build-version { color: var(--muted); font-size: 0.8rem; white-space: nowrap; }
 .language-menu select { width: auto; font: inherit; }
 @media (max-width: 960px) {
   .mast-inner { flex-wrap: wrap; column-gap: 16px; }
+  .mast-actions { max-width: 100%; flex-wrap: wrap; }
 }
 .party-menu summary,
 .btn-quiet,

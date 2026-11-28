@@ -26,6 +26,8 @@ java -jar target\bg3-helper-1.0.0.jar
 
 Open [the start page](http://127.0.0.1:8080). The executable JAR includes Bootstrap, the equipment catalog, the images, the build guides and the rules. Building for the first time requires Maven dependencies. The local PostgreSQL service must be running. The app works without an internet connection. Stop the server with Ctrl+C.
 
+Maven embeds the project version and seven-character Git commit hash in the application. The header shows them beside the language selector. When running from IntelliJ, run the Maven `process-resources` phase after changing commits to refresh the label.
+
 ## Try it
 
 Open [the editable UI navigation diagram](docs/ui-navigation.drawio) in draw.io to see where each action leads. On the Parties screen, click a hero’s portrait or name to open their sheet, then choose **Edit hero** to develop that character.

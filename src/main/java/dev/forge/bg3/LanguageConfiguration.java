@@ -1,6 +1,7 @@
 package dev.forge.bg3;
 
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.boot.info.GitProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -47,8 +48,20 @@ class LanguageConfiguration implements WebMvcConfigurer {
 }
 
 @ControllerAdvice(assignableTypes = {StartController.class, ForgeController.class})
-class LanguageMenu {
+class HeaderAttributes {
     record Page(String path, Map<String, String[]> parameters) {}
+
+    private final String buildVersion;
+
+    HeaderAttributes(Optional<GitProperties> git) {
+        buildVersion = git.map(info -> "v" + info.get("build.version") + "-" + info.get("commit.id.abbrev"))
+                .orElse("");
+    }
+
+    @ModelAttribute("buildVersion")
+    String buildVersion() {
+        return buildVersion;
+    }
 
     @ModelAttribute("languagePage")
     Page currentPage(HttpServletRequest request) {
