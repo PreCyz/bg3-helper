@@ -1,26 +1,25 @@
 package dev.forge.bg3;
 
+import io.zonky.test.db.postgres.embedded.EmbeddedPostgres;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpSession;
-import org.springframework.test.context.DynamicPropertyRegistry;
-import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 import tools.jackson.databind.ObjectMapper;
 import tools.jackson.databind.node.ObjectNode;
 
-import java.io.IOException;
 import java.net.CookieManager;
 import java.net.URI;
 import java.net.http.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Map;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -31,20 +30,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@AutoConfigureMockMvc
-class WorkshopFlowTest {
+class WorkshopFlowTest extends ForgeIntegrationTest {
     @TempDir
-    static Path temp;
+    Path temp;
 
-    @DynamicPropertySource
-    static void saveFile(DynamicPropertyRegistry registry) throws IOException {
-        Path file = temp.resolve("party.json");
-        try (var fixture = WorkshopFlowTest.class.getResourceAsStream("/data/demo-party.json")) {
-            Files.copy(fixture, file);
-        }
-        DatabaseFixture.configure(registry);
-        registry.add("forge.save-file", file::toString);
+    @BeforeEach
+    void seedSavedParty() {
+        database.change(campaigns -> campaigns.add(database.demoParty()));
+    }
+
+    @AfterEach
+    void removeSavedParties() throws Exception {
+        for (var party : store.campaigns().parties) store.removeParty(party.id);
     }
 
     @Autowired
@@ -247,16 +244,19 @@ class WorkshopFlowTest {
     }
 
     @Test
-    void migratesLegacySaveAndAllowsRemovingTheLastParty() throws Exception {
+    void migratesLegacySaveAndAllowsRemovingTheLastParty(@Autowired EmbeddedPostgres postgres) throws Exception {
         Path file = temp.resolve("legacy.json");
         var oldParty = store.snapshot();
         var legacy = json.valueToTree(oldParty);
         ((ObjectNode) legacy).remove(java.util.List.of("id", "name"));
         ((ObjectNode) legacy.get("heroes").get(0)).remove("gender");
         json.writeValue(file.toFile(), legacy);
-        try (var pg = DatabaseFixture.start()) {
-            var source = pg.getPostgresDatabase();
+        var admin = new org.springframework.jdbc.core.JdbcTemplate(postgres.getPostgresDatabase());
+        admin.execute("CREATE DATABASE migration");
+        try {
+            var source = postgres.getDatabase("postgres", "migration", Map.of("currentSchema", "helper"));
             var jdbc = new org.springframework.jdbc.core.JdbcTemplate(source);
+            DatabaseFixture.createSchemas(jdbc);
             var tx = new org.springframework.transaction.support.TransactionTemplate(
                     new org.springframework.jdbc.datasource.DataSourceTransactionManager(source));
             var db = new ForgeDatabase(jdbc, json, tx, file.toString(), "", "test-asset-paths.txt");
@@ -294,6 +294,8 @@ class WorkshopFlowTest {
             assertThat(reopened.campaigns().parties).isEmpty();
             reopened.createParty("Fresh start");
             assertThat(reopened.snapshot().heroes).isEmpty();
+        } finally {
+            admin.execute("DROP DATABASE migration");
         }
     }
 }

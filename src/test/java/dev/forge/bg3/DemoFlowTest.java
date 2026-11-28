@@ -1,13 +1,10 @@
 package dev.forge.bg3;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mock.web.MockHttpSession;
-import org.springframework.test.context.DynamicPropertyRegistry;
-import org.springframework.test.context.DynamicPropertySource;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
@@ -24,10 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest
-@AutoConfigureMockMvc
-class DemoFlowTest {
-    @TempDir static Path directory;
+class DemoFlowTest extends ForgeIntegrationTest {
     @Autowired MockMvc mvc;
     @Autowired PartyStore saved;
 
@@ -97,12 +91,6 @@ class DemoFlowTest {
                 .param("extraClass", "Cleric", "Monk").param("action", "remove.Cleric"))
                 .andExpect(status().isOk()).andReturn().getModelAndView();
         assertThat(((Hero) removed.getModel().get("draft")).classSummary()).isEqualTo("Ranger 5 / Monk 1");
-    }
-
-    @DynamicPropertySource
-    static void emptySave(DynamicPropertyRegistry registry) {
-        DatabaseFixture.configure(registry);
-        registry.add("forge.save-file", () -> directory.resolve("parties.json").toString());
     }
 
     @Test
@@ -383,8 +371,8 @@ class DemoFlowTest {
     }
 
     @Test
-    void firstRunDemoAndSavedCampaignsStayIndependent() throws Exception {
-        Path save = directory.resolve("parties.json");
+    @Transactional
+    void firstRunDemoAndSavedCampaignsStayIndependent(@Value("${forge.save-file}") Path save) throws Exception {
         var browser = new MockHttpSession();
         mvc.perform(get("/")).andExpect(status().isOk())
                 .andExpect(content().string(containsString("Create party")))

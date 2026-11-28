@@ -1,33 +1,42 @@
 package dev.forge.bg3;
 
 import io.zonky.test.db.postgres.embedded.EmbeddedPostgres;
-import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.context.annotation.Bean;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.test.context.DynamicPropertyRegistrar;
 import tools.jackson.core.type.TypeReference;
 import tools.jackson.databind.json.JsonMapper;
 
 import java.io.IOException;
-import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
 import java.util.Set;
+import java.util.UUID;
 
+@TestConfiguration(proxyBeanMethods = false)
 final class DatabaseFixture {
-    static EmbeddedPostgres start() throws IOException {
-        var postgres = EmbeddedPostgres.builder().setServerConfig("listen_addresses", "127.0.0.1").start();
-        var jdbc = new org.springframework.jdbc.core.JdbcTemplate(postgres.getPostgresDatabase());
-        jdbc.execute("CREATE SCHEMA helper");
-        jdbc.execute("CREATE SCHEMA demo");
-        jdbc.execute("ALTER ROLE postgres IN DATABASE postgres SET search_path TO helper");
-        return postgres;
+    @Bean(destroyMethod = "close")
+    EmbeddedPostgres postgres() throws IOException {
+        return EmbeddedPostgres.builder().setServerConfig("listen_addresses", "127.0.0.1").start();
     }
 
-    static void configure(DynamicPropertyRegistry registry) {
-        try {
-            var postgres = start();
-            registry.add("spring.datasource.url", () -> postgres.getJdbcUrl("postgres", "postgres"));
+    static void createSchemas(JdbcTemplate jdbc) {
+        jdbc.execute("CREATE SCHEMA helper");
+        jdbc.execute("CREATE SCHEMA demo");
+    }
+
+    @Bean
+    DynamicPropertyRegistrar testProperties(EmbeddedPostgres postgres) {
+        createSchemas(new JdbcTemplate(postgres.getPostgresDatabase()));
+        Path save = Path.of(System.getProperty("java.io.tmpdir"), "forge-" + UUID.randomUUID() + ".json");
+        return registry -> {
+            registry.add("spring.datasource.url", () -> postgres.getJdbcUrl("postgres", "postgres") + "&currentSchema=helper");
             registry.add("spring.datasource.username", () -> "postgres");
             registry.add("spring.datasource.password", () -> "");
             registry.add("forge.asset-manifest", () -> "test-asset-paths.txt");
-        } catch (IOException ex) { throw new UncheckedIOException(ex); }
+            registry.add("forge.save-file", save::toString);
+        };
     }
 
     static Set<String> assetPaths() throws IOException {
