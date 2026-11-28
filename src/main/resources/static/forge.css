@@ -1368,6 +1368,8 @@ select {
   overflow-wrap: anywhere;
   text-align: center;
 }
+.advice-scores { width: 100%; max-width: 32rem; margin-bottom: .75rem; }
+.advice-scores td, .advice-scores th { padding: .3rem .5rem; border-bottom: 1px solid var(--line); }
 .track-levels li {
   border-bottom: 1px solid var(--line);
   padding: .5rem 0;

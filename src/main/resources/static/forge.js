@@ -27,6 +27,33 @@ document
   );
 const form = document.getElementById("wizardForm");
 if (form) {
+  const pointBuy = document.getElementById("point-buy");
+  if (pointBuy) {
+    const two = form.elements.plusTwo;
+    const one = form.elements.plusOne;
+    let previousTwo = two.value;
+    let previousOne = one.value;
+    pointBuy.addEventListener("input", (event) => {
+      if (two.value === one.value) {
+        if (event.target === two) one.value = previousTwo;
+        if (event.target === one) two.value = previousOne;
+      }
+      previousTwo = two.value;
+      previousOne = one.value;
+      let spent = 0;
+      let total = 0;
+      const outputs = pointBuy.querySelectorAll("[data-final-score]");
+      pointBuy.querySelectorAll('[name="purchased"]').forEach((select, i) => {
+        spent += Number(select.selectedOptions[0].dataset.cost);
+        const bonus = i === Number(two.value) ? 2 : i === Number(one.value) ? 1 : 0;
+        const score = Number(select.value) + bonus;
+        outputs[i].value = score;
+        total += score;
+      });
+      document.getElementById("points-spent").value = spent;
+      document.getElementById("score-total").value = total;
+    });
+  }
   function updateClassBudget() {
     const levels = [...form.querySelectorAll("[data-class-level]")];
     const total = levels.reduce((sum, input) => sum + (input.valueAsNumber || 0), 0);

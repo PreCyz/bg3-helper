@@ -139,6 +139,34 @@ class WorkshopFlowTest extends ForgeIntegrationTest {
     }
 
     @Test
+    @Transactional
+    void newHeroRequiresThePurchasedAllocationToCostExactly27() throws Exception {
+        var party = store.snapshot();
+        String id = UUID.randomUUID().toString();
+        var form = post("/heroes/wizard").param("partyId", party.id).param("id", id).param("creating", "true")
+                .param("name", "Nia").param("heroClass", "Cleric").param("race", "Wood Elf")
+                .param("level", "1").param("step", "3").param("action", "save");
+        // These combined scores are legal with a different bonus pair. Validate the actual purchase.
+        var invalid = mvc.perform(form.param("purchased", "8", "15", "14", "10", "15", "10")
+                        .param("plusTwo", "0").param("plusOne", "1"))
+                .andExpect(status().isOk()).andReturn().getModelAndView();
+        assertThat(invalid.getModel().get("step")).isEqualTo(2);
+        assertThat(((PointBuy) invalid.getModel().get("allocation")).spent()).isEqualTo(29);
+        assertThat(store.snapshot().heroes).noneMatch(h -> h.id.equals(id));
+        form.with(req -> {
+            req.setParameter("purchased", "8", "8", "8", "15", "15", "15");
+            req.setParameter("plusTwo", "4");
+            req.setParameter("plusOne", "4");
+            return req;
+        });
+        mvc.perform(form).andExpect(status().isOk());
+        assertThat(store.snapshot().heroes).noneMatch(h -> h.id.equals(id));
+        form.with(req -> { req.setParameter("plusOne", "5"); return req; });
+        mvc.perform(form).andExpect(redirectedUrl("/sheet"));
+        assertThat(store.snapshot().hero(id).abilities).containsExactly(8, 8, 8, 15, 17, 16);
+    }
+
+    @Test
     void previewsThenSavesEquipsSwitchesAndReloads() throws Exception {
         String id = UUID.randomUUID().toString();
         String party = store.snapshot().id;

@@ -341,7 +341,9 @@ public class ForgeController {
                    @RequestParam String race, @RequestParam(required = false) String subrace, @RequestParam(required = false) String subraceFor,
                    @RequestParam Map<String, String> fields,
                    @RequestParam(name = "extraClass", required = false) List<String> extraClasses,
-                   @RequestParam(required = false) String gender, @RequestParam int level, @RequestParam int[] score, @RequestParam(defaultValue = "None") String subclass,
+                   @RequestParam(required = false) String gender, @RequestParam int level, @RequestParam(required = false) int[] score,
+                   @RequestParam(required = false) int[] purchased, @RequestParam(required = false) Integer plusTwo,
+                   @RequestParam(required = false) Integer plusOne, @RequestParam(defaultValue = "None") String subclass,
                    @RequestParam(defaultValue = "None") String style, @RequestParam(name = "skill", required = false) List<String> skills,
                    @RequestParam(name = "feat", required = false) List<String> feats, @RequestParam(defaultValue = "") String buildId,
                    @RequestParam(defaultValue = "1") int step, @RequestParam(defaultValue = "preview") String action,
@@ -364,7 +366,17 @@ public class ForgeController {
             if (!Hero.GENDERS.contains(gender)) throw new IllegalArgumentException("Choose a gender from the list.");
             h.gender = gender;
         }
-        if (h.name.length() > 60 || score.length != 6 || Arrays.stream(score).anyMatch(a -> a < 3 || a > 30)
+        PointBuy allocation = null;
+        if (purchased != null || plusTwo != null || plusOne != null) {
+            if (!creating || score != null || plusTwo == null || plusOne == null)
+                throw new IllegalArgumentException(PointBuy.INVALID);
+            allocation = new PointBuy(purchased, plusTwo, plusOne);
+            score = allocation.totals();
+        } else if (creating) {
+            allocation = PointBuy.exact(score).orElseThrow(() ->
+                    new IllegalArgumentException("Starting ability scores must use exactly 27 points and both creation bonuses."));
+        }
+        if (h.name.length() > 60 || score == null || score.length != 6 || Arrays.stream(score).anyMatch(a -> a < 3 || a > 30)
                 || level < 1 || level > 12 || !Rules.classes().contains(heroClass))
             throw new IllegalArgumentException("Check the hero’s identity, level and six ability scores.");
         h.heroClass = heroClass;
@@ -406,6 +418,16 @@ public class ForgeController {
         var preset = catalog.build(buildId);
         h.buildId = preset != null && (h.levelsIn(preset.heroClass()) > 0 || buildId.equals(base.buildId)) ? buildId : "";
         Rules.normalizeChoices(h);
+        if (allocation != null) {
+            m.addAttribute("allocation", allocation);
+            if (!allocation.complete() && ("save".equals(action) || ("next".equals(action) && step == 2))) {
+                step = 2;
+                action = "preview";
+                m.addAttribute("notice", allocation.plusOne() == allocation.plusTwo()
+                        ? "Assign the +2 and +1 bonuses to different abilities."
+                        : GameText.format("Spend exactly 27 points. Your allocation uses {0}.", allocation.spent()));
+            }
+        }
         if ("save".equals(action) && !h.name.isBlank()) {
             store.save(partyId, h, creating);
             flash.addFlashAttribute("notice", GameText.format(creating ? "{0} joined your party." : "{0} updated.", h.name));
@@ -443,6 +465,10 @@ public class ForgeController {
     private String wizard(Model m, Hero h, Hero base, boolean creating, int step) {
         Rules.normalizeChoices(h);
         m.addAttribute("draft", h);
+        if (creating) {
+            if (!m.containsAttribute("allocation")) m.addAttribute("allocation", PointBuy.recommended(h.abilities));
+            m.addAttribute("pointCosts", PointBuy.COST);
+        }
         m.addAttribute("creating", creating);
         m.addAttribute("step", step);
         m.addAttribute("classes", Rules.classes());

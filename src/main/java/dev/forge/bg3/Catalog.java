@@ -10,6 +10,10 @@ public class Catalog {
                         String subclass, int level, String style, List<String> skills, int[] abilities, String summary,
                         List<String> milestones, List<String> items, String wiki, String guide, String guideName,
                         String note, String art) {
+        public Build {
+            abilities = PointBuy.recommended(abilities).totals();
+        }
+
         Hero draft() {
             Hero hero = new Hero();
             hero.heroClass = heroClass;

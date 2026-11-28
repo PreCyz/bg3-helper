@@ -178,7 +178,11 @@ public class PartyStore {
             requireParty(p, partyId);
             if (creating) {
                 // A repeated submission of the same creation form must keep its original hero.
-                if (p.heroes.stream().noneMatch(h -> h.id.equals(draft.id))) p.heroes.add(draft.copy());
+                if (p.heroes.stream().noneMatch(h -> h.id.equals(draft.id))) {
+                    if (PointBuy.exact(draft.abilities).isEmpty())
+                        throw new IllegalArgumentException("Starting ability scores must use exactly 27 points and both creation bonuses.");
+                    p.heroes.add(draft.copy());
+                }
             } else {
                 Hero current = p.hero(draft.id);
                 draft.buildId = current.buildId;

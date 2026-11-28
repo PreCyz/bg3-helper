@@ -118,10 +118,34 @@
           </section>
           <section class="form-area" th:hidden="${step!=2}">
             <h2>[[#{ui.base.ability.scores}]]</h2>
-            <p class="help">
+            <div th:if="${creating}" id="point-buy">
+              <p class="help" th:text="#{pointBuy.rules}"></p>
+              <div class="form-fields">
+                <label>[[#{pointBuy.plusTwo}]]<select name="plusTwo">
+                  <option th:each="a,i : ${abilities}" th:value="${i.index}" th:text="${@words.text(a)}" th:selected="${allocation.plusTwo == i.index}"></option>
+                </select></label>
+                <label>[[#{pointBuy.plusOne}]]<select name="plusOne">
+                  <option th:each="a,i : ${abilities}" th:value="${i.index}" th:text="${@words.text(a)}" th:selected="${allocation.plusOne == i.index}"></option>
+                </select></label>
+              </div>
+              <table class="advice-scores mt-3">
+                <thead><tr><th>[[#{ui.ability.scores}]]</th><th>[[#{pointBuy.purchased}]]</th><th>[[#{pointBuy.final}]]</th></tr></thead>
+                <tbody><tr th:each="a,i : ${abilities}">
+                  <th scope="row"><label th:for="|purchased-${i.index}|" th:text="${@words.text(a)}"></label></th>
+                  <td><select name="purchased" th:id="|purchased-${i.index}|">
+                    <option th:each="cost,n : ${pointCosts}" th:value="${8+n.index}" th:text="${8+n.index}"
+                            th:attr="data-cost=${cost}" th:selected="${allocation.base[i.index] == 8+n.index}"></option>
+                  </select></td>
+                  <td><output data-final-score th:text="${draft.abilities[i.index]}"></output></td>
+                </tr></tbody>
+              </table>
+              <p aria-live="polite">[[#{pointBuy.spent}]] <output id="points-spent" th:text="${allocation.spent()}"></output> / 27
+                · [[#{pointBuy.total}]] <output id="score-total" th:text="${allocation.total()}"></output></p>
+            </div>
+            <p class="help" th:unless="${creating}">
               [[#{ui.enter.your.in.game.base.scores.including.creation.bonuses.feats.e}]]
             </p>
-            <div class="form-fields">
+            <div class="form-fields" th:unless="${creating}">
               <label th:each="a,i : ${abilities}"
                 ><span th:text="${@words.text(a)}"></span
                 ><input
