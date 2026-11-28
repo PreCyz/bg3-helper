@@ -273,14 +273,14 @@
           </div>
         </section>
       </div>
-      <section id="development-tracks" class="panel mt-3">
-        <div class="panel-head">
+      <details id="development-tracks" class="panel track-panel mt-3" open>
+        <summary class="panel-head">
           <svg th:replace="~{shared::icon('book')}"></svg>
           <h2>[[#{ui.development.tracks}]]</h2>
           <span class="metadata" th:text="#{format.track.count(${classTrackCount},${@words.text(hero.heroClass)},${builds.size()})}"></span>
-        </div>
+        </summary>
         <div class="panel-body">
-          <nav class="actions" th:aria-label="#{ui.predefined.development.tracks}">
+          <nav class="track-grid" th:aria-label="#{ui.predefined.development.tracks}">
             <a th:each="b : ${builds}" th:text="${@words.text(b.name)}"
                th:class="${b == build ? 'btn-gold' : 'btn-quiet'}"
                th:attr="aria-current=${b == build ? 'true' : null}"
@@ -346,7 +346,7 @@
           </div>
           </th:block>
         </div>
-      </section>
+      </details>
       <p class="sample-note" th:if="${hero.id=='aelar'}">
         [[#{ui.aelar.and.the.starting.inventory.are.a.playable.example.choose.ne}]]
       </p>

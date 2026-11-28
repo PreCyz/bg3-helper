@@ -1338,6 +1338,36 @@ select {
   list-style: none;
   padding: 0;
 }
+.hero-bar,
+.hero-bar .actions,
+.track-panel > summary {
+  flex-wrap: wrap;
+}
+.track-panel > summary {
+  cursor: pointer;
+}
+.track-panel > summary::after {
+  content: "";
+  width: .55rem;
+  height: .55rem;
+  margin-inline-start: auto;
+  border-right: 2px solid var(--gold);
+  border-bottom: 2px solid var(--gold);
+  transform: rotate(-45deg);
+}
+.track-panel[open] > summary::after {
+  transform: rotate(45deg);
+}
+.track-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+  gap: .6rem;
+}
+.track-grid a {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  text-align: center;
+}
 .track-levels li {
   border-bottom: 1px solid var(--line);
   padding: .5rem 0;
