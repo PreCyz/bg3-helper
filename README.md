@@ -41,6 +41,7 @@ Open [the editable UI navigation diagram](docs/ui-navigation.drawio) in draw.io 
 5. Open the party menu and choose **Manage parties** to create or switch parties, remove a hero, or remove a whole party. New parties start empty. Removing a hero frees their equipment for the remaining heroes. Removing a party also deletes its inventory. Both actions show a confirmation before saving.
 6. Choose one of the 11 playable races, then a subrace if that race has one. For example, **Drow → Seldarine Drow** and **Half-Elf → Drow Half-Elf** are distinct choices. Changing ancestry, gender, class or subclass updates the avatar preview. All artwork is bundled for offline use.
 7. On the hero sheet, choose **Development tracks** beside **Edit hero**. The 15 guides cover all 12 classes. The sheet shows matching subclasses and classes first. **Follow this track** saves the guide for that hero and highlights the next level for a matching class. To create a hero with preset ability scores, subclass and class skills, choose **Build library → Use build**.
+8. Choose **Create build** on a hero sheet to save that hero’s current setup, including equipped gear. Open **Personal development tracks** on any hero sheet to view or follow a saved build. Later changes to the original hero leave the saved build intact. You can expand or collapse either track section.
 
 ## Data and calculations
 

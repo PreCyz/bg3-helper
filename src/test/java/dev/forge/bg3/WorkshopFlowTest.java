@@ -10,6 +10,7 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
 import tools.jackson.databind.ObjectMapper;
 import tools.jackson.databind.node.ObjectNode;
 
@@ -19,6 +20,7 @@ import java.net.http.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -94,6 +96,46 @@ class WorkshopFlowTest extends ForgeIntegrationTest {
             assertThat(draft.abilities).containsExactly(build.abilities());
             assertThat(DatabaseFixture.assetPaths()).contains(build.art());
         }
+    }
+
+    @Test
+    @Transactional
+    void personalTrackKeepsTheSavedSetupAcrossParties() throws Exception {
+        store.select("aelar");
+        var original = store.snapshot();
+        var source = original.hero(original.active).copy();
+        source.otherClasses.add(new Hero.ClassLevel("Fighter", 1, "None", "Defence", List.of()));
+        store.save(original.id, source, false);
+        var sheet = mvc.perform(get("/sheet")).andExpect(status().isOk()).andReturn();
+        assertThat(sheet.getResponse().getContentAsString()).contains("Create build", "class=\"track-grid\"")
+                .doesNotContain("id=\"personal-development-tracks\"");
+        String request = sheet.getModelAndView().getModel().get("buildRequestId").toString();
+        var create = post("/heroes/" + source.id + "/personal-builds").param("partyId", original.id)
+                .param("requestId", request).param("mode", "melee");
+        String location = mvc.perform(create).andExpect(status().is3xxRedirection()).andReturn().getResponse().getRedirectedUrl();
+        assertThat(location).contains("mode=melee").endsWith("#personal-development-tracks");
+        mvc.perform(create).andExpect(redirectedUrl(location));
+        var reopened = new PartyStore(json, catalog, database).campaigns();
+        assertThat(reopened.personalBuilds).hasSize(1);
+        var build = reopened.personalBuilds.getFirst();
+        assertThat(build.hero()).usingRecursiveComparison().isEqualTo(source);
+        var result = mvc.perform(get(URI.create(location))).andExpect(status().isOk()).andReturn();
+        assertThat(result.getResponse().getContentAsString()).contains("Personal development tracks", "Fighter",
+                "Defence", "Titanstring Bow", "Build 1");
+
+        store.createParty("Second party");
+        var second = store.snapshot();
+        var follower = new Hero();
+        follower.name = "Nyx";
+        store.save(second.id, follower, true);
+        mvc.perform(create).andExpect(status().isBadRequest());
+        store.removeHero(original.id, source.id);
+        mvc.perform(post("/heroes/" + follower.id + "/track").param("partyId", second.id).param("buildId", build.id()))
+                .andExpect(status().is3xxRedirection());
+        var followed = mvc.perform(get("/sheet")).andExpect(status().isOk()).andReturn().getResponse();
+        assertThat(followed.getContentAsString()).contains("Nyx is following this track.", "Titanstring Bow");
+        assertThat(store.snapshot().hero(follower.id).gear).isEmpty();
+        assertThat(store.newDemo().campaigns().personalBuilds).isEmpty();
     }
 
     @Test

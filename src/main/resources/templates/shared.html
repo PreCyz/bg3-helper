@@ -124,6 +124,15 @@
       th:unless="${item != null and item.image != null and !item.image.isBlank()}"
       ><svg th:replace="~{shared::icon(${icon})}"></svg
     ></th:block>
+    <th:block th:fragment="followTrack(trackId)">
+      <p th:if="${trackId == hero.buildId}" th:text="#{format.following(${hero.name})}"></p>
+      <form th:unless="${trackId == hero.buildId}" method="post" th:action="@{heroes/{id}/track(id=${hero.id})}">
+        <input type="hidden" name="partyId" th:value="${party.id}" />
+        <input type="hidden" name="buildId" th:value="${trackId}" />
+        <input type="hidden" name="mode" th:value="${mode}" />
+        <button class="btn-soft" th:text="#{format.follow(${hero.name})}"></button>
+      </form>
+    </th:block>
     <footer th:fragment="footer">
       <span>Faerûn Forge</span
       ><span

@@ -29,6 +29,12 @@
           </div>
         </div>
         <div class="actions">
+          <form method="post" th:action="@{heroes/{id}/personal-builds(id=${hero.id})}">
+            <input type="hidden" name="partyId" th:value="${party.id}" />
+            <input type="hidden" name="requestId" th:value="${buildRequestId}" />
+            <input type="hidden" name="mode" th:value="${mode}" />
+            <button class="btn-quiet"><svg th:replace="~{shared::icon('plus')}"></svg>[[#{ui.create.build}]]</button>
+          </form>
           <a class="btn-quiet" th:href="@{sheet(mode=${mode},track=${build?.id})}+'#development-tracks'"
             ><svg th:replace="~{shared::icon('book')}"></svg>[[#{ui.development.tracks}]]</a>
           <a class="btn-quiet" th:href="@{heroes/{id}/edit(id=${hero.id})}"
@@ -273,7 +279,50 @@
           </div>
         </section>
       </div>
-      <details id="development-tracks" class="panel track-panel mt-3" open>
+      <details id="personal-development-tracks" class="panel track-panel mt-3"
+               th:if="${!personalBuilds.isEmpty()}" th:open="${personalSelected}">
+        <summary class="panel-head">
+          <h2>[[#{ui.personal.development.tracks}]]</h2>
+          <span class="count-pill" th:text="${personalBuilds.size()}"></span>
+        </summary>
+        <div class="panel-body" th:with="saved=${personalBuild.hero}">
+          <nav class="track-grid" th:aria-label="#{ui.personal.development.tracks}">
+            <a th:each="b,i : ${personalBuilds}"
+               th:text="#{format.personal.build(${personalBuilds.size() - i.index},${b.hero.name},${b.hero.level})}"
+               th:class="${b == personalBuild ? 'btn-gold' : 'btn-quiet'}"
+               th:attr="aria-current=${b == personalBuild ? 'true' : null}"
+               th:href="@{sheet(track=${b.id},mode=${mode})}+'#personal-development-tracks'"></a>
+          </nav>
+          <h3 class="mt-3" th:text="|${saved.name} · #{format.level(${saved.level})}|"></h3>
+          <p th:text="|${@words.text(saved.gender)} · ${@words.text(saved.race)}|"></p>
+          <ul class="clean-list">
+            <li th:each="c,i : ${saved.classLevels()}">
+              <strong th:text="|${@words.text(c.heroClass)} · #{format.level(${c.level})}|"></strong>
+              <span th:if="${c.subclass != 'None'}" th:text="| · ${@words.text(c.subclass)}|"></span>
+              <span th:if="${c.style != 'None'}" th:text="| · #{format.style(${@words.text(c.style)})}|"></span>
+              <span th:with="skills=${i.first and c.skills.isEmpty() ? @words.text(saved.skill) : @words.list(c.skills)}"
+                    th:if="${!c.skills.isEmpty() or (i.first and saved.skill != 'None')}"
+                    th:text="| · #{format.skills(${skills})}|"></span>
+            </li>
+          </ul>
+          <p><strong>[[#{ui.base.ability.scores}]]</strong>
+            <span th:each="score,i : ${saved.abilities}" th:text="${@words.text(shortNames[i.index])}+' '+${score}+${i.last ? '' : ' · '}"></span>
+          </p>
+          <p><strong>[[#{ui.feats}]]</strong>
+            <span th:text="${saved.feats.isEmpty() ? @words.text(saved.feat) : @words.list(saved.feats)}"></span>
+          </p>
+          <h3>[[#{ui.equipment.goals}]]</h3>
+          <p th:if="${saved.gear.isEmpty()}" th:text="${@words.text('None')}"></p>
+          <ul class="clean-list" th:unless="${saved.gear.isEmpty()}">
+            <li th:each="entry : ${saved.gear}">
+              <strong th:text="${@words.text(@fmt.slot(entry.key))}"></strong>
+              <span th:text="${@words.text(catalog[entry.value]?.name ?: entry.value)}"></span>
+            </li>
+          </ul>
+          <th:block th:replace="~{shared::followTrack(${personalBuild.id})}"></th:block>
+        </div>
+      </details>
+      <details id="development-tracks" class="panel track-panel mt-3" th:open="${!personalSelected}">
         <summary class="panel-head">
           <svg th:replace="~{shared::icon('book')}"></svg>
           <h2>[[#{ui.development.tracks}]]</h2>
@@ -296,13 +345,7 @@
           <p><strong>[[#{ui.starting.scores}]]</strong>
             <span th:each="score,i : ${build.abilities}" th:text="${@words.text(shortNames[i.index])}+' '+${score}+${i.last ? '' : ' · '}" ></span>
           </p>
-          <p th:if="${build.id == hero.buildId}" th:text="#{format.following(${hero.name})}"></p>
-          <form th:unless="${build.id == hero.buildId}" method="post" th:action="@{heroes/{id}/track(id=${hero.id})}">
-            <input type="hidden" name="partyId" th:value="${party.id}" />
-            <input type="hidden" name="buildId" th:value="${build.id}" />
-            <input type="hidden" name="mode" th:value="${mode}" />
-            <button class="btn-soft" th:text="#{format.follow(${hero.name})}"></button>
-          </form>
+          <th:block th:replace="~{shared::followTrack(${build.id})}"></th:block>
           <h3 class="mt-3">[[#{ui.level.by.level.plan}]]</h3>
           <p th:if="${trackLevel > 0 and trackLevel < build.milestones.size()}">
             <strong th:text="#{format.next.level(${trackLevel+1})}"></strong>

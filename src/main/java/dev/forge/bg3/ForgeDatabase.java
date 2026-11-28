@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.init.ScriptUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.support.TransactionTemplate;
+import tools.jackson.core.type.TypeReference;
 import tools.jackson.databind.JsonNode;
 import tools.jackson.databind.ObjectMapper;
 
@@ -190,10 +191,13 @@ class ForgeDatabase {
     PartyStore.Campaigns campaigns() {
         var result = new PartyStore.Campaigns();
         jdbc.query("""
-                SELECT c.active_party,p.body FROM forge_campaign c LEFT JOIN forge_party p ON true
+                SELECT c.active_party,p.body,c.personal_builds FROM forge_campaign c LEFT JOIN forge_party p ON true
                 WHERE c.id=1 ORDER BY p.position
                 """, (org.springframework.jdbc.core.RowCallbackHandler) rs -> {
-            result.activeParty = rs.getString(1);
+            if (rs.isFirst()) {
+                result.activeParty = rs.getString(1);
+                result.personalBuilds = json.readValue(rs.getString(3), new TypeReference<>() {});
+            }
             if (rs.getString(2) != null) result.parties.add(json.readValue(rs.getString(2), PartyStore.Party.class));
         });
         return result;
@@ -222,6 +226,7 @@ class ForgeDatabase {
                     """, party.id, position++, json.writeValueAsString(party));
         }
         for (String id : removed) jdbc.update("DELETE FROM forge_party WHERE id=?", id);
-        jdbc.update("UPDATE forge_campaign SET active_party=? WHERE id=1", campaigns.activeParty);
+        jdbc.update("UPDATE forge_campaign SET active_party=?,personal_builds=CAST(? AS jsonb) WHERE id=1",
+                campaigns.activeParty, json.writeValueAsString(campaigns.personalBuilds));
     }
 }

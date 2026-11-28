@@ -128,8 +128,11 @@ public class ForgeController {
     @GetMapping("/sheet")
     String sheet(Model m, @RequestParam(defaultValue = "auto") String mode,
                  @RequestParam(defaultValue = "") String track) {
-        var p = page(m, "sheet");
+        var campaigns = store.campaigns();
+        var p = campaigns.current();
+        if (p == null) throw new NoActiveParty();
         if (p.active == null) return redirect("parties");
+        layout(m, "sheet", p);
         Hero h = p.hero(p.active);
         m.addAttribute("heroGender", h.gender);
         var s = Rules.stats(h, catalog.items);
@@ -142,9 +145,17 @@ public class ForgeController {
         m.addAttribute("leftSlots", LEFT);
         m.addAttribute("rightSlots", RIGHT);
         m.addAttribute("slotCount", Slot.values().length);
-        var followed = catalog.build(h.buildId);
-        var preview = track.isBlank() ? followed : catalog.build(track);
-        if (!track.isBlank() && preview == null) throw new IllegalArgumentException("Unknown development track.");
+        String selectedId = track.isBlank() ? h.buildId : track;
+        var preview = catalog.build(selectedId);
+        var personal = campaigns.personalBuild(selectedId);
+        if (!track.isBlank() && preview == null && personal == null)
+            throw new IllegalArgumentException("Unknown development track.");
+        var personalBuilds = campaigns.personalBuilds.reversed();
+        m.addAttribute("personalBuilds", personalBuilds);
+        m.addAttribute("personalSelected", personal != null);
+        if (!personalBuilds.isEmpty())
+            m.addAttribute("personalBuild", personal != null ? personal : personalBuilds.getFirst());
+        m.addAttribute("buildRequestId", UUID.randomUUID());
         var orderedBuilds = catalog.builds.stream().sorted(Comparator
                 .comparing((Catalog.Build b) -> !b.heroClass().equals(h.heroClass))
                 .thenComparing(b -> !b.subclass().equals(h.subclass))).toList();
@@ -161,7 +172,15 @@ public class ForgeController {
                        @RequestParam(defaultValue = "auto") String mode, RedirectAttributes flash) throws IOException {
         store.followTrack(partyId, id, buildId);
         flash.addAttribute("mode", mode);
-        return redirect("sheet#development-tracks");
+        return redirect(catalog.build(buildId) == null ? "sheet#personal-development-tracks" : "sheet#development-tracks");
+    }
+
+    @PostMapping("/heroes/{id}/personal-builds")
+    String createPersonalBuild(@PathVariable String id, @RequestParam String partyId, @RequestParam UUID requestId,
+                               @RequestParam(defaultValue = "auto") String mode, RedirectAttributes attributes) {
+        attributes.addAttribute("track", store.createPersonalBuild(partyId, id, requestId));
+        attributes.addAttribute("mode", mode);
+        return redirect("sheet#personal-development-tracks");
     }
 
     @PostMapping("/party/switch")

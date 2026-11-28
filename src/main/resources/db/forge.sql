@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS forge_campaign (
     id integer PRIMARY KEY CHECK (id = 1),
     active_party text
 );
+ALTER TABLE forge_campaign ADD COLUMN IF NOT EXISTS personal_builds jsonb NOT NULL DEFAULT '[]';
 CREATE TABLE IF NOT EXISTS forge_party (
     id text PRIMARY KEY,
     position integer NOT NULL,

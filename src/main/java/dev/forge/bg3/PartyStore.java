@@ -28,9 +28,24 @@ public class PartyStore {
         }
     }
 
+    public record PersonalBuild(String id, Hero hero) {}
+
     public static class Campaigns {
         public String activeParty;
         public List<Party> parties = new ArrayList<>();
+        public List<PersonalBuild> personalBuilds = new ArrayList<>();
+
+        PersonalBuild personalBuild(String id) {
+            return personalBuilds.stream().filter(b -> b.id().equals(id)).findFirst().orElse(null);
+        }
+
+        Hero activeHero(String partyId, String heroId) {
+            Party party = current();
+            if (party == null) throw new IllegalArgumentException("Create a party first.");
+            requireParty(party, partyId);
+            if (!heroId.equals(party.active)) throw new IllegalArgumentException("The active hero changed. Reopen their sheet.");
+            return party.hero(heroId);
+        }
 
         public Party find(String id) {
             return parties.stream().filter(p -> p.id.equals(id)).findFirst()
@@ -139,12 +154,22 @@ public class PartyStore {
         });
     }
 
-    public void followTrack(String partyId, String heroId, String buildId) throws IOException {
-        if (catalog.build(buildId) == null) throw new IllegalArgumentException("Unknown development track.");
-        update(p -> {
-            requireParty(p, partyId);
-            if (!heroId.equals(p.active)) throw new IllegalArgumentException("The active hero changed. Reopen their sheet.");
-            p.hero(heroId).buildId = buildId;
+    public String createPersonalBuild(String partyId, String heroId, UUID requestId) {
+        String buildId = "personal-" + requestId;
+        change(all -> {
+            Hero hero = all.activeHero(partyId, heroId);
+            if (all.personalBuild(buildId) == null)
+                all.personalBuilds.add(new PersonalBuild(buildId, hero.copy()));
+        });
+        return buildId;
+    }
+
+    public void followTrack(String partyId, String heroId, String buildId) {
+        change(all -> {
+            Hero hero = all.activeHero(partyId, heroId);
+            if (catalog.build(buildId) == null && all.personalBuild(buildId) == null)
+                throw new IllegalArgumentException("Unknown development track.");
+            hero.buildId = buildId;
         });
     }
 
