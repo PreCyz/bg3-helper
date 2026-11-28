@@ -1,0 +1,2 @@
+/art/avatars/figures-v2/male/test-ancestry/ranger.webp
+/art/avatars/figures-v2/male/test-ancestry/portraits/ranger.webp

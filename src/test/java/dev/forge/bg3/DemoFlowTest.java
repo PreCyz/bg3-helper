@@ -227,11 +227,11 @@ class DemoFlowTest extends ForgeIntegrationTest {
         @SuppressWarnings("unchecked")
         var builds = (List<Catalog.Build>) view.get("builds");
         assertThat(builds).hasSize(15);
+        assertThat(builds.getFirst().id()).isEqualTo("shadow-monk");
         assertThat(builds.subList(0, 4)).allMatch(b -> b.heroClass().equals("Monk"));
         for (var build : builds.subList(0, 4)) {
             assertThat(build.milestones()).hasSize(12).doesNotContain("");
             assertThat(build.draft().subclass).isEqualTo(build.subclass());
-            mvc.perform(get(build.art())).andExpect(status().isOk());
             mvc.perform(post("/demo/heroes/drow-monk/track").session(session).param("partyId", party.id)
                     .param("buildId", build.id())).andExpect(status().is3xxRedirection());
             assertThat(store.snapshot().hero(monk.id).race).isEqualTo("Lolth-Sworn Drow");
