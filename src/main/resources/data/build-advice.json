@@ -1,0 +1,174 @@
+{
+  "mystic-archer": {
+    "feats": {"4":"Ability Improvement · DEX +2","8":"Sharpshooter","12":"Ability Improvement · CHA +2"},
+    "abilities": ["Dexterity","Charisma"],
+    "skills": [],
+    "groups": [
+      {"level":1,"kind":"cantrip","picks":["Vicious Mockery","Minor Illusion"]},
+      {"level":1,"kind":"learn","picks":["Dissonant Whispers"]},
+      {"level":5,"kind":"learn","picks":["Hypnotic Pattern"]},
+      {"level":7,"kind":"learn","picks":["Confusion"]},
+      {"level":9,"kind":"learn","picks":["Hold Monster"]},
+      {"level":10,"kind":"learn","picks":["Counterspell","Command"]},
+      {"level":11,"kind":"learn","picks":["Otto’s Irresistible Dance"]}
+    ]
+  },
+  "radiant-cleric": {
+    "feats": {"4":"Ability Improvement · WIS +2","8":"Ability Improvement · WIS +2","12":"Alert"},
+    "abilities": ["Wisdom","Constitution"],
+    "skills": [],
+    "groups": [
+      {"level":1,"kind":"cantrip","picks":["Guidance","Sacred Flame"]},
+      {"level":1,"kind":"prepare","picks":["Bless","Healing Word"]},
+      {"level":3,"kind":"prepare","picks":["Aid"]},
+      {"level":5,"kind":"prepare","picks":["Spirit Guardians"]},
+      {"level":11,"kind":"prepare","picks":["Heroes’ Feast","Heal"]}
+    ]
+  },
+  "gloom-stalker": {
+    "feats": {"4":"Sharpshooter","8":"Ability Improvement · DEX +2","12":"Ability Improvement · DEX / WIS +1"},
+    "abilities": ["Dexterity"],
+    "skills": ["Stealth"],
+    "groups": [
+      {"level":2,"kind":"learn","picks":["Hunter’s Mark","Longstrider"]},
+      {"level":5,"kind":"learn","picks":["Spike Growth"]},
+      {"level":9,"kind":"learn","picks":["Plant Growth"]}
+    ]
+  },
+  "open-hand-monk": {
+    "feats": {"4":"Tavern Brawler · CON","8":"Ability Improvement · WIS +2","12":"Ability Improvement · WIS +2"},
+    "abilities": ["Dexterity","Wisdom"],
+    "skills": [],
+    "groups": [
+      {"level":1,"kind":"action","picks":["Flurry of Blows"]},
+      {"level":3,"kind":"subclassAction","picks":["Flurry of Blows: Topple"]},
+      {"level":5,"kind":"action","picks":["Stunning Strike"]}
+    ]
+  },
+  "shadow-monk": {
+    "feats": {"4":"Ability Improvement · DEX +2","8":"Ability Improvement · DEX +2","12":"Alert"},
+    "abilities": ["Dexterity","Wisdom"],
+    "skills": ["Stealth"],
+    "groups": [
+      {"level":1,"kind":"action","picks":["Flurry of Blows"]},
+      {"level":3,"kind":"subclassAction","picks":["Pass Without Trace","Silence"]},
+      {"level":6,"kind":"subclassAction","picks":["Shadow Step"]}
+    ]
+  },
+  "four-elements-monk": {
+    "feats": {"4":"Ability Improvement · WIS +2","8":"Ability Improvement · DEX +2","12":"Ability Improvement · WIS +2"},
+    "abilities": ["Dexterity","Wisdom"],
+    "skills": [],
+    "groups": [
+      {"level":1,"kind":"action","picks":["Flurry of Blows"]},
+      {"level":3,"kind":"discipline","picks":["Fangs of the Fire Snake","Water Whip","Fist of Unbroken Air"]},
+      {"level":6,"kind":"discipline","picks":["Clench of the North Wind"]},
+      {"level":11,"kind":"discipline","picks":["Flames of the Phoenix"]}
+    ]
+  },
+  "drunken-master": {
+    "feats": {"4":"Ability Improvement · DEX +2","8":"Ability Improvement · DEX +2","12":"Ability Improvement · WIS +2"},
+    "abilities": ["Dexterity","Wisdom"],
+    "skills": [],
+    "groups": [
+      {"level":1,"kind":"action","picks":["Flurry of Blows"]},
+      {"level":3,"kind":"subclassAction","picks":["Drunken Technique"]},
+      {"level":5,"kind":"action","picks":["Stunning Strike"]}
+    ]
+  },
+  "berserker-thrower": {
+    "feats": {"4":"Tavern Brawler · STR","8":"Ability Improvement · STR +2","12":"Alert"},
+    "abilities": ["Strength","Constitution"],
+    "skills": [],
+    "groups": [
+      {"level":1,"kind":"action","picks":["Rage","Throw"]},
+      {"level":3,"kind":"subclassAction","picks":["Enraged Throw"]}
+    ]
+  },
+  "moon-wildshaper": {
+    "feats": {"4":"Ability Improvement · WIS +2","8":"Ability Improvement · WIS +2","12":"Alert"},
+    "abilities": ["Wisdom","Constitution"],
+    "skills": [],
+    "groups": [
+      {"level":1,"kind":"cantrip","picks":["Guidance","Thorn Whip"]},
+      {"level":1,"kind":"prepare","picks":["Entangle","Healing Word"]},
+      {"level":3,"kind":"prepare","picks":["Spike Growth"]},
+      {"level":7,"kind":"prepare","picks":["Conjure Woodland Being"]},
+      {"level":9,"kind":"prepare","picks":["Conjure Elemental"]},
+      {"level":11,"kind":"prepare","picks":["Heroes’ Feast"]}
+    ]
+  },
+  "battle-master": {
+    "feats": {"4":"Great Weapon Master","6":"Ability Improvement · STR +2","8":"Ability Improvement · STR +2","12":"Alert"},
+    "abilities": ["Strength","Constitution"],
+    "skills": [],
+    "groups": [
+      {"level":1,"kind":"action","picks":["Second Wind"]},
+      {"level":2,"kind":"action","picks":["Action Surge"]},
+      {"level":3,"kind":"manoeuvre","picks":["Trip Attack","Disarming Attack","Precision Attack"]}
+    ]
+  },
+  "devotion-paladin": {
+    "feats": {"4":"Ability Improvement · STR +2","8":"Ability Improvement · CHA +2","12":"Ability Improvement · STR +2"},
+    "abilities": ["Strength","Charisma"],
+    "skills": [],
+    "groups": [
+      {"level":1,"kind":"action","picks":["Lay on Hands"]},
+      {"level":2,"kind":"prepare","picks":["Bless","Command"]},
+      {"level":2,"kind":"action","picks":["Divine Smite"]},
+      {"level":5,"kind":"prepare","picks":["Aid"]},
+      {"level":9,"kind":"prepare","picks":["Revivify"]}
+    ]
+  },
+  "arcane-trickster": {
+    "feats": {"4":"Ability Improvement · DEX +2","8":"Ability Improvement · INT +2","10":"Ability Improvement · DEX +2","12":"Ability Improvement · INT +2"},
+    "abilities": ["Dexterity","Intelligence"],
+    "skills": ["Stealth"],
+    "groups": [
+      {"level":1,"kind":"action","picks":["Sneak Attack"]},
+      {"level":3,"kind":"subclassCantrip","picks":["Minor Illusion","Fire Bolt"]},
+      {"level":3,"kind":"subclassLearn","picks":["Shield","Disguise Self"]},
+      {"level":7,"kind":"subclassLearn","picks":["Invisibility"]}
+    ]
+  },
+  "draconic-fire": {
+    "feats": {"4":"Ability Improvement · CHA +2","8":"Ability Improvement · CHA +2","12":"Alert"},
+    "abilities": ["Charisma","Constitution"],
+    "skills": [],
+    "groups": [
+      {"level":1,"kind":"cantrip","picks":["Fire Bolt","Ray of Frost"]},
+      {"level":1,"kind":"learn","picks":["Shield","Magic Missile"]},
+      {"level":3,"kind":"learn","picks":["Scorching Ray"]},
+      {"level":5,"kind":"learn","picks":["Fireball"]},
+      {"level":7,"kind":"learn","picks":["Confusion"]},
+      {"level":9,"kind":"learn","picks":["Hold Monster"]},
+      {"level":11,"kind":"learn","picks":["Globe of Invulnerability"]}
+    ]
+  },
+  "fiend-tomelock": {
+    "feats": {"4":"Ability Improvement · CHA +2","8":"Ability Improvement · CHA +2","12":"Alert"},
+    "abilities": ["Charisma"],
+    "skills": [],
+    "groups": [
+      {"level":1,"kind":"cantrip","picks":["Eldritch Blast","Minor Illusion"]},
+      {"level":1,"kind":"learn","picks":["Hex","Armour of Agathys"]},
+      {"level":5,"kind":"learn","picks":["Hunger of Hadar"]},
+      {"level":7,"kind":"subclassLearn","picks":["Wall of Fire"]},
+      {"level":9,"kind":"learn","picks":["Hold Monster"]}
+    ]
+  },
+  "abjuration-ward": {
+    "feats": {"4":"Ability Improvement · INT +2","8":"Ability Improvement · INT +2","12":"Alert"},
+    "abilities": ["Intelligence","Constitution"],
+    "skills": [],
+    "groups": [
+      {"level":1,"kind":"cantrip","picks":["Ray of Frost","Mage Hand"]},
+      {"level":1,"kind":"wizard","picks":["Mage Armour","Shield","Magic Missile"]},
+      {"level":3,"kind":"wizard","picks":["Mirror Image"]},
+      {"level":5,"kind":"wizard","picks":["Counterspell","Glyph of Warding"]},
+      {"level":7,"kind":"wizard","picks":["Banishment"]},
+      {"level":9,"kind":"wizard","picks":["Conjure Elemental"]},
+      {"level":11,"kind":"wizard","picks":["Globe of Invulnerability"]}
+    ]
+  }
+}

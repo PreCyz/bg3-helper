@@ -151,6 +151,26 @@ public final class Rules {
         };
     }
 
+    // Background proficiencies from https://bg3.wiki/wiki/Backgrounds
+    static final Map<String,List<String>> BACKGROUNDS = Collections.unmodifiableMap(new TreeMap<>(Map.ofEntries(
+            Map.entry("Acolyte", List.of("Insight", "Religion")), Map.entry("Charlatan", List.of("Deception", "Sleight of Hand")),
+            Map.entry("Criminal", List.of("Deception", "Stealth")), Map.entry("Entertainer", List.of("Acrobatics", "Performance")),
+            Map.entry("Folk Hero", List.of("Animal Handling", "Survival")), Map.entry("Guild Artisan", List.of("Insight", "Persuasion")),
+            Map.entry("Haunted One", List.of("Medicine", "Intimidation")), Map.entry("Noble", List.of("History", "Persuasion")),
+            Map.entry("Outlander", List.of("Athletics", "Survival")), Map.entry("Sage", List.of("Arcana", "History")),
+            Map.entry("Soldier", List.of("Athletics", "Intimidation")), Map.entry("Urchin", List.of("Sleight of Hand", "Stealth")))));
+
+    static Set<String> proficientSkills(Hero h) {
+        Set<String> result = new LinkedHashSet<>(chosenSkills(h));
+        for (var c : h.otherClasses) result.addAll(c.skills());
+        result.remove(NONE);
+        result.addAll(BACKGROUNDS.getOrDefault(h.background, List.of()));
+        if (elf(h.race) || drow(h.race)) result.add("Perception");
+        if (h.race.startsWith("Wood ")) result.add("Stealth");
+        if ("Half-Orc".equals(h.race)) result.add("Intimidation");
+        return result;
+    }
+
     private static List<String> chosenSkills(Hero h) {
         List<String> input = h.skills;
         if (input == null || input.isEmpty()) input = Collections.singletonList(h.skill);
@@ -282,6 +302,10 @@ public final class Rules {
         if (main == null || off == null || !"MELEE".equals(main.slot) || !"MELEE".equals(off.slot)
                 || main.twoHanded || off.twoHanded) return false;
         return (lightWeapon(main) && lightWeapon(off)) || chosenFeats(hero).contains("Dual Wielder");
+    }
+
+    static int[] unbuffedScores(Hero hero) {
+        return scores(hero, chosenFeats(hero), List.of());
     }
 
     private static int[] scores(Hero h, List<String> feats, List<Item> items) {
@@ -480,16 +504,11 @@ public final class Rules {
     private static Map<String, Integer> skillBonuses(Hero h, String path, List<String> feats, int[] mod,
                                                      int prof, List<Item> items) {
         Map<String, Integer> result = new LinkedHashMap<>();
-        Set<String> selected = new HashSet<>(chosenSkills(h));
-        for (var c : h.otherClasses) selected.addAll(c.skills());
+        Set<String> selected = proficientSkills(h);
         for (var entry : SKILL_ABILITIES.entrySet()) {
             String skill = entry.getKey();
             int ability = entry.getValue();
-            boolean trained = selected.contains(skill)
-                    || skill.equals("Perception") && (elf(h.race) || drow(h.race))
-                    || skill.equals("Stealth") && h.race.startsWith("Wood ")
-                    || skill.equals("Intimidation") && h.race.equals("Half-Orc")
-                    || skill.equals("Performance") && hasPath(h, path, "Bladesinging");
+            boolean trained = selected.contains(skill) || skill.equals("Performance") && hasPath(h, path, "Bladesinging");
             boolean expertise = feats.contains("Actor") && (skill.equals("Deception") || skill.equals("Performance"))
                     || h.race.equals("Rock Gnome") && skill.equals("History");
             int extra = trained ? prof : 0;

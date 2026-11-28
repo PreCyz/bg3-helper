@@ -6,10 +6,12 @@ public class Hero {
     public static final List<String> GENDERS = List.of("Gender unspecified", "Male", "Female", "Non-binary");
     public String id = UUID.randomUUID().toString();
     public String gender = GENDERS.getFirst();
+    public String background = "";
     public String name = "", heroClass = "Ranger", race = "Wood Elf", subclass = "None",
             feat = "None", style = "None", skill = "None", buildId = "";
     public List<String> feats = new ArrayList<>();
     public List<String> skills = new ArrayList<>();
+    public List<String> loadout = new ArrayList<>();
     public int level = 1;
     // In order of first taking each additional class. Older saves have only their starting class.
     public record ClassLevel(String heroClass, int level, String subclass, String style, List<String> skills) {
@@ -53,6 +55,7 @@ public class Hero {
         h.id = id;
         h.name = name;
         h.gender = gender;
+        h.background = background;
         h.heroClass = heroClass;
         h.race = race;
         h.subclass = subclass;
@@ -61,6 +64,7 @@ public class Hero {
         h.style = style;
         h.skill = skill;
         h.skills = new ArrayList<>(skills);
+        h.loadout = new ArrayList<>(loadout);
         h.level = level;
         h.otherClasses = new ArrayList<>(otherClasses);
         h.abilities = abilities.clone();

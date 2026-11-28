@@ -139,6 +139,32 @@ class WorkshopFlowTest extends ForgeIntegrationTest {
     }
 
     @Test
+    void adviceUsesClassLevelsAndTheRemainingCharacterLevels(@Autowired BuildAdvisor advisor) {
+        Hero h = catalog.build("shadow-monk").draft();
+        h.level = 5;
+        h.subclass = "Way of Shadow";
+        h.otherClasses.add(new Hero.ClassLevel("Cleric", 1, "Light Domain", "None", List.of()));
+        assertThat(advisor.recommend(h, List.of(), "").bestFits().getFirst().plan().id()).isEqualTo("shadow-monk");
+        var advice = advisor.recommend(h, List.of(), "radiant-cleric");
+        assertThat(advice.current().level()).isEqualTo(1);
+        assertThat(advice.next().level()).isEqualTo(2);
+        assertThat(advisor.loadoutOptions(h)).contains("Bless").doesNotContain("Spirit Guardians");
+        assertThat(advisor.recommend(h, List.of(), "four-elements-monk").available())
+                .noneMatch(g -> g.kind().equals("discipline"));
+        h.level = 12;
+        assertThat(advisor.recommend(h, List.of(), "radiant-cleric").next()).isNull();
+        for (var build : catalog.builds) {
+            var full = build.draft();
+            full.level = 12;
+            var complete = advisor.recommend(full, List.of(), build.id());
+            assertThat(complete.current().level()).isEqualTo(12);
+            assertThat(complete.feats()).hasSize(Rules.featSlots(full));
+            assertThat(complete.feats()).allMatch(g -> Rules.featChoices().contains(g.feat()));
+            assertThat(complete.next()).isNull();
+        }
+    }
+
+    @Test
     @Transactional
     void newHeroRequiresThePurchasedAllocationToCostExactly27() throws Exception {
         var party = store.snapshot();
@@ -164,6 +190,24 @@ class WorkshopFlowTest extends ForgeIntegrationTest {
         form.with(req -> { req.setParameter("plusOne", "5"); return req; });
         mvc.perform(form).andExpect(redirectedUrl("/sheet"));
         assertThat(store.snapshot().hero(id).abilities).containsExactly(8, 8, 8, 15, 17, 16);
+    }
+
+    @Test
+    void equipmentAdviceUsesOnlyFreeCopiesAndLeavesThePartyUntouched(@Autowired BuildAdvisor advisor) {
+        var party = new PartyStore.Party();
+        var cleric = catalog.build("radiant-cleric").draft();
+        var companion = new Hero();
+        companion.gear.put("RING1", "caustic-band");
+        party.heroes.addAll(List.of(cleric, companion));
+        party.stock.put("caustic-band", 1);
+        party.stock.put("luminous-armour", 1);
+        var plan = advisor.recommend(cleric, List.of(), "radiant-cleric").selected().plan();
+        var picks = advisor.fillEmptySlots(party, cleric, plan);
+        assertThat(picks).hasSize(1);
+        assertThat(picks.getFirst().item().id).isEqualTo("luminous-armour");
+        assertThat(picks.getFirst().goal()).isTrue();
+        assertThat(cleric.gear).isEmpty();
+        assertThat(party.available("luminous-armour")).isOne();
     }
 
     @Test
